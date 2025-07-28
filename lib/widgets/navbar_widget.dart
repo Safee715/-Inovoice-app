@@ -16,31 +16,38 @@ class _NavbarWidgetState extends State<NavbarWidget> {
         builder:(context,selected_page, child)
         {
           return SafeArea(
-            child: ClipRRect(borderRadius: BorderRadiusGeometry.circular(10.0),
+            child: ClipRRect(borderRadius: BorderRadius.circular(10.0),
               child: NavigationBar(shadowColor: Colors.white,
                 destinations: [
-                  NavigationDestination(
+                  NavigationDestination(selectedIcon:Icon(Icons.home,color: Colors.blue,
+              ) ,
                       icon: Icon(Icons.home,
-                      color:selected_page==0?Colors.blue:Colors.grey,),
+                      ),
                       label: 'Home'),
-                  NavigationDestination(
+                  NavigationDestination(selectedIcon: Icon(Icons.people,
+                      color:Colors.blue),
                       icon: Icon(Icons.people,
-                        color:selected_page==1?Colors.blue:Colors.grey,),
+                        ),
                       label: 'Clients'),
-                  NavigationDestination(
+                  NavigationDestination(selectedIcon: Icon(Icons.add_circle,
+                    color:Colors.blue,size:60.0,shadows: [
+                      Shadow(blurRadius: 20.0,color: Colors.white,offset: Offset(0, 0))],
+                  ),
                       icon: Icon(Icons.add_circle,
                         color:Colors.blue,size:60.0,shadows: [
                           Shadow(blurRadius: 20.0,color: Colors.white,offset: Offset(0, 0))],
                       ),
                     label: "",
                       ),
-                  NavigationDestination(
+                  NavigationDestination(selectedIcon:Icon(Icons.shopping_cart,
+                    color:Colors.blue) ,
                       icon: Icon(Icons.shopping_cart,
-                        color:selected_page==3?Colors.blue:Colors.grey,),
+                        ),
                       label: 'Items'),
-                  NavigationDestination(
+                  NavigationDestination(selectedIcon: Icon(Icons.person,
+                    color:Colors.blue,),
                       icon: Icon(Icons.person,
-                        color:selected_page==4?Colors.blue:Colors.grey,),
+                        ),
                       label: 'Profile'),
               
                 ],backgroundColor: Colors.white,
@@ -48,7 +55,8 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   selected_page_notifier.value=value;
               
                 } ,
-                selectedIndex: selected_page,indicatorColor: Colors.transparent,
+                selectedIndex: selected_page,
+                indicatorColor: Colors.transparent,
               ),
             ),
           );
