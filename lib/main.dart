@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/pages/home_page.dart';
+import 'package:invoiceapp/pages/widget_tree_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -12,7 +12,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(theme: ThemeData(
         scaffoldBackgroundColor:  Colors.grey[400],
-      fontFamily: 'Poppins',
+      fontFamily: 'Biennale',
     ),
       debugShowCheckedModeBanner: false,
       home: InvoiceApp() ,
@@ -31,6 +31,6 @@ class InvoiceApp extends StatefulWidget {
 class _InvoiceAppState extends State<InvoiceApp> {
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    return WidgetTreePage();
   }
 }

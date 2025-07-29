@@ -13,11 +13,12 @@ class _DetailsDataWidgetState extends State<DetailsDataWidget> {
   Widget build(BuildContext context) {
     return
       Flexible(
-        child: GridView.count(
-          crossAxisCount: 2,
+        child: GridView.extent(
+maxCrossAxisExtent: 157,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           childAspectRatio: 1.5,
+          padding: EdgeInsetsGeometry.directional(),
           children: [
             Container(
               decoration: BoxDecoration(
@@ -30,9 +31,8 @@ class _DetailsDataWidgetState extends State<DetailsDataWidget> {
                     title: Text(
                       'Total Amounts',
                       style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal[600],
+                        fontSize: 12,
+                       fontFamily:'Biennale',fontWeight: FontWeight.w500,
                       ),
                     ),
                     leading: Icon(

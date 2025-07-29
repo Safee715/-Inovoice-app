@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/widgets/client_page_nav_bar.dart';
 
-class ItemsPage extends StatefulWidget {
-  const ItemsPage({super.key,required this.title});
+class TemplatePage extends StatefulWidget {
+
+  const TemplatePage({super.key,required this.title});
   final String title;
   @override
-  State<ItemsPage> createState() => _ItemsPageState();
+  State<TemplatePage> createState() => _TemplatePageState();
 }
 
-class _ItemsPageState extends State<ItemsPage> {
-
+class _TemplatePageState extends State<TemplatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(backgroundColor: Color(0xFE7EBF2),
         leading: IconButton(
           onPressed: () {
@@ -21,7 +22,7 @@ class _ItemsPageState extends State<ItemsPage> {
           },
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
-        title: Text(widget.title,
+        title:Text(widget.title,
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
@@ -30,6 +31,8 @@ class _ItemsPageState extends State<ItemsPage> {
         padding: const EdgeInsets.all(10.0),
         child: ClientPageNavBar(),
       ),
+
+
     );
   }
 }

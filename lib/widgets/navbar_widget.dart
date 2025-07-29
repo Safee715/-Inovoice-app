@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
+import 'package:invoiceapp/widgets/gradient_icon_widget.dart';
 
 class NavbarWidget extends StatefulWidget {
   const NavbarWidget({super.key});
@@ -29,13 +30,17 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       icon: Icon(Icons.people,
                         ),
                       label: 'Clients'),
-                  NavigationDestination(selectedIcon: Icon(Icons.add_circle,
-                    color:Colors.blue,size:60.0,shadows: [
-                      Shadow(blurRadius: 20.0,color: Colors.white,offset: Offset(0, 0))],
+
+                  NavigationDestination(selectedIcon: GradientIconWidget(size: 50,
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF4082E3),Color(0xFF9CD9FF)]
+                    ),icon: Icons.add_circle,
                   ),
-                      icon: Icon(Icons.add_circle,
-                        color:Colors.blue,size:60.0,shadows: [
-                          Shadow(blurRadius: 20.0,color: Colors.white,offset: Offset(0, 0))],
+
+                      icon: GradientIconWidget(size: 60,
+                        gradient: LinearGradient(
+                            colors: [Color(0xFF4082E3),Color(0xFF9CD9FF)]
+                        ),icon: Icons.add_circle,
                       ),
                     label: "",
                       ),
@@ -53,6 +58,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                 ],backgroundColor: Colors.white,
                 onDestinationSelected:(int value) {
                   selected_page_notifier.value=value;
+                  previous_page.value=selected_page_notifier.value;
               
                 } ,
                 selectedIndex: selected_page,
