@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/widgets/text_form_fields_mandatory.dart';
 import 'package:invoiceapp/widgets/text_form_fields_widget.dart';
 
@@ -15,6 +16,12 @@ class _AddClientsPageState extends State<AddClientsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
 appBar: AppBar(backgroundColor: Color(0xFE7EBF2),
+  leading: IconButton(
+    onPressed: () {
+      selected_page_notifier.value = 0;
+    },
+    icon: Icon(Icons.arrow_back_ios_outlined),
+  ),
   title: Text('Add Client',
     style:TextStyle(fontWeight: FontWeight.bold,fontSize: 24) ,),),
       body: SingleChildScrollView(

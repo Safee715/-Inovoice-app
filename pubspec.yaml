@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.14.4
+  flutter_svg: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -69,7 +70,29 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/images/splash.png
-  #   - images/a_dot_ham.jpeg
+      - assets/images/icons/
+      - assets/images/icons/add button.svg
+      - assets/images/icons/chart-bar.svg
+      - assets/images/icons/clients.svg
+      - assets/images/icons/homepage details.svg
+      - assets/images/icons/Horizontal Gridlines and Labels.svg
+      - assets/images/icons/items.svg
+      - assets/images/icons/menu-left-alt.svg
+      - assets/images/icons/no data.svg
+      - assets/images/icons/paid invoices.svg
+      - assets/images/icons/Pie.svg
+      - assets/images/icons/pie chart.svg
+      - assets/images/icons/shopping-cart-plus.svg
+      - assets/images/icons/templates.svg
+      - assets/images/icons/total amounts.svg
+      - assets/images/icons/total due.svg
+      - assets/images/icons/total invoices.svg
+      - assets/images/icons/total paid.svg
+      - assets/images/icons/user.svg
+      - assets/images/icons/users-group.svg
+      - assets/images/icons/Vertical Gridlines and Labels.svg
+      - assets/images/icons/homepage.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

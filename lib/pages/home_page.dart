@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/widgets/bar_charts_widget.dart';
+import 'package:invoiceapp/widgets/custom_icon_widget.dart';
 import 'package:invoiceapp/widgets/details_data_widget.dart';
 import 'package:invoiceapp/widgets/drafts_widget.dart';
 import 'package:invoiceapp/widgets/navbar_widget.dart';
@@ -28,7 +29,9 @@ class _HomePageState extends State<HomePage> {
           'Invoice Maker',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu_outlined)),
+        leading: IconButton(onPressed: () {}, icon:
+        CustomIconWidget(iconaddress: 'assets/images/icons/menu-left-alt.svg',
+            height:24, weight: 24, color: Colors.black)),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
         ],
@@ -55,17 +58,30 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             IconButton(onPressed: (){
                               selected_widget_notifier.value=0;
-                            }, icon: Icon(Icons.dataset_outlined,
-                              color: selected_widget==0?Colors.blue:Colors.grey,
-                            ),
+                            }, icon: CustomIconWidget(
+                                iconaddress: 'assets/images/icons/homepage details.svg',
+                                height: 18, weight: 18,
+                              color: selected_widget==0?Colors.blue:Colors.grey,)
+
 
                             ),
                             IconButton(onPressed: (){
                               selected_widget_notifier.value=1;
-                            }, icon: Icon(Icons.bar_chart,color: selected_widget==1?Colors.blue:Colors.grey,),),
+                            }, icon:
+                            CustomIconWidget(
+                              iconaddress: 'assets/images/icons/chart-bar.svg',
+                              height: 18, weight: 18,
+                              color: selected_widget==1?Colors.blue:Colors.grey,),
+                            ),
                             IconButton(onPressed: (){
                               selected_widget_notifier.value=2;
-                            }, icon: Icon(Icons.pie_chart,color: selected_widget==2?Colors.blue:Colors.grey,),),
+                            }, icon:CustomIconWidget(
+                                iconaddress: 'assets/images/icons/pie chart.svg',
+                                height: 18, weight: 18,
+                                color: selected_widget==2?Colors.blue:Colors.grey,)
+
+
+                            ),
                           ],
                         );
                       },
@@ -115,7 +131,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-bottomNavigationBar: NavbarWidget(),
+bottomNavigationBar: Padding(
+  padding: const EdgeInsets.only(bottom: 30.0,left: 30,right: 30,),
+  child: NavbarWidget(),
+),
       
 
 
