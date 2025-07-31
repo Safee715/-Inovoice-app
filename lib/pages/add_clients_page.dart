@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/data/notifiers.dart';
+// import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/widgets/text_form_fields_mandatory.dart';
 import 'package:invoiceapp/widgets/text_form_fields_widget.dart';
 
@@ -12,13 +12,14 @@ class AddClientsPage extends StatefulWidget {
 }
 
 class _AddClientsPageState extends State<AddClientsPage> {
+   bool _toggeled=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 appBar: AppBar(backgroundColor: Color(0xFE7EBF2),
   leading: IconButton(
     onPressed: () {
-      selected_page_notifier.value = 0;
+      Navigator.pop(context);
     },
     icon: Icon(Icons.arrow_back_ios_outlined),
   ),
@@ -36,11 +37,13 @@ appBar: AppBar(backgroundColor: Color(0xFE7EBF2),
               TextFormFieldsWidget(labelText: 'Address', hintText: 'London west street No (57)'),
 
               SizedBox(height: 30,),
-              SwitchListTile(
-                  value: false,
+              SwitchListTile(title: Text('Save to Client Lists'),activeColor: Color(0xff4F94FB),
+                value:_toggeled ,
                   onChanged:
-                  (value) {
-
+                  (bool value) {
+                  setState(() {
+                    _toggeled=value;
+                  });
                   },
               ),
               SizedBox(height: 20,),

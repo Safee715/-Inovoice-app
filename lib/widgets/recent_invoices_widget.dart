@@ -21,10 +21,17 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                 fontSize: 24.0
             ),
           ),
-            TextButton(onPressed: (){} ,
-              style: ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(Colors.red[100]),),
-              child: Text('Status',style: TextStyle(color: Colors.red),),),
+            Container(decoration: BoxDecoration(
+                color: Colors.red[100],
+            border: Border.all(color: Colors.red),
+              borderRadius: BorderRadius.circular(25)
+            ),
+              child: TextButton(onPressed: (){} ,
+                style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Colors.transparent),),
+                child: Text('Status',style: TextStyle(color: Colors.red),),
+              ),
+            ),
       ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,12 +58,12 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
-                  fontSize: 17.0)),
+                  fontSize: 16.0)),
                   Text('PKR 00.00',
                       style: TextStyle(
                           color: Colors.yellow[700],
                           fontWeight: FontWeight.bold,
-                      fontSize: 17.0)),
+                      fontSize: 16.0)),
                 ],
               ),
               Expanded(

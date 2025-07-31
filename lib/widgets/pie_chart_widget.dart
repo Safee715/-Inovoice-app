@@ -10,6 +10,6 @@ class PieChartWidget extends StatefulWidget {
 class _PieChartWidgetState extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
-    return Flexible(child: Text(' Pie ChartsWidget'),);
+    return Container(child: Text(' Pie ChartsWidget'),);
   }
 }

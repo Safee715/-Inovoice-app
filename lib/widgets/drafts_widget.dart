@@ -21,10 +21,19 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                     fontSize: 24.0
                 ),
               ),
-              TextButton(onPressed: (){} ,
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.red[100]),),
-                child: Text('No Status',style: TextStyle(color: Colors.red),),),
+              Container(
+                decoration: BoxDecoration(color:Colors.red[100] ,
+                  borderRadius: BorderRadius.circular(25),
+                  border:Border.all(color: Colors.red) ),
+                child: TextButton(onPressed: (){} ,
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                    
+                  ),
+                  child: Text('No Status',style: TextStyle(fontSize: 12,color: Colors.red),
+                  ),
+                ),
+              ),
             ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,12 +60,12 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0)),
+                          fontSize: 16.0)),
                   Text('PKR 00.00',
                       style: TextStyle(
                           color: Colors.yellow[700],
                           fontWeight: FontWeight.bold,
-                          fontSize: 17.0)),
+                          fontSize: 16.0)),
                 ],
               ),
               Expanded(
