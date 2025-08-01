@@ -18,16 +18,18 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        width: double.infinity,height: 500,
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            CircleAvatar(backgroundColor: Colors.white,
-              radius: 100,child: Icon(Icons.person_rounded,color: Colors.grey,
-              size: 100,),)
-        ],
-
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,height: 500,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              CircleAvatar(backgroundColor: Colors.white,
+                radius: 100,child: Icon(Icons.person_rounded,color: Colors.grey,
+                size: 100,),)
+          ],
+        
+          ),
         ),
       ),
       bottomNavigationBar:Padding(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/widgets/bar_charts_widget.dart';
@@ -23,12 +24,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [DataWidget(), BarChartsWidget(), PieChartWidget()];
-    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight =MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[400],
+        backgroundColor: Color(0xffF0F3F7),
         title: Text(
           'Invoice Maker',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -43,15 +44,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+          IconButton(onPressed: () {}, icon: CustomIconWidget(
+            iconaddress: 'assets/images/icons/bell-notification.svg',
+            height: 24,
+            weight: 24,
+            color: Colors.black,
+          ),),
         ],
       ),
-      body: SafeArea(
+      body: SafeArea(top: false,
         child: LayoutBuilder(builder: (context, constraints) {
           return SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
+              padding: EdgeInsets.only(left:screenWidth*0.036,right: screenWidth*0.036,bottom: screenWidth*0.036),
+              child: Column(crossAxisAlignment:CrossAxisAlignment.start,
                 children: [
                   Container(width: constraints.maxWidth,
 
@@ -59,35 +65,38 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(28)),
                     ),
-                    child: Column(
+                    child: Column(spacing: screenWidth*0.024,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-            
+                        SizedBox(height: screenWidth*0.024,),
                         ValueListenableBuilder(
                           valueListenable: selected_widget_notifier,
                           builder: (context, selected_widget, child) {
                             print('Current selected widget index: $selected_widget');
-                            return Row(
+                            return Row(spacing: screenWidth*0.024,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                IconButton(
+                                CupertinoButton(padding: EdgeInsets.zero,
                                   onPressed: () {
                                     selected_widget_notifier.value = 0;
-                                  },
-                                  icon: CustomIconWidget(
+                                  },minimumSize: Size(20, 20),
+                                  child: CustomIconWidget(
                                     iconaddress:
                                     'assets/images/icons/homepage details.svg',
-                                    height: 18,
+                                    height: 20,
                                     weight: 18,
                                     color: selected_widget == 0
                                         ? Colors.blue
                                         : Colors.grey,
                                   ),
                                 ),
-                                IconButton(
+
+                                CupertinoButton(minimumSize: Size(20, 20),
+                                  padding: EdgeInsets.zero,
                                   onPressed: () {
                                     selected_widget_notifier.value = 1;
                                   },
-                                  icon: CustomIconWidget(
+                                  child:  CustomIconWidget(
                                     iconaddress:
                                     'assets/images/icons/chart-bar.svg',
                                     height: 18,
@@ -97,11 +106,12 @@ class _HomePageState extends State<HomePage> {
                                         : Colors.grey,
                                   ),
                                 ),
-                                IconButton(
+                                CupertinoButton(padding: EdgeInsets.zero,
+                                  minimumSize: Size(20, 20),
                                   onPressed: () {
                                     selected_widget_notifier.value = 2;
                                   },
-                                  icon: CustomIconWidget(
+                                  child: CustomIconWidget(
                                     iconaddress:
                                     'assets/images/icons/pie chart.svg',
                                     height: 18,
@@ -111,6 +121,8 @@ class _HomePageState extends State<HomePage> {
                                         : Colors.grey,
                                   ),
                                 ),
+                                SizedBox(width: screenWidth*0.036),
+
                               ],
                             );
                           },
@@ -124,12 +136,26 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-            
-                  ListTile(
-                    title: Text(
-                      'Recent Invoices',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
-                    ),
+
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                       Text(
+                        'Recent Invoices',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24.0),
+                      ),
+
+                       ElevatedButton.icon(onPressed: (){},iconAlignment: IconAlignment.end,
+                        style: ElevatedButton.styleFrom(padding: EdgeInsets.only(left: 10,right: 0),backgroundColor: Color(0xffF0F3F7),
+                            shadowColor: Colors.transparent
+                        ),
+                        label:Text('View All',style: TextStyle(color: Color(0xff4F94FB),fontSize: 16),) ,
+                         icon: Icon(Icons.arrow_forward_ios_rounded,size: 20,
+                           color: Color(0xff4F94FB),),
+                      ),
+                    ],
+
                   ),
                   Container(
                     padding: EdgeInsets.all(20.0),
@@ -139,12 +165,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: RecentInvoicesWidget(),
                   ),
-                  ListTile(
-                    title: Text(
+                  Text(
                       'Drafts',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
                     ),
-                  ),
+
                   Container(
                     padding: EdgeInsets.all(20.0),
                     decoration: BoxDecoration(

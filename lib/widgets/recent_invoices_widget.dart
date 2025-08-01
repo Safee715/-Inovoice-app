@@ -18,20 +18,19 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
           Text('Jhon James',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24.0
+                fontSize: 18.0
             ),
           ),
-            Container(decoration: BoxDecoration(
-                color: Colors.red[100],
-            border: Border.all(color: Colors.red),
-              borderRadius: BorderRadius.circular(25)
-            ),
-              child: TextButton(onPressed: (){} ,
-                style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.transparent),),
-                child: Text('Status',style: TextStyle(color: Colors.red),),
+             ElevatedButton(onPressed: (){} ,
+                style:ElevatedButton.styleFrom(padding: EdgeInsets.all(0),
+                  minimumSize: Size(50, 19),shadowColor: Colors.transparent,
+                side: BorderSide(
+                    color: Color(0xffF26666),width: 1),
+                  backgroundColor: Color(0xffF26666).withValues(alpha: 0.2),),
+                child: Text('Status',
+                  style: TextStyle(color: Colors.red,fontWeight: FontWeight.w400,fontSize: 12),),
               ),
-            ),
+
       ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,12 +55,12 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                 children: [
                   Text('PKR 34579',
                       style: TextStyle(
-                          color: Colors.blue,
+                          color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                   fontSize: 16.0)),
                   Text('PKR 00.00',
                       style: TextStyle(
-                          color: Colors.yellow[700],
+                          color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                       fontSize: 16.0)),
                 ],

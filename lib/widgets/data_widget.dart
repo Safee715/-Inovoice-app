@@ -12,14 +12,20 @@ class DataWidget extends StatefulWidget {
 class _DataWidgetState extends State<DataWidget> {
   @override
   Widget build(BuildContext context) {
+double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight =MediaQuery.of(context).size.height;
 
+print(MediaQuery.of(context).size.width);
+print(MediaQuery.of(context).size.height);
 
 
       return Padding(
-        padding:  EdgeInsets.all(10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+        padding:  EdgeInsets.only(left: screenWidth*0.048,
+            right:screenWidth*0.048,bottom: screenWidth*0.048 ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   child: DataContainerWidget(
@@ -29,7 +35,7 @@ class _DataWidgetState extends State<DataWidget> {
                     color1: Color(0xFF3AC4FF).withValues(alpha: 0.1),
                     color2: Color(0xFF3AC4FF),),
                 ),
-                SizedBox(width:15),
+
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total paid.svg',
@@ -52,7 +58,7 @@ class _DataWidgetState extends State<DataWidget> {
                     color1: Color(0xffFF99591A).withValues(alpha: 0.1),
                     color2: Color(0xffFF9959),),
                 ),
-                SizedBox(width:15),
+
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/clients.svg',
@@ -75,7 +81,7 @@ class _DataWidgetState extends State<DataWidget> {
                     color1: Color(0xff73BCE5).withValues(alpha: 0.1),
                     color2: Color(0xff73BCE5),),
                 ),
-                SizedBox(width:15),
+
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total invoices.svg',
@@ -98,7 +104,7 @@ class _DataWidgetState extends State<DataWidget> {
                     color1: Color(0xffFFAE00).withValues(alpha: 0.1),
                     color2: Color(0xffFFAE00),),
                 ),
-                SizedBox(width:15),
+
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/due invoices.svg',
@@ -109,6 +115,7 @@ class _DataWidgetState extends State<DataWidget> {
                 ),
               ],
             ),
+            SizedBox(height: 10),
           ],
         ),
       );

@@ -10,6 +10,6 @@ class BarChartsWidget extends StatefulWidget {
 class _BarChartsWidgetState extends State<BarChartsWidget> {
   @override
   Widget build(BuildContext context) {
-    return  Container(child: Text('Bar ChartsWidget'),);
+    return  Container(child: Text('Bar ChartsWidget'),height: 347,);
   }
 }

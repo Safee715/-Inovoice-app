@@ -18,22 +18,22 @@ class _DraftsWidgetState extends State<DraftsWidget> {
               Text('Peter Paul',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24.0
+                    fontSize: 18.0
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(color:Colors.red[100] ,
-                  borderRadius: BorderRadius.circular(25),
-                  border:Border.all(color: Colors.red) ),
-                child: TextButton(onPressed: (){} ,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
-                    
+               ElevatedButton(onPressed: (){} ,
+                  style: ElevatedButton.styleFrom(
+                    padding:EdgeInsets.only(right: 10,left: 10),
+                    minimumSize: Size(50, 19),
+                    backgroundColor: Color(0xffD6DAE0),
                   ),
-                  child: Text('No Status',style: TextStyle(fontSize: 12,color: Colors.red),
+                  child: Text('No Status',
+                    style: TextStyle(fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
                   ),
                 ),
-              ),
+
             ],
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,12 +58,12 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                 children: [
                   Text('PKR 34579',
                       style: TextStyle(
-                          color: Colors.blue,
+                          color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
                   Text('PKR 00.00',
                       style: TextStyle(
-                          color: Colors.yellow[700],
+                          color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
                 ],

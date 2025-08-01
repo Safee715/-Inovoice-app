@@ -42,31 +42,34 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
       ),
       padding: EdgeInsets.all(15),
       width: double.infinity,
-      child: Column(mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      child:
+          Row(mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(maxRadius: 40,child: Text(getInitials(widget.name),
+              CircleAvatar(maxRadius: 30,child: Text(getInitials(widget.name),
                 style: TextStyle(
                     color: Color(0xff4F94FB),
                     fontWeight: FontWeight.w700,fontSize: 12),
               ),
                 backgroundColor:Color(0xff4F94FB).withValues(alpha: 0.2),),
               SizedBox(width: 15,),
-              Text(widget.name,style: TextStyle(
-                  color: Color(0xff4F94FB),
-                  fontWeight: FontWeight.w400,fontSize: 14),),
+              Column(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.name,style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,fontSize: 14),
+                  ),
+                  Container(
+                    child: Text(widget.email,style: TextStyle(color: Color(0xffBEC0CC)),),
+                  ),
+                ],
+              ),
               Spacer(),
               MenuWidget(),
 
             ],
           ),
-          Container(padding: EdgeInsets.only(left: 50),
-              child: Text(widget.email,style: TextStyle(color: Colors.grey[600]),),
-          ),
-        ],
-      ),
+
+
     );
   }
 }

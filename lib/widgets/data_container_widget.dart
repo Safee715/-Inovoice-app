@@ -25,10 +25,13 @@ class _DataContainerWidgetState extends State<DataContainerWidget> {
 final screen_Width=MediaQuery.of(context).size.width;
 final screen_Height=MediaQuery.of(context).size.height;
 
-    return Container(constraints: BoxConstraints(minWidth: screen_Width*0.381,minHeight:screen_Height*0.067),
-      padding: EdgeInsets.all(10),
-      width: screen_Width*0.4,
-      decoration: BoxDecoration(color: widget.color1,borderRadius:BorderRadius.circular(10),),
+    return Container(constraints: BoxConstraints(
+        minWidth: screen_Width*0.381,
+        minHeight:screen_Height*0.067),
+      padding: EdgeInsets.all(screen_Width*0.024),
+      width: screen_Width*0.381,
+      decoration: BoxDecoration(color: widget.color1,
+        borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
