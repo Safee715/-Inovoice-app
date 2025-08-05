@@ -35,7 +35,7 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(height: 70,
       decoration: BoxDecoration(
           color: Color(0xffffffff),
           borderRadius: BorderRadius.circular(10)
