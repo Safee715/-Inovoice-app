@@ -22,12 +22,13 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
             ),
           ),
              ElevatedButton(onPressed: (){} ,
-                style:ElevatedButton.styleFrom(padding: EdgeInsets.all(0),
+                style:ElevatedButton.styleFrom(
+                  padding: EdgeInsets.only(left: 10,right: 10),
                   minimumSize: Size(50, 19),shadowColor: Colors.transparent,
                 side: BorderSide(
                     color: Color(0xffF26666),width: 1),
                   backgroundColor: Color(0xffF26666).withValues(alpha: 0.2),),
-                child: Text('Status',
+                child: Text('Unpaid',
                   style: TextStyle(color: Colors.red,fontWeight: FontWeight.w400,fontSize: 12),),
               ),
 
@@ -35,20 +36,23 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Receipt Id'),
-              Text('Issue Date',
-                style: TextStyle(color: Colors.grey),),
-              Text('Due Date',
-                style: TextStyle(color: Colors.grey),),
+              Text('IN-01'),
+              Text('Issue: 05-15-2024',
+                style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),
+              ),
+              Container(width: 1,height: 20,
+                color: Color(0xff000000).withValues(alpha: 0.1),),
+              Text('Due: 13-12-2024',
+                style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
             ],
           ),
-          Divider(color: Colors.grey[50],),
+          Divider(color: Color(0xff000000).withValues(alpha: 0.1),thickness: 1,),
           Row(mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 children: [
-                  Text('Total:'),
-                  Text('Paid:'),
+                  Text('Total: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
+                  Text('Paid: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
                 ],
               ),
               Column(
@@ -69,9 +73,11 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text('Due Amount',
-                      style: TextStyle(color: Colors.black),),
-                    Text('PKR 425.23',
-                      style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,
+                      style: TextStyle(color: Color(0xff303744),),),
+                    Text('PKR 457.45',
+                      style: TextStyle(
+                          color: Color(0xffF26666),
+                          fontWeight: FontWeight.bold,
                           fontSize: 17.0
                       ),
                     ),

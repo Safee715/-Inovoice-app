@@ -10,6 +10,8 @@ class DraftsWidget extends StatefulWidget {
 class _DraftsWidgetState extends State<DraftsWidget> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -23,6 +25,9 @@ class _DraftsWidgetState extends State<DraftsWidget> {
               ),
                ElevatedButton(onPressed: (){} ,
                   style: ElevatedButton.styleFrom(
+                    side: BorderSide(width: 1,color: Color(0xffC8CBD1),
+
+                    ),shadowColor: Colors.transparent,
                     padding:EdgeInsets.only(right: 10,left: 10),
                     minimumSize: Size(50, 19),
                     backgroundColor: Color(0xffD6DAE0),
@@ -30,7 +35,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                   child: Text('No Status',
                     style: TextStyle(fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                        color: Color(0xff303744)),
                   ),
                 ),
 
@@ -38,20 +43,23 @@ class _DraftsWidgetState extends State<DraftsWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Receipt Id'),
-              Text('Issue Date',
-                style: TextStyle(color: Colors.grey),),
-              Text('Due Date',
-                style: TextStyle(color: Colors.grey),),
+              Text('IN-01'),
+
+              Text('Issue: 00-00-2024',
+                style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
+              Container(width: 1,height: 20,
+                color: Color(0xff000000).withValues(alpha: 0.1),),
+              Text('Due: 00-00-2024',
+                style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
             ],
           ),
-          Divider(color: Colors.grey[50],),
+          Divider(color: Color(0xff000000).withValues(alpha: 0.1),thickness: 1,),
           Row(mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 children: [
-                  Text('Total:'),
-                  Text('Paid:'),
+                  Text('Total: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
+                  Text('Paid: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
                 ],
               ),
               Column(
@@ -72,9 +80,9 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text('Due Amount',
-                      style: TextStyle(color: Colors.black),),
+                      style: TextStyle(color: Color(0xff303744),),),
                     Text('PKR 00.00',
-                      style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,
+                      style: TextStyle(color: Color(0xffF26666),fontWeight: FontWeight.bold,
                           fontSize: 17.0
                       ),
                     ),

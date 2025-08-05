@@ -28,11 +28,14 @@ class _HomePageState extends State<HomePage> {
     // double screenHeight =MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(centerTitle: false,titleSpacing: 0,
         backgroundColor: Color(0xffF0F3F7),
         title: Text(
           'Invoice Maker',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,color: Color(0xff303744)
+          
+          ),
         ),
         leading: IconButton(
           onPressed: () {},
@@ -44,14 +47,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: CustomIconWidget(
-            iconaddress: 'assets/images/icons/bell-notification.svg',
-            height: 24,
-            weight: 24,
-            color: Colors.black,
-          ),),
-        ],
+          IconButton(onPressed: () {}, icon:  CustomIconWidget(
+              iconaddress: 'assets/images/icons/bell-notification.svg',
+              height: 24,
+              weight: 24,
+
+            ),
+          ),
+  ],
       ),
+
+
+
       body: SafeArea(top: false,
         child: LayoutBuilder(builder: (context, constraints) {
           return SingleChildScrollView(
@@ -73,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                           valueListenable: selected_widget_notifier,
                           builder: (context, selected_widget, child) {
                             print('Current selected widget index: $selected_widget');
-                            return Row(spacing: screenWidth*0.024,
+                            return Row(
+                              spacing: screenWidth*0.012,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 CupertinoButton(padding: EdgeInsets.zero,
@@ -140,10 +148,10 @@ class _HomePageState extends State<HomePage> {
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                        Text(
-                        'Recent Invoices',
+                        'Recent Invoice',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 24.0),
+                            fontSize: 24.0,color: Color(0xff303744),),
                       ),
 
                        ElevatedButton.icon(onPressed: (){},iconAlignment: IconAlignment.end,
@@ -167,8 +175,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                       'Drafts',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
-                    ),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,color: Color(0xff303744)),
+
+                  ),
 
                   Container(
                     padding: EdgeInsets.all(20.0),
@@ -189,6 +200,8 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
         child: NavbarWidget(),
+
+
       ),
     );
   }

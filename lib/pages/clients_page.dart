@@ -70,7 +70,7 @@ class _ClientsPageState extends State<ClientsPage> {
       ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(bottom: 30.0, left: 50, right: 50),
         child: ClientPageNavBar(),
       ),
 

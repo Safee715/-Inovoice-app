@@ -31,7 +31,7 @@ print(MediaQuery.of(context).size.height);
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total amounts.svg',
                     text: 'Total Amounts',
-                    amount: '4328PKR',
+                    amount: '4,875 PKR',
                     color1: Color(0xFF3AC4FF).withValues(alpha: 0.1),
                     color2: Color(0xFF3AC4FF),),
                 ),
@@ -40,7 +40,7 @@ print(MediaQuery.of(context).size.height);
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total paid.svg',
                     text: 'Total Paid',
-                    amount: '4328PKR',
+                    amount: '4,875 PKR',
                     color1: Color(0xFF6690FF).withValues(alpha: 0.1),
                     color2: Color(0xFF668FFF),),
                 ),
@@ -54,7 +54,7 @@ print(MediaQuery.of(context).size.height);
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total due.svg',
                     text: 'Total Due',
-                    amount: '4328PKR',
+                    amount: '4,875 PKR',
                     color1: Color(0xffFF99591A).withValues(alpha: 0.1),
                     color2: Color(0xffFF9959),),
                 ),
@@ -63,7 +63,7 @@ print(MediaQuery.of(context).size.height);
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/clients.svg',
                     text: 'Total Clients',
-                    amount: '4328PKR',
+                    amount: '15',
                     color1: Color(0xff7778E5).withValues(alpha: 0.1),
                     color2: Color(0xff7778E5),),
                 ),
@@ -85,7 +85,7 @@ print(MediaQuery.of(context).size.height);
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/total invoices.svg',
-                    text: 'Total Invoices',
+                    text: 'Total Invoice',
                     amount: '50',
                     color1: Color(0xff3BBB2D).withValues(alpha: 0.1),
                     color2: Color(0xff3BBB2D),),
@@ -99,7 +99,7 @@ print(MediaQuery.of(context).size.height);
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/paid invoices.svg',
-                    text: 'Paid Invoices',
+                    text: 'Paid Invoice',
                     amount: '12',
                     color1: Color(0xffFFAE00).withValues(alpha: 0.1),
                     color2: Color(0xffFFAE00),),
@@ -108,7 +108,7 @@ print(MediaQuery.of(context).size.height);
                 SizedBox(
                   child: DataContainerWidget(
                     icon: 'assets/images/icons/due invoices.svg',
-                    text: 'Due Invoices',
+                    text: 'Due Invoice',
                     amount: '52',
                     color1: Color(0xffF26666).withValues(alpha: 0.1),
                     color2: Color(0xffF26666),),
