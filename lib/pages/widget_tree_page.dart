@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/pages/Items_page.dart';
-import 'package:invoiceapp/pages/add_clients_page.dart';
+import 'package:invoiceapp/pages/items_page/Items_page.dart';
+import 'package:invoiceapp/pages/add_clients_page/add_clients_page.dart';
 import 'package:invoiceapp/pages/c_widget_tree.dart';
-import 'package:invoiceapp/pages/home_page.dart';
-import 'package:invoiceapp/pages/profile_page.dart';
+import 'package:invoiceapp/pages/home_page/home_page.dart';
+import 'package:invoiceapp/pages/profile_page/profile_page.dart';
 
 
 class WidgetTreePage extends StatefulWidget {

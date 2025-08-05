@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/pages/Items_page.dart';
-import 'package:invoiceapp/pages/clients_page.dart';
-import 'package:invoiceapp/pages/template_page.dart';
+import 'package:invoiceapp/pages/items_page/Items_page.dart';
+import 'package:invoiceapp/pages/client_page/clients_page.dart';
+import 'package:invoiceapp/pages/templates_page/template_page.dart';
 
 class CWidgetTree extends StatefulWidget {
   const CWidgetTree({super.key});
