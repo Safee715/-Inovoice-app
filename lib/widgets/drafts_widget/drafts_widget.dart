@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceapp/widgets/drafts_widget/drafts_viewmodel.dart';
 
 class DraftsWidget extends StatefulWidget {
   const DraftsWidget({super.key});
@@ -10,14 +11,14 @@ class DraftsWidget extends StatefulWidget {
 class _DraftsWidgetState extends State<DraftsWidget> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
+    // double screenWidth = MediaQuery.of(context).size.width;
+    DraftsViewmodel draftsViewmodel=DraftsViewmodel();
     return SingleChildScrollView(
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Peter Paul',
+              Text(draftsViewmodel.name,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0
@@ -32,7 +33,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                     minimumSize: Size(50, 19),
                     backgroundColor: Color(0xffD6DAE0),
                   ),
-                  child: Text('No Status',
+                  child: Text(draftsViewmodel.status,
                     style: TextStyle(fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff303744)),
@@ -43,13 +44,13 @@ class _DraftsWidgetState extends State<DraftsWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('IN-01'),
+              Text(draftsViewmodel.receiptId),
 
-              Text('Issue: 00-00-2024',
+              Text('Issue: ${draftsViewmodel.issueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
               Container(width: 1,height: 20,
                 color: Color(0xff000000).withValues(alpha: 0.1),),
-              Text('Due: 00-00-2024',
+              Text('Due: ${draftsViewmodel.dueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
             ],
           ),
@@ -64,12 +65,12 @@ class _DraftsWidgetState extends State<DraftsWidget> {
               ),
               Column(
                 children: [
-                  Text('PKR 34579',
+                  Text('PKR ${draftsViewmodel.totalAmount}',
                       style: TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
-                  Text('PKR 00.00',
+                  Text('PKR ${draftsViewmodel.paidAmount}',
                       style: TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
@@ -81,7 +82,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                   children: [
                     Text('Due Amount',
                       style: TextStyle(color: Color(0xff303744),),),
-                    Text('PKR 00.00',
+                    Text('PKR ${draftsViewmodel.dueAmount}',
                       style: TextStyle(color: Color(0xffF26666),fontWeight: FontWeight.bold,
                           fontSize: 17.0
                       ),

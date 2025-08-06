@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoiceapp/widgets/recent_invoices_widget/recent_invoices_viewmodel.dart';
 
 class RecentInvoicesWidget extends StatefulWidget {
   const RecentInvoicesWidget({super.key});
@@ -10,12 +11,13 @@ class RecentInvoicesWidget extends StatefulWidget {
 class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
   @override
   Widget build(BuildContext context) {
+    RecentInvoicesViewmodel recentInvoicesViewmodel=RecentInvoicesViewmodel();
     return SingleChildScrollView(
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text('Jhon James',
+          Text(recentInvoicesViewmodel.name,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0
@@ -28,7 +30,7 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                 side: BorderSide(
                     color: Color(0xffF26666),width: 1),
                   backgroundColor: Color(0xffF26666).withValues(alpha: 0.2),),
-                child: Text('Unpaid',
+                child: Text(recentInvoicesViewmodel.status,
                   style: TextStyle(color: Colors.red,fontWeight: FontWeight.w400,fontSize: 12),),
               ),
 
@@ -36,13 +38,13 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('IN-01'),
-              Text('Issue: 05-15-2024',
+              Text(recentInvoicesViewmodel.receiptId),
+              Text('Issue: ${recentInvoicesViewmodel.issueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),
               ),
               Container(width: 1,height: 20,
                 color: Color(0xff000000).withValues(alpha: 0.1),),
-              Text('Due: 13-12-2024',
+              Text('Due: ${recentInvoicesViewmodel.dueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
             ],
           ),
@@ -57,12 +59,12 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
               ),
               Column(
                 children: [
-                  Text('PKR 34579',
+                  Text('PKR ${recentInvoicesViewmodel.totalAmount}',
                       style: TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                   fontSize: 16.0)),
-                  Text('PKR 00.00',
+                  Text('PKR ${recentInvoicesViewmodel.paidAmount}',
                       style: TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
@@ -74,7 +76,7 @@ class _RecentInvoicesWidgetState extends State<RecentInvoicesWidget> {
                   children: [
                     Text('Due Amount',
                       style: TextStyle(color: Color(0xff303744),),),
-                    Text('PKR 457.45',
+                    Text('PKR ${recentInvoicesViewmodel.dueAmount}',
                       style: TextStyle(
                           color: Color(0xffF26666),
                           fontWeight: FontWeight.bold,

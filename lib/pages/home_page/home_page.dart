@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/pages/home_page/home_page_viewmodel.dart';
 import 'package:invoiceapp/widgets/bar_charts_widget.dart';
+import 'package:invoiceapp/widgets/custom_cuppertino_button.dart';
 import 'package:invoiceapp/widgets/custom_icon_widget.dart';
 import 'package:invoiceapp/widgets/data_widget.dart';
-import 'package:invoiceapp/widgets/drafts_widget.dart';
+import 'package:invoiceapp/widgets/drafts_widget/drafts_widget.dart';
 import 'package:invoiceapp/widgets/navbar_widget.dart';
 import 'package:invoiceapp/widgets/pie_chart_widget.dart';
-import 'package:invoiceapp/widgets/recent_invoices_widget.dart';
+import 'package:invoiceapp/widgets/recent_invoices_widget/recent_invoices_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,12 +33,12 @@ final HomePageViewmodel h1= HomePageViewmodel();
         titleSpacing: 0,
         backgroundColor: Color(0xffF0F3F7),
         title: Text(
-          h1.appBar,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xff303744),
-          ),
-        ),
+        h1.appBar,
+        style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Color(0xff303744),
+              ),
+            ),
         leading: IconButton(
           onPressed: () {},
           icon: CustomIconWidget(
@@ -94,55 +94,20 @@ final HomePageViewmodel h1= HomePageViewmodel();
                                 spacing: screenWidth * 0.012,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  CupertinoButton(
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () {
-                                      selected_widget_notifier.value = 0;
-                                    },
-                                    minimumSize: Size(20, 20),
-                                    child: CustomIconWidget(
-                                      iconaddress:
-                                          h1.homePageDetailsAddress,
-                                      height: 20,
-                                      weight: 18,
-                                      color: selected_widget == 0
-                                          ? Colors.blue
-                                          : Colors.grey,
-                                    ),
-                                  ),
+                                 CustomCuppertinoButton(
+                                     iconAddress: h1.homePageDetailsAddress,
+                                     onPressed: (){h1.setHomePageDetails();},
+                                   index: 0,),
+                                  CustomCuppertinoButton(
+                                      iconAddress: h1.BarChartAddress,
+                                      onPressed: (){h1.setBarChartDetails();},
+                                    index: 1,
 
-                                  CupertinoButton(
-                                    minimumSize: Size(20, 20),
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () {
-                                      selected_widget_notifier.value = 1;
-                                    },
-                                    child: CustomIconWidget(
-                                      iconaddress:
-                                          h1.BarChartAddress,
-                                      height: 18,
-                                      weight: 18,
-                                      color: selected_widget == 1
-                                          ? Colors.blue
-                                          : Colors.grey,
-                                    ),
                                   ),
-                                  CupertinoButton(
-                                    padding: EdgeInsets.zero,
-                                    minimumSize: Size(20, 20),
-                                    onPressed: () {
-                                      selected_widget_notifier.value = 2;
-                                    },
-                                    child: CustomIconWidget(
-                                      iconaddress:
-                                          h1.PieChartAddress,
-                                      height: 18,
-                                      weight: 18,
-                                      color: selected_widget == 2
-                                          ? Colors.blue
-                                          : Colors.grey,
-                                    ),
-                                  ),
+                                  CustomCuppertinoButton(
+                                      iconAddress: h1.PieChartAddress,
+                                      onPressed: (){h1.setPieChartDetails();},
+                                  index: 2,),
                                   SizedBox(width: screenWidth * 0.036),
                                 ],
                               );

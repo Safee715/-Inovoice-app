@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/data/notifiers.dart';
 import 'package:invoiceapp/pages/add_clients_page/add_clients_page.dart';
 import 'package:invoiceapp/pages/client_page/client_page_viewmodel.dart';
 import 'package:invoiceapp/widgets/client_details_widget.dart';
@@ -24,7 +23,7 @@ class _ClientsPageState extends State<ClientsPage> {
       appBar: AppBar(backgroundColor: Color(0xFE7EBF2),
         leading: IconButton(
           onPressed: () {
-            selected_page_notifier.value = 0;
+            c1.backButtonFunction();
           },
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
@@ -37,23 +36,41 @@ class _ClientsPageState extends State<ClientsPage> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              ClientDetailsWidget(name: c1.names.elementAt(0),email: c1.emails.elementAt(0),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(0),
+                email: c1.emails.elementAt(0),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(1),email: c1.emails.elementAt(1),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(1),
+                email: c1.emails.elementAt(1),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(2),email: c1.emails.elementAt(2),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(2),
+                email: c1.emails.elementAt(2),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(3),email: c1.emails.elementAt(3),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(3),
+                email: c1.emails.elementAt(3),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(4),email: c1.emails.elementAt(4),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(4),
+                email: c1.emails.elementAt(4),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(5),email: c1.emails.elementAt(5),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(5),
+                email: c1.emails.elementAt(5),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(6),email: c1.emails.elementAt(6),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(6),
+                email: c1.emails.elementAt(6),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(7),email: c1.emails.elementAt(7),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(7),
+                email: c1.emails.elementAt(7),),
               SizedBox(height: 5,),
-              ClientDetailsWidget(name: c1.names.elementAt(8),email: c1.emails.elementAt(8),),
+              ClientDetailsWidget(
+                name: c1.names.elementAt(8),
+                email: c1.emails.elementAt(8),),
               SizedBox(height: 5,),
 
             ],

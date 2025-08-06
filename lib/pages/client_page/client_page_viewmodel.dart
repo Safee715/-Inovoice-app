@@ -1,3 +1,5 @@
+import 'package:invoiceapp/data/notifiers.dart';
+
 
 class ClientPageViewmodel {
 
@@ -24,6 +26,9 @@ class ClientPageViewmodel {
     'iron@gmail.com'
   ];
 final addButtonAddress='assets/images/icons/add clients.svg';
-
+void backButtonFunction()
+{
+  selected_page_notifier.value=0;
+}
 
 }

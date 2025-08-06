@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:invoiceapp/widgets/custom_icon_widget.dart';
 import 'package:invoiceapp/widgets/data_container_widget.dart';
 
 class DataWidget extends StatefulWidget {
@@ -20,7 +19,8 @@ print(MediaQuery.of(context).size.height);
 
 
       return Padding(
-        padding:  EdgeInsets.only(left: screenWidth*0.048,
+        padding:  EdgeInsets.only(
+            left: screenWidth*0.048,
             right:screenWidth*0.048,bottom: screenWidth*0.048 ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [

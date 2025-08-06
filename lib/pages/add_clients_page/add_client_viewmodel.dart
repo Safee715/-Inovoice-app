@@ -12,10 +12,9 @@ class
   final emailAddressHint='jhonjames@gmail.com';
   final addressHint  ='London west street No (57)';
   final address='Address';
-
   final  saveClientButtonText='Save to Client Lists';
-
   final  addButtonText='Add';
+
 
 
 
