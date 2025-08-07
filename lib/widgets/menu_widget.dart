@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/custom_icon_widget.dart';
+import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({super.key});

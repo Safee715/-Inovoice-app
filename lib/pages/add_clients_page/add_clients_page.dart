@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/pages/add_clients_page/add_client_viewmodel.dart';
-import 'package:invoiceapp/widgets/text_form_fields_mandatory.dart';
-import 'package:invoiceapp/widgets/text_form_fields_widget.dart';
+import 'package:DummyInvoice/pages/add_clients_page/add_client_viewmodel.dart';
+import 'package:DummyInvoice/widgets/text_form_fields_mandatory.dart';
+import 'package:DummyInvoice/widgets/text_form_fields_widget.dart';
 
 class AddClientsPage extends StatefulWidget {
   const AddClientsPage({super.key});
@@ -14,7 +14,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
   bool _toggeled = false;
   @override
   Widget build(BuildContext context) {
-    AddClientViewmodel a1 = AddClientViewmodel();
+    AddClientViewmodel addClientViewmodel = AddClientViewmodel();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFE7EBF2),
@@ -25,7 +25,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
         title: Text(
-          a1.appBarTitle,
+          addClientViewmodel.appBarTitle,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
       ),
@@ -35,29 +35,29 @@ class _AddClientsPageState extends State<AddClientsPage> {
           child: Column(
             children: [
               TextFormFieldsMandatory(
-                labelText: a1.firstNameLabel,
-                hintText: a1.firstName,
+                labelText: addClientViewmodel.firstNameLabel,
+                hintText: addClientViewmodel.firstName,
               ),
               TextFormFieldsMandatory(
-                labelText: a1.lastNameLabel,
-                hintText: a1.lastName,
+                labelText: addClientViewmodel.lastNameLabel,
+                hintText: addClientViewmodel.lastName,
               ),
               TextFormFieldsWidget(
-                labelText: a1.emailAddress,
-                hintText: a1.emailAddressHint,
+                labelText: addClientViewmodel.emailAddress,
+                hintText: addClientViewmodel.emailAddressHint,
               ),
               TextFormFieldsMandatory(
-                labelText: a1.phoneNo,
-                hintText: a1.phoneNoHint,
+                labelText: addClientViewmodel.phoneNo,
+                hintText: addClientViewmodel.phoneNoHint,
               ),
               TextFormFieldsWidget(
-                labelText: a1.address,
-                hintText: a1.addressHint,
+                labelText: addClientViewmodel.address,
+                hintText: addClientViewmodel.addressHint,
               ),
 
               SizedBox(height: 30),
               SwitchListTile(
-                title: Text(a1.saveClientButtonText),
+                title: Text(addClientViewmodel.saveClientButtonText),
                 activeColor: Color(0xff4F94FB),
                 value: _toggeled,
                 thumbColor: WidgetStatePropertyAll(Color(0xffFFFFFF)),
@@ -84,7 +84,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
                   ),
                   onPressed: () {},
                   child: Text(
-                    a1.addButtonText,
+                    addClientViewmodel.addButtonText,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,

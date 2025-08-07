@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/widgets/client_page_nav_bar.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/widgets/client_page_nav_bar.dart';
 
 class ItemsPage extends StatefulWidget {
   const ItemsPage({super.key,required this.title});

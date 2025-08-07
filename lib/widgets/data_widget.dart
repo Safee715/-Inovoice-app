@@ -1,5 +1,6 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/data_container_widget.dart';
+import 'package:DummyInvoice/widgets/data_container_widget.dart';
 
 class DataWidget extends StatefulWidget {
   const DataWidget({super.key});
@@ -11,17 +12,16 @@ class DataWidget extends StatefulWidget {
 class _DataWidgetState extends State<DataWidget> {
   @override
   Widget build(BuildContext context) {
-double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight =MediaQuery.of(context).size.height;
 
-print(MediaQuery.of(context).size.width);
-print(MediaQuery.of(context).size.height);
+
+HomePageViewmodel homePageViewmodel=HomePageViewmodel();
 
 
       return Padding(
         padding:  EdgeInsets.only(
-            left: screenWidth*0.048,
-            right:screenWidth*0.048,bottom: screenWidth*0.048 ),
+            left: homePageViewmodel.getWidth(context, 20),
+            right:homePageViewmodel.getWidth(context, 20),
+            bottom: homePageViewmodel.getWidth(context, 10),),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(

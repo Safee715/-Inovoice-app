@@ -1,4 +1,4 @@
-import 'package:invoiceapp/data/notifiers.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
 
 
 class ClientPageViewmodel {
@@ -25,7 +25,7 @@ class ClientPageViewmodel {
     'peter@gmail.com',
     'iron@gmail.com'
   ];
-final addButtonAddress='assets/images/icons/add clients.svg';
+final addButtonAddress='assets/images/icons/addclients.svg';
 void backButtonFunction()
 {
   selected_page_notifier.value=0;

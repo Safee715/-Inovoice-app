@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/pages/templates_page/abstract_template.dart';
-import 'package:invoiceapp/pages/templates_page/templates_page_viewmodel.dart';
-import 'package:invoiceapp/widgets/client_page_nav_bar.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/pages/templates_page/abstract_template.dart';
+import 'package:DummyInvoice/pages/templates_page/templates_page_viewmodel.dart';
+import 'package:DummyInvoice/widgets/client_page_nav_bar.dart';
 
 class TemplatePage extends StatefulWidget {
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/drafts_widget/drafts_viewmodel.dart';
+import 'package:DummyInvoice/widgets/drafts_widget/drafts_viewmodel.dart';
 
 class DraftsWidget extends StatefulWidget {
   const DraftsWidget({super.key});
@@ -11,7 +11,6 @@ class DraftsWidget extends StatefulWidget {
 class _DraftsWidgetState extends State<DraftsWidget> {
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.of(context).size.width;
     DraftsViewmodel draftsViewmodel=DraftsViewmodel();
     return SingleChildScrollView(
       child: Column(

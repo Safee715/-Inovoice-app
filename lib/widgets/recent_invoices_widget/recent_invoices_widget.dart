@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/recent_invoices_widget/recent_invoices_viewmodel.dart';
+import 'package:DummyInvoice/widgets/recent_invoices_widget/recent_invoices_viewmodel.dart';
 
 class RecentInvoicesWidget extends StatefulWidget {
   const RecentInvoicesWidget({super.key});

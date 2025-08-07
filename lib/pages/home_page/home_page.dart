@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/pages/home_page/home_page_viewmodel.dart';
-import 'package:invoiceapp/widgets/bar_charts_widget.dart';
-import 'package:invoiceapp/widgets/custom_cuppertino_button.dart';
-import 'package:invoiceapp/widgets/custom_icon_widget.dart';
-import 'package:invoiceapp/widgets/data_widget.dart';
-import 'package:invoiceapp/widgets/drafts_widget/drafts_widget.dart';
-import 'package:invoiceapp/widgets/navbar_widget.dart';
-import 'package:invoiceapp/widgets/pie_chart_widget.dart';
-import 'package:invoiceapp/widgets/recent_invoices_widget/recent_invoices_widget.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/widgets/bar_charts_widget.dart';
+import 'package:DummyInvoice/widgets/custom_cuppertino_button.dart';
+import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
+import 'package:DummyInvoice/widgets/data_widget.dart';
+import 'package:DummyInvoice/widgets/drafts_widget/drafts_widget.dart';
+import 'package:DummyInvoice/widgets/navbar_widget.dart';
+import 'package:DummyInvoice/widgets/pie_chart_widget.dart';
+import 'package:DummyInvoice/widgets/recent_invoices_widget/recent_invoices_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,16 +24,15 @@ class _HomePageState extends State<HomePage> {
       DataWidget(),
       BarChartsWidget(),
       PieChartWidget()];
-    double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight =MediaQuery.of(context).size.height;
-final HomePageViewmodel h1= HomePageViewmodel();
+
+final HomePageViewmodel viewmodel= HomePageViewmodel();
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         titleSpacing: 0,
         backgroundColor: Color(0xffF0F3F7),
         title: Text(
-        h1.appBar,
+          viewmodel.appBar,
         style: TextStyle(
         fontWeight: FontWeight.bold,
         color: Color(0xff303744),
@@ -42,7 +41,7 @@ final HomePageViewmodel h1= HomePageViewmodel();
         leading: IconButton(
           onPressed: () {},
           icon: CustomIconWidget(
-            iconaddress: h1.menuButtonAddress,
+            iconaddress: viewmodel.menuButtonAddress,
             height: 24,
             weight: 24,
             color: Colors.black,
@@ -52,7 +51,7 @@ final HomePageViewmodel h1= HomePageViewmodel();
           IconButton(
             onPressed: () {},
             icon: CustomIconWidget(
-              iconaddress: h1.notificationButtonAddress,
+              iconaddress: viewmodel.notificationButtonAddress,
               height: 24,
               weight: 24,
             ),
@@ -67,9 +66,9 @@ final HomePageViewmodel h1= HomePageViewmodel();
             return SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                  left: screenWidth * 0.036,
-                  right: screenWidth * 0.036,
-                  bottom: screenWidth * 0.036,
+                  left: viewmodel.getWidth(context, 15),
+                  right: viewmodel.getWidth(context, 15),
+                  bottom: viewmodel.getWidth(context, 15),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,33 +81,33 @@ final HomePageViewmodel h1= HomePageViewmodel();
                         borderRadius: BorderRadius.all(Radius.circular(28)),
                       ),
                       child: Column(
-                        spacing: screenWidth * 0.024,
+                        spacing: viewmodel.getWidth(context, 10),
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: screenWidth * 0.024),
+                          SizedBox(height: viewmodel.getWidth(context, 10),),
                           ValueListenableBuilder(
                             valueListenable: selected_widget_notifier,
                             builder: (context, selected_widget, child) {
 
                               return Row(
-                                spacing: screenWidth * 0.012,
+                                spacing: viewmodel.getWidth(context, 5),
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                  CustomCuppertinoButton(
-                                     iconAddress: h1.homePageDetailsAddress,
-                                     onPressed: (){h1.setHomePageDetails();},
+                                     iconAddress: viewmodel.homePageDetailsAddress,
+                                     onPressed: (){viewmodel.setHomePageDetails();},
                                    index: 0,),
                                   CustomCuppertinoButton(
-                                      iconAddress: h1.BarChartAddress,
-                                      onPressed: (){h1.setBarChartDetails();},
+                                      iconAddress: viewmodel.BarChartAddress,
+                                      onPressed: (){viewmodel.setBarChartDetails();},
                                     index: 1,
 
                                   ),
                                   CustomCuppertinoButton(
-                                      iconAddress: h1.PieChartAddress,
-                                      onPressed: (){h1.setPieChartDetails();},
+                                      iconAddress: viewmodel.PieChartAddress,
+                                      onPressed: (){viewmodel.setPieChartDetails();},
                                   index: 2,),
-                                  SizedBox(width: screenWidth * 0.036),
+                                  SizedBox(width:viewmodel.getWidth(context, 15),),
                                 ],
                               );
                             },
@@ -127,10 +126,10 @@ final HomePageViewmodel h1= HomePageViewmodel();
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          h1.recentInvoices,
+                          viewmodel.recentInvoices,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
+                            fontSize: 24,
                             color: Color(0xff303744),
                           ),
                         ),
@@ -144,7 +143,7 @@ final HomePageViewmodel h1= HomePageViewmodel();
                             shadowColor: Colors.transparent,
                           ),
                           label: Text(
-                            h1.viewAll,
+                            viewmodel.viewAll,
                             style: TextStyle(
                               color: Color(0xff4F94FB),
                               fontSize: 16,
@@ -159,7 +158,8 @@ final HomePageViewmodel h1= HomePageViewmodel();
                       ],
                     ),
                     Container(
-                      padding: EdgeInsets.all(20.0),
+                      padding: EdgeInsets.symmetric(horizontal: viewmodel.getWidth(context, 20),
+                          vertical: viewmodel.getWidth(context, 8),),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -167,16 +167,18 @@ final HomePageViewmodel h1= HomePageViewmodel();
                       child: RecentInvoicesWidget(),
                     ),
                     Text(
-                      h1.drafts,
+                      viewmodel.drafts,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24.0,
+                        fontSize: 24,
                         color: Color(0xff303744),
                       ),
                     ),
 
                     Container(
-                      padding: EdgeInsets.all(20.0),
+                      padding: EdgeInsets.symmetric(horizontal: viewmodel.getWidth(context, 20),
+                          vertical: viewmodel.getWidth(context, 8),
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -191,7 +193,8 @@ final HomePageViewmodel h1= HomePageViewmodel();
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
+        padding: EdgeInsets.only(
+            bottom: 30.0, left: 30, right: 30),
         child: NavbarWidget(),
       ),
     );

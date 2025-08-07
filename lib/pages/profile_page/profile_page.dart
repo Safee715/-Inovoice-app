@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/navbar_widget.dart';
+import 'package:DummyInvoice/widgets/navbar_widget.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:invoiceapp/data/notifiers.dart';
-import 'package:invoiceapp/widgets/custom_icon_widget.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
 class CustomCuppertinoButton extends StatefulWidget {
   const CustomCuppertinoButton({super.key,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/pages/widget_tree_page.dart';
+import 'package:DummyInvoice/pages/widget_tree_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -15,20 +15,20 @@ class Myapp extends StatelessWidget {
       fontFamily: 'Biennale',
     ),
       debugShowCheckedModeBanner: false,
-      home: InvoiceApp() ,
+      home: DummyInvoice() ,
 
     );
   }
 }
 
-class InvoiceApp extends StatefulWidget {
-  const InvoiceApp({super.key});
+class DummyInvoice extends StatefulWidget {
+  const DummyInvoice({super.key});
 
   @override
-  State<InvoiceApp> createState() => _InvoiceAppState();
+  State<DummyInvoice> createState() => _DummyInvoiceState();
 }
 
-class _InvoiceAppState extends State<InvoiceApp> {
+class _DummyInvoiceState extends State<DummyInvoice> {
   @override
   Widget build(BuildContext context) {
     return WidgetTreePage();

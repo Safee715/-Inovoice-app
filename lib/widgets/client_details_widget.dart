@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/menu_widget.dart';
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/widgets/menu_widget.dart';
 
 class ClientDetailsWidget extends StatefulWidget {
-  const ClientDetailsWidget({super.key,required this.name,required this.email});
+  const ClientDetailsWidget({super.key,
+    required this.name,required this.email});
 
   final String name;
   final String email;
@@ -32,10 +34,10 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
   }
   return initials;
   }
-
+HomePageViewmodel homePageViewmodel=HomePageViewmodel();
   @override
   Widget build(BuildContext context) {
-    return Container(height: 70,
+    return Container(height:70,
       decoration: BoxDecoration(
           color: Color(0xffffffff),
           borderRadius: BorderRadius.circular(10)
@@ -45,21 +47,25 @@ class _ClientDetailsWidgetState extends State<ClientDetailsWidget> {
       child:
           Row(mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(maxRadius: 30,child: Text(getInitials(widget.name),
+              CircleAvatar(maxRadius: 30,
+                child: Text(getInitials(widget.name),
                 style: TextStyle(
                     color: Color(0xff4F94FB),
-                    fontWeight: FontWeight.w700,fontSize: 12),
+                    fontWeight: FontWeight.bold,fontSize: 12),
               ),
                 backgroundColor:Color(0xff4F94FB).withValues(alpha: 0.2),),
               SizedBox(width: 15,),
               Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(widget.name,style: TextStyle(
-                      color: Colors.black,
+                      color: Color(0xff303744),
                       fontWeight: FontWeight.w400,fontSize: 14),
                   ),
                   Container(
-                    child: Text(widget.email,style: TextStyle(color: Color(0xffBEC0CC)),),
+                    child: Text(widget.email,
+                      style: TextStyle(color: Color(0xffBEC0CC),
+                      ),
+                    ),
                   ),
                 ],
               ),

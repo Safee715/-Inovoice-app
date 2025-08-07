@@ -1,4 +1,4 @@
-# invoiceapp
+# DummyInvoice
 
 A new Flutter project.
 

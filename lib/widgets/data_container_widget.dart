@@ -1,5 +1,6 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:invoiceapp/widgets/custom_icon_widget.dart';
+import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
 class DataContainerWidget extends StatefulWidget {
   const DataContainerWidget({super.key,
@@ -22,14 +23,14 @@ class DataContainerWidget extends StatefulWidget {
 class _DataContainerWidgetState extends State<DataContainerWidget> {
   @override
   Widget build(BuildContext context) {
-final screen_Width=MediaQuery.of(context).size.width;
-final screen_Height=MediaQuery.of(context).size.height;
+
+HomePageViewmodel homePageViewmodel=HomePageViewmodel();
 
     return Container(constraints: BoxConstraints(
-        minWidth: screen_Width*0.381,
-        minHeight:screen_Height*0.067),
-      padding: EdgeInsets.all(screen_Width*0.024),
-      width: screen_Width*0.381,
+        minWidth: homePageViewmodel.getWidth(context, 156),
+        minHeight:homePageViewmodel.getHeight(context, 70),),
+      padding: EdgeInsets.all(homePageViewmodel.getWidth(context, 10),),
+      width: homePageViewmodel.getWidth(context, 155),
       decoration: BoxDecoration(color: widget.color1,
         borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +57,7 @@ final screen_Height=MediaQuery.of(context).size.height;
               ),
             ],
           ),
-          SizedBox(height:screen_Height*0.011,),
+          SizedBox(height:homePageViewmodel.getHeight(context, 5),),
           Text(
             widget.amount,
             style: TextStyle(fontFamily: 'Biennale',
