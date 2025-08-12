@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
-import 'package:DummyInvoice/widgets/bar_charts_widget.dart';
+import 'package:DummyInvoice/widgets/bar_chart/bar_charts_widget.dart';
 import 'package:DummyInvoice/widgets/custom_cuppertino_button.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/widgets/data_widget.dart';
 import 'package:DummyInvoice/widgets/drafts_widget/drafts_widget.dart';
 import 'package:DummyInvoice/widgets/navbar_widget.dart';
-import 'package:DummyInvoice/widgets/pie_chart_widget.dart';
+import 'package:DummyInvoice/widgets/pie_chart/pie_chart_widget.dart';
 import 'package:DummyInvoice/widgets/recent_invoices_widget/recent_invoices_widget.dart';
 
 class HomePage extends StatefulWidget {
