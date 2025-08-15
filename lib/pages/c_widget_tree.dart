@@ -13,9 +13,9 @@ class CWidgetTree extends StatefulWidget {
 
 class _CWidgetTreeState extends State<CWidgetTree> {
   List<Widget> client_pages=[
-    TemplatePage(title: 'Templates'),
-    ClientsPage(title: 'Clients'),
-    ItemsPage(title: 'Items')
+    TemplatePage(),
+    ClientsPage(),
+    ItemsPage()
   ];
   @override
   Widget build(BuildContext context) {

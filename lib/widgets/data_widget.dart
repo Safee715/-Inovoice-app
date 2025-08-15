@@ -19,13 +19,14 @@ HomePageViewmodel homePageViewmodel=HomePageViewmodel();
 
       return Padding(
         padding:  EdgeInsets.only(
-            left: homePageViewmodel.getWidth(context, 20),
-            right:homePageViewmodel.getWidth(context, 20),
-            bottom: homePageViewmodel.getWidth(context, 10),),
+            left: homePageViewmodel.getWidth(context, 10),
+            right:homePageViewmodel.getWidth(context, 10),
+            bottom: homePageViewmodel.getWidth(context, 10),
+        ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
                   child: DataContainerWidget(
@@ -48,7 +49,7 @@ HomePageViewmodel homePageViewmodel=HomePageViewmodel();
               ],
             ),
             SizedBox(height: 10),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
                   child: DataContainerWidget(
@@ -71,7 +72,7 @@ HomePageViewmodel homePageViewmodel=HomePageViewmodel();
               ],
             ),
             SizedBox(height: 10),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
                   child: DataContainerWidget(
@@ -94,7 +95,7 @@ HomePageViewmodel homePageViewmodel=HomePageViewmodel();
               ],
             ),
             SizedBox(height: 10),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
                   child: DataContainerWidget(

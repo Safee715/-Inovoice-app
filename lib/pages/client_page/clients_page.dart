@@ -8,9 +8,9 @@ import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
 class ClientsPage extends StatefulWidget {
   const ClientsPage({super.key,
-    required this.title});
+    });
 
-  final String title;
+
   @override
   State<ClientsPage> createState() => _ClientsPageState();
 }
@@ -21,25 +21,31 @@ class _ClientsPageState extends State<ClientsPage> {
 
      ClientPageViewmodel clientPageViewmodel=ClientPageViewmodel();
       HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+      bool isDark=Theme.of(context).brightness==Brightness.dark;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(titleSpacing: 0,
           scrolledUnderElevation: 0,
           leadingWidth: 70,elevation: 0,
-          backgroundColor: Color(0xffF0F3F7),
+          backgroundColor:homePageViewmodel.getBackColor(isDark),
           centerTitle: false,
           leading: IconButton(
             onPressed: () {
               clientPageViewmodel.backButtonFunction();
             },
             icon: CustomIconWidget(
-                iconaddress: 'assets/images/icons/backarrow.svg',
+                iconaddress: homePageViewmodel.getIconAddress(
+                    isDark, 'assets/images/icons/nightmode_backButton.svg',
+                    'assets/images/icons/backarrow.svg'),
                 height: 28,
-                weight: 28
+                weight: 28,
+
             )
           ),
-          title: Text(widget.title,
-            style: TextStyle(color:Color(0xff303744),fontSize: 24, fontWeight: FontWeight.bold),
+          title: Text('Clients',
+            style: TextStyle(
+                color:homePageViewmodel.getTextColor(isDark),
+                fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
         body: SafeArea(top: false,
@@ -88,7 +94,7 @@ class _ClientsPageState extends State<ClientsPage> {
                     name: clientPageViewmodel.names.elementAt(8),
                     email: clientPageViewmodel.emails.elementAt(8),),
                   SizedBox(height: 5,),
-          
+
                 ],
               )
             ),
@@ -99,21 +105,21 @@ class _ClientsPageState extends State<ClientsPage> {
             return AddClientsPage();
           },
           ),
-      
+
           ) ;
-      
+
         }, icon: CustomIconWidget(
             iconaddress: clientPageViewmodel.addButtonAddress,
             height: 54, weight: 54
         ),
         ),
         bottomNavigationBar: Container(
-          color: Color(0xffF0F3F7),
+          color:homePageViewmodel.getBackColor(isDark),
           padding: EdgeInsets.only(
               bottom: 30.0, left: 50, right: 50),
           child: ClientPageNavBar(),
         ),
-      
+
       ),
     );
 

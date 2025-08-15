@@ -20,38 +20,35 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets = [
-      DataWidget(),
-      BarChartsWidget(),
-      PieChartWidget()];
-
-final HomePageViewmodel viewmodel= HomePageViewmodel();
+    List<Widget> widgets = [DataWidget(), BarChartsWidget(), PieChartWidget()];
+bool isDark =Theme.of(context).brightness==Brightness.dark;
+    final HomePageViewmodel viewmodel = HomePageViewmodel();
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(scrolledUnderElevation:0.0,
         centerTitle: false,
         titleSpacing: 0,
-        backgroundColor: Color(0xffF0F3F7),
+        backgroundColor: viewmodel.getBackColor(isDark),
         title: Text(
           viewmodel.appBar,
-        style: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Color(0xff303744),
-              ),
-            ),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: viewmodel.getTextColor(isDark),
+          ),
+        ),
         leading: IconButton(
           onPressed: () {},
           icon: CustomIconWidget(
             iconaddress: viewmodel.menuButtonAddress,
             height: 24,
             weight: 24,
-            color: Colors.black,
+            color: viewmodel.getTextColor(isDark),
           ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
             icon: CustomIconWidget(
-              iconaddress: viewmodel.notificationButtonAddress,
+              iconaddress: viewmodel.getNotificationIcon(isDark),
               height: 24,
               weight: 24,
             ),
@@ -73,41 +70,49 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    Container(margin: EdgeInsets.only(top: 10),
                       width: constraints.maxWidth,
-
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: viewmodel.getContainerColor(isDark),
                         borderRadius: BorderRadius.all(Radius.circular(28)),
                       ),
                       child: Column(
                         spacing: viewmodel.getWidth(context, 10),
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: viewmodel.getWidth(context, 10),),
+                          SizedBox(height: viewmodel.getWidth(context, 10)),
                           ValueListenableBuilder(
                             valueListenable: selected_widget_notifier,
                             builder: (context, selected_widget, child) {
-
                               return Row(
                                 spacing: viewmodel.getWidth(context, 5),
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                 CustomCuppertinoButton(
-                                     iconAddress: viewmodel.homePageDetailsAddress,
-                                     onPressed: (){viewmodel.setHomePageDetails();},
-                                   index: 0,),
                                   CustomCuppertinoButton(
-                                      iconAddress: viewmodel.BarChartAddress,
-                                      onPressed: (){viewmodel.setBarChartDetails();},
-                                    index: 1,
-
+                                    iconAddress:
+                                        viewmodel.homePageDetailsAddress,
+                                    onPressed: () {
+                                      viewmodel.setHomePageDetails();
+                                    },
+                                    index: 0,
                                   ),
                                   CustomCuppertinoButton(
-                                      iconAddress: viewmodel.PieChartAddress,
-                                      onPressed: (){viewmodel.setPieChartDetails();},
-                                  index: 2,),
-                                  SizedBox(width:viewmodel.getWidth(context, 15),),
+                                    iconAddress: viewmodel.BarChartAddress,
+                                    onPressed: () {
+                                      viewmodel.setBarChartDetails();
+                                    },
+                                    index: 1,
+                                  ),
+                                  CustomCuppertinoButton(
+                                    iconAddress: viewmodel.PieChartAddress,
+                                    onPressed: () {
+                                      viewmodel.setPieChartDetails();
+                                    },
+                                    index: 2,
+                                  ),
+                                  SizedBox(
+                                    width: viewmodel.getWidth(context, 15),
+                                  ),
                                 ],
                               );
                             },
@@ -130,7 +135,7 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
-                            color: Color(0xff303744),
+                            color: viewmodel.getTextColor(isDark),
                           ),
                         ),
 
@@ -139,7 +144,7 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
                           iconAlignment: IconAlignment.end,
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.only(left: 10, right: 0),
-                            backgroundColor: Color(0xffF0F3F7),
+                            backgroundColor:Colors.transparent,
                             shadowColor: Colors.transparent,
                           ),
                           label: Text(
@@ -158,10 +163,12 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
                       ],
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: viewmodel.getWidth(context, 20),
-                          vertical: viewmodel.getWidth(context, 8),),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: viewmodel.getWidth(context, 20),
+                        vertical: viewmodel.getWidth(context, 8),
+                      ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: viewmodel.getBottomContainerColor(isDark),
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
                       child: RecentInvoicesWidget(),
@@ -171,16 +178,17 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
-                        color: Color(0xff303744),
+                        color: viewmodel.getTextColor(isDark),
                       ),
                     ),
 
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: viewmodel.getWidth(context, 20),
-                          vertical: viewmodel.getWidth(context, 8),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: viewmodel.getWidth(context, 20),
+                        vertical: viewmodel.getWidth(context, 8),
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: viewmodel.getBottomContainerColor(isDark),
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
                       child: DraftsWidget(),
@@ -193,8 +201,7 @@ final HomePageViewmodel viewmodel= HomePageViewmodel();
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(
-            bottom: 30.0, left: 30, right: 30),
+        padding: EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
         child: NavbarWidget(),
       ),
     );

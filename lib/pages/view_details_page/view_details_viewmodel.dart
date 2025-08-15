@@ -1,9 +1,8 @@
 
-
 class
-    AddClientViewmodel {
+ViewDetailsViewmodel {
 
-  final  appBarTitle='Add Client';
+  final  appBarTitle='Client Details';
   final  firstNameLabel='First Name';
   final  lastNameLabel='Last Name';
   final  firstName='Tommy';
@@ -15,7 +14,7 @@ class
   final addressHint  ='London west street No (57)';
   final address='Address';
   final  saveClientButtonText='Save to Client Lists';
-  final  addButtonText='Add';
+  final  addButtonText='Save Changes';
 
 
 

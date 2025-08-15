@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
@@ -12,12 +13,13 @@ class ClientPageNavBar extends StatefulWidget {
 class _ClientPageNavBarState extends State<ClientPageNavBar> {
   @override
   Widget build(BuildContext context) {
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    bool isDark =Theme.of(context).brightness==Brightness.dark;
     return ValueListenableBuilder(
       valueListenable: client_page_index,
       builder: (context, index, child) {
            return SafeArea(
           child: Container(
-
             decoration: BoxDecoration(
                 boxShadow: [
               BoxShadow(spreadRadius: 0,
@@ -29,7 +31,7 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
               borderRadius: BorderRadius.circular(10.0),
               child: NavigationBar(
                 height: 74,
-                backgroundColor: Colors.white,
+                backgroundColor:homePageViewmodel.getNavbarColor(isDark),
                 indicatorColor: Colors.transparent,
                   destinations: [
                     NavigationDestination(
@@ -39,7 +41,9 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
                         ) ,label: 'Templates',
                       icon: CustomIconWidget(
                         iconaddress: 'assets/images/icons/templates.svg',
-                        height: 24, weight: 24,),
+                        height: 24, weight: 24,
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
+                      ),
                     ),
                     NavigationDestination(
                         selectedIcon: CustomIconWidget(
@@ -48,7 +52,7 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
                         ) ,label: 'Clients',
                       icon: CustomIconWidget(
                         iconaddress: 'assets/images/icons/users-group.svg',
-                        height: 24, weight: 24,),
+                        height: 24, weight: 24,color:  homePageViewmodel.getNavbarIconColor(isDark),),
                     ),
                     NavigationDestination(
                         selectedIcon:Icon(Icons.shopping_cart_rounded,
@@ -57,7 +61,7 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
                       label: 'Items',
                       icon: CustomIconWidget(
                           iconaddress: 'assets/images/icons/shopping-cart-plus.svg',
-                          height: 24, weight: 24, color: Colors.grey[500]
+                          height: 24, weight: 24, color: homePageViewmodel.getNavbarIconColor(isDark)
                       ),
                     ),
 
@@ -65,6 +69,7 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
 
                 onDestinationSelected: (int value) {
                   client_page_index.value=value;
+
                 },
                 selectedIndex: index,
                 labelTextStyle:WidgetStateTextStyle.resolveWith(
@@ -72,11 +77,13 @@ class _ClientPageNavBarState extends State<ClientPageNavBar> {
                     TextStyle textStyle;
                     if(states.contains(WidgetState.selected))
                     {
-                      textStyle= TextStyle(fontSize: 12,color: Color(0xff303744),fontWeight: FontWeight.bold);
+                      textStyle= TextStyle(fontSize: 12,
+                          color: homePageViewmodel.getTextColor(isDark),
+                          fontWeight: FontWeight.bold);
                     }
                     else
                     {
-                      textStyle =TextStyle(fontSize: 12,color: Color(0xff8D8F99));
+                      textStyle =TextStyle(fontSize: 12,color: homePageViewmodel.getNavbarIconColor(isDark));
                     }
                     return textStyle;
 

@@ -21,16 +21,18 @@ class DataContainerWidget extends StatefulWidget {
 }
 
 class _DataContainerWidgetState extends State<DataContainerWidget> {
+
   @override
   Widget build(BuildContext context) {
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    bool isDark =Theme.of(context).brightness==Brightness.dark;
 
-HomePageViewmodel homePageViewmodel=HomePageViewmodel();
 
     return Container(constraints: BoxConstraints(
-        minWidth: homePageViewmodel.getWidth(context, 156),
+        minWidth: homePageViewmodel.getWidth(context, 154),
         minHeight:homePageViewmodel.getHeight(context, 70),),
       padding: EdgeInsets.all(homePageViewmodel.getWidth(context, 10),),
-      width: homePageViewmodel.getWidth(context, 155),
+      width: homePageViewmodel.getWidth(context, 157),
       decoration: BoxDecoration(color: widget.color1,
         borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +64,7 @@ HomePageViewmodel homePageViewmodel=HomePageViewmodel();
             widget.amount,
             style: TextStyle(fontFamily: 'Biennale',
               fontWeight: FontWeight.bold,
-              color: Colors.black,fontSize:16,),
+              color: homePageViewmodel.getTextColor(isDark),fontSize:16,),
           ),
         ],
       ),

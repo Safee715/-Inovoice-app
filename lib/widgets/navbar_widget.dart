@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
@@ -12,6 +13,8 @@ class NavbarWidget extends StatefulWidget {
 class _NavbarWidgetState extends State<NavbarWidget> {
   @override
   Widget build(BuildContext context) {
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
     return ValueListenableBuilder(
       valueListenable: selected_page_notifier,
       builder: (context, selected_page, child) {
@@ -46,7 +49,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       iconaddress: 'assets/images/icons/home.svg',
                       height: 24,
                       weight: 24,
-                      color: Colors.grey[500],
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
                     ),
                   ),
                   NavigationDestination(
@@ -61,6 +64,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       iconaddress: 'assets/images/icons/users-group.svg',
                       height: 24,
                       weight: 24,
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
                     ),
                   ),
 
@@ -85,7 +89,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       iconaddress: 'assets/images/icons/shopping-cart-plus.svg',
                       height: 24,
                       weight: 24,
-                      color: Colors.grey[500],
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
                     ),
                   ),
                   NavigationDestination(
@@ -98,14 +102,15 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       iconaddress: 'assets/images/icons/user.svg',
                       height: 24,
                       weight: 24,
-                      color: Colors.grey[500],
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
                     ),
                   ),
                 ],
-                backgroundColor: Colors.white,
+                backgroundColor: homePageViewmodel.getNavbarColor(isDark),
                 onDestinationSelected: (int value) {
-                  selected_page_notifier.value = value;
-                  previous_page.value = selected_page_notifier.value;
+                       selected_page_notifier.value = value;
+                       previous_page.value = selected_page_notifier.value;
+
                 },
                 selectedIndex: selected_page,
                 indicatorColor: Colors.transparent,
@@ -114,13 +119,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   if (states.contains(WidgetState.selected)) {
                     textStyle = TextStyle(
                       fontSize: 12,
-                      color: Color(0xff303744),
+                      color: homePageViewmodel.getTextColor(isDark),
                       fontWeight: FontWeight.bold,
                     );
                   } else {
                     textStyle = TextStyle(
                       fontSize: 12,
-                      color: Color(0xff8D8F99),
+                      color: homePageViewmodel.getNavbarIconColor(isDark),
                     );
                   }
                   return textStyle;

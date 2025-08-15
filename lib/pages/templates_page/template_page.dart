@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/templates_page/abstract_template.dart';
@@ -6,8 +7,8 @@ import 'package:DummyInvoice/widgets/client_page_nav_bar.dart';
 
 class TemplatePage extends StatefulWidget {
 
-  const TemplatePage({super.key,required this.title});
-  final String title;
+  const TemplatePage({super.key});
+
   @override
   State<TemplatePage> createState() => _TemplatePageState();
 }
@@ -16,8 +17,8 @@ class _TemplatePageState extends State<TemplatePage> {
   @override
   Widget build(BuildContext context) {
     TemplatesPageViewmodel templatesPageViewmodel=TemplatesPageViewmodel();
-
-
+  HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+  bool isDark =Theme.of(context).brightness==Brightness.dark;
 
     return Scaffold(
 
@@ -28,8 +29,9 @@ class _TemplatePageState extends State<TemplatePage> {
           },
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
-        title:Text(widget.title,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        title:Text('Templates',
+          style: TextStyle(fontSize: 24,color: homePageViewmodel.getTextColor(isDark),
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: SafeArea(child: SingleChildScrollView(

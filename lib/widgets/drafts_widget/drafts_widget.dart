@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/drafts_widget/drafts_viewmodel.dart';
 
@@ -12,6 +13,9 @@ class _DraftsWidgetState extends State<DraftsWidget> {
   @override
   Widget build(BuildContext context) {
     DraftsViewmodel draftsViewmodel=DraftsViewmodel();
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    bool isDark =Theme.of(context).brightness==Brightness.dark;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -20,7 +24,8 @@ class _DraftsWidgetState extends State<DraftsWidget> {
               Text(draftsViewmodel.name,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0
+                    fontSize: 18.0,
+                    color:homePageViewmodel.getTextColor(isDark),
                 ),
               ),
                ElevatedButton(onPressed: (){} ,
@@ -43,7 +48,13 @@ class _DraftsWidgetState extends State<DraftsWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(draftsViewmodel.receiptId),
+              Text(draftsViewmodel.receiptId,
+                style: TextStyle(
+                  color:
+                homePageViewmodel.getTextColor(isDark),
+                ),
+
+              ),
 
               Text('Issue: ${draftsViewmodel.issueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
@@ -58,8 +69,10 @@ class _DraftsWidgetState extends State<DraftsWidget> {
             children: [
               Column(
                 children: [
-                  Text('Total: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
-                  Text('Paid: ',style: TextStyle(fontSize: 12,color: Color(0xff303744),),),
+                  Text('Total: ',style: TextStyle(fontSize: 12,
+                      color: homePageViewmodel.getTextColor(isDark),),),
+                  Text('Paid: ',style: TextStyle(fontSize: 12,
+                      color: homePageViewmodel.getTextColor(isDark),),),
                 ],
               ),
               Column(
@@ -80,7 +93,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text('Due Amount',
-                      style: TextStyle(color: Color(0xff303744),),),
+                      style: TextStyle(color:  homePageViewmodel.getTextColor(isDark),),),
                     Text('PKR ${draftsViewmodel.dueAmount}',
                       style: TextStyle(color: Color(0xffF26666),fontWeight: FontWeight.bold,
                           fontSize: 17.0

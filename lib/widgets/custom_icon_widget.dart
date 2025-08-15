@@ -23,7 +23,8 @@ class _CustomIconWidgetState extends State<CustomIconWidget> {
   Widget build(BuildContext context) {
     return  SvgPicture.asset(widget.iconaddress,
       height: widget.height,width: widget.weight,
-    colorFilter:widget.color!=null?    ColorFilter.mode(widget.color!,BlendMode.srcIn ):null);
+    colorFilter:widget.color!=null?
+    ColorFilter.mode(widget.color!,BlendMode.srcIn ):null);
   }
 }
 

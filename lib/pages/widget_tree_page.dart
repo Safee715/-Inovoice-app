@@ -17,7 +17,7 @@ class WidgetTreePage extends StatefulWidget {
 class _WidgetTreePageState extends State<WidgetTreePage> {
   List<Widget> pages=[HomePage(),
     CWidgetTree(),AddClientsPage(),
-    ItemsPage(title: 'Items'),ProfilePage()
+    ItemsPage(),ProfilePage()
   ];
   @override
   Widget build(BuildContext context) {

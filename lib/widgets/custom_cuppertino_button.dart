@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
@@ -20,6 +21,9 @@ final int index;
 class _CustomCuppertinoButtonState extends State<CustomCuppertinoButton> {
   @override
   Widget build(BuildContext context) {
+     HomePageViewmodel viewmodel = HomePageViewmodel();
+    bool isDark =Theme.of(context).brightness==Brightness.dark;
+
     return
           CupertinoButton(
             padding: EdgeInsets.zero,
@@ -34,7 +38,7 @@ class _CustomCuppertinoButtonState extends State<CustomCuppertinoButton> {
               weight: 18,
               color: selected_widget_notifier.value == widget.index
                   ? Colors.blue
-                  : Colors.grey,
+                  : viewmodel.getHomePageIconColor(isDark),
             ),
           );
 
