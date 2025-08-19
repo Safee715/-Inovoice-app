@@ -32,10 +32,7 @@ class _ItemsPageState extends State<ItemsPage> {
         ),
       ),
       body: Container(),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 30.0, left: selected_page_notifier.value==3?30:50, right:selected_page_notifier.value==3?30: 50),
-        child: selected_page_notifier.value==3?NavbarWidget():ClientPageNavBar(),
-      ),
+
     );
   }
 }

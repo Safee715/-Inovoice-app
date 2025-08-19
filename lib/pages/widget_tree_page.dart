@@ -1,3 +1,5 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/items_page/Items_page.dart';
@@ -5,7 +7,6 @@ import 'package:DummyInvoice/pages/add_clients_page/add_clients_page.dart';
 import 'package:DummyInvoice/pages/c_widget_tree.dart';
 import 'package:DummyInvoice/pages/home_page/home_page.dart';
 import 'package:DummyInvoice/pages/profile_page/profile_page.dart';
-
 
 class WidgetTreePage extends StatefulWidget {
   const WidgetTreePage({super.key});
@@ -15,21 +16,54 @@ class WidgetTreePage extends StatefulWidget {
 }
 
 class _WidgetTreePageState extends State<WidgetTreePage> {
-  List<Widget> pages=[HomePage(),
-    CWidgetTree(),AddClientsPage(),
-    ItemsPage(),ProfilePage()
+
+  List<Widget> pages = [
+    HomePage(),
+    CWidgetTree(),
+    AddClientsPage(),
+    ItemsPage(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
     return Scaffold(
       body: ValueListenableBuilder(
-          valueListenable: selected_page_notifier,
-          builder: (context, index, child)
-          {
-            return pages.elementAt(index);
-
-          },
+        valueListenable: selected_page_notifier,
+        builder: (context, index, child) {
+          return AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),switchInCurve: Curves.linear,
+            transitionBuilder: (child, animation) {
+              return ScaleTransition(scale: animation,child: child,);
+            },
+            child: pages[index],
+          );
+        },
       ),
+      bottomNavigationBar:
+      ValueListenableBuilder(
+      valueListenable: selected_page_notifier,
+      builder: (context, value, child) {
+        if(value==1) {
+        return Container(
+          color: homePageViewmodel.getBackColor(isDark),
+          padding: EdgeInsets.only(bottom: 30.0, left: 50, right: 50),
+          child: SizedBox(height: 20,),
+        );
+
+      }
+        else {
+         return Padding(
+              padding: EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
+              child: NavbarWidget()
+          );
+        }
+
+      },
+
+      )
     );
+
   }
 }

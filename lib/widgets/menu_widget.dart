@@ -1,12 +1,16 @@
+import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/edit_details_page/edit_client.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/view_details_page/view_details.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
+import 'package:provider/provider.dart';
 
 class MenuWidget extends StatefulWidget {
-  const MenuWidget({super.key});
-
+  const MenuWidget({super.key,
+  required this.id
+  });
+  final id;
   @override
   State<MenuWidget> createState() => _MenuWidgetState();
 }
@@ -15,25 +19,37 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    final clientPageViewmodel=context.watch<ClientPageViewmodel>();
     bool isDark=Theme.of(context).brightness==Brightness.dark;
-List<Widget> pages=[EditClient(),ViewDetails()];
+List<Widget> pages=[
+  EditClient(id: widget.id,),ViewDetails(id:widget.id)
+];
+
 
     return PopupMenuButton(
       onSelected: (value) {
-       Navigator.push(context,
-           MaterialPageRoute(builder: (context) {
-            if(value==0 ||value==2)
-              {
-                return pages[0];
-              }
-            else
-            {
-              return pages[1];
-            }
+        print('value is $value');
+        if(value==0)
+          {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return pages[0] ;
+            },
+            ),
+            );
+          }
+        else if(value==1)
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return pages[1] ;
+          },
+          ),
+          );
+        }
+        else if(value==2)
+          {
+           return clientPageViewmodel.deleteClient(widget.id);
 
-           },
-           )
-       );
+          }
       },
 
       color: homePageViewmodel.getBottomContainerColor(isDark).withValues(alpha: 0.8),

@@ -1,7 +1,8 @@
 
+import 'package:flutter/foundation.dart';
 
 class
-    AddClientViewmodel {
+    AddClientViewmodel extends ChangeNotifier{
 
   final  appBarTitle='Add Client';
   final  firstNameLabel='First Name';
@@ -19,5 +20,18 @@ class
 
 
 
+
+}
+
+class Client
+{
+  Client({required this.firstName,
+    required this.lastName,
+    required this.email});
+
+  final firstName;
+  final lastName;
+  final email;
+  String getFullName()=>'$firstName $lastName';
 
 }

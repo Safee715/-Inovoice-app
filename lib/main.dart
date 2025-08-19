@@ -1,9 +1,19 @@
+import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/widget_tree_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const Myapp());
+
+  runApp(
+  MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => ClientPageViewmodel(),),
+  ],child: const Myapp(),
+  ),
+
+  );
+
 }
 
 class Myapp extends StatelessWidget {

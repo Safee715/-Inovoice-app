@@ -6,7 +6,6 @@ import 'package:DummyInvoice/widgets/custom_cuppertino_button.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/widgets/data_widget.dart';
 import 'package:DummyInvoice/widgets/drafts_widget/drafts_widget.dart';
-import 'package:DummyInvoice/widgets/navbar_widget.dart';
 import 'package:DummyInvoice/widgets/pie_chart/pie_chart_widget.dart';
 import 'package:DummyInvoice/widgets/recent_invoices_widget/recent_invoices_widget.dart';
 
@@ -200,10 +199,7 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
           },
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 30.0, left: 30, right: 30),
-        child: NavbarWidget(),
-      ),
+
     );
   }
 }

@@ -1,7 +1,10 @@
+import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/add_clients_page/add_client_viewmodel.dart';
 import 'package:DummyInvoice/widgets/text_form_fields_mandatory.dart';
+import 'package:provider/provider.dart';
 
 class AddClientsPage extends StatefulWidget {
   const AddClientsPage({super.key});
@@ -9,15 +12,34 @@ class AddClientsPage extends StatefulWidget {
   @override
   State<AddClientsPage> createState() => _AddClientsPageState();
 }
+
 class _AddClientsPageState extends State<AddClientsPage> {
-  bool _toggeled = false;
+  bool isToggled = false;
+
+
+
   @override
   Widget build(BuildContext context) {
     AddClientViewmodel addClientViewmodel = AddClientViewmodel();
     HomePageViewmodel homePageViewmodel = HomePageViewmodel();
+    final clientPageViewmodel=context.watch<ClientPageViewmodel>();
     bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+
+
     return Scaffold(
-      appBar: AppBar(elevation: 0,
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            selected_page_notifier.value==2?selected_page_notifier.value=0:Navigator.pop(context);
+
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_outlined,
+            color: homePageViewmodel.getTextColor(isDark),
+          ),
+        ),
         backgroundColor: homePageViewmodel.getBackColor(isDark),
         scrolledUnderElevation: 0,
         title: Text(
@@ -31,13 +53,14 @@ class _AddClientsPageState extends State<AddClientsPage> {
         centerTitle: true,
       ),
       backgroundColor: homePageViewmodel.getBackColor(isDark),
-      body: SafeArea(top: false,
+      body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.only(
-                left: homePageViewmodel.getWidth(context, 20),
-            right: homePageViewmodel.getWidth(context, 20),
-              bottom: homePageViewmodel.getWidth(context, 20)
+            padding: EdgeInsets.only(
+              left: homePageViewmodel.getWidth(context, 20),
+              right: homePageViewmodel.getWidth(context, 20),
+              bottom: homePageViewmodel.getWidth(context, 20),
             ),
             child: Column(
               children: [
@@ -45,46 +68,51 @@ class _AddClientsPageState extends State<AddClientsPage> {
                   labelText: addClientViewmodel.firstNameLabel,
                   hintText: addClientViewmodel.firstName,
                   isMandatory: true,
+                  controller: clientPageViewmodel.firstNameController,
                 ),
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.lastNameLabel,
                   hintText: addClientViewmodel.lastName,
                   isMandatory: true,
+                  controller: clientPageViewmodel.lastNameController,
                 ),
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.emailAddress,
                   hintText: addClientViewmodel.emailAddressHint,
-                  isMandatory: false,
+                  isMandatory: true,
+                  controller: clientPageViewmodel.emailController,
                 ),
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.phoneNo,
                   hintText: addClientViewmodel.phoneNoHint,
                   isMandatory: true,
+                  controller: clientPageViewmodel.phoneController,
                 ),
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.address,
                   hintText: addClientViewmodel.addressHint,
-                  isMandatory: false,
+                  isMandatory: true,
+                  controller: clientPageViewmodel.addressController,
                 ),
-
                 SizedBox(height: 30),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       addClientViewmodel.saveClientButtonText,
-                      style: TextStyle(fontFamily: 'Biennale',fontSize: 14,
+                      style: TextStyle(
+                        fontFamily: 'Biennale',
+                        fontSize: 14,
                         color: homePageViewmodel.getTextColor(isDark),
                       ),
                     ),
-
                     Switch(
-                      value: _toggeled,
+                      value: isToggled,
                       onChanged: (bool value) {
                         setState(() {
-                          _toggeled = value;
+                          isToggled = value;
                         });
                       },
-
                     ),
                   ],
                 ),
@@ -106,7 +134,10 @@ class _AddClientsPageState extends State<AddClientsPage> {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                     ),
-                    onPressed: () {},
+                    onPressed: () async{
+                      clientPageViewmodel.addClient();
+                      selected_page_notifier.value==2?selected_page_notifier.value=0:Navigator.pop(context);
+                    },
                     child: Text(
                       addClientViewmodel.addButtonText,
                       style: TextStyle(
@@ -123,5 +154,8 @@ class _AddClientsPageState extends State<AddClientsPage> {
         ),
       ),
     );
+
   }
-}
+
+  }
+

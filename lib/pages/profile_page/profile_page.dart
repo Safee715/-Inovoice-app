@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/widgets/navbar_widget.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -32,11 +31,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar:Padding(
-        padding: const EdgeInsets.only(bottom: 30.0,left: 30,right: 30,),
-        child: NavbarWidget(),
-      ),
-
     );
   }
 }

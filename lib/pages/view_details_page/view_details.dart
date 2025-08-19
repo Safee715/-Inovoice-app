@@ -1,23 +1,34 @@
+import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/view_details_page/view_details_viewmodel.dart';
 import 'package:DummyInvoice/widgets/text_form_fields_mandatory.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class ViewDetails extends StatefulWidget {
-  const ViewDetails({super.key});
-
+  const ViewDetails({
+    super.key,
+  required this.id
+  });
+final id;
   @override
   State<ViewDetails> createState() => _ViewDetailsState();
 }
 
 class _ViewDetailsState extends State<ViewDetails> {
-  bool _toggeled = false;
+
   @override
   Widget build(BuildContext context) {
     HomePageViewmodel homePageViewmodel=HomePageViewmodel();
     ViewDetailsViewmodel viewDetailsViewmodel=ViewDetailsViewmodel();
     bool isDark=Theme.of(context).brightness==Brightness.dark;
+    final clientPageViewmodel=context.watch<ClientPageViewmodel>();
+    clientPageViewmodel.firstNameController.text=clientPageViewmodel.firstNames.value.elementAt(widget.id);
+    clientPageViewmodel.emailController.text=clientPageViewmodel.emails.value.elementAt(widget.id);
+    clientPageViewmodel.lastNameController.text=clientPageViewmodel.lastNames.value.elementAt(widget.id);
+    clientPageViewmodel.addressController.text=clientPageViewmodel.addresses.value.elementAt(widget.id);
+    clientPageViewmodel.phoneController.text=clientPageViewmodel.phoneNos.value.elementAt(widget.id);
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: true,
         backgroundColor: homePageViewmodel.getBackColor(isDark),
@@ -54,79 +65,37 @@ class _ViewDetailsState extends State<ViewDetails> {
               children: [
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.firstNameLabel,
-                  hintText: viewDetailsViewmodel.firstName,
+                  controller: clientPageViewmodel.firstNameController,
                   isMandatory: true,
+                  enabeled: false,
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.lastNameLabel,
-                  hintText: viewDetailsViewmodel.lastName,
+                  controller: clientPageViewmodel.lastNameController,
                   isMandatory: true,
+                  enabeled: false,
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.emailAddress,
-                  hintText: viewDetailsViewmodel.emailAddressHint,
-                  isMandatory: false,
+                  controller: clientPageViewmodel.emailController,
+                  isMandatory: true,
+                  enabeled: false,
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.phoneNo,
-                  hintText: viewDetailsViewmodel.phoneNoHint,
+                  controller: clientPageViewmodel.phoneController,
                   isMandatory: true,
+                  enabeled: false,
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.address,
-                  hintText: viewDetailsViewmodel.addressHint,
-                  isMandatory: false,
+                  controller: clientPageViewmodel.addressController,
+                  isMandatory: true,
+                  enabeled: false,
                 ),
         
                 SizedBox(height: 30),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      viewDetailsViewmodel.saveClientButtonText,
-                      style: TextStyle(fontFamily: 'Biennale',fontSize: 14,
-                        color: homePageViewmodel.getTextColor(isDark),
-                      ),
-                    ),
-        
-                    Switch(
-                      value: _toggeled,
-                      onChanged: (bool value) {
-                        setState(() {
-                          _toggeled = value;
-                        });
-                      },
-        
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Container(
-                  width: homePageViewmodel.getWidth(context, 297),
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    gradient: LinearGradient(
-                      colors: [Color(0xFF9CD9FF), Color(0xFF4082E3)],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      viewDetailsViewmodel.addButtonText,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+
               ],
             ),
           ),

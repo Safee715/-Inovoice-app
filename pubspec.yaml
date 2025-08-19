@@ -38,6 +38,8 @@ dependencies:
   flutter_svg: ^2.2.0
   pie_chart: ^5.4.0
   intl: ^0.20.2
+  shared_preferences: ^2.5.3
+  provider: ^6.1.5
 
 
 dev_dependencies:

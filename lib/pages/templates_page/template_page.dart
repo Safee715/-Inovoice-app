@@ -87,12 +87,6 @@ class _TemplatePageState extends State<TemplatePage> {
       ),
       ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 30.0, left: 50, right: 50),
-        child: ClientPageNavBar(),
-      ),
-
-
     );
   }
 }

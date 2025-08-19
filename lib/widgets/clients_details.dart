@@ -4,10 +4,13 @@ import 'package:DummyInvoice/widgets/menu_widget.dart';
 
 class ClientsDetails extends StatefulWidget {
   const ClientsDetails({super.key,
-   required  this.name,required this.email});
+   required  this.name,required this.email,
+  required this.id
+  });
 
   final String name;
   final String email;
+  final id;
   @override
   State<ClientsDetails> createState() => _ClientsDetailsState();
 }
@@ -19,9 +22,14 @@ class _ClientsDetailsState extends State<ClientsDetails> {
 
 
   String getInitials(String name)
-  {List<String> parts=name.trim().split(" ");
+  {
   String initials='';
-  if(parts.length==1)
+  if(name==null||name.trim().isEmpty)
+    {
+      return '';
+    }
+  List<String> parts=name.trim().split(" ").where((element) => element.isNotEmpty).toList();
+   if(parts.length==1)
   {
     initials= parts[0][0].toUpperCase();
 
@@ -65,7 +73,7 @@ minLeadingWidth: 30,horizontalTitleGap: 5,
           ),
         ],
       ),
-      trailing: MenuWidget(),
+      trailing: MenuWidget(id: widget.id),
 
 
     );
