@@ -67,20 +67,20 @@ final clientPageViewmodel=context.watch<ClientPageViewmodel>();
             left: homePageViewmodel.getWidth(context, 15),
             right: homePageViewmodel.getWidth(context, 15),
           ),
-          child: ValueListenableBuilder(valueListenable: clientPageViewmodel.firstNames,
-            builder:(context, names, child) {
+          child: ValueListenableBuilder(valueListenable: clientPageViewmodel.client,
+            builder:(context, clients, child) {
             return  ValueListenableBuilder(
-              valueListenable: clientPageViewmodel.emails, builder: (context, emails, child) {
-              if(names.isEmpty)
+              valueListenable: clientPageViewmodel.client, builder: (context, emails, child) {
+              if(clients.isEmpty)
               {
                 return Center(child: Container(child: Text('No Clients Yet')));
               }
               else {
-                print(names.length);
+                print(clients.length);
                 return ListView.builder(
-                  itemCount: names.length,
+                  itemCount: clients.length,
                   itemBuilder: (context, index) {
-                    final bool isLast = index == names.length - 1;
+                    final bool isLast = index == clients.length - 1;
                     print('index==$index');
                     return Padding(
                       padding: EdgeInsets.only(
@@ -89,8 +89,8 @@ final clientPageViewmodel=context.watch<ClientPageViewmodel>();
                             context, isLast ? 50 : 5),
                       ),
                       child: ClientsDetails(
-                        name:'${clientPageViewmodel.firstNames.value.elementAt(index)} ${clientPageViewmodel.lastNames.value.elementAt(index)}',
-                        email:emails[index],
+                        name:'${clientPageViewmodel.client.value.elementAt(index).firstName} ${clientPageViewmodel.client.value.elementAt(index).lastname}',
+                        email:clientPageViewmodel.client.value.elementAt(index).email,
                         id: index,
                       ),
                     );

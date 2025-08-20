@@ -47,7 +47,7 @@ List<Widget> pages=[
         }
         else if(value==2)
           {
-           return clientPageViewmodel.deleteClient(widget.id);
+           return clientPageViewmodel.delete_Client(widget.id);
 
           }
       },

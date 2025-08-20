@@ -1,7 +1,40 @@
+import 'dart:convert';
+
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Client
+{
+  String firstName;
+  String lastname;
+  String email;
+  String phoneNo;
+  String address;
+  Client({required this.firstName,
+    required this.lastname,
+    required this.email,
+    required this.phoneNo,
+    required this.address
+  });
+
+  Map<String, dynamic>toJson()=>
+      {
+        'firstName':firstName,
+        'lastname':lastname,
+        'email':email,
+        'phoneNo':phoneNo,
+        'address':address,
+      };
+factory Client.fromJson(Map<String ,dynamic>json)=>
+    Client(firstName: json['firstName'],
+        lastname: json['lastname'],
+        email: json['email'],
+        phoneNo: json['phoneNo'],
+        address: json['address']
+    );
+
+}
 
 class ClientPageViewmodel extends ChangeNotifier {
 
@@ -12,79 +45,58 @@ class ClientPageViewmodel extends ChangeNotifier {
     this.context
   })
   {
-    loadClients();
+    getClients();
   }
   final context;
- ValueNotifier< List<String>> firstNames=ValueNotifier([]);
- ValueNotifier< List<String>> lastNames=ValueNotifier([]);
- ValueNotifier< List<String>> emails=ValueNotifier([]);
- ValueNotifier< List<String>> phoneNos=ValueNotifier([]);
- ValueNotifier< List<String>> addresses=ValueNotifier([]);
+
+ ValueNotifier< List<Client>> client=ValueNotifier([]);
  final TextEditingController firstNameController = TextEditingController();
  final TextEditingController lastNameController = TextEditingController();
  final TextEditingController emailController = TextEditingController();
  final TextEditingController phoneController = TextEditingController();
  final TextEditingController addressController = TextEditingController();
- void loadClients()async
+
+ void saveClient(List<Client> clientObject)async
  {
-   final prefs=await SharedPreferences.getInstance();
-   final clientFirstNames=prefs.getStringList('firstNames')??[];
-   final clientLastNames=prefs.getStringList('lastNames')??[];
-   final clientEmails=prefs.getStringList('emails')??[];
-   final clientPhoneNos=prefs.getStringList('phoneNos')??[];
-   final clientAddresses=prefs.getStringList('addresses')??[];
-   firstNames.value=clientFirstNames;
-   lastNames.value=clientLastNames;
-   emails.value=clientEmails;
-   addresses.value=clientAddresses;
-   phoneNos.value=clientPhoneNos;
-   // print("Loaded names: $clientNames");
-   // print("Loaded emails: $clientEmails");
-   // print("CLoaded names: ${names}");
-   // print("CLoaded emails: ${emails}");
-   // clearControllers();
+   final SharedPreferences prefs=await SharedPreferences.getInstance();
+   List<String> clientString=clientObject.map((e) => jsonEncode(e.toJson())).toList();
+   List<String> savedStrings= prefs.getStringList('client')??[];
+   List<String> updatedList=savedStrings+clientString;
+await prefs.setStringList('client', updatedList);
+List<Client> savedObjects=updatedList.map((str) => Client.fromJson(jsonDecode(str) as Map<String ,dynamic>)).toList();
+
+client.value=savedObjects;
+
 notifyListeners();
  }
- void deleteClient(int id)async
+
+
+ void getClients()async
  {
-   final SharedPreferences preferences=await SharedPreferences.getInstance();
-   final clientFirstNames=preferences.getStringList('firstNames')??[];
-   final clientLastNames=preferences.getStringList('lastNames')??[];
-   final clientEmails=preferences.getStringList('emails')??[];
-   final clientAddresses=preferences.getStringList('addresses')??[];
-   final clientPhoneNos=preferences.getStringList('phoneNos')??[];
-   if(id<clientFirstNames.length)
-   {
-      clientFirstNames.removeAt(id);
-    }if(id<clientLastNames.length)
-   {
-      clientLastNames.removeAt(id);
-    }if(id<clientPhoneNos.length)
-   {
-      clientPhoneNos.removeAt(id);
-    }if(id<clientAddresses.length)
-   {
-      clientAddresses.removeAt(id);
-    }
-    if(id<clientEmails.length)
-   {
-      clientEmails.removeAt(id);
-    }
-    firstNames.value=List.from(clientFirstNames);
-    lastNames.value=List.from(clientLastNames);
-   emails.value=List.from(clientEmails);
-   addresses.value=List.from(clientAddresses);
-   phoneNos.value=List.from(clientPhoneNos);
-   preferences.setStringList('firstNames',clientFirstNames );
-   preferences.setStringList('lastNames',clientLastNames );
-   preferences.setStringList('emails',clientEmails );
-   preferences.setStringList('addresses',clientAddresses );
-   preferences.setStringList('phoneNos',clientPhoneNos );
-   // print("after names: ${names}");
-   // print("after emails: ${emails}");
-notifyListeners();
+
+   final SharedPreferences prefs=await SharedPreferences.getInstance();
+   List<String> stringLists=prefs.getStringList('client')??[];
+   List<Client> savedClients=stringLists.map((e) => Client.fromJson(jsonDecode(e) as Map<String,dynamic>)).toList();
+
+   client.value=List.from(savedClients);
+   notifyListeners();
 
  }
+
+
+
+
+ void delete_Client(int id)async
+ {
+   final SharedPreferences prefs=await SharedPreferences.getInstance();
+   List<String> savedStrings=prefs.getStringList('client')??[];
+   savedStrings.removeAt(id);
+   prefs.setStringList('client',savedStrings);
+   List<Client> listOfClients=savedStrings.map((e) => Client.fromJson(jsonDecode(e)as Map<String,dynamic>)).toList();
+   client.value=List.from(listOfClients);
+   notifyListeners();
+ }
+
  Future <void> addClient() async {
    final SharedPreferences prefs = await SharedPreferences.getInstance();
    final first = firstNameController.text.trim();
@@ -92,34 +104,17 @@ notifyListeners();
    final email = emailController.text.trim();
    final phone = phoneController.text.trim();
    final address = addressController.text.trim();
-   if (first.isEmpty || last.isEmpty||phone.isEmpty||address.isEmpty||email.isEmpty) {
-     ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(content: Text('Please fill out mandatory fields')),
-     );
-     return;
-   }
-   final clientFirstNames=prefs.getStringList('firstNames')??[];
-   final clientLastNames=prefs.getStringList('lastNames')??[];
-   final clientEmails=prefs.getStringList('emails')??[];
-   final clientAddresses=prefs.getStringList('addresses')??[];
-   final clientPhoneNos=prefs.getStringList('phoneNos')??[];
-   clientFirstNames.add(first);
-   clientLastNames.add(last);
-   clientEmails.add(email);
-   clientAddresses.add(address);
-   clientPhoneNos.add(phone);
 
-   firstNames.value=List.from(clientFirstNames);
-   lastNames.value=List.from(clientLastNames);
-   emails.value=List.from(clientEmails);
-   addresses.value=List.from(clientAddresses);
-   phoneNos.value=List.from(clientPhoneNos);
 
-   prefs.setStringList('firstNames',clientFirstNames );
-   prefs.setStringList('lastNames',clientLastNames );
-   prefs.setStringList('emails',clientEmails );
-   prefs.setStringList('addresses',clientAddresses );
-   prefs.setStringList('phoneNos',clientPhoneNos );
+   final savedStrings=prefs.getStringList('client')??[];
+
+   final savedClients=savedStrings.map((e) => Client.fromJson(jsonDecode(e)as Map<String,dynamic>)).toList();
+   savedClients.add(Client(firstName: first, lastname: last, email: email, phoneNo: phone, address: address));
+   
+   client.value=List.from(savedClients);
+   List<String> newList=savedClients.map((e) => jsonEncode(e.toJson())).toList();
+   prefs.setStringList('client', newList);
+
 notifyListeners();
  }
   Future <void> editClient(
@@ -131,32 +126,22 @@ notifyListeners();
         required  newAddress
       }) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final clientFirstNames=prefs.getStringList('firstNames')??[];
-    final clientLastNames=prefs.getStringList('lastNames')??[];
-    final clientEmails=prefs.getStringList('emails')??[];
-    final clientAddresses=prefs.getStringList('addresses')??[];
-    final clientPhoneNos=prefs.getStringList('phoneNos')??[];
-    clientFirstNames[id]=newFirstName;
-    clientLastNames[id]=newLastName;
-    clientEmails[id]=newEmailAddress;
-    clientPhoneNos[id]=newPhoneNo;
-    clientAddresses[id]=newAddress;
-    firstNames.value=List.from(clientFirstNames);
-    lastNames.value=List.from(clientLastNames);
-    emails.value=List.from(clientEmails);
-    addresses.value=List.from(clientAddresses);
-    phoneNos.value=List.from(clientPhoneNos);
+    final savedStrings=prefs.getStringList('client')??[];
 
 
-    prefs.setStringList('firstNames',clientFirstNames );
-    prefs.setStringList('lastNames',clientLastNames );
-    prefs.setStringList('emails',clientEmails );
-    prefs.setStringList('addresses',clientAddresses );
-    prefs.setStringList('phoneNos',clientPhoneNos );
+    List<Client> savedClients=savedStrings.map((e) => Client.fromJson(jsonDecode(e)as Map<String,dynamic>)).toList();
+    savedClients.elementAt(id).firstName=newFirstName;
+    savedClients.elementAt(id).lastname=newLastName;
+    savedClients.elementAt(id).email=newEmailAddress;
+    savedClients.elementAt(id).address=newAddress;
+    savedClients.elementAt(id).phoneNo=newPhoneNo;
+List<String> newStrings=savedClients.map((e) => jsonEncode(e.toJson())).toList();
+prefs.setStringList('client', newStrings);
+client.value=List.from(savedClients);
+
     clearControllers();
   notifyListeners();
-  // print('new $newFirstName');
-  // print('new $newEmailAddress');
+
 
 
 
@@ -184,11 +169,7 @@ void backButtonFunction()
     emailController.dispose();
     addressController.dispose();
     phoneController.dispose();
-    firstNames.dispose();
-    lastNames.dispose();
-    emails.dispose();
-    phoneNos.dispose();
-    addresses.dispose();
+
     super.dispose();
   }
 

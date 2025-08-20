@@ -20,11 +20,11 @@ class _EditClient extends State<EditClient> {
     super.initState();
     editClientViewmodel = EditClientViewmodel();
   final clientPageViewmodel=Provider.of<ClientPageViewmodel>(context,listen: false);
-  editClientViewmodel.firstNameController.text=clientPageViewmodel.firstNames.value.elementAt(widget.id);
-  editClientViewmodel.emailController.text=clientPageViewmodel.emails.value.elementAt(widget.id);
-  editClientViewmodel.lastNameController.text=clientPageViewmodel.lastNames.value.elementAt(widget.id);
-  editClientViewmodel.addressController.text=clientPageViewmodel.addresses.value.elementAt(widget.id);
-  editClientViewmodel.phoneController.text=clientPageViewmodel.phoneNos.value.elementAt(widget.id);
+  editClientViewmodel.firstNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).firstName;
+  editClientViewmodel.emailController.text=clientPageViewmodel.client.value.elementAt(widget.id).email;
+  editClientViewmodel.lastNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).lastname;
+  editClientViewmodel.addressController.text=clientPageViewmodel.client.value.elementAt(widget.id).address;
+  editClientViewmodel.phoneController.text=clientPageViewmodel.client.value.elementAt(widget.id).phoneNo;
   }
   bool _toggeled = false;
   @override
@@ -67,7 +67,7 @@ class _EditClient extends State<EditClient> {
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.emailAddress,
                   controller: editClientViewmodel.emailController,
-                  isMandatory: true,
+                  isMandatory: false,
 
                 ),
                 TextFormFieldsMandatory(
@@ -78,7 +78,7 @@ class _EditClient extends State<EditClient> {
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.address,
                   controller: editClientViewmodel.addressController,
-                  isMandatory: true,
+                  isMandatory: false,
                 ),
 
                 SizedBox(height: 30),

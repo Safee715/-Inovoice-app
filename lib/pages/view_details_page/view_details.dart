@@ -24,11 +24,11 @@ class _ViewDetailsState extends State<ViewDetails> {
     ViewDetailsViewmodel viewDetailsViewmodel=ViewDetailsViewmodel();
     bool isDark=Theme.of(context).brightness==Brightness.dark;
     final clientPageViewmodel=context.watch<ClientPageViewmodel>();
-    clientPageViewmodel.firstNameController.text=clientPageViewmodel.firstNames.value.elementAt(widget.id);
-    clientPageViewmodel.emailController.text=clientPageViewmodel.emails.value.elementAt(widget.id);
-    clientPageViewmodel.lastNameController.text=clientPageViewmodel.lastNames.value.elementAt(widget.id);
-    clientPageViewmodel.addressController.text=clientPageViewmodel.addresses.value.elementAt(widget.id);
-    clientPageViewmodel.phoneController.text=clientPageViewmodel.phoneNos.value.elementAt(widget.id);
+    clientPageViewmodel.firstNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).firstName;
+    clientPageViewmodel.emailController.text=clientPageViewmodel.client.value.elementAt(widget.id).email;
+    clientPageViewmodel.lastNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).lastname;
+    clientPageViewmodel.addressController.text=clientPageViewmodel.client.value.elementAt(widget.id).address;
+    clientPageViewmodel.phoneController.text=clientPageViewmodel.client.value.elementAt(widget.id).phoneNo;
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: true,
         backgroundColor: homePageViewmodel.getBackColor(isDark),
@@ -78,7 +78,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.emailAddress,
                   controller: clientPageViewmodel.emailController,
-                  isMandatory: true,
+                  isMandatory: false,
                   enabeled: false,
                 ),
                 TextFormFieldsMandatory(
@@ -90,7 +90,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.address,
                   controller: clientPageViewmodel.addressController,
-                  isMandatory: true,
+                  isMandatory: false,
                   enabeled: false,
                 ),
         

@@ -79,7 +79,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.emailAddress,
                   hintText: addClientViewmodel.emailAddressHint,
-                  isMandatory: true,
+                  isMandatory: false,
                   controller: clientPageViewmodel.emailController,
                 ),
                 TextFormFieldsMandatory(
@@ -91,7 +91,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
                 TextFormFieldsMandatory(
                   labelText: addClientViewmodel.address,
                   hintText: addClientViewmodel.addressHint,
-                  isMandatory: true,
+                  isMandatory: false,
                   controller: clientPageViewmodel.addressController,
                 ),
                 SizedBox(height: 30),
@@ -135,9 +135,17 @@ class _AddClientsPageState extends State<AddClientsPage> {
                       shadowColor: Colors.transparent,
                     ),
                     onPressed: () async{
-                      clientPageViewmodel.addClient();
-                      selected_page_notifier.value==2?selected_page_notifier.value=0:Navigator.pop(context);
-                    },
+                      if (clientPageViewmodel.firstNameController.text.isEmpty || clientPageViewmodel.lastNameController.text.isEmpty||clientPageViewmodel.phoneController.text.isEmpty)
+                      {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please fill out mandatory fields')),
+                      );
+                      }
+                      else
+                        {clientPageViewmodel.addClient();
+                        selected_page_notifier.value==2?selected_page_notifier.value=0:Navigator.pop(context);
+                        }
+                       },
                     child: Text(
                       addClientViewmodel.addButtonText,
                       style: TextStyle(
