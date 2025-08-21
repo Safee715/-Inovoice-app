@@ -1,4 +1,3 @@
-import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
@@ -26,8 +25,7 @@ class _WidgetTreePageState extends State<WidgetTreePage> {
   ];
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
+
     return Scaffold(
       body: ValueListenableBuilder(
         valueListenable: selected_page_notifier,
@@ -46,10 +44,8 @@ class _WidgetTreePageState extends State<WidgetTreePage> {
       valueListenable: selected_page_notifier,
       builder: (context, value, child) {
         if(value==1) {
-        return Container(
-          color: homePageViewmodel.getBackColor(isDark),
+        return Padding(
           padding: EdgeInsets.only(bottom: 30.0, left: 50, right: 50),
-          child: SizedBox(height: 20,),
         );
 
       }

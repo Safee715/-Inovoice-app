@@ -172,5 +172,36 @@ void backButtonFunction()
 
     super.dispose();
   }
+String ?emailValidator(String? value)
+{  if ((value == null) || (value.isEmpty)) {
+  return null;
+}
+  else if(!RegExp(r'^[\w.-]+@([\w-]+\.)+[\w.-]{2,4}$').hasMatch(value))
+  {
+  return 'Enter a valid email';
+  }
+return null;
+}
+  String ?nameValidator(String? value)
+  {  if ((value == null) || (value.isEmpty)) {
+    return 'Please Enter Name';
+  }
+    else if(!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value))
+    {
+      return 'Enter a valid Name';
+    }
+    return null;
+  }
+  String ?phoneValidator(String? value)
+  {  if ((value == null) || (value.isEmpty)) {
+    return 'Please Enter Phone Number';
+  }
+  else if(!RegExp(r'^[0-9\s]{11}$').hasMatch(value))
+  {
+    return 'Enter a valid Phone';
+  }
+  return null;
+  }
+
 
 }

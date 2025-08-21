@@ -57,28 +57,40 @@ class _EditClient extends State<EditClient> {
                   labelText: editClientViewmodel.firstNameLabel,
                   controller: editClientViewmodel.firstNameController,
                   isMandatory: true  ,
+                  textInputType: TextInputType.name,
+                  maxLength: 40,
 
                 ),
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.lastNameLabel,
                   controller: editClientViewmodel.lastNameController,
                   isMandatory: true,
+                  textInputType: TextInputType.name,
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.emailAddress,
                   controller: editClientViewmodel.emailController,
                   isMandatory: false,
+                  textInputType: TextInputType.emailAddress,
+                  maxLength: 70,
 
                 ),
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.phoneNo,
                   controller: editClientViewmodel.phoneController,
                   isMandatory: true,
+                  textInputType: TextInputType.phone,
+                  maxLength: 11,
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: editClientViewmodel.address,
                   controller: editClientViewmodel.addressController,
                   isMandatory: false,
+                  textInputType: TextInputType.text,
+                  maxLength: 70,
+
                 ),
 
                 SizedBox(height: 30),

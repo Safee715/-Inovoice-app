@@ -67,31 +67,41 @@ class _ViewDetailsState extends State<ViewDetails> {
                   labelText: viewDetailsViewmodel.firstNameLabel,
                   controller: clientPageViewmodel.firstNameController,
                   isMandatory: true,
-                  enabeled: false,
+                  enabled: false,
+
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.lastNameLabel,
                   controller: clientPageViewmodel.lastNameController,
                   isMandatory: true,
-                  enabeled: false,
+                  enabled: false,
+
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.emailAddress,
                   controller: clientPageViewmodel.emailController,
                   isMandatory: false,
-                  enabeled: false,
+                  enabled: false,
+
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.phoneNo,
                   controller: clientPageViewmodel.phoneController,
                   isMandatory: true,
-                  enabeled: false,
+                  enabled: false,
+
+
                 ),
                 TextFormFieldsMandatory(
                   labelText: viewDetailsViewmodel.address,
                   controller: clientPageViewmodel.addressController,
                   isMandatory: false,
-                  enabeled: false,
+                  enabled: false,
+
+
                 ),
         
                 SizedBox(height: 30),

@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/client_page_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
@@ -21,25 +22,29 @@ class _CWidgetTreeState extends State<CWidgetTree> {
   Widget build(
       BuildContext context
       ) {
-    return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: client_page_index,
-        builder: (context, c_selected_page, child) {
-          return AnimatedSwitcher(
-            duration: Duration(
-                milliseconds: 500),
-          transitionBuilder: (child, animation) {
+    HomePageViewmodel homePageViewmodel = HomePageViewmodel();
 
-           return ScaleTransition(scale: animation,alignment: Alignment.center,
-           child: child);
+  return SafeArea(
+      child: Scaffold(
+        body: ValueListenableBuilder(
+          valueListenable: client_page_index,
+          builder: (context, c_selected_page, child) {
+            return AnimatedSwitcher(
+              duration: Duration(
+                  milliseconds: 500),
+            transitionBuilder: (child, animation) {
+      
+             return ScaleTransition(scale: animation,alignment: Alignment.center,
+             child: child);
+            },
+              child: client_pages[c_selected_page],
+            );
           },
-            child: client_pages[c_selected_page],
-          );
-        },
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only( left: 50, right: 50),
-        child: ClientPageNavBar(),
+        ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only( left: 50, right: 50,bottom: homePageViewmodel.getHeight(context, 30)),
+          child: ClientPageNavBar(),
+        ),
       ),
     );
   }
