@@ -2,121 +2,150 @@ import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/edit_details_page/edit_client_viewmode.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/widgets/text_form_fields_mandatory.dart';
+import 'package:DummyInvoice/widgets/custom_text_fields.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class EditClient extends StatefulWidget {
-  const EditClient({super.key,required this.id});
-final id;
+  const EditClient({super.key, required this.id});
+
+  final id;
+
   @override
   State<EditClient> createState() => _EditClient();
 }
 
 class _EditClient extends State<EditClient> {
   late final EditClientViewmodel editClientViewmodel;
+  late HomePageViewmodel homePageViewmodel;
+
   @override
-  void initState()
-  {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    homePageViewmodel = HomePageViewmodel(
+      screenWidth: MediaQuery.of(context).size.width,
+      screenHeight: MediaQuery.of(context).size.height,
+    );
+  }
+
+  @override
+  void initState() {
     super.initState();
     editClientViewmodel = EditClientViewmodel();
-  final clientPageViewmodel=Provider.of<ClientPageViewmodel>(context,listen: false);
-  editClientViewmodel.firstNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).firstName;
-  editClientViewmodel.emailController.text=clientPageViewmodel.client.value.elementAt(widget.id).email;
-  editClientViewmodel.lastNameController.text=clientPageViewmodel.client.value.elementAt(widget.id).lastname;
-  editClientViewmodel.addressController.text=clientPageViewmodel.client.value.elementAt(widget.id).address;
-  editClientViewmodel.phoneController.text=clientPageViewmodel.client.value.elementAt(widget.id).phoneNo;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final clientPageViewmodel = context.read<ClientPageViewmodel>();
+      editClientViewmodel.getControllerText(clientPageViewmodel, widget.id);
+    });
   }
-  bool _toggeled = false;
+
+  bool isToggled = false;
+
   @override
   Widget build(BuildContext context) {
-    final clientPageViewmodel=context.watch<ClientPageViewmodel>();
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: homePageViewmodel.getBackColor(isDark),scrolledUnderElevation: 0,
+        backgroundColor: homePageViewmodel.getBackColor(isDark),
+        scrolledUnderElevation: 0,
         title: Text(
           editClientViewmodel.appBarTitle,
-          style: TextStyle(color:homePageViewmodel.getTextColor(isDark),
-              fontWeight: FontWeight.bold, fontSize: 24),
+          style: TextStyle(
+            color: homePageViewmodel.getTextColor(isDark),
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
         ),
         centerTitle: true,
-      ),backgroundColor: homePageViewmodel.getBackColor(isDark),
-      body: SafeArea(top: false,
+      ),
+      backgroundColor: homePageViewmodel.getBackColor(isDark),
+      body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.only(
-                left: homePageViewmodel.getWidth(context, 20),
-                right: homePageViewmodel.getWidth(context, 20),
-                bottom: homePageViewmodel.getWidth(context, 20)
+            padding: EdgeInsets.only(
+              left: homePageViewmodel.getWidth(20),
+              right: homePageViewmodel.getWidth(20),
+              bottom: homePageViewmodel.getWidth(20),
             ),
             child: Column(
               children: [
-                TextFormFieldsMandatory(
+                CustomTextFields(
                   labelText: editClientViewmodel.firstNameLabel,
                   controller: editClientViewmodel.firstNameController,
-                  isMandatory: true  ,
-                  textInputType: TextInputType.name,
+                  isMandatory: true,
                   maxLength: 40,
-
+                  validator: (p0) => clientPageViewmodel.nameValidator(p0),
+                  inputFormatter: FilteringTextInputFormatter.allow(
+                    RegExp(r'[a-zA-Z- ]'),
+                  ),
                 ),
-                TextFormFieldsMandatory(
+                CustomTextFields(
                   labelText: editClientViewmodel.lastNameLabel,
                   controller: editClientViewmodel.lastNameController,
                   isMandatory: true,
-                  textInputType: TextInputType.name,
-
+                  validator: (p0) => clientPageViewmodel.nameValidator(p0),
+                  inputFormatter: FilteringTextInputFormatter.allow(
+                    RegExp(r'[a-zA-Z- ]'),
+                  ),
                 ),
-                TextFormFieldsMandatory(
+                CustomTextFields(
                   labelText: editClientViewmodel.emailAddress,
                   controller: editClientViewmodel.emailController,
                   isMandatory: false,
                   textInputType: TextInputType.emailAddress,
                   maxLength: 70,
-
+                  validator: (p0) => clientPageViewmodel.emailValidator(p0),
                 ),
-                TextFormFieldsMandatory(
+                CustomTextFields(
                   labelText: editClientViewmodel.phoneNo,
                   controller: editClientViewmodel.phoneController,
                   isMandatory: true,
                   textInputType: TextInputType.phone,
                   maxLength: 11,
-
+                  inputFormatter: FilteringTextInputFormatter.allow(
+                    RegExp(r'[0-9]+'),
+                  ),
                 ),
-                TextFormFieldsMandatory(
+                CustomTextFields(
                   labelText: editClientViewmodel.address,
                   controller: editClientViewmodel.addressController,
                   isMandatory: false,
                   textInputType: TextInputType.text,
-                  maxLength: 70,
+                  inputFormatter: FilteringTextInputFormatter.allow(
+                    RegExp(r'[a-zA-Z- ]'),
+                  ),
 
+                  maxLength: 70,
                 ),
 
                 SizedBox(height: 30),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       editClientViewmodel.saveClientButtonText,
-                      style: TextStyle(fontSize: 14,fontFamily: 'Biennale',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Biennale',
                         color: homePageViewmodel.getTextColor(isDark),
                       ),
                     ),
 
                     Switch(
-                      value: _toggeled,
+                      value: isToggled,
                       onChanged: (bool value) {
                         setState(() {
-                          _toggeled = value;
+                          isToggled = value;
                         });
                       },
-
                     ),
                   ],
                 ),
                 SizedBox(height: 20),
                 Container(
-                  width: homePageViewmodel.getWidth(context, 297),
+                  width: homePageViewmodel.getWidth(297),
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
@@ -132,28 +161,29 @@ class _EditClient extends State<EditClient> {
                       shadowColor: Colors.transparent,
                     ),
                     onPressed: () {
-                      if (editClientViewmodel.firstNameController.text.isEmpty ||
-                          editClientViewmodel.lastNameController.text.isEmpty||
-                          editClientViewmodel.phoneController.text.isEmpty
-                      )
-                      {
+                      if (editClientViewmodel
+                              .firstNameController
+                              .text
+                              .isEmpty ||
+                          editClientViewmodel.lastNameController.text.isEmpty ||
+                          editClientViewmodel.phoneController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Please fill out mandatory fields')),
+                          SnackBar(
+                            content: Text('Please fill out mandatory fields'),
+                          ),
                         );
-
-                      }
-                      else
-                      {
-                        clientPageViewmodel.editClient(widget.id,
-                          newFirstName: editClientViewmodel.firstNameController
-                              .text,
-                          newLastName: editClientViewmodel.lastNameController
-                              .text,
-                          newEmailAddress: editClientViewmodel.emailController
-                              .text,
+                      } else {
+                        clientPageViewmodel.editClient(
+                          widget.id,
+                          newFirstName:
+                              editClientViewmodel.firstNameController.text,
+                          newLastName:
+                              editClientViewmodel.lastNameController.text,
+                          newEmailAddress:
+                              editClientViewmodel.emailController.text,
                           newPhoneNo: editClientViewmodel.phoneController.text,
-                          newAddress: editClientViewmodel.addressController
-                              .text,
+                          newAddress:
+                              editClientViewmodel.addressController.text,
                         );
                         Navigator.pop(context);
                       }
@@ -174,5 +204,11 @@ class _EditClient extends State<EditClient> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    editClientViewmodel.dispose();
+    super.dispose();
   }
 }

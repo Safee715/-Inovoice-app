@@ -1,5 +1,5 @@
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class
     AddClientViewmodel extends ChangeNotifier{
@@ -17,9 +17,6 @@ class
   final address='Address';
   final  saveClientButtonText='Save to Client Lists';
   final  addButtonText='Add';
-
-
-
 
 }
 

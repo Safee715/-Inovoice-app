@@ -18,6 +18,7 @@ class Client
     required this.address
   });
 
+
   Map<String, dynamic>toJson()=>
       {
         'firstName':firstName,
@@ -169,7 +170,6 @@ void backButtonFunction()
     emailController.dispose();
     addressController.dispose();
     phoneController.dispose();
-
     super.dispose();
   }
 String ?emailValidator(String? value)
@@ -186,7 +186,7 @@ return null;
   {  if ((value == null) || (value.isEmpty)) {
     return 'Please Enter Name';
   }
-    else if(!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value))
+    else if(!RegExp(r'^[a-zA-Z ]+$').hasMatch(value))
     {
       return 'Enter a valid Name';
     }
@@ -196,7 +196,7 @@ return null;
   {  if ((value == null) || (value.isEmpty)) {
     return 'Please Enter Phone Number';
   }
-  else if(!RegExp(r'^[0-9\s]{11}$').hasMatch(value))
+  else if(!RegExp(r'^(?:[+0]9)?[0-9\s]{10-12}$').hasMatch(value))
   {
     return 'Enter a valid Phone';
   }

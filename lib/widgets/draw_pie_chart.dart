@@ -3,11 +3,11 @@ import 'dart:math';
 
 class DrawPieChart extends CustomPainter {
   DrawPieChart({
-    required this.pieChartViewmodel,
+    required this.homePageViewmodel,
     required this.dataMap,
     required this.colorsList,
   });
-  final pieChartViewmodel;
+  final homePageViewmodel;
   final Map dataMap;
   final List<Color> colorsList;
 

@@ -3,8 +3,8 @@ import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class TextFormFieldsMandatory extends StatefulWidget {
-  const TextFormFieldsMandatory({
+class CustomTextFields extends StatefulWidget {
+  const CustomTextFields({
     super.key,
     required this.labelText,
     this.hintText,
@@ -26,11 +26,11 @@ class TextFormFieldsMandatory extends StatefulWidget {
   final String? Function(String?)?  validator;
   final TextInputFormatter ?inputFormatter;
   @override
-  State<TextFormFieldsMandatory> createState() =>
-      _TextFormFieldsMandatoryState();
+  State<CustomTextFields> createState() =>
+      _CustomTextFieldsState();
 }
 
-class _TextFormFieldsMandatoryState extends State<TextFormFieldsMandatory> {
+class _CustomTextFieldsState extends State<CustomTextFields> {
   @override
   Widget build(BuildContext context) {
     HomePageViewmodel homePageViewmodel = HomePageViewmodel();

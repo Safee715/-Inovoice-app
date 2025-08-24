@@ -35,14 +35,18 @@ required super.textcolor,
 
 
 
+
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel(
+        screenWidth: MediaQuery.of(context).size.width,
+        screenHeight:MediaQuery.of(context).size.height
+    );
     return Container(constraints: BoxConstraints(
-        minWidth: homePageViewmodel.getWidth(context, 157),
-        minHeight:homePageViewmodel.getHeight(context, 261)),
-      padding: EdgeInsets.all(homePageViewmodel.getWidth(context, 10)),
-      width: homePageViewmodel.getWidth(context, 157),
+        minWidth: homePageViewmodel.getWidth(157),
+        minHeight:homePageViewmodel.getHeight( 261)),
+      padding: EdgeInsets.all(homePageViewmodel.getWidth( 10)),
+      width: homePageViewmodel.getWidth( 157),
       decoration: BoxDecoration(color: boxcolor,
         borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +70,7 @@ required super.textcolor,
             ],
           ),
 
-          SizedBox(height:homePageViewmodel.getHeight(context, 12),),
+          SizedBox(height:homePageViewmodel.getHeight( 12),),
           Align(alignment: Alignment.center,
             child: Text(
               amount,
@@ -92,13 +96,16 @@ class DesignedTemplate extends AbstractTemplate {
 
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel(
+      screenHeight: MediaQuery.of(context).size.height,
+      screenWidth: MediaQuery.of(context).size.width
+    );
     return Container(constraints: BoxConstraints(
-        minWidth: homePageViewmodel.getWidth(context, 157),
-        minHeight:homePageViewmodel.getHeight(context, 261),
+        minWidth: homePageViewmodel.getWidth(157),
+        minHeight:homePageViewmodel.getHeight( 261),
     ),
-      padding: EdgeInsets.all(homePageViewmodel.getWidth(context, 10),),
-      width: homePageViewmodel.getWidth(context, 157),
+      padding: EdgeInsets.all(homePageViewmodel.getWidth( 10),),
+      width: homePageViewmodel.getWidth(157),
       decoration: BoxDecoration(color: boxcolor,
         borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +132,7 @@ class DesignedTemplate extends AbstractTemplate {
               ],
             ),
           ),
-          SizedBox(height:homePageViewmodel.getWidth(context, 12),),
+          SizedBox(height:homePageViewmodel.getWidth( 12),),
           Align(alignment: Alignment.center,
             child: Text(
               amount,

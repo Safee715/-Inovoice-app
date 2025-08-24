@@ -24,15 +24,19 @@ class _DataContainerWidgetState extends State<DataContainerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    HomePageViewmodel homePageViewmodel=HomePageViewmodel(
+        screenWidth:MediaQuery.of(context).size.width ,
+      screenHeight: MediaQuery.of(context).size.height
+
+    );
     bool isDark =Theme.of(context).brightness==Brightness.dark;
 
 
     return Container(constraints: BoxConstraints(
-        minWidth: homePageViewmodel.getWidth(context, 154),
-        minHeight:homePageViewmodel.getHeight(context, 70),),
-      padding: EdgeInsets.all(homePageViewmodel.getWidth(context, 10),),
-      width: homePageViewmodel.getWidth(context, 157),
+        minWidth: homePageViewmodel.getWidth(154),
+        minHeight:homePageViewmodel.getHeight( 70),),
+      padding: EdgeInsets.all(homePageViewmodel.getWidth( 10),),
+      width: homePageViewmodel.getWidth( 157),
       decoration: BoxDecoration(color: widget.color1,
         borderRadius:BorderRadius.circular(10),),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +63,7 @@ class _DataContainerWidgetState extends State<DataContainerWidget> {
               ),
             ],
           ),
-          SizedBox(height:homePageViewmodel.getHeight(context, 5),),
+          SizedBox(height:homePageViewmodel.getHeight( 5),),
           Text(
             widget.amount,
             style: TextStyle(fontFamily: 'Biennale',

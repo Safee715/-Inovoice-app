@@ -14,14 +14,18 @@ class _DataWidgetState extends State<DataWidget> {
   Widget build(BuildContext context) {
 
 
-HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+HomePageViewmodel homePageViewmodel=HomePageViewmodel(
+  screenWidth: MediaQuery.of(context).size.width,
+  screenHeight: MediaQuery.of(context).size.height,
+
+);
 
 
       return Padding(
         padding:  EdgeInsets.only(
-            left: homePageViewmodel.getWidth(context, 10),
-            right:homePageViewmodel.getWidth(context, 10),
-            bottom: homePageViewmodel.getWidth(context, 10),
+            left: homePageViewmodel.getWidth( 10),
+            right:homePageViewmodel.getWidth( 10),
+            bottom: homePageViewmodel.getWidth( 10),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [

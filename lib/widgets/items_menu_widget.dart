@@ -1,67 +1,64 @@
-import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/edit_details_page/edit_client.dart';
+import 'package:DummyInvoice/pages/edit_items_page/edit_items_page.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/view_details_page/view_details.dart';
+import 'package:DummyInvoice/pages/items_page/items_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/itemsdetails/view_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
-import 'package:provider/provider.dart';
 
-class MenuWidget extends StatefulWidget {
-  const MenuWidget({super.key,
-  required this.id
+class ItemsMenuWidget extends StatefulWidget {
+  const ItemsMenuWidget({super.key,
+    required this.id,required this.itemsPageViewmodel
   });
   final id;
+  final ItemsPageViewmodel itemsPageViewmodel;
   @override
-  State<MenuWidget> createState() => _MenuWidgetState();
+  State<ItemsMenuWidget> createState() => _ItemsMenuWidgetState();
 }
 
-class _MenuWidgetState extends State<MenuWidget> {
+class _ItemsMenuWidgetState extends State<ItemsMenuWidget> {
+
   @override
   Widget build(BuildContext context) {
     HomePageViewmodel homePageViewmodel=HomePageViewmodel();
-    final clientPageViewmodel=context.watch<ClientPageViewmodel>();
     bool isDark=Theme.of(context).brightness==Brightness.dark;
-List<Widget> pages=[
-  EditClient(id: widget.id,),ViewDetails(id:widget.id)
-];
+
 
 
     return PopupMenuButton(
       onSelected: (value) {
         print('value is $value');
-        if(value==0)
-          {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return pages[0] ;
+        if (value == 0) {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+              return EditItemsPage(id: widget.id,);
             },
             ),
-            );
-          }
-        else if(value==1)
-        {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return pages[1] ;
-          },
-          ),
           );
         }
-        else if(value==2)
-          {
-           return clientPageViewmodel.delete_Client(widget.id);
+        else if (value == 1) {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+              return ViewItemsDetails(id: widget.id);
+            },
+            ),
+          );
+        }
+        else if (value == 2) {
+          return widget.itemsPageViewmodel.deleteItem(widget.id);
+        }
 
-          }
       },
 
       color: homePageViewmodel.getBottomContainerColor(isDark).withValues(alpha: 0.8),
       icon: CustomIconWidget(
-          iconaddress: homePageViewmodel.getIconAddress(isDark, 'assets/images/icons/nightmode_menuButton.svg', 'assets/images/icons/edit_delete_button.svg'),
-          height: 24, weight: 24,),
+        iconaddress: homePageViewmodel.getIconAddress(isDark, 'assets/images/icons/nightmode_menuButton.svg', 'assets/images/icons/edit_delete_button.svg'),
+        height: 24, weight: 24,),
 
       itemBuilder: (context) => [
         PopupMenuItem(
           child:ListTile(leading:CustomIconWidget(
-              iconaddress: 'assets/images/icons/Group 37201.svg',
-              height: 18, weight: 18,color: homePageViewmodel.getTextColor(isDark),),
+            iconaddress: 'assets/images/icons/Group 37201.svg',
+            height: 18, weight: 18,color: homePageViewmodel.getTextColor(isDark),),
             title: Text('Edit'),
           ),
           value: 0,

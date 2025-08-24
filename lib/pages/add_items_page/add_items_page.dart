@@ -1,23 +1,26 @@
 import 'package:DummyInvoice/data/notifiers.dart';
-import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/add_items_page/add_items_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/items_page/item_page_repository.dart';
+import 'package:DummyInvoice/pages/items_page/items_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/pages/add_clients_page/add_client_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
-class AddClientsPage extends StatefulWidget {
-  const AddClientsPage({super.key});
+class AddItemsPage extends StatefulWidget {
+  const AddItemsPage({super.key});
 
   @override
-  State<AddClientsPage> createState() => _AddClientsPageState();
+  State<AddItemsPage> createState() => _AddItemsPageState();
 }
 
-class _AddClientsPageState extends State<AddClientsPage> {
+class _AddItemsPageState extends State<AddItemsPage> {
   bool isToggled = false;
   final formKey = GlobalKey<FormState>();
   late HomePageViewmodel homePageViewmodel;
+  ItemPageRepository itemPageRepository = ItemPageRepository();
+  late ItemsPageViewmodel itemsPageViewmodel;
+  AddItemViewmodel addItemViewmodel = AddItemViewmodel();
 
   @override
   void didChangeDependencies() {
@@ -27,13 +30,16 @@ class _AddClientsPageState extends State<AddClientsPage> {
       screenHeight: MediaQuery.of(context).size.height,
     );
   }
+  @override
+  void initState()
+  {
+    super.initState();
+    itemsPageViewmodel = ItemsPageViewmodel(itemPageRepository);
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    AddClientViewmodel addClientViewmodel = AddClientViewmodel();
-
-    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
-    clientPageViewmodel.clearControllers();
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -41,7 +47,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            selected_page_notifier.value == 2
+            selected_page_notifier.value == 3
                 ? selected_page_notifier.value = 0
                 : Navigator.pop(context);
           },
@@ -53,7 +59,7 @@ class _AddClientsPageState extends State<AddClientsPage> {
         backgroundColor: homePageViewmodel.getBackColor(isDark),
         scrolledUnderElevation: 0,
         title: Text(
-          addClientViewmodel.appBarTitle,
+          addItemViewmodel.appBarTitle,
           style: TextStyle(
             color: homePageViewmodel.getTextColor(isDark),
             fontWeight: FontWeight.bold,
@@ -77,80 +83,81 @@ class _AddClientsPageState extends State<AddClientsPage> {
               child: Column(
                 children: [
                   CustomTextFields(
-                    labelText: addClientViewmodel.firstNameLabel,
-                    hintText: addClientViewmodel.firstName,
+                    labelText: addItemViewmodel.itemNameLabel,
+                    hintText: addItemViewmodel.itemName,
                     isMandatory: true,
-                    controller: clientPageViewmodel.firstNameController,
+                    controller: itemsPageViewmodel.itemNameController,
                     maxLength: 40,
-                    validator: (p0) => clientPageViewmodel.nameValidator(p0),
+                    validator: (p0) => itemsPageViewmodel.nameValidator(p0),
                     inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z- ]'),
+                      RegExp(r'[a-zA-Z0-9-]'),
                     ),
                   ),
-                  CustomTextFields(
-                    labelText: addClientViewmodel.lastNameLabel,
-                    hintText: addClientViewmodel.lastName,
-                    isMandatory: true,
-                    maxLength: 40,
-                    controller: clientPageViewmodel.lastNameController,
-                    validator: (p0) => clientPageViewmodel.nameValidator(p0),
-                    inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z- ]'),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: CustomTextFields(
+                          labelText: addItemViewmodel.itemPriceLabel,
+                          hintText: addItemViewmodel.itemPrice,
+                          isMandatory: true,
+                          maxLength: 10,
+                          controller: itemsPageViewmodel.itemPriceController,
+                          textInputType: TextInputType.phone,
+                          inputFormatter: FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9]'),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: homePageViewmodel.getWidth(40)),
+                      Expanded(
+                        child: CustomTextFields(
+                          labelText: addItemViewmodel.itemCodeLabel,
+                          hintText: addItemViewmodel.itemCode,
+                          isMandatory: false,
+                          controller: itemsPageViewmodel.itemCodeController,
+                          textInputType: TextInputType.phone,
+                          maxLength: 10,
+
+                        ),
+                      ),
+                    ],
                   ),
+
                   CustomTextFields(
-                    labelText: addClientViewmodel.emailAddress,
-                    hintText: addClientViewmodel.emailAddressHint,
-                    isMandatory: false,
-                    controller: clientPageViewmodel.emailController,
-                    textInputType: TextInputType.emailAddress,
-                    maxLength: 70,
-                    validator: (p0) => clientPageViewmodel.emailValidator(p0),
-                  ),
-                  CustomTextFields(
-                    labelText: addClientViewmodel.phoneNo,
-                    hintText: addClientViewmodel.phoneNoHint,
+                    labelText: addItemViewmodel.itemQuantityLabel,
+                    hintText: addItemViewmodel.itemQuantity,
                     isMandatory: true,
-                    controller: clientPageViewmodel.phoneController,
+                    controller: itemsPageViewmodel.itemQuantityController,
                     textInputType: TextInputType.phone,
-                    maxLength: 11,
+                    maxLength: 10,
                     inputFormatter: FilteringTextInputFormatter.allow(
                       RegExp(r'[0-9]+'),
                     ),
                   ),
                   CustomTextFields(
-                    labelText: addClientViewmodel.address,
-                    hintText: addClientViewmodel.addressHint,
+                    labelText: addItemViewmodel.itemCategoryLabel,
+                    hintText: addItemViewmodel.itemCategory,
                     isMandatory: false,
-                    controller: clientPageViewmodel.addressController,
+                    controller: itemsPageViewmodel.itemCategoryController,
                     textInputType: TextInputType.text,
-                    maxLength: 70,
+                    maxLength: 30,
+                    inputFormatter: FilteringTextInputFormatter.allow(
+                      RegExp(r'[a-zA-Z- 0-9]'),
+                    ),
+                  ),
+                  CustomTextFields(
+                    labelText: addItemViewmodel.itemUnitLabel,
+                    hintText: addItemViewmodel.itemUnit,
+                    isMandatory: false,
+                    controller: itemsPageViewmodel.itemUnitController,
+                    textInputType: TextInputType.text,
+                    maxLength: 20,
                     inputFormatter: FilteringTextInputFormatter.allow(
                       RegExp(r'[a-zA-Z- 0-9]'),
                     ),
                   ),
                   SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        addClientViewmodel.saveClientButtonText,
-                        style: TextStyle(
-                          fontFamily: 'Biennale',
-                          fontSize: 14,
-                          color: homePageViewmodel.getTextColor(isDark),
-                        ),
-                      ),
-                      Switch(
-                        value: isToggled,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isToggled = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
 
                   SizedBox(height: 20),
                   Container(
@@ -171,14 +178,13 @@ class _AddClientsPageState extends State<AddClientsPage> {
                       ),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          clientPageViewmodel.addClient();
-                          selected_page_notifier.value == 2
-                              ? selected_page_notifier.value = 0
-                              : Navigator.pop(context);
+                         itemsPageViewmodel.addItem();
+                              Navigator.pop(context);
+
                         } else {}
                       },
                       child: Text(
-                        addClientViewmodel.addButtonText,
+                        addItemViewmodel.addButtonText,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,

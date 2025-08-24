@@ -1,6 +1,5 @@
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
-import 'package:DummyInvoice/widgets/pie_chart/draw_pie_chart.dart';
-import 'package:DummyInvoice/widgets/pie_chart/pie_chart_viewmodel.dart';
+import 'package:DummyInvoice/widgets/draw_pie_chart.dart';
 import 'package:flutter/material.dart';
 
 int selected_key = 0;
@@ -15,10 +14,13 @@ class PieChartWidget extends StatefulWidget {
 class _PieChartWidgetState extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
-    PieChartViewmodel pieChartViewmodel =
-    PieChartViewmodel(screenHeight: MediaQuery.sizeOf(context).height,
-        screenWidth:MediaQuery.sizeOf(context).width, );
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
+    // PieChartViewmodel pieChartViewmodel =
+    // PieChartViewmodel(screenHeight: MediaQuery.sizeOf(context).height,
+    //     screenWidth:MediaQuery.sizeOf(context).width, );
+     HomePageViewmodel homePageViewmodel=HomePageViewmodel(
+      screenHeight: MediaQuery.sizeOf(context).height,
+      screenWidth:MediaQuery.sizeOf(context).width,
+    );
     bool isDark=Theme.of(context).brightness==Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(
@@ -84,38 +86,31 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(margin: EdgeInsets.only(bottom: 20,top: 30),
-                  child: TweenAnimationBuilder<double>(
-                    curve: Curves.easeOut,
-                    duration: Duration(seconds: 2),
-                    tween: Tween(end: 1, begin: 0),
-                    builder: (context, value, child) {
-                      return CustomPaint(
-                        size: Size(
-                            double.infinity,(298) ),
-                        painter: DrawPieChart(
-                          pieChartViewmodel: pieChartViewmodel,
-                          dataMap: selected_key == 0
-                              ? pieChartViewmodel.dataMap1
-                              : pieChartViewmodel.dataMap2,
-                          colorsList: pieChartViewmodel.colorsList,
-                        ),
-                      );
-                    },
+                  child: CustomPaint(
+                    size: Size(
+                        double.infinity,(298) ),
+                    painter: DrawPieChart(
+                      homePageViewmodel: homePageViewmodel,
+                      dataMap: selected_key == 0
+                          ? homePageViewmodel.dataMap1
+                          : homePageViewmodel.dataMap2,
+                      colorsList: homePageViewmodel.colorsList,
+                    ),
                   ),
-                ),SizedBox(height: pieChartViewmodel.getWidth(40),),
+                ),SizedBox(height: homePageViewmodel.getWidth(40),),
                 Container(
                   child: Row(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: pieChartViewmodel.getWidth(8),
-                        backgroundColor: pieChartViewmodel.colorsList[0],),
+                        radius: homePageViewmodel.getWidth(8),
+                        backgroundColor: homePageViewmodel.colorsList[0],),
                       Text(' Paid',style: TextStyle( fontFamily: 'Biennale',
                         fontSize: 12,color: homePageViewmodel.getTextColor(isDark),
                         fontWeight: FontWeight.bold,),
-                      ),SizedBox(width:  pieChartViewmodel.getWidth(20),),
+                      ),SizedBox(width:  homePageViewmodel.getWidth(20),),
                       CircleAvatar(
-                        radius: pieChartViewmodel.getWidth(8),
-                        backgroundColor: pieChartViewmodel.colorsList[1],),
+                        radius: homePageViewmodel.getWidth(8),
+                        backgroundColor: homePageViewmodel.colorsList[1],),
                       Text(' Due',style: TextStyle( fontFamily: 'Biennale',
                         fontSize: 12,color: homePageViewmodel.getTextColor(isDark),
                         fontWeight: FontWeight.bold,),),

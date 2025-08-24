@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
-import 'package:DummyInvoice/widgets/menu_widget.dart';
+import 'package:DummyInvoice/widgets/clients_menu_widget.dart';
 
 class ClientsDetails extends StatefulWidget {
   const ClientsDetails({super.key,
@@ -73,7 +73,7 @@ minLeadingWidth: 30,horizontalTitleGap: 5,
           ),
         ],
       ),
-      trailing: MenuWidget(id: widget.id),
+      trailing: ClientsMenuWidget(id: widget.id),
 
 
     );

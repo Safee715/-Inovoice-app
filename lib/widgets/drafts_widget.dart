@@ -1,6 +1,5 @@
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/widgets/drafts_widget/drafts_viewmodel.dart';
 
 class DraftsWidget extends StatefulWidget {
   const DraftsWidget({super.key});
@@ -12,7 +11,6 @@ class DraftsWidget extends StatefulWidget {
 class _DraftsWidgetState extends State<DraftsWidget> {
   @override
   Widget build(BuildContext context) {
-    DraftsViewmodel draftsViewmodel=DraftsViewmodel();
     HomePageViewmodel homePageViewmodel=HomePageViewmodel();
     bool isDark =Theme.of(context).brightness==Brightness.dark;
 
@@ -21,7 +19,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(draftsViewmodel.name,
+              Text(homePageViewmodel.draftName,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
@@ -37,7 +35,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                     minimumSize: Size(50, 19),
                     backgroundColor: Color(0xffD6DAE0),
                   ),
-                  child: Text(draftsViewmodel.status,
+                  child: Text(homePageViewmodel.draftStatus,
                     style: TextStyle(fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff303744)),
@@ -48,7 +46,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(draftsViewmodel.receiptId,
+              Text(homePageViewmodel.draftReceiptId,
                 style: TextStyle(
                   color:
                 homePageViewmodel.getTextColor(isDark),
@@ -56,11 +54,11 @@ class _DraftsWidgetState extends State<DraftsWidget> {
 
               ),
 
-              Text('Issue: ${draftsViewmodel.issueDate}',
+              Text('Issue: ${homePageViewmodel.draftIssueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
               Container(width: 1,height: 20,
                 color: Color(0xff000000).withValues(alpha: 0.1),),
-              Text('Due: ${draftsViewmodel.dueDate}',
+              Text('Due: ${homePageViewmodel.draftDueDate}',
                 style: TextStyle(fontSize: 12,color: Color(0xffBEC0CC),),),
             ],
           ),
@@ -77,12 +75,12 @@ class _DraftsWidgetState extends State<DraftsWidget> {
               ),
               Column(
                 children: [
-                  Text('PKR ${draftsViewmodel.totalAmount}',
+                  Text('PKR ${homePageViewmodel.draftTotalAmount}',
                       style: TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0)),
-                  Text('PKR ${draftsViewmodel.paidAmount}',
+                  Text('PKR ${homePageViewmodel.draftPaidAmount}',
                       style: TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
@@ -94,7 +92,7 @@ class _DraftsWidgetState extends State<DraftsWidget> {
                   children: [
                     Text('Due Amount',
                       style: TextStyle(color:  homePageViewmodel.getTextColor(isDark),),),
-                    Text('PKR ${draftsViewmodel.dueAmount}',
+                    Text('PKR ${homePageViewmodel.draftDueAmount}',
                       style: TextStyle(color: Color(0xffF26666),fontWeight: FontWeight.bold,
                           fontSize: 17.0
                       ),

@@ -1,13 +1,13 @@
+import 'package:DummyInvoice/widgets/home_page_menu_widgets_navigation.dart';
+import 'package:DummyInvoice/widgets/pie_chart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
-import 'package:DummyInvoice/widgets/bar_chart/bar_charts_widget.dart';
-import 'package:DummyInvoice/widgets/custom_cuppertino_button.dart';
+import 'package:DummyInvoice/widgets/bar_charts_widget.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/widgets/data_widget.dart';
-import 'package:DummyInvoice/widgets/drafts_widget/drafts_widget.dart';
-import 'package:DummyInvoice/widgets/pie_chart/pie_chart_widget.dart';
-import 'package:DummyInvoice/widgets/recent_invoices_widget/recent_invoices_widget.dart';
+import 'package:DummyInvoice/widgets/drafts_widget.dart';
+import 'package:DummyInvoice/widgets/recent_invoices_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,13 +17,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late HomePageViewmodel viewmodel;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    viewmodel = HomePageViewmodel(
+      screenWidth: MediaQuery.of(context).size.width,
+      screenHeight: MediaQuery.of(context).size.height,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [DataWidget(), BarChartsWidget(), PieChartWidget()];
-bool isDark =Theme.of(context).brightness==Brightness.dark;
-    final HomePageViewmodel viewmodel = HomePageViewmodel();
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      appBar: AppBar(scrolledUnderElevation:0.0,
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         centerTitle: false,
         titleSpacing: 0,
         backgroundColor: viewmodel.getBackColor(isDark),
@@ -62,58 +74,29 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
             return SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                  left: viewmodel.getWidth(context, 15),
-                  right: viewmodel.getWidth(context, 15),
-                  bottom: viewmodel.getWidth(context, 15),
+                  left: viewmodel.getWidth(15),
+                  right: viewmodel.getWidth(15),
+                  bottom: viewmodel.getWidth(15),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(margin: EdgeInsets.only(top: 10),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
                       width: constraints.maxWidth,
                       decoration: BoxDecoration(
                         color: viewmodel.getContainerColor(isDark),
                         borderRadius: BorderRadius.all(Radius.circular(28)),
                       ),
                       child: Column(
-                        spacing: viewmodel.getWidth(context, 10),
+                        spacing: viewmodel.getWidth(10),
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: viewmodel.getWidth(context, 10)),
+                          SizedBox(height: viewmodel.getWidth(10)),
                           ValueListenableBuilder(
                             valueListenable: selected_widget_notifier,
                             builder: (context, selected_widget, child) {
-                              return Row(
-                                spacing: viewmodel.getWidth(context, 5),
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  CustomCuppertinoButton(
-                                    iconAddress:
-                                        viewmodel.homePageDetailsAddress,
-                                    onPressed: () {
-                                      viewmodel.setHomePageDetails();
-                                    },
-                                    index: 0,
-                                  ),
-                                  CustomCuppertinoButton(
-                                    iconAddress: viewmodel.BarChartAddress,
-                                    onPressed: () {
-                                      viewmodel.setBarChartDetails();
-                                    },
-                                    index: 1,
-                                  ),
-                                  CustomCuppertinoButton(
-                                    iconAddress: viewmodel.PieChartAddress,
-                                    onPressed: () {
-                                      viewmodel.setPieChartDetails();
-                                    },
-                                    index: 2,
-                                  ),
-                                  SizedBox(
-                                    width: viewmodel.getWidth(context, 15),
-                                  ),
-                                ],
-                              );
+                              return HomePageMenuWidgetsNavigation();
                             },
                           ),
                           ValueListenableBuilder(
@@ -143,7 +126,7 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
                           iconAlignment: IconAlignment.end,
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.only(left: 10, right: 0),
-                            backgroundColor:Colors.transparent,
+                            backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
                           ),
                           label: Text(
@@ -163,8 +146,8 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: viewmodel.getWidth(context, 20),
-                        vertical: viewmodel.getWidth(context, 8),
+                        horizontal: viewmodel.getWidth(20),
+                        vertical: viewmodel.getWidth(8),
                       ),
                       decoration: BoxDecoration(
                         color: viewmodel.getBottomContainerColor(isDark),
@@ -183,8 +166,8 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
 
                     Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: viewmodel.getWidth(context, 20),
-                        vertical: viewmodel.getWidth(context, 8),
+                        horizontal: viewmodel.getWidth(20),
+                        vertical: viewmodel.getWidth(8),
                       ),
                       decoration: BoxDecoration(
                         color: viewmodel.getBottomContainerColor(isDark),
@@ -199,7 +182,6 @@ bool isDark =Theme.of(context).brightness==Brightness.dark;
           },
         ),
       ),
-
     );
   }
 }
