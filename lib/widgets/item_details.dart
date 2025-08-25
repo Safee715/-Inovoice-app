@@ -34,12 +34,14 @@ class _ItemDetailsState extends State<ItemDetails> {
           side: BorderSide(color:homePageViewmodel.getTextColor(isDark).withValues(alpha: 0.2), )
       ),
 
-      title: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+      title: Row(mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(width: 10),
           Text(widget.name,style: TextStyle(
               color:homePageViewmodel.getTextColor(isDark),
               fontWeight: FontWeight.w400,fontSize: 14),),
-          Text(widget.price.toString(),
+          Spacer(),
+          Text("\$${widget.price.toString()}",
             style: TextStyle(color:Color(0xFF4082E3),fontSize: 12
           ),
           ),

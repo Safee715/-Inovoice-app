@@ -15,6 +15,7 @@ class CustomTextFields extends StatefulWidget {
     this.maxLength,
     this.validator,
     this.inputFormatter,
+    this.prefix,
   });
   final String labelText;
   final TextEditingController? controller;
@@ -25,6 +26,7 @@ class CustomTextFields extends StatefulWidget {
   final  int ?maxLength;
   final String? Function(String?)?  validator;
   final TextInputFormatter ?inputFormatter;
+  final   String ? prefix;
   @override
   State<CustomTextFields> createState() =>
       _CustomTextFieldsState();
@@ -67,6 +69,7 @@ class _CustomTextFieldsState extends State<CustomTextFields> {
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          
           keyboardType: widget.textInputType,
           maxLength:widget.maxLength,
           controller: widget.controller,
@@ -93,7 +96,8 @@ class _CustomTextFieldsState extends State<CustomTextFields> {
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(5),
             ),
-            hintText: widget.hintText,
+            hintText: widget.hintText,prefix: Text(widget.prefix??""),
+
             hintStyle: TextStyle(
               fontSize: 12,
               fontFamily: 'Biennale',

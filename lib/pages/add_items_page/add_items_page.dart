@@ -1,4 +1,3 @@
-import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/add_items_page/add_items_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/items_page/item_page_repository.dart';
@@ -47,9 +46,7 @@ class _AddItemsPageState extends State<AddItemsPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            selected_page_notifier.value == 3
-                ? selected_page_notifier.value = 0
-                : Navigator.pop(context);
+           Navigator.pop(context);
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,
@@ -90,7 +87,7 @@ class _AddItemsPageState extends State<AddItemsPage> {
                     maxLength: 40,
                     validator: (p0) => itemsPageViewmodel.nameValidator(p0),
                     inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z0-9-]'),
+                      RegExp(r'[a-zA-Z0-9- ]'),
                     ),
                   ),
                   Row(
@@ -101,6 +98,7 @@ class _AddItemsPageState extends State<AddItemsPage> {
                           labelText: addItemViewmodel.itemPriceLabel,
                           hintText: addItemViewmodel.itemPrice,
                           isMandatory: true,
+                          prefix: '\$',
                           maxLength: 10,
                           controller: itemsPageViewmodel.itemPriceController,
                           textInputType: TextInputType.phone,
