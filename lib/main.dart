@@ -1,8 +1,8 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/pages/navigation_pages/main_navigation_page.dart';
+import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {

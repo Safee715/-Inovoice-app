@@ -1,34 +1,28 @@
-import 'package:DummyInvoice/data/helpers/assets.dart';
-import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/edit_details_page/view/edit_client.dart';
-import 'package:DummyInvoice/pages/view_details_page/view/view_details_page.dart';
+import 'package:DummyInvoice/pages/edit_items_page/view/edit_items_page.dart';
+import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/itemsdetailspage/view/view_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
-import 'package:provider/provider.dart';
 
-class ClientsMenuWidget extends StatefulWidget {
-  const ClientsMenuWidget({
+class ItemsMenuWidget extends StatefulWidget {
+  const ItemsMenuWidget({
     super.key,
     required this.id,
-    required this.constants,
-
+    required this.itemsPageViewmodel,
   });
   final int id;
-  final Constants constants;
+  final ItemsPageViewmodel itemsPageViewmodel;
   @override
-  State<ClientsMenuWidget> createState() =>
-      _ClientsMenuWidgetState();
+  State<ItemsMenuWidget> createState() =>
+      _ItemsMenuWidgetState();
 }
 
-class _ClientsMenuWidgetState
-    extends State<ClientsMenuWidget> {
+class _ItemsMenuWidgetState
+    extends State<ItemsMenuWidget> {
   @override
   Widget build(BuildContext context) {
 
-    final clientPageViewmodel = context
-        .watch<ClientPageViewmodel>();
 
     return PopupMenuButton(
       onSelected: (value) {
@@ -38,7 +32,9 @@ class _ClientsMenuWidgetState
             context,
             MaterialPageRoute(
               builder: (context) {
-                return EditClient(id: widget.id);
+                return EditItemsPage(
+                  id: widget.id,
+                );
               },
             ),
           );
@@ -47,24 +43,23 @@ class _ClientsMenuWidgetState
             context,
             MaterialPageRoute(
               builder: (context) {
-                return ViewDetailsPage(
+                return ViewItemsDetails(
                   id: widget.id,
                 );
               },
             ),
           );
         } else if (value == 2) {
-          return clientPageViewmodel
-              .delete_Client(widget.id);
+          return widget.itemsPageViewmodel
+              .deleteItem(widget.id);
         }
       },
 
-      color:  Theme.of(context)
+      color: Theme.of(context)
           .getBottomContainerColor()
           .withValues(alpha: 0.8),
       icon: CustomIconWidget(
-        iconaddress: Theme.of(context)
-            .getMenuIcon(),
+        iconaddress: Theme.of(context).getMenuIcon(),
         height: 24,
         weight: 24,
       ),
@@ -74,13 +69,13 @@ class _ClientsMenuWidgetState
           child: ListTile(
             leading: CustomIconWidget(
               iconaddress:
-                  Assets.EditIcon,
+                  'assets/images/icons/Group 37201.svg',
               height: 18,
               weight: 18,
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text(widget.constants.popMenuText[0]),
+            title: Text('Edit'),
           ),
           value: 0,
         ),
@@ -88,13 +83,13 @@ class _ClientsMenuWidgetState
           child: ListTile(
             leading: CustomIconWidget(
               iconaddress:
-              Assets.ViewIcon,
+                  'assets/images/icons/eye.svg',
               height: 18,
               weight: 18,
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text(widget.constants.popMenuText[1]),
+            title: Text('View Details'),
           ),
           value: 1,
         ),
@@ -102,13 +97,13 @@ class _ClientsMenuWidgetState
           child: ListTile(
             leading: CustomIconWidget(
               iconaddress:
-              Assets.DeleteIcon,
+                  'assets/images/icons/trash.svg',
               height: 18,
               weight: 18,
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text(widget.constants.popMenuText[2]),
+            title: Text('Delete'),
           ),
           value: 2,
         ),
