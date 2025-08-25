@@ -1,5 +1,4 @@
-
-import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +10,7 @@ class CustomTextFields extends StatefulWidget {
     required this.isMandatory,
     this.controller,
     this.enabled,
-     this.textInputType,
+    this.textInputType,
     this.maxLength,
     this.validator,
     this.inputFormatter,
@@ -22,22 +21,21 @@ class CustomTextFields extends StatefulWidget {
   final String? hintText;
   final bool isMandatory;
   final bool? enabled;
-  final TextInputType ?textInputType;
-  final  int ?maxLength;
-  final String? Function(String?)?  validator;
-  final TextInputFormatter ?inputFormatter;
-  final   String ? prefix;
+  final TextInputType? textInputType;
+  final int? maxLength;
+  final String? Function(String?)? validator;
+  final TextInputFormatter? inputFormatter;
+  final String? prefix;
   @override
   State<CustomTextFields> createState() =>
       _CustomTextFieldsState();
 }
 
-class _CustomTextFieldsState extends State<CustomTextFields> {
+class _CustomTextFieldsState
+    extends State<CustomTextFields> {
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel = HomePageViewmodel();
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
-
+   
     return Column(
       children: [
         Row(
@@ -48,7 +46,8 @@ class _CustomTextFieldsState extends State<CustomTextFields> {
                 fontSize: 14,
                 fontFamily: 'Biennale',
                 fontWeight: FontWeight.w500,
-                color: homePageViewmodel.getTextColor(isDark),
+                color: Theme.of(context)
+                    .getTextColor(),
               ),
             ),
             widget.isMandatory
@@ -65,46 +64,68 @@ class _CustomTextFieldsState extends State<CustomTextFields> {
           ],
         ),
         TextFormField(
-          inputFormatters: widget.inputFormatter==null?null:[widget.inputFormatter!],
+          inputFormatters:
+              widget.inputFormatter == null
+              ? null
+              : [widget.inputFormatter!],
           onTapOutside: (event) {
-            FocusManager.instance.primaryFocus?.unfocus();
+            FocusManager.instance.primaryFocus
+                ?.unfocus();
           },
-          
+
           keyboardType: widget.textInputType,
-          maxLength:widget.maxLength,
+          maxLength: widget.maxLength,
           controller: widget.controller,
-          validator: (value) =>widget.validator?.call(value),
+          validator: (value) =>
+              widget.validator?.call(value),
           enabled: widget.enabled,
           cursorColor: Color(0xFF4082E3),
           decoration: InputDecoration(
             filled: true,
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Color(0xFF4082E3),width: 2,
-                ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Color(0xFF4082E3),width: 2,
+                color: Color(0xFF4082E3),
+                width: 2,
               ),
             ),
+            focusedErrorBorder:
+                OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xFF4082E3),
+                    width: 2,
+                  ),
+                ),
             errorBorder: OutlineInputBorder(
-                borderSide:  BorderSide(
-                    color:Colors.red,width: 1)),
-            fillColor: homePageViewmodel.getTextFormFieldColor(isDark),
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 1,
+              ),
+            ),
+            fillColor: Theme.of(context)
+                .getTextFormFieldColor(),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(
+                5,
+              ),
             ),
-            hintText: widget.hintText,prefix: Text(widget.prefix??""),
-
+            hintText: widget.hintText,
+            prefix: Text(widget.prefix ?? ""),
+            prefixStyle: TextStyle(
+              color: Colors.black,
+            ),
             hintStyle: TextStyle(
               fontSize: 12,
               fontFamily: 'Biennale',
               fontWeight: FontWeight.w500,
-              color: homePageViewmodel.getHintTextColor(isDark),
+              color: Theme.of(context)
+                  .getHintTextColor(),
             ),
-            contentPadding: EdgeInsets.only(left: 10, right: 10, top: 10),
+            contentPadding: EdgeInsets.only(
+              left: 10,
+              right: 10,
+              top: 10,
+            ),
           ),
         ),
       ],

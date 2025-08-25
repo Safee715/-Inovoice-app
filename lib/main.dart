@@ -1,19 +1,21 @@
+import 'package:DummyInvoice/data/helpers/constants.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/navigation_pages/main_navigation_page.dart';
 import 'package:provider/provider.dart';
+
 void main() {
-
   runApp(
-  MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => ClientPageViewmodel(),),
-
-  ],child: const Myapp(),
-  ),
-
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ClientPageViewmodel(),
+        ),
+      ],
+      child: const Myapp(),
+    ),
   );
-
 }
 
 class Myapp extends StatelessWidget {
@@ -21,31 +23,35 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
-    bool isDark =Theme.of(context).brightness==Brightness.dark;
+    final Constants constants=Constants();
+
+
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor:homePageViewmodel.getBackColor(isDark) ,
+        scaffoldBackgroundColor: Theme.of(context)
+            .getBackColor(),
         useMaterial3: true,
         switchTheme: SwitchThemeData(
-            trackColor: WidgetStateColor.resolveWith((states) {
-              if(states.contains(WidgetState.selected))
-                {
-
+          trackColor:
+              WidgetStateColor.resolveWith((
+                states,
+              ) {
+                if (states.contains(
+                  WidgetState.selected,
+                )) {
                   return Color(0xff4F94FB);
-                }
-              else
-                {
+                } else {
                   return Colors.grey;
                 }
-            },
-            ),
-          thumbColor:WidgetStatePropertyAll(Color(0xffffffff)),
-          trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
-
-
-
-      ),
+              }),
+          thumbColor: WidgetStatePropertyAll(
+            Color(0xffffffff),
+          ),
+          trackOutlineColor:
+              WidgetStatePropertyAll(
+                Colors.transparent,
+              ),
+        ),
         brightness: Brightness.light,
         fontFamily: 'Biennale',
       ),
@@ -54,25 +60,29 @@ class Myapp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
         switchTheme: SwitchThemeData(
-            trackColor: WidgetStateColor.resolveWith((states) {
-              if(states.contains(WidgetState.selected))
-              {
-
-                return Color(0xff4F94FB);
-              }
-              else
-              {
-                return Colors.grey;
-              }
-            },
-            ),
-            thumbColor:WidgetStatePropertyAll(Color(0xffffffff)),
-            trackOutlineColor: WidgetStatePropertyAll(Colors.transparent)
-
+          trackColor:
+              WidgetStateColor.resolveWith((
+                states,
+              ) {
+                if (states.contains(
+                  WidgetState.selected,
+                )) {
+                  return Color(0xff4F94FB);
+                } else {
+                  return Colors.grey;
+                }
+              }),
+          thumbColor: WidgetStatePropertyAll(
+            Color(0xffffffff),
+          ),
+          trackOutlineColor:
+              WidgetStatePropertyAll(
+                Colors.transparent,
+              ),
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MainNavigationPage(),
+      home: MainNavigationPage(constant:  constants,),
       themeMode: ThemeMode.system,
     );
   }

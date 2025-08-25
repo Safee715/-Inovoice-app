@@ -8,30 +8,40 @@ class EditClientViewmodel {
   final emailAddress = 'Email Address';
   final phoneNo = 'Phone Number';
   final address = 'Address';
-  final saveClientButtonText = 'Save to Client Lists';
+  final saveClientButtonText =
+      'Save to Client Lists';
   final addButtonText = 'Save Changes';
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  final TextEditingController
+  firstNameController = TextEditingController();
+  final TextEditingController lastNameController =
+      TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController();
+  final TextEditingController phoneController =
+      TextEditingController();
+  final TextEditingController addressController =
+      TextEditingController();
 
-  void getControllerText(ClientPageViewmodel clientPageViewmodel,
+  void getControllerText(
+    ClientPageViewmodel clientPageViewmodel,
     int id,
   ) {
-    final client=clientPageViewmodel.client.value.elementAt(id);
-    firstNameController.text=client.firstName;
-    lastNameController.text=client.lastname;
-    emailController.text=client.email;
-    phoneController.text=client.phoneNo;
-    addressController.text=client.address;
-
+    final client = clientPageViewmodel
+        .client
+        .value
+        .elementAt(id);
+    firstNameController.text = client.firstName;
+    lastNameController.text = client.lastname;
+    emailController.text = client.email;
+    phoneController.text = client.phoneNo;
+    addressController.text = client.address;
   }
-  void dispose()
-  {firstNameController.dispose();
-  lastNameController.dispose();
-  emailController.dispose();
-  phoneController.dispose();
-  addressController.dispose();
+
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
   }
 }

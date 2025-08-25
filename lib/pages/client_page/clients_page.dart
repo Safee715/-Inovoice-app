@@ -1,4 +1,4 @@
-import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/add_clients_page/add_clients_page.dart';
 import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
@@ -10,25 +10,18 @@ class ClientsPage extends StatefulWidget {
   const ClientsPage({super.key});
 
   @override
-  State<ClientsPage> createState() => _ClientsPageState();
+  State<ClientsPage> createState() =>
+      _ClientsPageState();
 }
 
-class _ClientsPageState extends State<ClientsPage> {
-  late HomePageViewmodel homePageViewmodel;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    homePageViewmodel = HomePageViewmodel(
-      screenWidth: MediaQuery.of(context).size.width,
-      screenHeight: MediaQuery.of(context).size.height,
-    );
-  }
+class _ClientsPageState
+    extends State<ClientsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
+    final clientPageViewmodel = context
+        .watch<ClientPageViewmodel>();
 
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -36,18 +29,20 @@ class _ClientsPageState extends State<ClientsPage> {
           scrolledUnderElevation: 0,
           leadingWidth: 70,
           elevation: 0,
-          backgroundColor: homePageViewmodel.getBackColor(isDark),
+          backgroundColor: Theme.of(context)
+              .getBackColor(),
           centerTitle: false,
           leading: IconButton(
             onPressed: () {
-              clientPageViewmodel.backButtonFunction();
+              clientPageViewmodel
+                  .backButtonFunction();
             },
             icon: CustomIconWidget(
-              iconaddress: homePageViewmodel.getIconAddress(
-                isDark,
-                'assets/images/icons/nightmode_backButton.svg',
-                'assets/images/icons/backarrow.svg',
-              ),
+              iconaddress: Theme.of(context)
+                  .getIconAddress(
+                    'assets/images/icons/nightmode_backButton.svg',
+                    'assets/images/icons/backarrow.svg',
+                  ),
               height: 28,
               weight: 28,
             ),
@@ -55,7 +50,8 @@ class _ClientsPageState extends State<ClientsPage> {
           title: Text(
             'Clients',
             style: TextStyle(
-              color: homePageViewmodel.getTextColor(isDark),
+              color: Theme.of(context)
+                  .getTextColor(),
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -63,50 +59,86 @@ class _ClientsPageState extends State<ClientsPage> {
         ),
         body: Padding(
           padding: EdgeInsets.only(
-            left: homePageViewmodel.getWidth(15),
-            right: homePageViewmodel.getWidth(15),
+            left: context.getWidth(15),
+            right: context.getWidth(15),
           ),
           child: ValueListenableBuilder(
-            valueListenable: clientPageViewmodel.client,
+            valueListenable:
+                clientPageViewmodel.client,
             builder: (context, clients, child) {
               return ValueListenableBuilder(
-                valueListenable: clientPageViewmodel.client,
+                valueListenable:
+                    clientPageViewmodel.client,
                 builder: (context, emails, child) {
                   if (clients.isEmpty) {
                     return Center(
                       child: Container(
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomIconWidget(iconaddress: 'assets/images/icons/noDataIcon.svg',
-                                  height: homePageViewmodel.getWidth(65),
-                                  weight: homePageViewmodel.getWidth(114)
-                              ),
-                              Text(maxLines: 2,softWrap: true,
-                                'No Data Available!',style: TextStyle(
-                                  color: Color(0xffBEC0CC),fontSize: 14,
+                        child: Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .center,
+                          children: [
+                            CustomIconWidget(
+                              iconaddress:
+                                  'assets/images/icons/noDataIcon.svg',
+                              height:
+                                  context
+                                      .getWidth(
+                                        65,
+                                      ),
+                              weight:
+                                  context
+                                      .getWidth(
+                                        114,
+                                      ),
+                            ),
+                            Text(
+                              maxLines: 2,
+                              softWrap: true,
+                              'No Data Available!',
+                              style: TextStyle(
+                                color: Color(
+                                  0xffBEC0CC,
                                 ),
+                                fontSize: 14,
                               ),
-                            ],
-                          )),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   } else {
                     print(clients.length);
                     return ListView.builder(
                       itemCount: clients.length,
                       itemBuilder: (context, index) {
-                        final bool isLast = index == clients.length - 1;
+                        final bool isLast =
+                            index ==
+                            clients.length - 1;
                         print('index==$index');
                         return Padding(
                           padding: EdgeInsets.only(
-                            top: homePageViewmodel.getWidth(5),
-                            bottom: homePageViewmodel.getWidth(isLast ? 50 : 5),
+                            top: context
+                                .getWidth(5),
+                            bottom:
+                                context
+                                    .getWidth(
+                                      isLast
+                                          ? 50
+                                          : 5,
+                                    ),
                           ),
                           child: ClientsDetails(
                             name:
                                 '${clientPageViewmodel.client.value.elementAt(index).firstName} ${clientPageViewmodel.client.value.elementAt(index).lastname}',
-                            email: clientPageViewmodel.client.value
-                                .elementAt(index)
-                                .email,
+                            email:
+                                clientPageViewmodel
+                                    .client
+                                    .value
+                                    .elementAt(
+                                      index,
+                                    )
+                                    .email,
                             id: index,
                           ),
                         );
@@ -121,7 +153,9 @@ class _ClientsPageState extends State<ClientsPage> {
 
         floatingActionButton: IconButton(
           onPressed: () {
-            context.read<ClientPageViewmodel>().clearControllers();
+            context
+                .read<ClientPageViewmodel>()
+                .clearControllers();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -132,12 +166,15 @@ class _ClientsPageState extends State<ClientsPage> {
             );
           },
           icon: CustomIconWidget(
-            iconaddress: clientPageViewmodel.addButtonAddress,
+            iconaddress: clientPageViewmodel
+                .addButtonAddress,
             height: 54,
             weight: 54,
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation
+                .endDocked,
       ),
     );
   }

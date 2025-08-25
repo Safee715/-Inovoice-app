@@ -1,8 +1,8 @@
+import 'package:DummyInvoice/data/helpers/constants.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/client_page/client_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/pages/add_clients_page/add_client_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,30 +11,21 @@ class AddClientsPage extends StatefulWidget {
   const AddClientsPage({super.key});
 
   @override
-  State<AddClientsPage> createState() => _AddClientsPageState();
+  State<AddClientsPage> createState() =>
+      _AddClientsPageState();
 }
 
-class _AddClientsPageState extends State<AddClientsPage> {
-  bool isToggled = false;
+class _AddClientsPageState
+    extends State<AddClientsPage> {
   final formKey = GlobalKey<FormState>();
-  late HomePageViewmodel homePageViewmodel;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    homePageViewmodel = HomePageViewmodel(
-      screenWidth: MediaQuery.of(context).size.width,
-      screenHeight: MediaQuery.of(context).size.height,
-    );
-  }
+  Constants constants = Constants(
+    addButtonText: 'Add',
+  );
 
   @override
   Widget build(BuildContext context) {
-    AddClientViewmodel addClientViewmodel = AddClientViewmodel();
-
-    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
-    clientPageViewmodel.clearControllers();
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final clientPageViewmodel = context
+        .watch<ClientPageViewmodel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -47,142 +38,192 @@ class _AddClientsPageState extends State<AddClientsPage> {
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,
-            color: homePageViewmodel.getTextColor(isDark),
+            color: Theme.of(
+              context,
+            ).getTextColor(),
           ),
         ),
-        backgroundColor: homePageViewmodel.getBackColor(isDark),
+        backgroundColor: Theme.of(
+          context,
+        ).getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          addClientViewmodel.appBarTitle,
+          constants.addClientAppBarTitle,
           style: TextStyle(
-            color: homePageViewmodel.getTextColor(isDark),
+            color: Theme.of(
+              context,
+            ).getTextColor(),
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
         ),
         centerTitle: true,
       ),
-      backgroundColor: homePageViewmodel.getBackColor(isDark),
+      backgroundColor: Theme.of(
+        context,
+      ).getBackColor(),
       body: SafeArea(
         top: false,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: homePageViewmodel.getWidth(20),
-              right: homePageViewmodel.getWidth(20),
-              bottom: homePageViewmodel.getWidth(20),
+              left: context.getWidth(20),
+              right: context.getWidth(20),
+              bottom: context.getWidth(20),
             ),
             child: Form(
               key: formKey,
               child: Column(
                 children: [
                   CustomTextFields(
-                    labelText: addClientViewmodel.firstNameLabel,
-                    hintText: addClientViewmodel.firstName,
+                    labelText:
+                        constants.firstNameLabel,
+                    hintText: constants.firstName,
                     isMandatory: true,
-                    controller: clientPageViewmodel.firstNameController,
+                    controller:
+                        clientPageViewmodel
+                            .firstNameController,
                     maxLength: 40,
-                    validator: (p0) => clientPageViewmodel.nameValidator(p0),
-                    inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z- ]'),
-                    ),
+                    validator: (p0) =>
+                        clientPageViewmodel
+                            .nameValidator(p0),
+                    inputFormatter:
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z- ]'),
+                        ),
                   ),
                   CustomTextFields(
-                    labelText: addClientViewmodel.lastNameLabel,
-                    hintText: addClientViewmodel.lastName,
+                    labelText:
+                        constants.lastNameLabel,
+                    hintText: constants.lastName,
                     isMandatory: true,
                     maxLength: 40,
-                    controller: clientPageViewmodel.lastNameController,
-                    validator: (p0) => clientPageViewmodel.nameValidator(p0),
-                    inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z- ]'),
-                    ),
+                    controller:
+                        clientPageViewmodel
+                            .lastNameController,
+                    validator: (p0) =>
+                        clientPageViewmodel
+                            .nameValidator(p0),
+                    inputFormatter:
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z- ]'),
+                        ),
                   ),
                   CustomTextFields(
-                    labelText: addClientViewmodel.emailAddress,
-                    hintText: addClientViewmodel.emailAddressHint,
+                    labelText:
+                        constants.emailAddress,
+                    hintText: constants
+                        .emailAddressHint,
                     isMandatory: false,
-                    controller: clientPageViewmodel.emailController,
-                    textInputType: TextInputType.emailAddress,
+                    controller:
+                        clientPageViewmodel
+                            .emailController,
+                    textInputType: TextInputType
+                        .emailAddress,
                     maxLength: 70,
-                    validator: (p0) => clientPageViewmodel.emailValidator(p0),
+                    validator: (p0) =>
+                        clientPageViewmodel
+                            .emailValidator(p0),
                   ),
                   CustomTextFields(
-                    labelText: addClientViewmodel.phoneNo,
-                    hintText: addClientViewmodel.phoneNoHint,
+                    labelText: constants.phoneNo,
+                    hintText:
+                        constants.phoneNoHint,
                     isMandatory: true,
-                    controller: clientPageViewmodel.phoneController,
-                    textInputType: TextInputType.phone,
-                    maxLength: 11,
-                    inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[0-9]+'),
-                    ),
+                    controller:
+                        clientPageViewmodel
+                            .phoneController,
+                    textInputType:
+                        TextInputType.phone,
+                    maxLength: 11,validator: (p0) => clientPageViewmodel.phoneValidator(p0),
+                    inputFormatter:
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[0-9]+'),
+                        ),
                   ),
                   CustomTextFields(
-                    labelText: addClientViewmodel.address,
-                    hintText: addClientViewmodel.addressHint,
+                    labelText: constants.address,
+                    hintText:
+                        constants.addressHint,
                     isMandatory: false,
-                    controller: clientPageViewmodel.addressController,
-                    textInputType: TextInputType.text,
+                    controller:
+                        clientPageViewmodel
+                            .addressController,
+                    textInputType:
+                        TextInputType.text,
                     maxLength: 70,
-                    inputFormatter: FilteringTextInputFormatter.allow(
-                      RegExp(r'[a-zA-Z- 0-9]'),
-                    ),
+                    inputFormatter:
+                        FilteringTextInputFormatter.allow(
+                          RegExp(
+                            r'[a-zA-Z- 0-9]',
+                          ),
+                        ),
                   ),
                   SizedBox(height: 30),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment:
+                        MainAxisAlignment
+                            .spaceBetween,
                     children: [
                       Text(
-                        addClientViewmodel.saveClientButtonText,
+                        constants
+                            .saveClientButtonText,
                         style: TextStyle(
                           fontFamily: 'Biennale',
                           fontSize: 14,
-                          color: homePageViewmodel.getTextColor(isDark),
+                          color: Theme.of(
+                            context,
+                          ).getTextColor(),
                         ),
                       ),
-                      Switch(
-                        value: isToggled,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isToggled = value;
-                          });
-                        },
-                      ),
+
                     ],
                   ),
 
                   SizedBox(height: 20),
                   Container(
-                    width: homePageViewmodel.getWidth(187),
+                    width: context.getWidth(187),
                     height: 50,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      gradient: LinearGradient(
-                        colors: [Color(0xFF9CD9FF), Color(0xFF4082E3)],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
+                      borderRadius:
+                          BorderRadius.circular(
+                            5.0,
+                          ),
+                      gradient: constants.gradient,
                     ),
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                      ),
+                      style:
+                          ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Colors
+                                    .transparent,
+                            shadowColor: Colors
+                                .transparent,
+                          ),
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          clientPageViewmodel.addClient();
-                          selected_page_notifier.value == 2
-                              ? selected_page_notifier.value = 0
-                              : Navigator.pop(context);
+                        if (formKey.currentState!
+                            .validate()) {
+                          clientPageViewmodel
+                              .addClient();
+                          selected_page_notifier
+                                      .value ==
+                                  2
+                              ? selected_page_notifier
+                                        .value =
+                                    0
+                              : Navigator.pop(
+                                  context,
+                                );
                         } else {}
                       },
                       child: Text(
-                        addClientViewmodel.addButtonText,
+                        constants
+                            .getElevatedButtonText(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontWeight:
+                              FontWeight.bold,
                         ),
                       ),
                     ),

@@ -1,54 +1,60 @@
+import 'package:DummyInvoice/data/helpers/assets.dart';
+import 'package:DummyInvoice/data/helpers/constants.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 
 import 'package:DummyInvoice/widgets/custom_cuppertino_button.dart';
 
-class HomePageMenuWidgetsNavigation extends StatefulWidget {
-  const HomePageMenuWidgetsNavigation({super.key});
-
+class HomePageMenuWidgetsNavigation
+    extends StatefulWidget {
+  const HomePageMenuWidgetsNavigation({
+    super.key,
+    required this.constants
+  });
+final Constants constants;
   @override
-  State<HomePageMenuWidgetsNavigation> createState() => _HomePageMenuWidgetsNavigationState();
+  State<HomePageMenuWidgetsNavigation>
+  createState() =>
+      _HomePageMenuWidgetsNavigationState();
 }
 
-class _HomePageMenuWidgetsNavigationState extends State<HomePageMenuWidgetsNavigation> {
-  late HomePageViewmodel viewmodel;
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    viewmodel = HomePageViewmodel(
-      screenWidth: MediaQuery.of(context).size.width,
-      screenHeight: MediaQuery.of(context).size.height,
-    );
-  }
+class _HomePageMenuWidgetsNavigationState
+    extends State<HomePageMenuWidgetsNavigation> {
+
+
   @override
   Widget build(BuildContext context) {
+    HomePageViewmodel homePageViewmodel=
+    HomePageViewmodel(constant:widget.constants ,
+        context: context);
     return Row(
-      spacing: viewmodel.getWidth(5),
+      spacing: context.getWidth(5),
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         CustomCuppertinoButton(
           iconAddress:
-          viewmodel.homePageDetailsAddress,
+              Assets.homePageDetailsAddress,
           onPressed: () {
-            viewmodel.setHomePageDetails();
+            homePageViewmodel.setHomePageDetails();
           },
           index: 0,
         ),
         CustomCuppertinoButton(
-          iconAddress: viewmodel.BarChartAddress,
+          iconAddress: Assets.BarChartAddress,
           onPressed: () {
-            viewmodel.setBarChartDetails();
+            homePageViewmodel.setBarChartDetails();
           },
           index: 1,
         ),
         CustomCuppertinoButton(
-          iconAddress: viewmodel.PieChartAddress,
+          iconAddress: Assets.PieChartAddress,
           onPressed: () {
-            viewmodel.setPieChartDetails();
+            homePageViewmodel.setPieChartDetails();
           },
           index: 2,
         ),
-        SizedBox(width: viewmodel.getWidth(15)),
+        SizedBox(width: context.getWidth(15)),
       ],
     );
   }

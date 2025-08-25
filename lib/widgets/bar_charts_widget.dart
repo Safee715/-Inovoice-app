@@ -1,3 +1,5 @@
+import 'package:DummyInvoice/data/helpers/constants.dart';
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/draw_bars.dart';
 
@@ -6,36 +8,40 @@ import 'package:flutter/material.dart';
 int selected_key = 0;
 
 class BarChartsWidget extends StatefulWidget {
-  const BarChartsWidget({super.key});
-
+  const BarChartsWidget({super.key,required this.constants});
+final Constants constants;
   @override
-  State<BarChartsWidget> createState() => _BarChartsWidgetState();
+  State<BarChartsWidget> createState() =>
+      _BarChartsWidgetState();
 }
 
-class _BarChartsWidgetState extends State<BarChartsWidget> {
-
-
+class _BarChartsWidgetState
+    extends State<BarChartsWidget> {
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel = HomePageViewmodel(
-      screenWidth: MediaQuery.of(context).size.width,
-      screenHeight: MediaQuery.of(context).size.height,
-    );
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    HomePageViewmodel homePageViewmodel =
+        HomePageViewmodel(constant:widget.constants ,context: context);
+
     return Container(
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20),
+            padding: EdgeInsets.only(
+              left: 20,
+              top: 20,
+              right: 20,
+              bottom: 20,
+            ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Income Overview',
+                Text(widget.constants.incomeOverviewText,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Biennale',
-                    color: homePageViewmodel.getTextColor(isDark),
+                    color:  Theme.of(context)
+                        .getTextColor(),
                   ),
                 ),
                 Container(
@@ -43,30 +49,49 @@ class _BarChartsWidgetState extends State<BarChartsWidget> {
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius:
+                        BorderRadius.circular(30),
 
-                    border: Border.all(color: Color(0xff8D8F99)),
+                    border: Border.all(
+                      color: Color(0xff8D8F99),
+                    ),
                   ),
 
                   child: DropdownButton(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                    ),
                     isDense: true,
-                    underline: Container(height: 1),
-                    borderRadius: BorderRadius.circular(20),
+                    underline: Container(
+                      height: 1,
+                    ),
+                    borderRadius:
+                        BorderRadius.circular(20),
                     style: TextStyle(
                       fontSize: 12,
-                      backgroundColor: Colors.transparent,
-                      color: homePageViewmodel.getTextColor(isDark),
+                      backgroundColor:
+                          Colors.transparent,
+                      color:  Theme.of(context)
+                          .getTextColor(),
                       fontFamily: 'Biennale',
                     ),
                     icon: Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: homePageViewmodel.getBottomContainerColor(isDark),
+                      Icons
+                          .keyboard_arrow_down_rounded,
+                      color:  Theme.of(context)
+                          .getBottomContainerColor(),
                     ),
 
                     items: [
-                      DropdownMenuItem(value: 0, child: Text('This Week')),
-                      DropdownMenuItem(value: 1, child: Text('Last Week')),
+                      DropdownMenuItem(
+                        value: 0,
+                        child: Text(widget.constants.dropDownMenuTexts[0],),
+                      ),
+                      DropdownMenuItem(
+                        value: 1,
+                        child: Text(widget.constants.dropDownMenuTexts[1],),
+                      ),
                     ],
                     onChanged: (newValue) {
                       setState(() {
@@ -79,29 +104,45 @@ class _BarChartsWidgetState extends State<BarChartsWidget> {
               ],
             ),
           ),
-          Divider(height: 1, color: Color(0xffEBECF2), thickness: 1),
+          Divider(
+            height: 1,
+            color: Color(0xffEBECF2),
+            thickness: 1,
+          ),
           Container(
             padding: EdgeInsets.only(
-              top: homePageViewmodel.getWidth(50),
-              left: homePageViewmodel.getWidth(5),
-              bottom: homePageViewmodel.getWidth(30),
-              right: homePageViewmodel.getWidth(5),
+              top: context.getWidth(50),
+              left: context.getWidth(5),
+              bottom: context.getWidth(
+                30,
+              ),
+              right: context.getWidth(
+                5,
+              ),
             ),
             child: TweenAnimationBuilder<double>(
               tween: Tween(begin: 0, end: 1),
-              duration: const Duration(seconds: 2),
+              duration: const Duration(
+                seconds: 2,
+              ),
               curve: Curves.easeOut,
               builder: (context, value, child) {
                 return LayoutBuilder(
                   builder: (context, constraints) {
                     return CustomPaint(
-                      painter: DrawBars(homePageViewmodel,
+                      painter: DrawBars(
+                        homePageViewmodel,
                         selected_key,
                         selected_key == 0
-                            ? homePageViewmodel.data1
-                            : homePageViewmodel.data2,
+                            ? homePageViewmodel
+                                  .data1
+                            : homePageViewmodel
+                                  .data2,
                       ),
-                      size: Size(constraints.maxWidth, 237),
+                      size: Size(
+                        constraints.maxWidth,
+                        237,
+                      ),
                     );
                   },
                 );

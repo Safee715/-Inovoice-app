@@ -1,27 +1,31 @@
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/draw_pie_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:DummyInvoice/data/helpers/constants.dart';
 
 int selected_key = 0;
 
 class PieChartWidget extends StatefulWidget {
-  const PieChartWidget({super.key});
+  const PieChartWidget({super.key,
+  required this.constant
+  });
+  final Constants constant;
 
   @override
-  State<PieChartWidget> createState() => _PieChartWidgetState();
+  State<PieChartWidget> createState() =>
+      _PieChartWidgetState();
 }
 
-class _PieChartWidgetState extends State<PieChartWidget> {
+class _PieChartWidgetState
+    extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
-    // PieChartViewmodel pieChartViewmodel =
-    // PieChartViewmodel(screenHeight: MediaQuery.sizeOf(context).height,
-    //     screenWidth:MediaQuery.sizeOf(context).width, );
-     HomePageViewmodel homePageViewmodel=HomePageViewmodel(
-      screenHeight: MediaQuery.sizeOf(context).height,
-      screenWidth:MediaQuery.sizeOf(context).width,
-    );
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
+    HomePageViewmodel homePageViewmodel =
+        HomePageViewmodel(constant: widget.constant,
+         context: context
+        );
+
     return Padding(
       padding: const EdgeInsets.only(
         top: 10,
@@ -32,13 +36,16 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Income Overview',
                 style: TextStyle(
                   fontSize: 14,
-                  color: homePageViewmodel.getTextColor(isDark),
+                  color: Theme.of(
+                    context,
+                  ).getTextColor(),
                   fontFamily: 'Biennale',
                 ),
               ),
@@ -47,28 +54,49 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius:
+                      BorderRadius.circular(30),
 
-                  border: Border.all(color: Color(0xff8D8F99)),
+                  border: Border.all(
+                    color: Color(0xff8D8F99),
+                  ),
                 ),
 
                 child: DropdownButton(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ),
                   isDense: true,
                   underline: Container(height: 1),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius:
+                      BorderRadius.circular(20),
                   style: TextStyle(
                     fontSize: 12,
-                    backgroundColor: Colors.transparent,
-                    color: homePageViewmodel.getTextColor(isDark),
+                    backgroundColor:
+                        Colors.transparent,
+                    color: Theme.of(
+                      context,
+                    ).getTextColor(),
                     fontFamily: 'Biennale',
                   ),
-                  icon: Icon(Icons.keyboard_arrow_down_rounded,
-                    color:homePageViewmodel.getBottomContainerColor(isDark) ,),
+                  icon: Icon(
+                    Icons
+                        .keyboard_arrow_down_rounded,
+                    color: Theme.of(
+                      context,
+                    ).getBottomContainerColor(),
+                  ),
 
                   items: [
-                    DropdownMenuItem(value: 0, child: Text('Last Week')),
-                    DropdownMenuItem(value: 1, child: Text('This Week')),
+                    DropdownMenuItem(
+                      value: 0,
+                      child: Text('Last Week'),
+                    ),
+                    DropdownMenuItem(
+                      value: 1,
+                      child: Text('This Week'),
+                    ),
                   ],
                   onChanged: (newValue) {
                     setState(() {
@@ -81,45 +109,96 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 20,top: 30),
+            margin: EdgeInsets.only(
+              bottom: 20,
+              top: 30,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceAround,
               children: [
-                Container(margin: EdgeInsets.only(bottom: 20,top: 30),
+                Container(
+                  margin: EdgeInsets.only(
+                    bottom: 20,
+                    top: 30,
+                  ),
                   child: CustomPaint(
                     size: Size(
-                        double.infinity,(298) ),
+                      double.infinity,
+                      (298),
+                    ),
                     painter: DrawPieChart(
-                      homePageViewmodel: homePageViewmodel,
+                      homePageViewmodel:
+                          homePageViewmodel,
                       dataMap: selected_key == 0
-                          ? homePageViewmodel.dataMap1
-                          : homePageViewmodel.dataMap2,
-                      colorsList: homePageViewmodel.colorsList,
+                          ? homePageViewmodel
+                                .dataMap1
+                          : homePageViewmodel
+                                .dataMap2,
+                      colorsList:
+                          homePageViewmodel
+                              .colorsList,
                     ),
                   ),
-                ),SizedBox(height: homePageViewmodel.getWidth(40),),
+                ),
+                SizedBox(
+                  height: context.getWidth(40),
+                ),
                 Container(
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: homePageViewmodel.getWidth(8),
-                        backgroundColor: homePageViewmodel.colorsList[0],),
-                      Text(' Paid',style: TextStyle( fontFamily: 'Biennale',
-                        fontSize: 12,color: homePageViewmodel.getTextColor(isDark),
-                        fontWeight: FontWeight.bold,),
-                      ),SizedBox(width:  homePageViewmodel.getWidth(20),),
+                        radius: context.getWidth(
+                          8,
+                        ),
+                        backgroundColor:
+                            homePageViewmodel
+                                .colorsList[0],
+                      ),
+                      Text(
+                        ' Paid',
+                        style: TextStyle(
+                          fontFamily: 'Biennale',
+                          fontSize: 12,
+                          color: Theme.of(
+                            context,
+                          ).getTextColor(),
+                          fontWeight:
+                              FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        width: context.getWidth(
+                          20,
+                        ),
+                      ),
                       CircleAvatar(
-                        radius: homePageViewmodel.getWidth(8),
-                        backgroundColor: homePageViewmodel.colorsList[1],),
-                      Text(' Due',style: TextStyle( fontFamily: 'Biennale',
-                        fontSize: 12,color: homePageViewmodel.getTextColor(isDark),
-                        fontWeight: FontWeight.bold,),),
+                        radius: context.getWidth(
+                          8,
+                        ),
+                        backgroundColor:
+                            homePageViewmodel
+                                .colorsList[1],
+                      ),
+                      Text(
+                        ' Due',
+                        style: TextStyle(
+                          fontFamily: 'Biennale',
+                          fontSize: 12,
+                          color: Theme.of(
+                            context,
+                          ).getTextColor(),
+                          fontWeight:
+                              FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-
           ),
         ],
       ),

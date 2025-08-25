@@ -1,6 +1,4 @@
 class ProfilePageViewmodel {
-
-  final iconAddress='assets/images/icons/user.svg';
-
-
+  final iconAddress =
+      'assets/images/icons/user.svg';
 }

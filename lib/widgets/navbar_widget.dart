@@ -1,3 +1,4 @@
+import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/home_page/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
@@ -7,14 +8,15 @@ class NavbarWidget extends StatefulWidget {
   const NavbarWidget({super.key});
 
   @override
-  State<NavbarWidget> createState() => _NavbarWidgetState();
+  State<NavbarWidget> createState() =>
+      _NavbarWidgetState();
 }
 
-class _NavbarWidgetState extends State<NavbarWidget> {
+class _NavbarWidgetState
+    extends State<NavbarWidget> {
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=HomePageViewmodel();
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
+
     return ValueListenableBuilder(
       valueListenable: selected_page_notifier,
       builder: (context, selected_page, child) {
@@ -24,21 +26,26 @@ class _NavbarWidgetState extends State<NavbarWidget> {
               boxShadow: [
                 BoxShadow(
                   spreadRadius: 0,
-                  color: Colors.black.withValues(alpha: 0.1),
+                  color: Colors.black.withValues(
+                    alpha: 0.1,
+                  ),
                   offset: Offset(0, 1),
                   blurRadius: 5,
                 ),
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(
+                10.0,
+              ),
 
               child: NavigationBar(
                 height: 74,
                 destinations: [
                   NavigationDestination(
                     selectedIcon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/homepage.svg',
+                      iconaddress:
+                          'assets/images/icons/homepage.svg',
                       height: 24,
                       weight: 24,
                       color: Color(0xff6EAEF1),
@@ -46,33 +53,40 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                     label: 'Home',
 
                     icon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/home.svg',
+                      iconaddress:
+                          'assets/images/icons/home.svg',
                       height: 24,
                       weight: 24,
-                      color: homePageViewmodel.getNavbarIconColor(isDark),
+                      color: Theme.of(context)
+                          .getNavbarIconColor( ),
                     ),
                   ),
                   NavigationDestination(
                     selectedIcon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/users-group2.svg',
+                      iconaddress:
+                          'assets/images/icons/users-group2.svg',
                       height: 24,
                       weight: 24,
                       color: Color(0xff6EAEF1),
                     ),
                     label: 'Clients',
                     icon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/users-group.svg',
+                      iconaddress:
+                          'assets/images/icons/users-group.svg',
                       height: 24,
                       weight: 24,
-                      color: homePageViewmodel.getNavbarIconColor(isDark),
+                      color: Theme.of(context)
+                          .getNavbarIconColor(),
                     ),
                   ),
 
                   NavigationDestination(
                     icon: Align(
-                      alignment: Alignment.bottomCenter,
+                      alignment:
+                          Alignment.bottomCenter,
                       child: CustomIconWidget(
-                        iconaddress: 'assets/images/icons/add clients.svg',
+                        iconaddress:
+                            'assets/images/icons/add clients.svg',
                         height: 54,
                         weight: 54,
                       ),
@@ -86,10 +100,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                     ),
                     label: 'Items',
                     icon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/shopping-cart-plus.svg',
+                      iconaddress:
+                          'assets/images/icons/shopping-cart-plus.svg',
                       height: 24,
                       weight: 24,
-                      color: homePageViewmodel.getNavbarIconColor(isDark),
+                      color: Theme.of(context)
+                          .getNavbarIconColor(
+                          ),
                     ),
                   ),
                   NavigationDestination(
@@ -99,37 +116,56 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                     ),
                     label: 'Profile',
                     icon: CustomIconWidget(
-                      iconaddress: 'assets/images/icons/user.svg',
+                      iconaddress:
+                          'assets/images/icons/user.svg',
                       height: 24,
                       weight: 24,
-                      color: homePageViewmodel.getNavbarIconColor(isDark),
+                      color: Theme.of(context)
+                          .getNavbarIconColor(
+                          ),
                     ),
                   ),
                 ],
-                backgroundColor: homePageViewmodel.getNavbarColor(isDark),
-                onDestinationSelected: (int value) {
-                       selected_page_notifier.value = value;
-                       previous_page.value = selected_page_notifier.value;
-
-                },
+                backgroundColor: Theme.of(context)
+                    .getNavbarColor(),
+                onDestinationSelected:
+                    (int value) {
+                      selected_page_notifier
+                              .value =
+                          value;
+                      previous_page.value =
+                          selected_page_notifier
+                              .value;
+                    },
                 selectedIndex: selected_page,
-                indicatorColor: Colors.transparent,
-                labelTextStyle: WidgetStateTextStyle.resolveWith((states) {
-                  TextStyle textStyle;
-                  if (states.contains(WidgetState.selected)) {
-                    textStyle = TextStyle(
-                      fontSize: 12,
-                      color: homePageViewmodel.getTextColor(isDark),
-                      fontWeight: FontWeight.bold,
-                    );
-                  } else {
-                    textStyle = TextStyle(
-                      fontSize: 12,
-                      color: homePageViewmodel.getNavbarIconColor(isDark),
-                    );
-                  }
-                  return textStyle;
-                }),
+                indicatorColor:
+                    Colors.transparent,
+                labelTextStyle:
+                    WidgetStateTextStyle.resolveWith((
+                      states,
+                    ) {
+                      TextStyle textStyle;
+                      if (states.contains(
+                        WidgetState.selected,
+                      )) {
+                        textStyle = TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context)
+                              .getTextColor(
+                              ),
+                          fontWeight:
+                              FontWeight.bold,
+                        );
+                      } else {
+                        textStyle = TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context)
+                              .getNavbarIconColor(
+                              ),
+                        );
+                      }
+                      return textStyle;
+                    }),
               ),
             ),
           ),
