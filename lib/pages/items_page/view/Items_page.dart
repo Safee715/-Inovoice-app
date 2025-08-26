@@ -132,29 +132,36 @@ class _ItemsPageState extends State<ItemsPage> {
           },
         ),
       ),
-      floatingActionButton: IconButton(
-        onPressed: () {
-          context
-              .read<ClientPageViewmodel>()
-              .clearControllers();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return AddItemsPage();
-              },
-            ),
-          );
-        },
-        icon: CustomIconWidget(
-          iconaddress:
-              itemsPageViewmodel.addButtonAddress,
-          height: 54,
-          weight: 54,
-        ),
-      ),
+      floatingActionButton: _buildFloatingActionButton(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.endDocked,
     );
   }
+
+  Widget _buildFloatingActionButton()
+  {
+    return IconButton(
+      onPressed: () {
+        context
+            .read<ClientPageViewmodel>()
+            .clearControllers();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AddItemsPage();
+            },
+          ),
+        );
+      },
+      icon: CustomIconWidget(
+        iconaddress:
+        itemsPageViewmodel.addButtonAddress,
+        height: 54,
+        weight: 54,
+      ),
+    );
+  }
+
+
 }

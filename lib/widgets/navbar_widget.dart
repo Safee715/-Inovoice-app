@@ -1,19 +1,11 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
-class NavbarWidget extends StatefulWidget {
+class NavbarWidget extends StatelessWidget {
   const NavbarWidget({super.key});
 
-  @override
-  State<NavbarWidget> createState() =>
-      _NavbarWidgetState();
-}
-
-class _NavbarWidgetState
-    extends State<NavbarWidget> {
   @override
   Widget build(BuildContext context) {
 

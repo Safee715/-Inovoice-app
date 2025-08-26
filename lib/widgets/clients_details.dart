@@ -14,6 +14,7 @@ class ClientsDetails extends StatefulWidget {
   final String name;
   final String email;
   final int id;
+
   @override
   State<ClientsDetails> createState() =>
       _ClientsDetailsState();
@@ -40,11 +41,11 @@ class _ClientsDetailsState
     }
     return initials;
   }
-  Constants constants=Constants();
+
+  Constants constants = Constants();
 
   @override
   Widget build(BuildContext context) {
-
     return ListTile(
       contentPadding: EdgeInsets.symmetric(
         vertical: 10.0,
@@ -53,15 +54,16 @@ class _ClientsDetailsState
       minLeadingWidth: 30,
       horizontalTitleGap: 5,
       dense: true,
-      tileColor:  Theme.of(context)
-          .getBottomContainerColor(),
+      tileColor: Theme.of(
+        context,
+      ).getBottomContainerColor(),
       shape: RoundedRectangleBorder(
         borderRadius:
             BorderRadiusGeometry.circular(10),
         side: BorderSide(
-          color:  Theme.of(context)
-              .getTextColor()
-              .withValues(alpha: 0.2),
+          color: Theme.of(
+            context,
+          ).getTextColor().withValues(alpha: 0.2),
         ),
       ),
       leading: CircleAvatar(
@@ -85,8 +87,9 @@ class _ClientsDetailsState
           Text(
             widget.name,
             style: TextStyle(
-              color:  Theme.of(context)
-                  .getTextColor(),
+              color: Theme.of(
+                context,
+              ).getTextColor(),
               fontWeight: FontWeight.w400,
               fontSize: 14,
             ),
@@ -100,7 +103,10 @@ class _ClientsDetailsState
           ),
         ],
       ),
-      trailing: ClientsMenuWidget(constants:constants ,id: widget.id),
+      trailing: ClientsMenuWidget(
+        constants: constants,
+        id: widget.id,
+      ),
     );
   }
 }

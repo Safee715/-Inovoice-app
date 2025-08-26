@@ -78,187 +78,177 @@ class _EditClient extends State<EditClient> {
             ),
             child: Column(
               children: [
-                CustomTextFields(
-                  labelText: editClientViewmodel
-                      .firstNameLabel,
-                  controller: editClientViewmodel
-                      .firstNameController,
-                  isMandatory: true,
-                  maxLength: 40,
-                  validator: (p0) =>
-                      clientPageViewmodel
-                          .nameValidator(p0),
-                  inputFormatter:
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[a-zA-Z- ]'),
-                      ),
-                ),
-                CustomTextFields(
-                  labelText: editClientViewmodel
-                      .lastNameLabel,
-                  controller: editClientViewmodel
-                      .lastNameController,
-                  isMandatory: true,
-                  validator: (p0) =>
-                      clientPageViewmodel
-                          .nameValidator(p0),
-                  inputFormatter:
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[a-zA-Z- ]'),
-                      ),
-                ),
-                CustomTextFields(
-                  labelText: editClientViewmodel
-                      .emailAddress,
-                  controller: editClientViewmodel
-                      .emailController,
-                  isMandatory: false,
-                  textInputType:
-                      TextInputType.emailAddress,
-                  maxLength: 70,
-                  validator: (p0) =>
-                      clientPageViewmodel
-                          .emailValidator(p0),
-                ),
-                CustomTextFields(
-                  labelText:
-                      editClientViewmodel.phoneNo,
-                  controller: editClientViewmodel
-                      .phoneController,
-                  isMandatory: true,
-                  textInputType:
-                      TextInputType.phone,
-                  maxLength: 11,
-                  inputFormatter:
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[0-9]+'),
-                      ),
-                ),
-                CustomTextFields(
-                  labelText:
-                      editClientViewmodel.address,
-                  controller: editClientViewmodel
-                      .addressController,
-                  isMandatory: false,
-                  textInputType:
-                      TextInputType.text,
-                  inputFormatter:
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[a-zA-Z- ]'),
-                      ),
-
-                  maxLength: 70,
-                ),
-
-                SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment
-                          .spaceBetween,
-                  children: [
-                    Text(
-                      editClientViewmodel
-                          .saveClientButtonText,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Biennale',
-                        color: Theme.of(
-                          context,
-                        ).getTextColor(),
-                      ),
-                    ),
-                  ],
-                ),
+                _buildCustomDetailsFields(clientPageViewmodel),
                 SizedBox(height: 20),
-                Container(
-                  width: context.getWidth(297),
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(
-                          5.0,
-                        ),
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF9CD9FF),
-                        Color(0xFF4082E3),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Colors.transparent,
-                          shadowColor:
-                              Colors.transparent,
-                        ),
-                    onPressed: () {
-                      if (editClientViewmodel
-                              .firstNameController
-                              .text
-                              .isEmpty ||
-                          editClientViewmodel
-                              .lastNameController
-                              .text
-                              .isEmpty ||
-                          editClientViewmodel
-                              .phoneController
-                              .text
-                              .isEmpty) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(
-                          SnackBar(
-                            content: Text(widget.constants!.snackBarText),
-                          ),
-                        );
-                      } else {
-                        clientPageViewmodel.editClient(
-                          widget.id,
-                          newFirstName:
-                              editClientViewmodel
-                                  .firstNameController
-                                  .text,
-                          newLastName:
-                              editClientViewmodel
-                                  .lastNameController
-                                  .text,
-                          newEmailAddress:
-                              editClientViewmodel
-                                  .emailController
-                                  .text,
-                          newPhoneNo:
-                              editClientViewmodel
-                                  .phoneController
-                                  .text,
-                          newAddress:
-                              editClientViewmodel
-                                  .addressController
-                                  .text,
-                        );
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text(
-                      editClientViewmodel
-                          .addButtonText,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
+                _buildSaveButton(clientPageViewmodel),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+  Widget _buildSaveButton(ClientPageViewmodel clientPageViewmodel)
+  {
+    return Container(
+      width: context.getWidth(297),
+      height: 40,
+      decoration: BoxDecoration(
+        borderRadius:
+        BorderRadius.circular(
+          5.0,
+        ),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF9CD9FF),
+            Color(0xFF4082E3),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: ElevatedButton(
+        style:
+        ElevatedButton.styleFrom(
+          backgroundColor:
+          Colors.transparent,
+          shadowColor:
+          Colors.transparent,
+        ),
+        onPressed: () {
+          if (editClientViewmodel
+              .firstNameController
+              .text
+              .isEmpty ||
+              editClientViewmodel
+                  .lastNameController
+                  .text
+                  .isEmpty ||
+              editClientViewmodel
+                  .phoneController
+                  .text
+                  .isEmpty) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(
+              SnackBar(
+                content: Text(widget.constants!.snackBarText),
+              ),
+            );
+          } else {
+            clientPageViewmodel.editClient(
+              widget.id,
+              newFirstName:
+              editClientViewmodel
+                  .firstNameController
+                  .text,
+              newLastName:
+              editClientViewmodel
+                  .lastNameController
+                  .text,
+              newEmailAddress:
+              editClientViewmodel
+                  .emailController
+                  .text,
+              newPhoneNo:
+              editClientViewmodel
+                  .phoneController
+                  .text,
+              newAddress:
+              editClientViewmodel
+                  .addressController
+                  .text,
+            );
+            Navigator.pop(context);
+          }
+        },
+        child: Text(
+          editClientViewmodel
+              .addButtonText,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight:
+            FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildCustomDetailsFields(ClientPageViewmodel clientPageViewmodel)
+  {
+    return Column(
+      children: [CustomTextFields(
+        labelText: editClientViewmodel
+            .firstNameLabel,
+        controller: editClientViewmodel
+            .firstNameController,
+        isMandatory: true,
+        maxLength: 40,
+        validator: (p0) =>
+            clientPageViewmodel
+                .nameValidator(p0),
+        inputFormatter:
+        FilteringTextInputFormatter.allow(
+          RegExp(r'[a-zA-Z- ]'),
+        ),
+      ),
+        CustomTextFields(
+          labelText: editClientViewmodel
+              .lastNameLabel,
+          controller: editClientViewmodel
+              .lastNameController,
+          isMandatory: true,
+          validator: (p0) =>
+              clientPageViewmodel
+                  .nameValidator(p0),
+          inputFormatter:
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[a-zA-Z- ]'),
+          ),
+        ),
+        CustomTextFields(
+          labelText: editClientViewmodel
+              .emailAddress,
+          controller: editClientViewmodel
+              .emailController,
+          isMandatory: false,
+          textInputType:
+          TextInputType.emailAddress,
+          maxLength: 70,
+          validator: (p0) =>
+              clientPageViewmodel
+                  .emailValidator(p0),
+        ),
+        CustomTextFields(
+          labelText:
+          editClientViewmodel.phoneNo,
+          controller: editClientViewmodel
+              .phoneController,
+          isMandatory: true,
+          textInputType:
+          TextInputType.phone,
+          maxLength: 11,
+          inputFormatter:
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[0-9]+'),
+          ),
+        ),
+        CustomTextFields(
+          labelText:
+          editClientViewmodel.address,
+          controller: editClientViewmodel
+              .addressController,
+          isMandatory: false,
+          textInputType:
+          TextInputType.text,
+          inputFormatter:
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[a-zA-Z- ]'),
+          ),
+
+          maxLength: 70,
+        ),],
     );
   }
 

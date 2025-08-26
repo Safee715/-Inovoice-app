@@ -70,198 +70,197 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      body: SafeArea(
-        top: false,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: context.getWidth(15),
-                  right: context.getWidth(15),
-                  bottom: context.getWidth(15),
-                ),
-                child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                      ),
-                      width: constraints.maxWidth,
-                      decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).getContainerColor(),
-                        borderRadius:
-                            BorderRadius.all(
-                              Radius.circular(28),
-                            ),
-                      ),
-                      child: Column(
-                        spacing: context.getWidth(
-                          10,
-                        ),
-                        mainAxisAlignment:
-                            MainAxisAlignment
-                                .start,
-                        children: [
-                          SizedBox(
-                            height: context
-                                .getWidth(10),
-                          ),
-                          ValueListenableBuilder(
-                            valueListenable:
-                                selected_widget_notifier,
-                            builder:
-                                (
-                                  context,
-                                  selected_widget,
-                                  child,
-                                ) {
-                                  return HomePageMenuWidgetsNavigation(
-                                    constants:
-                                        constants,
-                                  );
-                                },
-                          ),
-                          ValueListenableBuilder(
-                            valueListenable:
-                                selected_widget_notifier,
-                            builder:
-                                (
-                                  context,
-                                  selected_widget,
-                                  child,
-                                ) {
-                                  return viewmodel
-                                      .widgets
-                                      .elementAt(
-                                        selected_widget,
-                                      );
-                                },
-                          ),
-                        ],
+      body: _buildHomePageBody(viewmodel),
+    );
+  }
+
+  Widget _buildHomePageBody(HomePageViewmodel viewmodel )
+  {
+    return SafeArea(
+      top: false,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: context.getWidth(15),
+                right: context.getWidth(15),
+                bottom: context.getWidth(15),
+              ),
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                    ),
+                    width: constraints.maxWidth,
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).getContainerColor(),
+                      borderRadius:
+                      BorderRadius.all(
+                        Radius.circular(28),
                       ),
                     ),
-
-                    Row(
+                    child: Column(
+                      spacing: context.getWidth(
+                        10,
+                      ),
                       mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceBetween,
+                      MainAxisAlignment
+                          .start,
                       children: [
-                        Text(
-                          constants
-                              .recentInvoicesLabel,
-                          style: TextStyle(
-                            fontWeight:
-                                FontWeight.bold,
-                            fontSize: 24,
-                            color: Theme.of(
-                              context,
-                            ).getTextColor(),
-                          ),
+                        SizedBox(
+                          height: context
+                              .getWidth(10),
                         ),
-
-                        ElevatedButton.icon(
-                          onPressed: () {},
-                          iconAlignment:
-                              IconAlignment.end,
-                          style: ElevatedButton.styleFrom(
-                            padding:
-                                EdgeInsets.only(
-                                  left: 10,
-                                  right: 0,
-                                ),
-                            backgroundColor:
-                                Colors
-                                    .transparent,
-                            shadowColor: Colors
-                                .transparent,
-                          ),
-                          label: Text(
-                            constants
-                                .viewAllLabel,
-                            style: TextStyle(
-                              color: Color(
-                                0xff4F94FB,
-                              ),
-                              fontSize: 16,
-                            ),
-                          ),
-                          icon: Icon(
-                            Icons
-                                .arrow_forward_ios_rounded,
-                            size: 20,
-                            color: Color(
-                              0xff4F94FB,
-                            ),
-                          ),
+                        ValueListenableBuilder(
+                          valueListenable:
+                          selected_widget_notifier,
+                          builder:
+                              (
+                              context,
+                              selected_widget,
+                              child,
+                              ) {
+                            return HomePageMenuWidgetsNavigation(
+                              constants:
+                              constants,
+                            );
+                          },
+                        ),
+                        ValueListenableBuilder(
+                          valueListenable:
+                          selected_widget_notifier,
+                          builder:
+                              (
+                              context,
+                              selected_widget,
+                              child,
+                              ) {
+                            return viewmodel
+                                .widgets
+                                .elementAt(
+                              selected_widget,
+                            );
+                          },
                         ),
                       ],
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(
-                            horizontal: context
-                                .getWidth(20),
-                            vertical: context
-                                .getWidth(8),
-                          ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).getBottomContainerColor(),
-                        borderRadius:
-                            BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                      ),
-                      child: RecentInvoicesWidget(
-                        constant: constants,
-                      ),
-                    ),
-                    Text(
-                      constants.draftsLabel,
-                      style: TextStyle(
-                        fontWeight:
-                            FontWeight.bold,
-                        fontSize: 24,
-                        color: Theme.of(
-                          context,
-                        ).getTextColor(),
-                      ),
-                    ),
+                  ),
+                  _buildRecentInvoiceWidget(),
+                  _buildDraftsWidget(),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(
-                            horizontal: context
-                                .getWidth(20),
-                            vertical: context
-                                .getWidth(8),
-                          ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(
-                          context,
-                        ).getBottomContainerColor(),
-                        borderRadius:
-                            BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                      ),
-                      child: DraftsWidget(
-                        constants: constants,
-                      ),
-                    ),
-                  ],
+  Widget _buildRecentInvoiceWidget() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              constants.recentInvoicesLabel,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Theme.of(
+                  context,
+                ).getTextColor(),
+              ),
+            ),
+
+            ElevatedButton.icon(
+              onPressed: () {},
+              iconAlignment: IconAlignment.end,
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 0,
+                ),
+                backgroundColor:
+                    Colors.transparent,
+                shadowColor: Colors.transparent,
+              ),
+              label: Text(
+                constants.viewAllLabel,
+                style: TextStyle(
+                  color: Color(0xff4F94FB),
+                  fontSize: 16,
                 ),
               ),
-            );
-          },
+              icon: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 20,
+                color: Color(0xff4F94FB),
+              ),
+            ),
+          ],
         ),
-      ),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.getWidth(20),
+            vertical: context.getWidth(8),
+          ),
+          decoration: BoxDecoration(
+            color: Theme.of(
+              context,
+            ).getBottomContainerColor(),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          child: RecentInvoicesWidget(
+            constant: constants,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDraftsWidget() {
+    return Column(
+      crossAxisAlignment:
+          CrossAxisAlignment.start,
+      children: [
+        Text(
+          constants.draftsLabel,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Theme.of(
+              context,
+            ).getTextColor(),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.getWidth(20),
+            vertical: context.getWidth(8),
+          ),
+          decoration: BoxDecoration(
+            color: Theme.of(
+              context,
+            ).getBottomContainerColor(),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          child: DraftsWidget(
+            constants: constants,
+          ),
+        ),
+      ],
     );
   }
 }

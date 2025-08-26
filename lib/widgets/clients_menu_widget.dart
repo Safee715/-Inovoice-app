@@ -2,8 +2,8 @@ import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/client_view_details_page/view/client_view_details_page.dart';
 import 'package:DummyInvoice/pages/edit_details_page/view/edit_client.dart';
-import 'package:DummyInvoice/pages/view_details_page/view/view_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class _ClientsMenuWidgetState
             context,
             MaterialPageRoute(
               builder: (context) {
-                return ViewDetailsPage(
+                return ClientViewDetailsPage(
                   id: widget.id,
                 );
               },

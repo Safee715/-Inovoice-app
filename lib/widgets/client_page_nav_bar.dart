@@ -4,16 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 
-class ClientPageNavBar extends StatefulWidget {
+class ClientPageNavBar extends StatelessWidget {
   const ClientPageNavBar({super.key});
 
-  @override
-  State<ClientPageNavBar> createState() =>
-      _ClientPageNavBarState();
-}
-
-class _ClientPageNavBarState
-    extends State<ClientPageNavBar> {
   @override
   Widget build(BuildContext context) {
 
@@ -126,7 +119,8 @@ class _ClientPageNavBarState
                         );
                       }
                       return textStyle;
-                    }),
+                    }
+                    ),
               ),
             ),
           ),

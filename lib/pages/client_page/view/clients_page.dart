@@ -57,124 +57,131 @@ class _ClientsPageState
             ),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.only(
-            left: context.getWidth(15),
-            right: context.getWidth(15),
-          ),
-          child: ValueListenableBuilder(
-            valueListenable:
-                clientPageViewmodel.client,
-            builder: (context, clients, child) {
-              return ValueListenableBuilder(
-                valueListenable:
-                    clientPageViewmodel.client,
-                builder: (context, emails, child) {
-                  if (clients.isEmpty) {
-                    return Center(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .center,
-                          children: [
-                            CustomIconWidget(
-                              iconaddress:
-                                  'assets/images/icons/noDataIcon.svg',
-                              height:
-                                  context
-                                      .getWidth(
-                                        65,
-                                      ),
-                              weight:
-                                  context
-                                      .getWidth(
-                                        114,
-                                      ),
-                            ),
-                            Text(
-                              maxLines: 2,
-                              softWrap: true,
-                              'No Data Available!',
-                              style: TextStyle(
-                                color: Color(
-                                  0xffBEC0CC,
-                                ),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  } else {
-                    print(clients.length);
-                    return ListView.builder(
-                      itemCount: clients.length,
-                      itemBuilder: (context, index) {
-                        final bool isLast =
-                            index ==
-                            clients.length - 1;
-                        print('index==$index');
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            top: context
-                                .getWidth(5),
-                            bottom:
-                                context
-                                    .getWidth(
-                                      isLast
-                                          ? 50
-                                          : 5,
-                                    ),
-                          ),
-                          child: ClientsDetails(
-                            name:
-                                '${clientPageViewmodel.client.value.elementAt(index).firstName} ${clientPageViewmodel.client.value.elementAt(index).lastname}',
-                            email:
-                                clientPageViewmodel
-                                    .client
-                                    .value
-                                    .elementAt(
-                                      index,
-                                    )
-                                    .email,
-                            id: index,
-                          ),
-                        );
-                      },
-                    );
-                  }
-                },
-              );
-            },
-          ),
-        ),
-
-        floatingActionButton: IconButton(
-          onPressed: () {
-            context
-                .read<ClientPageViewmodel>()
-                .clearControllers();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return AddClientsPage();
-                },
-              ),
-            );
-          },
-          icon: CustomIconWidget(
-            iconaddress: clientPageViewmodel
-                .addButtonAddress,
-            height: 54,
-            weight: 54,
-          ),
-        ),
+        body: _buildBody(clientPageViewmodel),
+        floatingActionButton: _addClientButton(clientPageViewmodel),
         floatingActionButtonLocation:
             FloatingActionButtonLocation
                 .endDocked,
+      ),
+    );
+  }
+  Widget _buildBody(ClientPageViewmodel clientPageViewmodel)
+  {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: context.getWidth(15),
+        right: context.getWidth(15),
+      ),
+      child: ValueListenableBuilder(
+        valueListenable:
+        clientPageViewmodel.client,
+        builder: (context, clients, child) {
+          return ValueListenableBuilder(
+            valueListenable:
+            clientPageViewmodel.client,
+            builder: (context, emails, child) {
+              if (clients.isEmpty) {
+                return Center(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment:
+                      MainAxisAlignment
+                          .center,
+                      children: [
+                        CustomIconWidget(
+                          iconaddress:
+                          'assets/images/icons/noDataIcon.svg',
+                          height:
+                          context
+                              .getWidth(
+                            65,
+                          ),
+                          weight:
+                          context
+                              .getWidth(
+                            114,
+                          ),
+                        ),
+                        Text(
+                          maxLines: 2,
+                          softWrap: true,
+                          'No Data Available!',
+                          style: TextStyle(
+                            color: Color(
+                              0xffBEC0CC,
+                            ),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                print(clients.length);
+                return ListView.builder(
+                  itemCount: clients.length,
+                  itemBuilder: (context, index) {
+                    final bool isLast =
+                        index ==
+                            clients.length - 1;
+                    print('index==$index');
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: context
+                            .getWidth(5),
+                        bottom:
+                        context
+                            .getWidth(
+                          isLast
+                              ? 50
+                              : 5,
+                        ),
+                      ),
+                      child: ClientsDetails(
+                        name:
+                        '${clientPageViewmodel.client.value.elementAt(index).firstName} ${clientPageViewmodel.client.value.elementAt(index).lastname}',
+                        email:
+                        clientPageViewmodel
+                            .client
+                            .value
+                            .elementAt(
+                          index,
+                        )
+                            .email,
+                        id: index,
+                      ),
+                    );
+                  },
+                );
+              }
+            },
+          );
+        },
+      ),
+    );
+  }
+  Widget _addClientButton(ClientPageViewmodel clientPageViewmodel)
+  {
+    return IconButton(
+      onPressed: () {
+        context
+            .read<ClientPageViewmodel>()
+            .clearControllers();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AddClientsPage();
+            },
+          ),
+        );
+      },
+      icon: CustomIconWidget(
+        iconaddress: clientPageViewmodel
+            .addButtonAddress,
+        height: 54,
+        weight: 54,
       ),
     );
   }

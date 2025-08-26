@@ -97,121 +97,8 @@ class _ViewItemsDetailsState
               key: formKey,
               child: Column(
                 children: [
-                  CustomTextFields(
-                    labelText: addItemViewmodel
-                        .itemNameLabel,
-                    isMandatory: true,
-                    controller: editItemViewmodel
-                        .itemNameController,
-                    maxLength: 40,
-                    enabled: false,
-                    validator: (p0) =>
-                        itemsPageViewmodel
-                            .nameValidator(p0),
-                    inputFormatter:
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'[a-zA-Z0-9-]'),
-                        ),
-                  ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment
-                            .spaceBetween,
-                    children: [
-                      Expanded(
-                        child: CustomTextFields(
-                          labelText:
-                              addItemViewmodel
-                                  .itemPriceLabel,
-                          isMandatory: true,
-                          prefix: '\$',
-                          maxLength: 10,
-                          enabled: false,
-                          controller:
-                              editItemViewmodel
-                                  .itemPriceController,
-                          textInputType:
-                              TextInputType.phone,
-                          inputFormatter:
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9]'),
-                              ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context
-                            .getWidth(40),
-                      ),
-                      Expanded(
-                        child: CustomTextFields(
-                          labelText:
-                              addItemViewmodel
-                                  .itemCodeLabel,
-                          isMandatory: false,
-                          enabled: false,
-                          controller:
-                              editItemViewmodel
-                                  .itemCodeController,
-                          textInputType:
-                              TextInputType.phone,
-                          maxLength: 10,
-                        ),
-                      ),
-                    ],
-                  ),
+                  _buildTextFields(),
 
-                  CustomTextFields(
-                    labelText: addItemViewmodel
-                        .itemQuantityLabel,
-
-                    isMandatory: true,
-                    controller: editItemViewmodel
-                        .itemQuantityController,
-                    textInputType:
-                        TextInputType.phone,
-                    maxLength: 10,
-                    enabled: false,
-                    inputFormatter:
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'[0-9]+'),
-                        ),
-                  ),
-                  CustomTextFields(
-                    labelText: addItemViewmodel
-                        .itemCategoryLabel,
-
-                    isMandatory: false,
-                    controller: editItemViewmodel
-                        .itemCategoryController,
-                    textInputType:
-                        TextInputType.text,
-                    maxLength: 30,
-                    enabled: false,
-                    inputFormatter:
-                        FilteringTextInputFormatter.allow(
-                          RegExp(
-                            r'[a-zA-Z- 0-9]',
-                          ),
-                        ),
-                  ),
-                  CustomTextFields(
-                    labelText: addItemViewmodel
-                        .itemUnitLabel,
-                    isMandatory: false,
-                    enabled: false,
-                    controller: editItemViewmodel
-                        .itemUnitController,
-                    textInputType:
-                        TextInputType.text,
-                    maxLength: 20,
-                    inputFormatter:
-                        FilteringTextInputFormatter.allow(
-                          RegExp(
-                            r'[a-zA-Z- 0-9]',
-                          ),
-                        ),
-                  ),
-                  SizedBox(height: 30),
 
                   SizedBox(height: 20),
                 ],
@@ -220,6 +107,127 @@ class _ViewItemsDetailsState
           ),
         ),
       ),
+    );
+  }
+  Widget _buildTextFields()
+  {
+    return Column(
+       children: [
+         CustomTextFields(
+           labelText: addItemViewmodel
+               .itemNameLabel,
+           isMandatory: true,
+           controller: editItemViewmodel
+               .itemNameController,
+           maxLength: 40,
+           enabled: false,
+           validator: (p0) =>
+               itemsPageViewmodel
+                   .nameValidator(p0),
+           inputFormatter:
+           FilteringTextInputFormatter.allow(
+             RegExp(r'[a-zA-Z0-9-]'),
+           ),
+         ),
+         Row(
+           mainAxisAlignment:
+           MainAxisAlignment
+               .spaceBetween,
+           children: [
+             Expanded(
+               child: CustomTextFields(
+                 labelText:
+                 addItemViewmodel
+                     .itemPriceLabel,
+                 isMandatory: true,
+                 prefix: '\$',
+                 maxLength: 10,
+                 enabled: false,
+                 controller:
+                 editItemViewmodel
+                     .itemPriceController,
+                 textInputType:
+                 TextInputType.phone,
+                 inputFormatter:
+                 FilteringTextInputFormatter.allow(
+                   RegExp(r'[0-9]'),
+                 ),
+               ),
+             ),
+             SizedBox(
+               width: context
+                   .getWidth(40),
+             ),
+             Expanded(
+               child: CustomTextFields(
+                 labelText:
+                 addItemViewmodel
+                     .itemCodeLabel,
+                 isMandatory: false,
+                 enabled: false,
+                 controller:
+                 editItemViewmodel
+                     .itemCodeController,
+                 textInputType:
+                 TextInputType.phone,
+                 maxLength: 10,
+               ),
+             ),
+           ],
+         ),
+
+         CustomTextFields(
+           labelText: addItemViewmodel
+               .itemQuantityLabel,
+
+           isMandatory: true,
+           controller: editItemViewmodel
+               .itemQuantityController,
+           textInputType:
+           TextInputType.phone,
+           maxLength: 10,
+           enabled: false,
+           inputFormatter:
+           FilteringTextInputFormatter.allow(
+             RegExp(r'[0-9]+'),
+           ),
+         ),
+         CustomTextFields(
+           labelText: addItemViewmodel
+               .itemCategoryLabel,
+
+           isMandatory: false,
+           controller: editItemViewmodel
+               .itemCategoryController,
+           textInputType:
+           TextInputType.text,
+           maxLength: 30,
+           enabled: false,
+           inputFormatter:
+           FilteringTextInputFormatter.allow(
+             RegExp(
+               r'[a-zA-Z- 0-9]',
+             ),
+           ),
+         ),
+         CustomTextFields(
+           labelText: addItemViewmodel
+               .itemUnitLabel,
+           isMandatory: false,
+           enabled: false,
+           controller: editItemViewmodel
+               .itemUnitController,
+           textInputType:
+           TextInputType.text,
+           maxLength: 20,
+           inputFormatter:
+           FilteringTextInputFormatter.allow(
+             RegExp(
+               r'[a-zA-Z- 0-9]',
+             ),
+           ),
+         ),
+       ],
     );
   }
 }

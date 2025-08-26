@@ -1,23 +1,23 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
-import 'package:DummyInvoice/pages/view_details_page/viewmodel/view_details_viewmodel.dart';
+import 'package:DummyInvoice/pages/client_view_details_page/viewmodel/view_details_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ViewDetailsPage extends StatefulWidget {
-  const ViewDetailsPage({
+class ClientViewDetailsPage extends StatefulWidget {
+  const ClientViewDetailsPage({
     super.key,
     required this.id,
   });
   final int  id;
   @override
-  State<ViewDetailsPage> createState() =>
-      _ViewDetailsPageState();
+  State<ClientViewDetailsPage> createState() =>
+      _ClientViewDetailsPageState();
 }
 
-class _ViewDetailsPageState
-    extends State<ViewDetailsPage> {
+class _ClientViewDetailsPageState
+    extends State<ClientViewDetailsPage> {
   late ViewDetailsViewmodel viewDetailsViewmodel;
 
 
@@ -82,53 +82,59 @@ class _ViewDetailsPageState
             ),
             child: Column(
               children: [
-                CustomTextFields(
-                  labelText: viewDetailsViewmodel
-                      .firstNameLabel,
-                  controller: viewDetailsViewmodel
-                      .firstNameController,
-                  isMandatory: true,
-                  enabled: false,
-                ),
-                CustomTextFields(
-                  labelText: viewDetailsViewmodel
-                      .lastNameLabel,
-                  controller: viewDetailsViewmodel
-                      .lastNameController,
-                  isMandatory: true,
-                  enabled: false,
-                ),
-                CustomTextFields(
-                  labelText: viewDetailsViewmodel
-                      .emailAddress,
-                  controller: viewDetailsViewmodel
-                      .emailController,
-                  isMandatory: false,
-                  enabled: false,
-                ),
-                CustomTextFields(
-                  labelText: viewDetailsViewmodel
-                      .phoneNo,
-                  controller: viewDetailsViewmodel
-                      .phoneController,
-                  isMandatory: true,
-                  enabled: false,
-                ),
-                CustomTextFields(
-                  labelText: viewDetailsViewmodel
-                      .address,
-                  controller: viewDetailsViewmodel
-                      .addressController,
-                  isMandatory: false,
-                  enabled: false,
-                ),
-
+                _buildCustomTextFields(),
                 SizedBox(height: 30),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+  Widget _buildCustomTextFields()
+  {
+    return Column(
+      children: [ CustomTextFields(
+        labelText: viewDetailsViewmodel
+            .firstNameLabel,
+        controller: viewDetailsViewmodel
+            .firstNameController,
+        isMandatory: true,
+        enabled: false,
+      ),
+        CustomTextFields(
+          labelText: viewDetailsViewmodel
+              .lastNameLabel,
+          controller: viewDetailsViewmodel
+              .lastNameController,
+          isMandatory: true,
+          enabled: false,
+        ),
+        CustomTextFields(
+          labelText: viewDetailsViewmodel
+              .emailAddress,
+          controller: viewDetailsViewmodel
+              .emailController,
+          isMandatory: false,
+          enabled: false,
+        ),
+        CustomTextFields(
+          labelText: viewDetailsViewmodel
+              .phoneNo,
+          controller: viewDetailsViewmodel
+              .phoneController,
+          isMandatory: true,
+          enabled: false,
+        ),
+        CustomTextFields(
+          labelText: viewDetailsViewmodel
+              .address,
+          controller: viewDetailsViewmodel
+              .addressController,
+          isMandatory: false,
+          enabled: false,
+        ),
+      ],
     );
   }
 }
