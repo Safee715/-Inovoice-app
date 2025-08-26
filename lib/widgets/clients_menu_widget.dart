@@ -6,17 +6,19 @@ import 'package:DummyInvoice/pages/client_view_details_page/view/client_view_det
 import 'package:DummyInvoice/pages/edit_details_page/view/edit_client.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
-import 'package:provider/provider.dart';
 
 class ClientsMenuWidget extends StatefulWidget {
   const ClientsMenuWidget({
     super.key,
     required this.id,
     required this.constants,
+    required this.clientPageViewmodel,
 
   });
   final int id;
   final Constants constants;
+  final ClientPageViewmodel clientPageViewmodel;
+
   @override
   State<ClientsMenuWidget> createState() =>
       _ClientsMenuWidgetState();
@@ -24,11 +26,11 @@ class ClientsMenuWidget extends StatefulWidget {
 
 class _ClientsMenuWidgetState
     extends State<ClientsMenuWidget> {
+
   @override
   Widget build(BuildContext context) {
 
-    final clientPageViewmodel = context
-        .watch<ClientPageViewmodel>();
+
 
     return PopupMenuButton(
       onSelected: (value) {
@@ -38,7 +40,8 @@ class _ClientsMenuWidgetState
             context,
             MaterialPageRoute(
               builder: (context) {
-                return EditClient(id: widget.id);
+                return EditClient(id: widget.id,
+                  clientPageViewmodel: widget.clientPageViewmodel,);
               },
             ),
           );
@@ -49,12 +52,13 @@ class _ClientsMenuWidgetState
               builder: (context) {
                 return ClientViewDetailsPage(
                   id: widget.id,
+                  clientPageViewmodel: widget.clientPageViewmodel,
                 );
               },
             ),
           );
         } else if (value == 2) {
-          return clientPageViewmodel
+          return widget.clientPageViewmodel
               .delete_Client(widget.id);
         }
       },

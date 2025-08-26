@@ -1,49 +1,17 @@
-import 'dart:convert';
-
 import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/pages/client_page/model/clients_page_model.dart';
+import 'package:DummyInvoice/pages/client_page/repo/clients_page_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-class Client {
-  String firstName;
-  String lastname;
-  String email;
-  String phoneNo;
-  String address;
-  Client({
-    required this.firstName,
-    required this.lastname,
-    required this.email,
-    required this.phoneNo,
-    required this.address,
-  });
-
-  Map<String, dynamic> toJson() => {
-    'firstName': firstName,
-    'lastname': lastname,
-    'email': email,
-    'phoneNo': phoneNo,
-    'address': address,
-  };
-  factory Client.fromJson(
-    Map<String, dynamic> json,
-  ) => Client(
-    firstName: json['firstName'] as String,
-    lastname: json['lastname'] as String,
-    email: json['email'] as String,
-    phoneNo: json['phoneNo'] as String,
-    address: json['address'] as String,
-  );
-}
 
 class ClientPageViewmodel extends ChangeNotifier {
-  ClientPageViewmodel({this.context}) {
-    getClients();
-  }
+  ClientPageViewmodel(
+    this.context,
+      this.clientsPageRepo,
+  );
   final context;
-
+  final  ClientsPageRepo clientsPageRepo;
   ValueNotifier<List<Client>> client =
-      ValueNotifier([]);
+      ValueNotifier<List<Client>>([]);
   final TextEditingController
   firstNameController = TextEditingController();
   final TextEditingController lastNameController =
@@ -55,145 +23,58 @@ class ClientPageViewmodel extends ChangeNotifier {
   final TextEditingController addressController =
       TextEditingController();
 
-  void saveClient(
-    List<Client> clientObject,
-  ) async {
-    final SharedPreferences prefs =
-        await SharedPreferences.getInstance();
-    List<String> clientString = clientObject
-        .map((e) => jsonEncode(e.toJson()))
-        .toList();
-    List<String> savedStrings =
-        prefs.getStringList('client') ?? [];
-    List<String> updatedList =
-        savedStrings + clientString;
-    await prefs.setStringList(
-      'client',
-      updatedList,
+  void addClient() async {
+    await clientsPageRepo.openDb();
+    await clientsPageRepo.insertClient(
+      Client(
+        firstName: firstNameController.text,
+        lastname: lastNameController.text,
+        email: emailController.text,
+        phoneNo: phoneController.text,
+        address: addressController.text,
+      ),
     );
-    List<Client> savedObjects = updatedList
-        .map(
-          (str) => Client.fromJson(
-            jsonDecode(str)
-                as Map<String, dynamic>,
-          ),
-        )
-        .toList();
-
-    client.value = savedObjects;
 
     notifyListeners();
   }
 
   void getClients() async {
-    final SharedPreferences prefs =
-        await SharedPreferences.getInstance();
-    List<String> stringLists =
-        prefs.getStringList('client') ?? [];
-    List<Client> savedClients = stringLists
-        .map(
-          (e) => Client.fromJson(
-            jsonDecode(e) as Map<String, dynamic>,
-          ),
-        )
-        .toList();
-
-    client.value = List.from(savedClients);
-    notifyListeners();
+    await clientsPageRepo.openDb();
+client.value=await clientsPageRepo.getAllClients();
   }
 
   void delete_Client(int id) async {
-    final SharedPreferences prefs =
-        await SharedPreferences.getInstance();
-    List<String> savedStrings =
-        prefs.getStringList('client') ?? [];
-    savedStrings.removeAt(id);
-    prefs.setStringList('client', savedStrings);
-    List<Client> listOfClients = savedStrings
-        .map(
-          (e) => Client.fromJson(
-            jsonDecode(e) as Map<String, dynamic>,
-          ),
-        )
-        .toList();
-    client.value = List.from(listOfClients);
-    notifyListeners();
-  }
-
-  Future<void> addClient() async {
-    final SharedPreferences prefs =
-        await SharedPreferences.getInstance();
-    final first = firstNameController.text.trim();
-    final last = lastNameController.text.trim();
-    final email = emailController.text.trim();
-    final phone = phoneController.text.trim();
-    final address = addressController.text.trim();
-
-    final savedStrings =
-        prefs.getStringList('client') ?? [];
-
-    final savedClients = savedStrings
-        .map(
-          (e) => Client.fromJson(
-            jsonDecode(e) as Map<String, dynamic>,
-          ),
-        )
-        .toList();
-    savedClients.add(
-      Client(
-        firstName: first,
-        lastname: last,
-        email: email,
-        phoneNo: phone,
-        address: address,
-      ),
-    );
-
-    client.value = List.from(savedClients);
-    List<String> newList = savedClients
-        .map((e) => jsonEncode(e.toJson()))
-        .toList();
-    prefs.setStringList('client', newList);
-
+    await clientsPageRepo.openDb();
+    clientsPageRepo.deleteClient(id);
     notifyListeners();
   }
 
   Future<void> editClient(
     int id, {
-    required  String newFirstName,
-    required  String newLastName,
-    required  String newEmailAddress,
-    required  String newPhoneNo,
-    required  String newAddress,
+    required String newFirstName,
+    required String newLastName,
+    required String newEmailAddress,
+    required String newPhoneNo,
+    required String newAddress,
   }) async {
-    final SharedPreferences prefs =
-        await SharedPreferences.getInstance();
-    final savedStrings =
-        prefs.getStringList('client') ?? [];
-
-    List<Client> savedClients = savedStrings
-        .map(
-          (e) => Client.fromJson(
-            jsonDecode(e) as Map<String, dynamic>,
-          ),
-        )
-        .toList();
-    savedClients.elementAt(id).firstName =
-        newFirstName;
-    savedClients.elementAt(id).lastname =
-        newLastName;
-    savedClients.elementAt(id).email =
-        newEmailAddress;
-    savedClients.elementAt(id).address =
-        newAddress;
-    savedClients.elementAt(id).phoneNo =
-        newPhoneNo;
-    List<String> newStrings = savedClients
-        .map((e) => jsonEncode(e.toJson()))
-        .toList();
-    prefs.setStringList('client', newStrings);
-    client.value = List.from(savedClients);
-
+    await clientsPageRepo.openDb();
+    await clientsPageRepo.updateClient(
+      Client(id: id,
+        firstName: newFirstName,
+        lastname: newLastName,
+        email: newEmailAddress,
+        phoneNo: newPhoneNo,
+        address: newAddress,
+      ),
+    );
+    client.value[id]=Client(
+      id: id,
+        firstName: newFirstName,
+        lastname: newLastName,
+        email: newEmailAddress,
+        phoneNo: newPhoneNo,
+        address: newAddress);
+    client.value=[...client.value];
     clearControllers();
     notifyListeners();
   }
@@ -206,8 +87,8 @@ class ClientPageViewmodel extends ChangeNotifier {
     addressController.clear();
   }
 
-  final addButtonAddress =
-      'assets/images/icons/addclients.svg';
+
+
   void backButtonFunction() {
     selected_page_notifier.value = 0;
   }

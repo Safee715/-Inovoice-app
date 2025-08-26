@@ -5,16 +5,17 @@ import 'package:DummyInvoice/pages/edit_details_page/viewmodel/edit_client_viewm
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class EditClient extends StatefulWidget {
   const EditClient({super.key,
     required this.id,
-    this.constants
+    this.constants,
+    required this.clientPageViewmodel,
   });
 
   final int id;
   final Constants ?constants;
+  final ClientPageViewmodel clientPageViewmodel;
 
   @override
   State<EditClient> createState() =>
@@ -22,29 +23,24 @@ class EditClient extends StatefulWidget {
 }
 
 class _EditClient extends State<EditClient> {
-  late final EditClientViewmodel
-  editClientViewmodel;
-
+  late  EditClientViewmodel editClientViewmodel;
   @override
   void initState() {
     super.initState();
-    editClientViewmodel = EditClientViewmodel();
+
+    editClientViewmodel = EditClientViewmodel(id: widget.id);
     WidgetsBinding.instance.addPostFrameCallback((
       _,
-    ) {
-      final clientPageViewmodel = context
-          .read<ClientPageViewmodel>();
+    )async {
       editClientViewmodel.getControllerText(
-        clientPageViewmodel,
-        widget.id,
+       widget.clientPageViewmodel,
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final clientPageViewmodel = context
-        .watch<ClientPageViewmodel>();
+
 
     return Scaffold(
       appBar: AppBar(
@@ -78,9 +74,9 @@ class _EditClient extends State<EditClient> {
             ),
             child: Column(
               children: [
-                _buildCustomDetailsFields(clientPageViewmodel),
+                _buildCustomDetailsFields(widget.clientPageViewmodel),
                 SizedBox(height: 20),
-                _buildSaveButton(clientPageViewmodel),
+                _buildSaveButton(widget.clientPageViewmodel),
               ],
             ),
           ),

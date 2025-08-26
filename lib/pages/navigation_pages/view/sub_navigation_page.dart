@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 
 class SubNavigationPage extends StatefulWidget {
-  const SubNavigationPage({super.key});
+  const SubNavigationPage({super.key,
+  });
 
   @override
   State<SubNavigationPage> createState() =>
@@ -14,9 +15,9 @@ class SubNavigationPage extends StatefulWidget {
 
 class _SubNavigationPageState
     extends State<SubNavigationPage> {
-  NavigationPageViewModel
-  navigationPageViewModel =
-      NavigationPageViewModel();
+ NavigationPageViewModel navigationPageViewModel=NavigationPageViewModel();
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 
 class EditItemViewmodel {
   EditItemViewmodel({required this.id});
+  final id;
+
   final appBarTitle = 'Edit Item';
   final itemNameLabel = 'Item Name';
   final itemPriceLabel = 'Item Price';
@@ -18,7 +20,6 @@ class EditItemViewmodel {
   final itemUnit = 'Enter Item Unit';
   final addButtonText = 'Add Item';
 
-  final id;
   final TextEditingController itemNameController =
       TextEditingController();
   final TextEditingController

@@ -1,30 +1,29 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => ClientPageViewmodel(),
-        ),
-      ],
-      child: const Myapp(),
-    ),
+
+      const Myapp(),
+
   );
 }
 
-class Myapp extends StatelessWidget {
+class Myapp extends StatefulWidget {
   const Myapp({super.key});
+
+  @override
+  State<Myapp> createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+
 
   @override
   Widget build(BuildContext context) {
     final Constants constants=Constants();
-
 
     return MaterialApp(
       theme: ThemeData(
@@ -82,7 +81,7 @@ class Myapp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MainNavigationPage(constant:  constants,),
+      home: MainNavigationPage(constant: constants,),
       themeMode: ThemeMode.system,
     );
   }

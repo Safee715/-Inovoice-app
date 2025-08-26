@@ -3,14 +3,16 @@ import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.d
 import 'package:DummyInvoice/pages/client_view_details_page/viewmodel/view_details_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ClientViewDetailsPage extends StatefulWidget {
   const ClientViewDetailsPage({
     super.key,
     required this.id,
+    required this.clientPageViewmodel,
   });
   final int  id;
+  final ClientPageViewmodel clientPageViewmodel;
+
   @override
   State<ClientViewDetailsPage> createState() =>
       _ClientViewDetailsPageState();
@@ -18,19 +20,23 @@ class ClientViewDetailsPage extends StatefulWidget {
 
 class _ClientViewDetailsPageState
     extends State<ClientViewDetailsPage> {
-  late ViewDetailsViewmodel viewDetailsViewmodel;
 
+  late ViewDetailsViewmodel viewDetailsViewmodel;
 
   @override
   void initState() {
     super.initState();
-    viewDetailsViewmodel = ViewDetailsViewmodel();
-    final clientPageViewmodel = context
-        .read<ClientPageViewmodel>();
-    viewDetailsViewmodel.getControllerText(
-      clientPageViewmodel,
-      widget.id,
-    );
+    viewDetailsViewmodel = ViewDetailsViewmodel(id: widget.id);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async{
+       viewDetailsViewmodel.getControllerText(
+        widget.clientPageViewmodel,
+      );
+       setState(() {
+
+       });
+    },);
+
   }
 
   @override

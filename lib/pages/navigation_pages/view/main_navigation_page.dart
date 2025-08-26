@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 
 class MainNavigationPage extends StatefulWidget {
-  const MainNavigationPage({super.key,required this.constant});
+  const MainNavigationPage({super.key,
+    required this.constant,
+  });
 final Constants constant;
+
+
   @override
   State<MainNavigationPage> createState() =>
       _MainNavigationPageState();
@@ -14,9 +18,7 @@ final Constants constant;
 
 class _MainNavigationPageState
     extends State<MainNavigationPage> {
-  NavigationPageViewModel
-  navigationPageViewModel =
-      NavigationPageViewModel();
+  NavigationPageViewModel navigationPageViewModel =NavigationPageViewModel();
 
   @override
   Widget build(BuildContext context) {

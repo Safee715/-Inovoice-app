@@ -60,31 +60,7 @@ class ItemPageRepository {
     );
   }
 
-  Future<Item?> getItem(int id) async {
-    final dbClient = await database;
 
-    List<Map> maps = await dbClient.query(
-      tableName,
-      columns: [
-        columnId,
-        columnItemName,
-        columnItemPrice,
-        columnItemCode,
-        columnItemQuantity,
-        columnItemCategory,
-        columnItemUnit,
-      ],
-      where: '$columnId=?',
-      whereArgs: [id],
-    );
-    if (maps.length > 0) {
-      return Item.fromMap(
-        maps.first as Map<String, Object?>,
-      );
-    } else {
-      return null;
-    }
-  }
 
   Future<int> deleteItem(int id) async {
     final dbClient = await database;

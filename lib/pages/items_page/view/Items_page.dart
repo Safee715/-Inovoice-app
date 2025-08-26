@@ -2,14 +2,12 @@ import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/add_items_page/view/add_items_page.dart';
-import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/pages/items_page/Widgets/item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
-import 'package:provider/provider.dart';
 
 class ItemsPage extends StatefulWidget {
   ItemsPage({super.key,this.constants});
@@ -142,9 +140,6 @@ class _ItemsPageState extends State<ItemsPage> {
   {
     return IconButton(
       onPressed: () {
-        context
-            .read<ClientPageViewmodel>()
-            .clearControllers();
         Navigator.push(
           context,
           MaterialPageRoute(

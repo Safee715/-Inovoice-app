@@ -9,10 +9,11 @@ import 'package:DummyInvoice/pages/client_page/view/clients_page.dart';
 import 'package:DummyInvoice/pages/templates_page/view/template_page.dart';
 
 class NavigationPageViewModel {
+
   final Constants constants=Constants();
   List<Widget>get pages => [
     HomePage(),
-    SubNavigationPage(),
+    SubNavigationPage( ),
     AddClientsPage(),
     ItemsPage(constants: constants,),
     ProfilePage(constants: constants,),
