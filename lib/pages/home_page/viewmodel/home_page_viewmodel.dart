@@ -7,10 +7,13 @@ import 'package:DummyInvoice/pages/home_page/widgets/pie_chart_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 
-class HomePageViewmodel {
+class HomePageViewmodel extends ChangeNotifier{
   HomePageViewmodel({required this.context,
     required this.constant
-  });
+  }){
+    setData1();
+    setData2();
+  }
 
   final BuildContext context;
   final Constants constant;
@@ -65,36 +68,52 @@ class HomePageViewmodel {
 
   //Bar chart data
 
-  List<double> data1 = [
-    370000,
-    375000,
-    350000,
-    250000,
-    300000,
-    200000,
-    330000,
-    350000,
-    320000,
-    280000,
-    380000,
-    400000,
+  List<double> _data1=[] ;
+  List<double> _data2 = [];
+  List<double> getData1()
+  {
+    return _data1;
+  }
+  List<double> getData2()
+  {
+    return _data2;
+  }
+  void setData1(){
+    _data1 = [
+      370000,
+      375000,
+      350000,
+      250000,
+      300000,
+      200000,
+      330000,
+      350000,
+      320000,
+      280000,
+      380000,
+      400000,
 
-  ];
-  List<double> data2 = [
-    370070,
-    375000,
-    350000,
-    400000,
-    300000,
-    200000,
-    330000,
-    350000,
-    320000,
-    580000,
-    780000,
-    400000,
-  ];
-  List<String> months = [
+    ];
+
+  }
+  void setData2(){
+    _data2 = [
+      370070,
+      375000,
+      350000,
+      400000,
+      300000,
+      200000,
+      330000,
+      350000,
+      320000,
+      580000,
+      780000,
+      400000,
+    ];
+  }
+
+  List<String> _months = [
     LanguageManager.translate('Jan'),
     LanguageManager.translate('Feb'),
     LanguageManager.translate('Mar'),
@@ -283,11 +302,11 @@ class HomePageViewmodel {
   ) {
     double gap = barGap();
     double barWidth = getBarWidth(data, width);
-    for (int i = 1; i <= months.length; i += 2) {
+    for (int i = 1; i <= _months.length; i += 2) {
       final textPainter = TextPainter(
         textDirection: TextDirection.ltr,
         text: TextSpan(
-          text: months[i],
+          text: _months[i],
           style: TextStyle(
             fontSize: 12,
             fontFamily: 'Biennale',

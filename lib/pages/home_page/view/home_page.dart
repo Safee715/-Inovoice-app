@@ -12,6 +12,7 @@ import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart'
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/drafts_widget.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/recent_invoices_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,55 +31,55 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final HomePageViewmodel viewmodel =
-        HomePageViewmodel(
-          context: context,
-          constant: constants,
-        );
 
-    return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0.0,
-        centerTitle: false,
-        titleSpacing: 0,
-        backgroundColor: Theme.of(
-          context,
-        ).getBackColor(),
-        title: Text(
-          constants.homePageAppBarTitle,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(
-              context,
-            ).getTextColor(),
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: CustomIconWidget(
-            iconaddress: Assets.menuButtonAddress,
-            height: 24,
-            weight: 24,
-            color: Theme.of(
-              context,
-            ).getTextColor(),
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CustomIconWidget(
-              iconaddress: Theme.of(
+    return Consumer<HomePageViewmodel>(
+      builder: (ctx, viewmodel, child) {
+
+      return Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0.0,
+          centerTitle: false,
+          titleSpacing: 0,
+          backgroundColor: Theme.of(
+            context,
+          ).getBackColor(),
+          title: Text(
+            constants.homePageAppBarTitle,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(
                 context,
-              ).getNotificationIcon(),
-              height: 24,
-              weight: 24,
+              ).getTextColor(),
             ),
           ),
-        ],
-      ),
-
-      body: _buildHomePageBody(viewmodel),
+          leading: IconButton(
+            onPressed: () {},
+            icon: CustomIconWidget(
+              iconaddress: Assets.menuButtonAddress,
+              height: 24,
+              weight: 24,
+              color: Theme.of(
+                context,
+              ).getTextColor(),
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: CustomIconWidget(
+                iconaddress: Theme.of(
+                  context,
+                ).getNotificationIcon(),
+                height: 24,
+                weight: 24,
+              ),
+            ),
+          ],
+        ),
+      
+        body: _buildHomePageBody(viewmodel),
+      );
+      },
     );
   }
 

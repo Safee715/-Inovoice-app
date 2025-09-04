@@ -4,8 +4,8 @@ import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart'
 import 'package:DummyInvoice/pages/home_page/widgets/draw_bars.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-int selected_key = 0;
 
 class BarChartsWidget extends StatefulWidget {
   const BarChartsWidget({
@@ -20,11 +20,12 @@ final Constants constants;
 
 class _BarChartsWidgetState
     extends State<BarChartsWidget> {
+  int selected_key = 0;
+
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel =
-        HomePageViewmodel(constant:widget.constants ,
-            context: context);
+    final  homePageViewmodel =context.watch<HomePageViewmodel>();
+
 
     return Container(
       child: Column(
@@ -139,9 +140,9 @@ class _BarChartsWidgetState
                         selected_key:selected_key,
                         data: selected_key == 0
                             ? homePageViewmodel
-                                  .data1
+                                  .getData1()
                             : homePageViewmodel
-                                  .data2,
+                                  .getData2(),
 
 
                       ),

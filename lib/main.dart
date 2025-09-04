@@ -2,10 +2,11 @@ import 'dart:ui' ;
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
+import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/onboardingScreens/onboarding_page1.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:provider/provider.dart';
 String deviceLang=PlatformDispatcher.instance.locale.languageCode;
 bool isRtl()
 {
@@ -15,8 +16,15 @@ bool isRtl()
 
 void main() {
 LanguageManager.init(deviceLang);
+Constants constants=Constants();
   runApp(
-      const Myapp(),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => HomePageViewmodel(context: context, constant: constants),)
+      // ChangeNotifierProvider(create: (context) => HomePageViewmodel(context: context, constant: constants),)
+    ],
+      child:  const Myapp(),
+    )
+
 
   );
 }
@@ -33,7 +41,6 @@ class _MyappState extends State<Myapp> {
 
   @override
   Widget build(BuildContext context) {
-    final Constants constants=Constants(context: context);
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Theme.of(context)
@@ -91,12 +98,7 @@ class _MyappState extends State<Myapp> {
       ),
       debugShowCheckedModeBanner: false,
       home: OnboardingPage1(),
-      // Builder(
-      //   builder: (context) {
-      //     return Directionality(textDirection: isRtl()?TextDirection.rtl:TextDirection.ltr,
-      //         child: MainNavigationPage(constant: constants,));
-      //   }
-      // ),
+
       themeMode: ThemeMode.system,
     );
   }
