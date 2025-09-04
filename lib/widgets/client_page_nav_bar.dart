@@ -1,5 +1,6 @@
 import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
@@ -45,7 +46,7 @@ class ClientPageNavBar extends StatelessWidget {
                       height: 18,
                       weight: 18,
                     ),
-                    label: 'Templates',
+                      label: LanguageManager.translate('templates'),
                     icon: CustomIconWidget(
                       iconaddress:
                       Assets.TemplateIconUnSelected,
@@ -64,7 +65,7 @@ class ClientPageNavBar extends StatelessWidget {
                       weight: 24,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Clients',
+                    label: LanguageManager.translate('Clients'),
                     icon: CustomIconWidget(
                       iconaddress:
                       Assets.ClientsIconUnSelected,                      height: 24,
@@ -79,7 +80,7 @@ class ClientPageNavBar extends StatelessWidget {
                       Icons.shopping_cart_rounded,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Items',
+                    label: LanguageManager.translate('Items'),
                     icon: CustomIconWidget(
                       iconaddress:
                       Assets.ItemsIconUnSelected,                      height: 24,

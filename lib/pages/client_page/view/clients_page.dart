@@ -1,4 +1,5 @@
 import 'package:DummyInvoice/data/helpers/assets.dart';
+import 'package:DummyInvoice/data/helpers/common_functions.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/add_clients_page/view/add_clients_page.dart';
@@ -18,8 +19,9 @@ class ClientsPage extends StatefulWidget {
 
 class _ClientsPageState
     extends State<ClientsPage> {
-  Constants constants=Constants();
+  Constants constants = Constants();
   late ClientPageViewmodel clientPageViewmodel;
+  CommonFunctions commonFunctions=CommonFunctions();
   ClientsPageRepo clientsPageRepo =
       ClientsPageRepo();
 
@@ -47,9 +49,9 @@ class _ClientsPageState
           ).getBackColor(),
           centerTitle: false,
           leading: IconButton(
-            onPressed: () {
-              clientPageViewmodel
-                  .backButtonFunction();
+            onPressed: ()
+            {
+              commonFunctions.backButtonForSubNavigationPages(context);
             },
             icon: CustomIconWidget(
               iconaddress: Theme.of(context)
@@ -109,7 +111,7 @@ class _ClientsPageState
                       children: [
                         CustomIconWidget(
                           iconaddress:
-                        Assets.NoDataIcon,
+                              Assets.NoDataIcon,
                           height: context
                               .getWidth(65),
                           weight: context
@@ -118,7 +120,8 @@ class _ClientsPageState
                         Text(
                           maxLines: 2,
                           softWrap: true,
-                          constants.noDataAvailableText,
+                          constants
+                              .noDataAvailableText,
                           style: TextStyle(
                             color: Color(
                               0xffBEC0CC,
@@ -135,7 +138,7 @@ class _ClientsPageState
                 return ListView.builder(
                   itemCount: clients.length,
                   itemBuilder: (context, index) {
-                    final bool isLast =
+                  final bool isLast =
                         index ==
                         clients.length - 1;
                     print('index==$index');
@@ -184,8 +187,7 @@ class _ClientsPageState
         );
       },
       icon: CustomIconWidget(
-        iconaddress:
-            Assets.addButtonAddress,
+        iconaddress: Assets.addButtonAddress,
         height: 54,
         weight: 54,
       ),

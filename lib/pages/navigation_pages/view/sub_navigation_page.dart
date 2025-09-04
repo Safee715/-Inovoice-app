@@ -17,29 +17,26 @@ class _SubNavigationPageState
     extends State<SubNavigationPage> {
  NavigationPageViewModel navigationPageViewModel=NavigationPageViewModel();
 
-
-
-  @override
+ @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ValueListenableBuilder(
-          valueListenable: client_page_index,
-          builder: (context, c_selected_page, child) {
-            return navigationPageViewModel
-                .sub_Navigation_Pages[c_selected_page];
-          },
-        ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(
-            left: 50,
-            right: 50,
-            bottom: context.getHeight(
-              30,
-            ),
+
+    return Scaffold(
+      body: ValueListenableBuilder(
+        valueListenable: client_page_index,
+        builder: (context, c_selected_page, child) {
+          return navigationPageViewModel
+              .sub_Navigation_Pages[c_selected_page];
+        },
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: 50,
+          right: 50,
+          bottom: context.getHeight(
+            30,
           ),
-          child: ClientPageNavBar(),
         ),
+        child: ClientPageNavBar(),
       ),
     );
   }

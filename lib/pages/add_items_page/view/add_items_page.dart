@@ -53,7 +53,7 @@ class _AddItemsPageState
         ).getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          addItemViewmodel.appBarTitle,
+          addItemViewmodel.addItemAppBarTitle,
           style: TextStyle(
             color: Theme.of(
               context,
@@ -108,7 +108,7 @@ class _AddItemsPageState
               .nameValidator(p0),
           inputFormatter:
               FilteringTextInputFormatter.allow(
-                RegExp(r'[a-zA-Z0-9- ]'),
+                  itemsPageViewmodel.getRegExp()
               ),
         ),
 
@@ -178,7 +178,7 @@ class _AddItemsPageState
           maxLength: 30,
           inputFormatter:
               FilteringTextInputFormatter.allow(
-                RegExp(r'[a-zA-Z- 0-9]'),
+                  itemsPageViewmodel.getRegExp()
               ),
         ),
         CustomTextFields(
@@ -192,7 +192,7 @@ class _AddItemsPageState
           maxLength: 20,
           inputFormatter:
               FilteringTextInputFormatter.allow(
-                RegExp(r'[a-zA-Z- 0-9]'),
+              itemsPageViewmodel.getRegExp(),
               ),
         ),
       ],

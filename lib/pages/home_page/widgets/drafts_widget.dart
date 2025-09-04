@@ -1,5 +1,6 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _DraftsWidgetState
                 MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.constants.draftsLabel,
+                 homePageViewmodel.draftName,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -75,12 +76,23 @@ class _DraftsWidgetState
                 ),
               ),
 
-              Text(
-                'Issue: ${homePageViewmodel.draftIssueDate}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xffBEC0CC),
-                ),
+              Row(
+                children: [
+                  Text(
+                    LanguageManager.translate('issuedate'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                  Text(
+                    ': ${homePageViewmodel.draftIssueDate}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 width: 1,
@@ -89,12 +101,23 @@ class _DraftsWidgetState
                   0xff000000,
                 ).withValues(alpha: 0.1),
               ),
-              Text(
-                'Due: ${homePageViewmodel.draftDueDate}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xffBEC0CC),
-                ),
+              Row(
+                children: [
+                  Text(
+                    LanguageManager.translate('Due'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                  Text(
+                    '${homePageViewmodel.draftDueDate}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -108,10 +131,10 @@ class _DraftsWidgetState
             mainAxisAlignment:
                 MainAxisAlignment.start,
             children: [
-              Column(
+              Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Total: ',
+                    LanguageManager.translate('Total'),
                     style: TextStyle(
                       fontSize: 12,
                       color:  Theme.of(context)
@@ -119,7 +142,7 @@ class _DraftsWidgetState
                     ),
                   ),
                   Text(
-                    'Paid: ',
+                    LanguageManager.translate('Paid'),
                     style: TextStyle(
                       fontSize: 12,
                       color:  Theme.of(context)
@@ -128,23 +151,47 @@ class _DraftsWidgetState
                   ),
                 ],
               ),
-              Column(
+              Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'PKR ${homePageViewmodel.draftTotalAmount}',
-                    style: TextStyle(
-                      color: Color(0xff3AC4FF),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        LanguageManager.translate('PKR'),
+                        style: TextStyle(
+                          color: Color(0xff3AC4FF),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Text(
+                        ' ${homePageViewmodel.draftTotalAmount}',
+                        style: TextStyle(
+                          color: Color(0xff3AC4FF),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'PKR ${homePageViewmodel.draftPaidAmount}',
-                    style: TextStyle(
-                      color: Color(0xffFFAE00),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        LanguageManager.translate('PKR'),
+                        style: TextStyle(
+                          color: Color(0xffFFAE00),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Text(
+                        ' ${homePageViewmodel.draftPaidAmount}',
+                        style: TextStyle(
+                          color: Color(0xffFFAE00),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -154,20 +201,33 @@ class _DraftsWidgetState
                       CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Due Amount',
+                      LanguageManager.translate('DueAmount'),
                       style: TextStyle(
                         color:  Theme.of(context)
                             .getTextColor(),
                       ),
                     ),
-                    Text(
-                      'PKR ${homePageViewmodel.draftDueAmount}',
-                      style: TextStyle(
-                        color: Color(0xffF26666),
-                        fontWeight:
+                    Row(mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          LanguageManager.translate('PKR'),
+                          style: TextStyle(
+                            color: Color(0xffF26666),
+                            fontWeight:
+                                FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
+                        Text(
+                          ' ${homePageViewmodel.draftDueAmount}',
+                          style: TextStyle(
+                            color: Color(0xffF26666),
+                            fontWeight:
                             FontWeight.bold,
-                        fontSize: 17.0,
-                      ),
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

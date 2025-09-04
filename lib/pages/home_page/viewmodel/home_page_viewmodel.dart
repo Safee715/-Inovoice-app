@@ -1,5 +1,6 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/bar_charts_widget.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/data_widget.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/pie_chart_widget.dart';
@@ -20,24 +21,24 @@ class HomePageViewmodel {
   ];
 
   //Draft Invoices data
-  final draftName = 'Peter Paul';
-  final draftStatus = 'No status';
-  final draftReceiptId = 'IN-01';
-  final draftIssueDate = '00-00-2024';
-  final draftDueDate = '00-00-2024';
-  final draftTotalAmount = '34579';
-  final draftPaidAmount = '00.00';
-  final draftDueAmount = '00.00';
+  final draftName = LanguageManager.translate('draftName');
+  final draftStatus = LanguageManager.translate('draftStatus');
+  final draftReceiptId = LanguageManager.translate('draftReceiptId');
+  final draftIssueDate = LanguageManager.translate('draftIssueDate');
+  final draftDueDate = LanguageManager.translate('draftDueDate');
+  final draftTotalAmount = LanguageManager.translate('draftTotalAmount');
+  final draftPaidAmount = LanguageManager.translate('draftPaidAmount');
+  final draftDueAmount = LanguageManager.translate('draftDueAmount');
 
   // RecentInvoices data
-  final recentInvoiceName = 'Jhon James';
-  final recentInvoiceStatus = 'Unpaid';
-  final recentInvoiceReceiptId = 'IN-01';
-  final recentInvoiceIssueDate = '05-15-2024';
-  final recentInvoiceDueDate = '13-12-2024';
-  final recentInvoiceTotalAmount = '34579';
-  final recentInvoicePaidAmount = '00.00';
-  final recentInvoiceDueAmount = '457.45';
+  final recentInvoiceName = LanguageManager.translate('recentInvoiceName');
+  final recentInvoiceStatus = LanguageManager.translate('recentInvoiceStatus');
+  final recentInvoiceReceiptId = LanguageManager.translate('recentInvoiceReceiptId');
+  final recentInvoiceIssueDate = LanguageManager.translate('recentInvoiceIssueDate');
+  final recentInvoiceDueDate = LanguageManager.translate('recentInvoiceDueDate');
+  final recentInvoiceTotalAmount = LanguageManager.translate('recentInvoiceTotalAmount');
+  final recentInvoicePaidAmount = LanguageManager.translate('recentInvoicePaidAmount');
+  final recentInvoiceDueAmount = LanguageManager.translate('recentInvoiceDueAmount');
 
   //address
 
@@ -77,6 +78,7 @@ class HomePageViewmodel {
     280000,
     380000,
     400000,
+
   ];
   List<double> data2 = [
     370070,
@@ -93,18 +95,18 @@ class HomePageViewmodel {
     400000,
   ];
   List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    LanguageManager.translate('Jan'),
+    LanguageManager.translate('Feb'),
+    LanguageManager.translate('Mar'),
+    LanguageManager.translate('Apr'),
+    LanguageManager.translate('May'),
+    LanguageManager.translate('Jun'),
+    LanguageManager.translate('Jul'),
+    LanguageManager.translate('Aug'),
+    LanguageManager.translate('Sep'),
+    LanguageManager.translate('Oct'),
+    LanguageManager.translate('Nov'),
+    LanguageManager.translate('Dec'),
   ];
 
   double getMaxValue(List<double> data) {
@@ -115,10 +117,7 @@ class HomePageViewmodel {
   }
 
   double barGap() {
-    double width =
-        (7 / 412) *
-        (MediaQuery.of(context).size.height);
-    return width;
+    return getWidth(7);
   }
 
   double getBarWidth(
@@ -130,7 +129,7 @@ class HomePageViewmodel {
     double totalGap = totalBars * gap;
     double remainingWidth =
         width - totalGap - gap;
-    double barWidth = remainingWidth / totalBars;
+    double barWidth = (remainingWidth / totalBars);
     return barWidth;
   }
 
@@ -348,13 +347,13 @@ class HomePageViewmodel {
 
   //Pie Chart LogicData
   Map<String, double> dataMap1 = {
-    'Paid': 10508048.00,
-    'Due': 5005876.00,
+    LanguageManager.translate('Paid'): 10508048.00,
+    LanguageManager.translate('Due'): 5005876.00,
   };
 
   Map<String, double> dataMap2 = {
-    'Paid': 10508048.00,
-    'Due': 505876.00,
+    LanguageManager.translate('Paid'): 10508048.00,
+    LanguageManager.translate('Due'): 505876.00,
   };
   final chartRadius = 276.59;
 

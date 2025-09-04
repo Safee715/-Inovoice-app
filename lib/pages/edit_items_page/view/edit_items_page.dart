@@ -101,7 +101,7 @@ class _EditItemsPageState
                 children: [
                   _buildCustomTextFields(),
                   SizedBox(height: 20),
-                 _buildCustomSaveButton(),
+                  _buildCustomSaveButton(),
                 ],
               ),
             ),
@@ -110,39 +110,29 @@ class _EditItemsPageState
       ),
     );
   }
-  Widget _buildCustomSaveButton()
-  {
-    return  Container(
+
+  Widget _buildCustomSaveButton() {
+    return Container(
       width: context.getWidth(187),
       height: 50,
       decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(
-          5.0,
-        ),
+        borderRadius: BorderRadius.circular(5.0),
         gradient: LinearGradient(
           colors: [
             Color(0xFF9CD9FF),
             Color(0xFF4082E3),
           ],
-          begin:
-          Alignment.topCenter,
-          end: Alignment
-              .bottomCenter,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
       ),
       child: ElevatedButton(
-        style:
-        ElevatedButton.styleFrom(
-          backgroundColor:
-          Colors
-              .transparent,
-          shadowColor: Colors
-              .transparent,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
         onPressed: () async {
-          if (formKey.currentState!
-              .validate()) {
+          if (formKey.currentState!.validate()) {
             itemsPageViewmodel.editItem(
               widget.id,
               editItemViewmodel
@@ -168,134 +158,113 @@ class _EditItemsPageState
           } else {}
         },
         child: Text(
-          addItemViewmodel
-              .addButtonText,
+          addItemViewmodel.addButtonText,
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
-            fontWeight:
-            FontWeight.bold,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
     );
   }
-  Widget _buildCustomTextFields()
-  {
+
+  Widget _buildCustomTextFields() {
     return Column(
-       children: [
-         CustomTextFields(
-           labelText: addItemViewmodel
-               .itemNameLabel,
-           isMandatory: true,
-           controller: editItemViewmodel
-               .itemNameController,
-           maxLength: 40,
-           validator: (p0) =>
-               itemsPageViewmodel
-                   .nameValidator(p0),
-           inputFormatter:
-           FilteringTextInputFormatter.allow(
-             RegExp(
-               r'[a-zA-Z0-9- ]',
-             ),
-           ),
-         ),
-         Row(
-           mainAxisAlignment:
-           MainAxisAlignment
-               .spaceBetween,
-           children: [
-             Expanded(
-               child: CustomTextFields(
-                 labelText:
-                 addItemViewmodel
-                     .itemPriceLabel,
-                 isMandatory: true,
-                 maxLength: 10,
-                 controller:
-                 editItemViewmodel
-                     .itemPriceController,
-                 textInputType:
-                 TextInputType.phone,
-                 prefix: '\$',
-                 inputFormatter:
-                 FilteringTextInputFormatter.allow(
-                   RegExp(r'[0-9]'),
-                 ),
-               ),
-             ),
-             SizedBox(
-               width: context.getWidth(
-                 40,
-               ),
-             ),
-             Expanded(
-               child: CustomTextFields(
-                 labelText:
-                 addItemViewmodel
-                     .itemCodeLabel,
-                 isMandatory: false,
-                 controller:
-                 editItemViewmodel
-                     .itemCodeController,
-                 textInputType:
-                 TextInputType.phone,
-                 maxLength: 10,
-               ),
-             ),
-           ],
-         ),
+      children: [
+        CustomTextFields(
+          labelText:
+              addItemViewmodel.itemNameLabel,
+          isMandatory: true,
+          controller: editItemViewmodel
+              .itemNameController,
+          maxLength: 40,
+          validator: (p0) => itemsPageViewmodel
+              .nameValidator(p0),
+          inputFormatter:
+              FilteringTextInputFormatter.allow(
+                itemsPageViewmodel.getRegExp(),
+              ),
+        ),
+        Row(
+          mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: CustomTextFields(
+                labelText: addItemViewmodel
+                    .itemPriceLabel,
+                isMandatory: true,
+                maxLength: 10,
+                controller: editItemViewmodel
+                    .itemPriceController,
+                textInputType:
+                    TextInputType.phone,
+                prefix: '\$',
+                inputFormatter:
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r'[0-9]'),
+                    ),
+              ),
+            ),
+            SizedBox(width: context.getWidth(40)),
+            Expanded(
+              child: CustomTextFields(
+                labelText: addItemViewmodel
+                    .itemCodeLabel,
+                isMandatory: false,
+                controller: editItemViewmodel
+                    .itemCodeController,
+                textInputType:
+                    TextInputType.phone,
+                maxLength: 10,
+              ),
+            ),
+          ],
+        ),
 
-         CustomTextFields(
-           labelText: addItemViewmodel
-               .itemQuantityLabel,
+        CustomTextFields(
+          labelText:
+              addItemViewmodel.itemQuantityLabel,
 
-           isMandatory: true,
-           controller: editItemViewmodel
-               .itemQuantityController,
-           textInputType:
-           TextInputType.phone,
-           maxLength: 10,
-           inputFormatter:
-           FilteringTextInputFormatter.allow(
-             RegExp(r'[0-9]+'),
-           ),
-         ),
-         CustomTextFields(
-           labelText: addItemViewmodel
-               .itemCategoryLabel,
+          isMandatory: true,
+          controller: editItemViewmodel
+              .itemQuantityController,
+          textInputType: TextInputType.phone,
+          maxLength: 10,
+          inputFormatter:
+              FilteringTextInputFormatter.allow(
+                RegExp(r'[0-9]+'),
+              ),
+        ),
+        CustomTextFields(
+          labelText:
+              addItemViewmodel.itemCategoryLabel,
 
-           isMandatory: false,
-           controller: editItemViewmodel
-               .itemCategoryController,
-           textInputType:
-           TextInputType.text,
-           maxLength: 30,
-           inputFormatter:
-           FilteringTextInputFormatter.allow(
-             RegExp(
-               r'[a-zA-Z- 0-9]',
-             ),
-           ),
-         ),
-         CustomTextFields(
-           labelText: addItemViewmodel
-               .itemUnitLabel,
-           isMandatory: false,
-           controller: editItemViewmodel
-               .itemUnitController,
-           textInputType:
-           TextInputType.text,
-           maxLength: 20,
-           inputFormatter:
-           FilteringTextInputFormatter.allow(
-             RegExp(
-               r'[a-zA-Z- 0-9]',
-             ),
-           ),
-         )
-       ],
+          isMandatory: false,
+          controller: editItemViewmodel
+              .itemCategoryController,
+          textInputType: TextInputType.text,
+          maxLength: 30,
+          inputFormatter:
+              FilteringTextInputFormatter.allow(
+                itemsPageViewmodel.getRegExp(),
+              ),
+        ),
+        CustomTextFields(
+          labelText:
+              addItemViewmodel.itemUnitLabel,
+          isMandatory: false,
+          controller: editItemViewmodel
+              .itemUnitController,
+          textInputType: TextInputType.text,
+          maxLength: 20,
+          inputFormatter:
+              FilteringTextInputFormatter.allow(
+                itemsPageViewmodel.getRegExp(),
+              ),
+        ),
+      ],
     );
   }
 }

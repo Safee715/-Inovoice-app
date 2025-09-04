@@ -1,20 +1,21 @@
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:flutter/foundation.dart';
 
 class AddItemViewmodel extends ChangeNotifier {
-  final appBarTitle = 'Add Item';
-  final itemNameLabel = 'Item Name';
-  final itemPriceLabel = 'Item Price';
-  final itemQuantityLabel = 'Item Quantity';
-  final itemCodeLabel = 'Item Code';
-  final itemCategoryLabel = 'Item Category';
-  final itemUnitLabel = 'Item Unit';
-  final itemName = 'Enter Item Name';
-  final itemPrice = 'Enter Item Price';
-  final itemCode = 'Enter Item Code';
-  final itemQuantity = 'Enter Item Quantity';
-  final itemCategory = 'Enter Item Category';
-  final itemUnit = 'Enter Item Unit';
-  final addButtonText = 'Add Item';
+  final addItemAppBarTitle = LanguageManager.translate('addItemAppBarTitle');
+  final itemNameLabel = LanguageManager.translate('itemNameLabel');
+  final itemPriceLabel = LanguageManager.translate('itemPriceLabel');
+  final itemQuantityLabel = LanguageManager.translate('itemQuantityLabel');
+  final itemCodeLabel = LanguageManager.translate('itemCodeLabel');
+  final itemCategoryLabel = LanguageManager.translate('itemCategoryLabel');
+  final itemUnitLabel = LanguageManager.translate('itemUnitLabel');
+  final itemName = LanguageManager.translate('itemName');
+  final itemPrice = LanguageManager.translate('itemPrice');
+  final itemCode = LanguageManager.translate('itemCode');
+  final itemQuantity = LanguageManager.translate('itemQuantity');
+  final itemCategory = LanguageManager.translate('itemCategory');
+  final itemUnit = LanguageManager.translate('itemUnit');
+  final addButtonText = LanguageManager.translate('addButtonText');
 }
 
 class Item {

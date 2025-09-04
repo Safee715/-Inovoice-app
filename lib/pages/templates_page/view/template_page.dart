@@ -1,7 +1,7 @@
+import 'package:DummyInvoice/data/helpers/common_functions.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/templates_page/view/abstract_template.dart';
 import 'package:DummyInvoice/pages/templates_page/viewmodel/templates_page_viewmodel.dart';
 
@@ -16,6 +16,7 @@ class TemplatePage extends StatefulWidget {
 
 class _TemplatePageState
     extends State<TemplatePage> {
+  CommonFunctions commonFunctions=CommonFunctions();
   @override
   Widget build(BuildContext context) {
     TemplatesPageViewmodel
@@ -27,8 +28,9 @@ class _TemplatePageState
       appBar: AppBar(
         backgroundColor: Color(0xFE7EBF2),
         leading: IconButton(
-          onPressed: () {
-            selected_page_notifier.value = 0;
+          onPressed: ()
+          {
+            commonFunctions.backButtonForSubNavigationPages(context);
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,

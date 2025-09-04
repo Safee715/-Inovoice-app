@@ -1,5 +1,6 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -81,12 +82,23 @@ class _RecentInvoicesWidgetState
                       .getTextColor(),
                 ),
               ),
-              Text(
-                'Issue: ${homePageViewmodel.recentInvoiceIssueDate}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xffBEC0CC),
-                ),
+              Row(
+                children: [
+                  Text(
+                    LanguageManager.translate('issuedate'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                  Text(
+                    ': ${homePageViewmodel.recentInvoiceIssueDate}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 width: 1,
@@ -95,12 +107,23 @@ class _RecentInvoicesWidgetState
                   0xff000000,
                 ).withValues(alpha: 0.1),
               ),
-              Text(
-                'Due: ${homePageViewmodel.recentInvoiceDueDate}',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xffBEC0CC),
-                ),
+              Row(
+                children: [
+                  Text(
+                    LanguageManager.translate('Due'),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                  Text(
+                   ': ${homePageViewmodel.recentInvoiceDueDate}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xffBEC0CC),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -117,7 +140,7 @@ class _RecentInvoicesWidgetState
               Column(
                 children: [
                   Text(
-                    'Total: ',
+                    LanguageManager.translate('Total'),
                     style: TextStyle(
                       fontSize: 12,
                       color: Theme.of(context)
@@ -125,7 +148,7 @@ class _RecentInvoicesWidgetState
                     ),
                   ),
                   Text(
-                    'Paid: ',
+                    LanguageManager.translate('Paid'),
                     style: TextStyle(
                       fontSize: 12,
                       color: Theme.of(context)
@@ -134,23 +157,47 @@ class _RecentInvoicesWidgetState
                   ),
                 ],
               ),
-              Column(
+              Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'PKR ${homePageViewmodel.recentInvoiceTotalAmount}',
-                    style: TextStyle(
-                      color: Color(0xff3AC4FF),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
+                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        LanguageManager.translate('PKR'),
+                        style: TextStyle(
+                          color: Color(0xff3AC4FF),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Text(
+                       ' ${homePageViewmodel.recentInvoiceTotalAmount}',
+                        style: TextStyle(
+                          color: Color(0xff3AC4FF),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'PKR ${homePageViewmodel.recentInvoicePaidAmount}',
-                    style: TextStyle(
-                      color: Color(0xffFFAE00),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        LanguageManager.translate('PKR'),
+                        style: TextStyle(
+                          color: Color(0xffFFAE00),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      Text(
+                        ' ${homePageViewmodel.recentInvoicePaidAmount}',
+                        style: TextStyle(
+                          color: Color(0xffFFAE00),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -160,20 +207,33 @@ class _RecentInvoicesWidgetState
                       CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Due Amount',
+                      LanguageManager.translate('DueAmount'),
                       style: TextStyle(
                         color: Theme.of(context)
                             .getTextColor(),
                       ),
                     ),
-                    Text(
-                      'PKR ${homePageViewmodel.recentInvoiceDueAmount}',
-                      style: TextStyle(
-                        color: Color(0xffF26666),
-                        fontWeight:
+                    Row(mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          LanguageManager.translate('PKR'),
+                          style: TextStyle(
+                            color: Color(0xffF26666),
+                            fontWeight:
+                                FontWeight.bold,
+                            fontSize: 17.0,
+                          ),
+                        ),
+                        Text(
+                          ' ${homePageViewmodel.recentInvoiceDueAmount}',
+                          style: TextStyle(
+                            color: Color(0xffF26666),
+                            fontWeight:
                             FontWeight.bold,
-                        fontSize: 17.0,
-                      ),
+                            fontSize: 17.0,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

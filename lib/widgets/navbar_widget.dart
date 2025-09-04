@@ -1,4 +1,6 @@
+import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
@@ -37,16 +39,14 @@ class NavbarWidget extends StatelessWidget {
                   NavigationDestination(
                     selectedIcon: CustomIconWidget(
                       iconaddress:
-                          'assets/images/icons/homepage.svg',
-                      height: 24,
+                      Assets.SelectedHomeIcon,                      height: 24,
                       weight: 24,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Home',
+                    label: LanguageManager.translate('Home'),
 
                     icon: CustomIconWidget(
-                      iconaddress:
-                          'assets/images/icons/home.svg',
+                      iconaddress:Assets.HomeIcon,
                       height: 24,
                       weight: 24,
                       color: Theme.of(context)
@@ -55,17 +55,15 @@ class NavbarWidget extends StatelessWidget {
                   ),
                   NavigationDestination(
                     selectedIcon: CustomIconWidget(
-                      iconaddress:
-                          'assets/images/icons/users-group2.svg',
+                      iconaddress:Assets.ClientsIconSelected,
                       height: 24,
                       weight: 24,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Clients',
+                    label: LanguageManager.translate('Clients'),
                     icon: CustomIconWidget(
                       iconaddress:
-                          'assets/images/icons/users-group.svg',
-                      height: 24,
+                      Assets.ClientsIcon,                      height: 24,
                       weight: 24,
                       color: Theme.of(context)
                           .getNavbarIconColor(),
@@ -77,8 +75,7 @@ class NavbarWidget extends StatelessWidget {
                       alignment:
                           Alignment.bottomCenter,
                       child: CustomIconWidget(
-                        iconaddress:
-                            'assets/images/icons/add clients.svg',
+                        iconaddress:Assets.AddButtonIcon,
                         height: 54,
                         weight: 54,
                       ),
@@ -90,11 +87,10 @@ class NavbarWidget extends StatelessWidget {
                       Icons.shopping_cart_rounded,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Items',
+                    label: LanguageManager.translate('Items'),
                     icon: CustomIconWidget(
                       iconaddress:
-                          'assets/images/icons/shopping-cart-plus.svg',
-                      height: 24,
+                      Assets.ItemsIcon,                      height: 24,
                       weight: 24,
                       color: Theme.of(context)
                           .getNavbarIconColor(
@@ -106,10 +102,9 @@ class NavbarWidget extends StatelessWidget {
                       Icons.person_rounded,
                       color: Color(0xff6EAEF1),
                     ),
-                    label: 'Profile',
+                    label: LanguageManager.translate('Profile'),
                     icon: CustomIconWidget(
-                      iconaddress:
-                          'assets/images/icons/user.svg',
+                      iconaddress:Assets.ProfileIcon,
                       height: 24,
                       weight: 24,
                       color: Theme.of(context)

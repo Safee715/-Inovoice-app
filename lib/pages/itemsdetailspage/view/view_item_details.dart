@@ -67,7 +67,7 @@ class _ViewItemsDetailsState
             .getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          addItemViewmodel.appBarTitle,
+          addItemViewmodel.addItemAppBarTitle,
           style: TextStyle(
             color: Theme.of(context).getTextColor(),
             fontWeight: FontWeight.bold,

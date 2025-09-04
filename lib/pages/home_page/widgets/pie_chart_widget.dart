@@ -1,4 +1,5 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/draw_pie_chart.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _PieChartWidgetState
                 MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Income Overview',
+                widget.constant.incomeOverviewText,
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(
@@ -91,11 +92,11 @@ class _PieChartWidgetState
                   items: [
                     DropdownMenuItem(
                       value: 0,
-                      child: Text('Last Week'),
+                      child: Text(widget.constant.dropDownMenuTexts[1]),
                     ),
                     DropdownMenuItem(
                       value: 1,
-                      child: Text('This Week'),
+                      child: Text(widget.constant.dropDownMenuTexts[0]),
                     ),
                   ],
                   onChanged: (newValue) {
@@ -158,7 +159,7 @@ class _PieChartWidgetState
                                 .colorsList[0],
                       ),
                       Text(
-                        ' Paid',
+                       LanguageManager.translate('Paid'),
                         style: TextStyle(
                           fontFamily: 'Biennale',
                           fontSize: 12,
@@ -183,7 +184,7 @@ class _PieChartWidgetState
                                 .colorsList[1],
                       ),
                       Text(
-                        ' Due',
+                        LanguageManager.translate('Due'),
                         style: TextStyle(
                           fontFamily: 'Biennale',
                           fontSize: 12,

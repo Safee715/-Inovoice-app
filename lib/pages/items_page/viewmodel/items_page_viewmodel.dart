@@ -1,4 +1,5 @@
 import 'package:DummyInvoice/data/notifiers.dart';
+import 'package:DummyInvoice/main.dart';
 import 'package:DummyInvoice/pages/items_page/model/item_page_model.dart';
 import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:flutter/material.dart';
@@ -111,13 +112,30 @@ class ItemsPageViewmodel extends ChangeNotifier {
     itemUnitController.dispose();
     super.dispose();
   }
+  RegExp getRegExp()
+  {
+    switch(deviceLang)
+    {
+      case 'en':
+        return RegExp(r'^[a-zA-Z0-9\s.,-]*$');
+      case 'ur':
+        return RegExp(r'^[\u0600-\u06FF0-9\s.,-]*$');
+      case 'fr':
+      case 'es':
+      case 'tr':
+        return RegExp(r'^[a-zA-Z0-9\s.,-\u00C0-\u00FF\u0100-\u024F]*$');
+      case 'zh':
+        return RegExp(r'^[\u4E00-\u9FFF\u3400-\u4DBF0-9\s.,-]*$');
+      default :
+        return RegExp(r'.*');
+    }
+  }
 
   String? nameValidator(String? value) {
     if ((value == null) || (value.isEmpty)) {
       return 'Please Enter Name';
-    } else if (!RegExp(
-      r'^[a-zA-Z ]+$',
-    ).hasMatch(value)) {
+    } else if (!getRegExp()
+        .hasMatch(value)) {
       return 'Enter a valid Name';
     }
     return null;

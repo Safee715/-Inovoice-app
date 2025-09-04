@@ -1,7 +1,11 @@
 import 'package:DummyInvoice/data/helpers/assets.dart';
+import 'package:DummyInvoice/data/helpers/common_functions.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/home_page/widgets/home_page_menu_widgets_navigation.dart';
+import 'package:DummyInvoice/pages/navigation_pages/view/sub_navigation_page.dart';
+import 'package:DummyInvoice/pages/templates_page/view/abstract_template.dart';
+import 'package:DummyInvoice/pages/templates_page/viewmodel/templates_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
@@ -19,6 +23,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Constants constants = Constants();
+  CommonFunctions commonFunctions =
+      CommonFunctions();
+  TemplatesPageViewmodel templatesPageViewmodel =
+      TemplatesPageViewmodel();
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +82,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildHomePageBody(HomePageViewmodel viewmodel )
-  {
+  Widget _buildHomePageBody(
+    HomePageViewmodel viewmodel,
+  ) {
     return SafeArea(
       top: false,
       child: LayoutBuilder(
@@ -89,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Column(
                 crossAxisAlignment:
-                CrossAxisAlignment.start,
+                    CrossAxisAlignment.start,
                 children: [
                   Container(
                     margin: EdgeInsets.only(
@@ -101,17 +110,16 @@ class _HomePageState extends State<HomePage> {
                         context,
                       ).getContainerColor(),
                       borderRadius:
-                      BorderRadius.all(
-                        Radius.circular(28),
-                      ),
+                          BorderRadius.all(
+                            Radius.circular(28),
+                          ),
                     ),
                     child: Column(
                       spacing: context.getWidth(
                         10,
                       ),
                       mainAxisAlignment:
-                      MainAxisAlignment
-                          .start,
+                          MainAxisAlignment.start,
                       children: [
                         SizedBox(
                           height: context
@@ -119,40 +127,41 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ValueListenableBuilder(
                           valueListenable:
-                          selected_widget_notifier,
+                              selected_widget_notifier,
                           builder:
                               (
-                              context,
-                              selected_widget,
-                              child,
+                                context,
+                                selected_widget,
+                                child,
                               ) {
-                            return HomePageMenuWidgetsNavigation(
-                              constants:
-                              constants,
-                            );
-                          },
+                                return HomePageMenuWidgetsNavigation(
+                                  constants:
+                                      constants,
+                                );
+                              },
                         ),
                         ValueListenableBuilder(
                           valueListenable:
-                          selected_widget_notifier,
+                              selected_widget_notifier,
                           builder:
                               (
-                              context,
-                              selected_widget,
-                              child,
+                                context,
+                                selected_widget,
+                                child,
                               ) {
-                            return viewmodel
-                                .widgets
-                                .elementAt(
-                              selected_widget,
-                            );
-                          },
+                                return viewmodel
+                                    .widgets
+                                    .elementAt(
+                                      selected_widget,
+                                    );
+                              },
                         ),
                       ],
                     ),
                   ),
                   _buildRecentInvoiceWidget(),
                   _buildDraftsWidget(),
+                  _buildTemplatesWidget(),
                 ],
               ),
             ),
@@ -261,6 +270,89 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildTemplatesWidget() {
+    return GestureDetector(
+      onTap: (){
+        client_page_index.value=0;
+        Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              SubNavigationPage(),
+        ),
+      );
+    },
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceAround,
+              children: [
+                RectangularTemplate(
+                  id: templatesPageViewmodel.ids
+                      .elementAt(0),
+                  name: templatesPageViewmodel
+                      .names
+                      .elementAt(0),
+                  amount: templatesPageViewmodel
+                      .amounts
+                      .elementAt(0),
+                  boxcolor: Colors.white,
+                  textcolor: Colors.black,
+                ),
+                RectangularTemplate(
+                  id: templatesPageViewmodel.ids
+                      .elementAt(0),
+                  name: templatesPageViewmodel
+                      .names
+                      .elementAt(0),
+                  amount: templatesPageViewmodel
+                      .amounts
+                      .elementAt(0),
+                  boxcolor: Colors.grey,
+                  textcolor: Colors.black,
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceAround,
+              children: [
+                DesignedTemplate(
+                  id: templatesPageViewmodel.ids
+                      .elementAt(2),
+                  name: templatesPageViewmodel
+                      .names
+                      .elementAt(2),
+                  amount: templatesPageViewmodel
+                      .amounts
+                      .elementAt(2),
+                  boxcolor: Colors.white,
+                  textcolor: Colors.black,
+                ),
+                DesignedTemplate(
+                  id: templatesPageViewmodel.ids
+                      .elementAt(3),
+                  name: templatesPageViewmodel
+                      .names
+                      .elementAt(3),
+                  amount: templatesPageViewmodel
+                      .amounts
+                      .elementAt(3),
+                  boxcolor: Colors.grey,
+                  textcolor: Colors.black,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

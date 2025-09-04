@@ -1,11 +1,21 @@
+import 'dart:ui' ;
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/languages/language_manager.dart';
+import 'package:DummyInvoice/pages/onboardingScreens/onboarding_page1.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
+import 'package:intl/intl.dart' hide TextDirection;
+String deviceLang=PlatformDispatcher.instance.locale.languageCode;
+bool isRtl()
+{
+  final locale=PlatformDispatcher.instance.locale;
+  return Bidi.isRtlLanguage(locale.languageCode);
+}
 
 void main() {
+LanguageManager.init(deviceLang);
   runApp(
-
       const Myapp(),
 
   );
@@ -23,8 +33,7 @@ class _MyappState extends State<Myapp> {
 
   @override
   Widget build(BuildContext context) {
-    final Constants constants=Constants();
-
+    final Constants constants=Constants(context: context);
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Theme.of(context)
@@ -81,7 +90,13 @@ class _MyappState extends State<Myapp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MainNavigationPage(constant: constants,),
+      home: OnboardingPage1(),
+      // Builder(
+      //   builder: (context) {
+      //     return Directionality(textDirection: isRtl()?TextDirection.rtl:TextDirection.ltr,
+      //         child: MainNavigationPage(constant: constants,));
+      //   }
+      // ),
       themeMode: ThemeMode.system,
     );
   }

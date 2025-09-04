@@ -1,18 +1,20 @@
 import 'package:DummyInvoice/data/helpers/assets.dart';
+import 'package:DummyInvoice/data/helpers/common_functions.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/add_items_page/view/add_items_page.dart';
 import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/pages/items_page/Widgets/item_details.dart';
 import 'package:flutter/material.dart';
-import 'package:DummyInvoice/data/notifiers.dart';
 
 class ItemsPage extends StatefulWidget {
-  ItemsPage({super.key,this.constants});
+  ItemsPage({super.key, this.constants});
 
-  final Constants ?constants;
+  final Constants? constants;
+
   @override
   State<ItemsPage> createState() =>
       _ItemsPageState();
@@ -20,6 +22,7 @@ class ItemsPage extends StatefulWidget {
 
 class _ItemsPageState extends State<ItemsPage> {
   late ItemsPageViewmodel itemsPageViewmodel;
+  CommonFunctions commonFunctions=CommonFunctions();
   ItemPageRepository itemPageRepository =
       ItemPageRepository();
 
@@ -39,8 +42,10 @@ class _ItemsPageState extends State<ItemsPage> {
         scrolledUnderElevation: 0,
         backgroundColor: Color(0xFE7EBF2),
         leading: IconButton(
-          onPressed: () {
-            selected_page_notifier.value = 0;
+          onPressed: ()
+          {
+
+          commonFunctions.backButtonForSubNavigationPages(context);
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,
@@ -50,7 +55,7 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
         ),
         title: Text(
-          'Items',
+         widget.constants!.itemsAppBarTitle,
           style: TextStyle(
             color: Theme.of(
               context,
@@ -60,84 +65,91 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: context.getWidth(15),
-          right: context.getWidth(15),
-        ),
-        child: ValueListenableBuilder(
-          valueListenable:
-              itemsPageViewmodel.items,
-          builder: (context, items, child) {
-            if (items.isEmpty) {
-              return Center(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
-                    children: [
-                      CustomIconWidget(
-                        iconaddress:Assets.NoDataIcon,
-                        height: context.getWidth(
-                          65,
-                        ),
-                        weight: context.getWidth(
-                          114,
-                        ),
-                      ),
-                      Text(widget.constants!.noDataAvailableText,
-                        maxLines: 2,
-                        softWrap: true,
-
-                        style: TextStyle(
-                          color: Color(
-                            0xffBEC0CC,
-                          ),
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              print(items.length);
-              return ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  final bool isLast =
-                      index == items.length - 1;
-                  print('index==$index');
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      top: context.getWidth(5),
-                      bottom: context.getWidth(
-                        isLast ? 50 : 5,
-                      ),
-                    ),
-                    child: ItemDetails(
-                      itemsPageViewmodel:
-                          itemsPageViewmodel,
-                      name: item.itemName,
-                      price: item.itemPrice,
-                      id: item.id!,
-                    ),
-                  );
-                },
-              );
-            }
-          },
-        ),
-      ),
-      floatingActionButton: _buildFloatingActionButton(),
+      body: _buildBody(),
+      floatingActionButton:
+          _buildFloatingActionButton(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.endDocked,
     );
   }
+Widget _buildBody()
+{
+  return Padding(
+    padding: EdgeInsets.only(
+      left: context.getWidth(15),
+      right: context.getWidth(15),
+    ),
+    child: ValueListenableBuilder(
+      valueListenable:
+      itemsPageViewmodel.items,
+      builder: (context, items, child) {
+        if (items.isEmpty) {
+          return Center(
+            child: Container(
+              child: Column(
+                mainAxisAlignment:
+                MainAxisAlignment.center,
+                children: [
+                  CustomIconWidget(
+                    iconaddress:
+                    Assets.NoDataIcon,
+                    height: context.getWidth(
+                      65,
+                    ),
+                    weight: context.getWidth(
+                      114,
+                    ),
+                  ),
+                  Text(
+                    widget
+                        .constants!
+                        .noDataAvailableText,
+                    maxLines: 2,
+                    softWrap: true,
 
-  Widget _buildFloatingActionButton()
-  {
+                    style: TextStyle(
+                      color: Color(
+                        0xffBEC0CC,
+                      ),
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          print(items.length);
+          return ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              final bool isLast =
+                  index == items.length - 1;
+              print('index==$index');
+              return Padding(
+                padding: EdgeInsets.only(
+                  top: context.getWidth(5),
+                  bottom: context.getWidth(
+                    isLast ? 50 : 5,
+                  ),
+                ),
+                child: ItemDetails(
+                  itemsPageViewmodel:
+                  itemsPageViewmodel,
+                  name: item.itemName,
+                  price: item.itemPrice,
+                  id: item.id!,
+                ),
+              );
+            },
+          );
+        }
+      },
+    ),
+  );
+}
+  Widget _buildFloatingActionButton() {
     return IconButton(
       onPressed: () {
         Navigator.push(
@@ -151,12 +163,10 @@ class _ItemsPageState extends State<ItemsPage> {
       },
       icon: CustomIconWidget(
         iconaddress:
-        itemsPageViewmodel.addButtonAddress,
+            itemsPageViewmodel.addButtonAddress,
         height: 54,
         weight: 54,
       ),
     );
   }
-
-
 }

@@ -4,13 +4,15 @@ import 'package:DummyInvoice/pages/client_view_details_page/viewmodel/view_detai
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/material.dart';
 
-class ClientViewDetailsPage extends StatefulWidget {
+class ClientViewDetailsPage
+    extends StatefulWidget {
   const ClientViewDetailsPage({
     super.key,
     required this.id,
     required this.clientPageViewmodel,
   });
-  final int  id;
+
+  final int id;
   final ClientPageViewmodel clientPageViewmodel;
 
   @override
@@ -20,38 +22,40 @@ class ClientViewDetailsPage extends StatefulWidget {
 
 class _ClientViewDetailsPageState
     extends State<ClientViewDetailsPage> {
-
   late ViewDetailsViewmodel viewDetailsViewmodel;
 
   @override
   void initState() {
     super.initState();
-    viewDetailsViewmodel = ViewDetailsViewmodel(id: widget.id);
+    viewDetailsViewmodel = ViewDetailsViewmodel(
+      id: widget.id,
+    );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async{
-       viewDetailsViewmodel.getControllerText(
+    WidgetsBinding.instance.addPostFrameCallback((
+      _,
+    ) async {
+      viewDetailsViewmodel.getControllerText(
         widget.clientPageViewmodel,
       );
-       setState(() {
-
-       });
-    },);
-
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        backgroundColor: Theme.of(context)
-            .getBackColor(),
+        backgroundColor: Theme.of(
+          context,
+        ).getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
           viewDetailsViewmodel.appBarTitle,
           style: TextStyle(
-            color:  Theme.of(context).getTextColor(),
+            color: Theme.of(
+              context,
+            ).getTextColor(),
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -61,30 +65,26 @@ class _ClientViewDetailsPageState
           preferredSize: Size.fromHeight(1),
           child: Container(
             margin: EdgeInsets.symmetric(
-              horizontal: context
-                  .getWidth(20),
+              horizontal: context.getWidth(20),
             ),
-            color: Theme.of(context).getAppBarBottomColor(),
+            color: Theme.of(
+              context,
+            ).getAppBarBottomColor(),
             height: 1,
           ),
         ),
       ),
-      backgroundColor:  Theme.of(context)
-          .getBackColor(),
+      backgroundColor: Theme.of(
+        context,
+      ).getBackColor(),
       body: SafeArea(
         top: false,
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: context.getWidth(
-                20,
-              ),
-              right: context.getWidth(
-                20,
-              ),
-              bottom: context.getWidth(
-                20,
-              ),
+              left: context.getWidth(20),
+              right: context.getWidth(20),
+              bottom: context.getWidth(20),
             ),
             child: Column(
               children: [
@@ -97,44 +97,43 @@ class _ClientViewDetailsPageState
       ),
     );
   }
-  Widget _buildCustomTextFields()
-  {
+
+  Widget _buildCustomTextFields() {
     return Column(
-      children: [ CustomTextFields(
-        labelText: viewDetailsViewmodel
-            .firstNameLabel,
-        controller: viewDetailsViewmodel
-            .firstNameController,
-        isMandatory: true,
-        enabled: false,
-      ),
+      children: [
         CustomTextFields(
-          labelText: viewDetailsViewmodel
-              .lastNameLabel,
+          labelText:
+              viewDetailsViewmodel.firstNameLabel,
+          controller: viewDetailsViewmodel
+              .firstNameController,
+          isMandatory: true,
+          enabled: false,
+        ),
+        CustomTextFields(
+          labelText:
+              viewDetailsViewmodel.lastNameLabel,
           controller: viewDetailsViewmodel
               .lastNameController,
           isMandatory: true,
           enabled: false,
         ),
         CustomTextFields(
-          labelText: viewDetailsViewmodel
-              .emailAddress,
+          labelText:
+              viewDetailsViewmodel.emailAddress,
           controller: viewDetailsViewmodel
               .emailController,
           isMandatory: false,
           enabled: false,
         ),
         CustomTextFields(
-          labelText: viewDetailsViewmodel
-              .phoneNo,
+          labelText: viewDetailsViewmodel.phoneNo,
           controller: viewDetailsViewmodel
               .phoneController,
           isMandatory: true,
           enabled: false,
         ),
         CustomTextFields(
-          labelText: viewDetailsViewmodel
-              .address,
+          labelText: viewDetailsViewmodel.address,
           controller: viewDetailsViewmodel
               .addressController,
           isMandatory: false,

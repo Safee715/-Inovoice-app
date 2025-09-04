@@ -186,7 +186,7 @@ class _EditClient extends State<EditClient> {
                 .nameValidator(p0),
         inputFormatter:
         FilteringTextInputFormatter.allow(
-          RegExp(r'[a-zA-Z- ]'),
+          clientPageViewmodel.getRegExp(),
         ),
       ),
         CustomTextFields(
@@ -200,7 +200,7 @@ class _EditClient extends State<EditClient> {
                   .nameValidator(p0),
           inputFormatter:
           FilteringTextInputFormatter.allow(
-            RegExp(r'[a-zA-Z- ]'),
+            clientPageViewmodel.getRegExp(),
           ),
         ),
         CustomTextFields(
@@ -240,7 +240,7 @@ class _EditClient extends State<EditClient> {
           TextInputType.text,
           inputFormatter:
           FilteringTextInputFormatter.allow(
-            RegExp(r'[a-zA-Z- ]'),
+            clientPageViewmodel.getRegExp(),
           ),
 
           maxLength: 70,
