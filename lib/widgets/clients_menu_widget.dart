@@ -52,7 +52,6 @@ class _ClientsMenuWidgetState
               builder: (context) {
                 return ClientViewDetailsPage(
                   id: widget.id,
-                  clientPageViewmodel: widget.clientPageViewmodel,
                 );
               },
             ),

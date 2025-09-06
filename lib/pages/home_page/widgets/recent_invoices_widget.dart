@@ -3,6 +3,7 @@ import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RecentInvoicesWidget
     extends StatefulWidget {
@@ -20,8 +21,7 @@ class _RecentInvoicesWidgetState
     extends State<RecentInvoicesWidget> {
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel =
-        HomePageViewmodel(constant: widget.constant,context: context);
+    final homePageViewmodel =context.watch<HomePageViewmodel>();
 
 
     return SingleChildScrollView(

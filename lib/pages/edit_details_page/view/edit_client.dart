@@ -5,6 +5,7 @@ import 'package:DummyInvoice/pages/edit_details_page/viewmodel/edit_client_viewm
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class EditClient extends StatefulWidget {
   const EditClient({super.key,
@@ -23,25 +24,17 @@ class EditClient extends StatefulWidget {
 }
 
 class _EditClient extends State<EditClient> {
-  late  EditClientViewmodel editClientViewmodel;
   @override
   void initState() {
     super.initState();
-
-    editClientViewmodel = EditClientViewmodel(id: widget.id);
-    WidgetsBinding.instance.addPostFrameCallback((
-      _,
-    )async {
-      editClientViewmodel.getControllerText(
-       widget.clientPageViewmodel,
-      );
-    });
+    final clientPageViewmodel=context.read<ClientPageViewmodel>();
+    final editClientViewmodel=context.read<EditClientViewmodel>();
+    editClientViewmodel.getControllerText(clientPageViewmodel, widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
-
-
+    final editClientViewmodel=context.watch<EditClientViewmodel>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(
@@ -74,9 +67,9 @@ class _EditClient extends State<EditClient> {
             ),
             child: Column(
               children: [
-                _buildCustomDetailsFields(widget.clientPageViewmodel),
+                _buildCustomDetailsFields(),
                 SizedBox(height: 20),
-                _buildSaveButton(widget.clientPageViewmodel),
+                _buildSaveButton(),
               ],
             ),
           ),
@@ -84,9 +77,12 @@ class _EditClient extends State<EditClient> {
       ),
     );
   }
-  Widget _buildSaveButton(ClientPageViewmodel clientPageViewmodel)
+  Widget _buildSaveButton()
   {
-    return Container(
+  final clientPageViewmodel=context.watch<ClientPageViewmodel>();
+  final editClientViewmodel=context.watch<EditClientViewmodel>();
+
+  return Container(
       width: context.getWidth(297),
       height: 40,
       decoration: BoxDecoration(
@@ -171,9 +167,12 @@ class _EditClient extends State<EditClient> {
       ),
     );
   }
-  Widget _buildCustomDetailsFields(ClientPageViewmodel clientPageViewmodel)
+  Widget _buildCustomDetailsFields()
   {
-    return Column(
+    final editClientViewmodel=context.watch<EditClientViewmodel>();
+  final clientPageViewmodel=context.watch<ClientPageViewmodel>();
+
+  return Column(
       children: [CustomTextFields(
         labelText: editClientViewmodel
             .firstNameLabel,
@@ -247,10 +246,8 @@ class _EditClient extends State<EditClient> {
         ),],
     );
   }
-
-  @override
+@override
   void dispose() {
-    editClientViewmodel.dispose();
     super.dispose();
   }
 }

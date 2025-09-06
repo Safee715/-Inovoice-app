@@ -1,11 +1,10 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/add_items_page/viewmodel/add_items_viewmodel.dart';
 import 'package:DummyInvoice/pages/edit_items_page/viewmodel/edit_item_viewmodel.dart';
-import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class EditItemsPage extends StatefulWidget {
   const EditItemsPage({
@@ -24,35 +23,24 @@ class _EditItemsPageState
     extends State<EditItemsPage> {
   bool isToggled = false;
   final formKey = GlobalKey<FormState>();
-  ItemPageRepository itemPageRepository =
-      ItemPageRepository();
-  late ItemsPageViewmodel itemsPageViewmodel;
-  AddItemViewmodel addItemViewmodel =
-      AddItemViewmodel();
-  late EditItemViewmodel editItemViewmodel;
 
-  @override
-  void initState() {
-    super.initState();
-    itemsPageViewmodel = ItemsPageViewmodel(
-      itemPageRepository,
-    );
-    editItemViewmodel = EditItemViewmodel(
-      id: widget.id,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((
-      _,
-    ) async {
-      await itemsPageViewmodel.loadItems();
-      editItemViewmodel.getControllerText(
-        itemsPageViewmodel,
-      );
-      setState(() {});
-    });
-  }
+@override
+void initState()
+{
+  super.initState();
+    final editItemViewmodel = context.read<
+        EditItemViewmodel>();
+    final itemsPageViewmodel = context.read<
+        ItemsPageViewmodel>();
+    editItemViewmodel.getControllerText(
+        itemsPageViewmodel, widget.id);
+
+}
 
   @override
   Widget build(BuildContext context) {
+    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -72,7 +60,7 @@ class _EditItemsPageState
         ).getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          editItemViewmodel.appBarTitle,
+          itemsPageViewmodel.EditItemAppBarTitle,
           style: TextStyle(
             color: Theme.of(
               context,
@@ -112,6 +100,8 @@ class _EditItemsPageState
   }
 
   Widget _buildCustomSaveButton() {
+    final  editItemViewmodel = context.watch<EditItemViewmodel>();
+    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
     return Container(
       width: context.getWidth(187),
       height: 50,
@@ -158,7 +148,7 @@ class _EditItemsPageState
           } else {}
         },
         child: Text(
-          addItemViewmodel.addButtonText,
+          itemsPageViewmodel.SaveItemButtonText,
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -170,11 +160,13 @@ class _EditItemsPageState
   }
 
   Widget _buildCustomTextFields() {
+    final editItemViewmodel = context.watch<EditItemViewmodel>();
+    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
     return Column(
       children: [
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemNameLabel,
+              itemsPageViewmodel.itemNameLabel,
           isMandatory: true,
           controller: editItemViewmodel
               .itemNameController,
@@ -192,7 +184,7 @@ class _EditItemsPageState
           children: [
             Expanded(
               child: CustomTextFields(
-                labelText: addItemViewmodel
+                labelText: itemsPageViewmodel
                     .itemPriceLabel,
                 isMandatory: true,
                 maxLength: 10,
@@ -210,7 +202,7 @@ class _EditItemsPageState
             SizedBox(width: context.getWidth(40)),
             Expanded(
               child: CustomTextFields(
-                labelText: addItemViewmodel
+                labelText: itemsPageViewmodel
                     .itemCodeLabel,
                 isMandatory: false,
                 controller: editItemViewmodel
@@ -225,7 +217,7 @@ class _EditItemsPageState
 
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemQuantityLabel,
+          itemsPageViewmodel.itemQuantityLabel,
 
           isMandatory: true,
           controller: editItemViewmodel
@@ -239,7 +231,7 @@ class _EditItemsPageState
         ),
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemCategoryLabel,
+          itemsPageViewmodel.itemCategoryLabel,
 
           isMandatory: false,
           controller: editItemViewmodel
@@ -253,7 +245,7 @@ class _EditItemsPageState
         ),
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemUnitLabel,
+          itemsPageViewmodel.itemUnitLabel,
           isMandatory: false,
           controller: editItemViewmodel
               .itemUnitController,

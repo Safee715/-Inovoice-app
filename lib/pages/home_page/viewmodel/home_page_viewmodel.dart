@@ -13,6 +13,8 @@ class HomePageViewmodel extends ChangeNotifier{
   }){
     setData1();
     setData2();
+    setDataMap1();
+    setDataMap2();
   }
 
   final BuildContext context;
@@ -365,16 +367,36 @@ class HomePageViewmodel extends ChangeNotifier{
   }
 
   //Pie Chart LogicData
-  Map<String, double> dataMap1 = {
-    LanguageManager.translate('Paid'): 10508048.00,
-    LanguageManager.translate('Due'): 5005876.00,
-  };
+  Map<String, double> _dataMap1 = {};
 
-  Map<String, double> dataMap2 = {
-    LanguageManager.translate('Paid'): 10508048.00,
-    LanguageManager.translate('Due'): 505876.00,
-  };
+  Map<String, double> _dataMap2 = {};
   final chartRadius = 276.59;
+  void setDataMap1()
+  {
+    _dataMap1 =
+    {
+      LanguageManager.translate(
+          'Paid'): 10508048.00,
+      LanguageManager.translate(
+          'Due'): 5005876.00,
+    };
+  }
+  void setDataMap2()
+  {
+    _dataMap2 =
+    {
+      LanguageManager.translate('Paid'): 10508048.00,
+      LanguageManager.translate('Due'): 505876.00,
+    };
+
+  }
+  Map<String, double> getDataMap1()
+  {
+    return _dataMap1;
+  }  Map<String, double> getDataMap2()
+  {
+    return _dataMap2;
+  }
 
   List<Color> colorsList = [
     Color(0xffFFBD2E),

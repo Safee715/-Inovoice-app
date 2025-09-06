@@ -4,6 +4,7 @@ import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart'
 import 'package:DummyInvoice/pages/home_page/widgets/draw_pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
+import 'package:provider/provider.dart';
 
 int selected_key = 0;
 
@@ -22,10 +23,8 @@ class _PieChartWidgetState
     extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel =
-        HomePageViewmodel(constant: widget.constant,
-         context: context
-        );
+    final  homePageViewmodel =context.watch<HomePageViewmodel>();
+
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -86,7 +85,7 @@ class _PieChartWidgetState
                         .keyboard_arrow_down_rounded,
                     color: Theme.of(
                       context,
-                    ).getBottomContainerColor(),
+                    ).getTextFormFieldColor(),
                   ),
 
                   items: [
@@ -133,9 +132,9 @@ class _PieChartWidgetState
                           homePageViewmodel,
                       dataMap: selected_key == 0
                           ? homePageViewmodel
-                                .dataMap1
+                                .getDataMap1()
                           : homePageViewmodel
-                                .dataMap2,
+                                .getDataMap2(),
                       colorsList:
                           homePageViewmodel
                               .colorsList,
@@ -151,9 +150,7 @@ class _PieChartWidgetState
                         MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: context.getWidth(
-                          8,
-                        ),
+                        radius:8,
                         backgroundColor:
                             homePageViewmodel
                                 .colorsList[0],
@@ -176,9 +173,7 @@ class _PieChartWidgetState
                         ),
                       ),
                       CircleAvatar(
-                        radius: context.getWidth(
-                          8,
-                        ),
+                        radius:8,
                         backgroundColor:
                             homePageViewmodel
                                 .colorsList[1],

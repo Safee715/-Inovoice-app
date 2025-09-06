@@ -18,7 +18,7 @@ class _OnboardingPage1State
     extends State<OnboardingPage1> {
   @override
   Widget build(BuildContext context) {
-    Constants constants=Constants();
+    Constants constants = Constants();
     final size = MediaQuery.of(context).size;
     final circleRadius = size.width * 0.4;
     print('circleRadius$circleRadius');
@@ -29,14 +29,17 @@ class _OnboardingPage1State
     print('safeRadius$safeRadius');
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Theme.of(context).getBackColor(),
       body: Container(
         padding: EdgeInsets.only(
           bottom: 20,
           top: 20,
         ),
-
         decoration: BoxDecoration(
-          gradient:Theme.of(context).getOnboardingScreenBackGradient(),),
+          gradient: Theme.of(
+            context,
+          ).getOnboardingScreenBackGradient(),
+        ),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -56,8 +59,9 @@ class _OnboardingPage1State
                       alignment: Alignment.center,
                       children: [
                         CircleAvatar(
-                          backgroundColor:
-                          Theme.of(context).getOnboardingCircleColor(),
+                          backgroundColor: Theme.of(
+                            context,
+                          ).getOnboardingCircleColor(),
                           radius: safeRadius,
                         ),
                         Positioned(
@@ -67,7 +71,6 @@ class _OnboardingPage1State
                                 ArcBottomCustomClipper(
                                   radius:
                                       safeRadius,
-
                                 ),
                             child: Image.asset(
                               Assets.SurprisedMan,
@@ -131,19 +134,23 @@ class _OnboardingPage1State
                                   ),
                             ),
                           ),
-                        ),Positioned(
+                        ),
+                        Positioned(
                           right: 29,
                           bottom: 163,
                           child: Image.asset(
                             Assets.Intersect,
-                            width: context.getWidth(28).clamp(28, 28),
+                            width: context
+                                .getWidth(28)
+                                .clamp(28, 28),
                           ),
                         ),
                         Positioned(
                           right: 43,
-                            bottom: 143,
-                            child:SvgPicture.asset(Assets.Paid)
-
+                          bottom: 143,
+                          child: SvgPicture.asset(
+                            Assets.Paid,
+                          ),
                         ),
                         Positioned(
                           right: 5,
@@ -151,7 +158,8 @@ class _OnboardingPage1State
                           child: SvgPicture.asset(
                             Assets.Trend,
                           ),
-                        ), Positioned(
+                        ),
+                        Positioned(
                           right: 0,
                           bottom: 140,
                           child: SvgPicture.asset(
@@ -169,7 +177,8 @@ class _OnboardingPage1State
                           right: 0,
                           bottom: 80,
                           child: SvgPicture.asset(
-                            Assets.YellowDollorObject,
+                            Assets
+                                .YellowDollorObject,
                           ),
                         ),
                       ],
@@ -178,11 +187,14 @@ class _OnboardingPage1State
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                      top: 20,left: 20,right: 20
+                    top: 20,
+                    left: 20,
+                    right: 20,
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    constants.OnboardingPage1Text1,
+                    constants
+                        .OnboardingPage1Text1,
                     softWrap: true,
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -195,38 +207,51 @@ class _OnboardingPage1State
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                  top: 20,left: 20,right: 20
+                    top: 20,
+                    left: 20,
+                    right: 20,
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    constants.OnboardingPage1Text2,
+                    constants
+                        .OnboardingPage1Text2,
                     softWrap: true,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Satoshi',
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).getOnboardingTextColor(),
+                      color: Theme.of(
+                        context,
+                      ).getOnboardingTextColor(),
                       fontSize: 16,
                     ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  child:Row(mainAxisAlignment: MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: context.getWidth(8),
-                        backgroundColor: Color(0xff4082E3),
+                        radius: 8,
+                        backgroundColor: Color(
+                          0xff4082E3,
+                        ),
                       ),
-                      SizedBox(width: context.getWidth(10)),
+                      SizedBox(width: 10),
                       CircleAvatar(
-                        radius: context.getWidth(8),
-                        backgroundColor: Color(0xffD1D1D1),
+                        radius: 8,
+                        backgroundColor: Color(
+                          0xffD1D1D1,
+                        ),
                       ),
                     ],
-                  ) ,
+                  ),
                 ),
-                SizedBox(height: context.getWidth(20),),
+                SizedBox(
+                  height: context.getWidth(20),
+                ),
                 Container(
                   width: context.getWidth(360),
                   decoration: BoxDecoration(
@@ -253,6 +278,10 @@ class _OnboardingPage1State
                       );
                     },
                     style: ElevatedButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(
+                            vertical: 12,
+                          ),
                       overlayColor:
                           Colors.transparent,
                       shadowColor:
@@ -273,14 +302,14 @@ class _OnboardingPage1State
                       style: TextStyle(
                         color: Color(0xffffffff),
                         fontFamily: 'Satoshi',
-                        fontSize: 22,letterSpacing: 1,
+                        fontSize: 22,
+                        letterSpacing: 1,
                         fontWeight:
-                            FontWeight.w900,
+                            FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

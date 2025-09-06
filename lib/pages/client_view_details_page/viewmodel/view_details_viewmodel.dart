@@ -1,9 +1,7 @@
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
-class ViewDetailsViewmodel {
-  ViewDetailsViewmodel({required this.id});
-  final int id;
+class ViewDetailsViewmodel extends ChangeNotifier {
 
   final appBarTitle = 'Client Details';
   final firstNameLabel = 'First Name';
@@ -24,11 +22,10 @@ class ViewDetailsViewmodel {
       TextEditingController();
 
   void getControllerText(
-    ClientPageViewmodel clientPageViewmodel,
+    ClientPageViewmodel clientPageViewmodel,int id
   ) {
     final client = clientPageViewmodel
-        .client
-        .value[id];
+        .getClientByDbId(id);
     firstNameController.text = client.firstName;
     lastNameController.text = client.lastname;
     emailController.text = client.email;

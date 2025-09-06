@@ -97,4 +97,7 @@ const Map<String,String> SpanishStrings={
 'OnboardingPage2Text2':'Rastrea fácilmente tus facturas con etiquetas de colores. Descubre cuáles están pagadas, vencidas o pendientes de pago, y haz seguimiento con un solo toque.' ,
 'Next':'Próximo' ,
 'GetStarted':'Empezar' ,
+'ViewItemAppBarTitle':'Ver detalles' ,
+'EditItemAppBarTitle':'Editar artículo' ,
+'SaveItemButtonText':'Ahorrar' ,
 };

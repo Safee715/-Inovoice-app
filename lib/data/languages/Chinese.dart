@@ -97,4 +97,7 @@ const Map<String,String> ChineseStrings={
 'OnboardingPage2Text2':'使用颜色编码标签轻松追踪您的发票。了解哪些发票已付款、到期或未付款，只需轻点一下即可跟进' ,
 'Next':'下一个' ,
 'GetStarted':'开始' ,
+'ViewItemAppBarTitle':'查看详情' ,
+'EditItemAppBarTitle':'编辑项目' ,
+'SaveItemButtonText':'节省' ,
 };

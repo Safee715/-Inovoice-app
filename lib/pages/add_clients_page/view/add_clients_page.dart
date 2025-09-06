@@ -2,11 +2,12 @@ import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
-import 'package:DummyInvoice/pages/client_page/repo/clients_page_repo.dart';
+import 'package:DummyInvoice/pages/add_clients_page/viewmodel/add_client_viewmodel.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AddClientsPage extends StatefulWidget {
   const AddClientsPage({super.key});
@@ -22,18 +23,13 @@ class _AddClientsPageState
   Constants constants = Constants(
     addButtonText: LanguageManager.translate('Add'),
   );
-  final ClientsPageRepo clientsPageRepo =
-      ClientsPageRepo();
-  late ClientPageViewmodel clientPageViewmodel;
-
-  @override
-  void initState() {
-    super.initState();
-    clientPageViewmodel = ClientPageViewmodel(
-      context,
-      clientsPageRepo,
-    );
-  }
+@override
+  void initState()
+{
+  super.initState();
+  final addClientViewmodel=context.read<AddClientViewmodel>();
+  addClientViewmodel.clearControllers();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +81,7 @@ class _AddClientsPageState
               key: formKey,
               child: Column(
                 children: [
-                  _buildCustomTextFields(
-                    clientPageViewmodel,
-                  ),
+                  _buildCustomTextFields(),
                   SizedBox(height: 30),
                   Row(
                     mainAxisAlignment:
@@ -108,9 +102,7 @@ class _AddClientsPageState
                     ],
                   ),
                   SizedBox(height: 20),
-                  _buildAddButton(
-                    clientPageViewmodel,
-                  ),
+                  _buildAddButton(),
                 ],
               ),
             ),
@@ -120,16 +112,16 @@ class _AddClientsPageState
     );
   }
 
-  Widget _buildCustomTextFields(
-    ClientPageViewmodel clientPageViewmodel,
-  ) {
+  Widget _buildCustomTextFields() {
+    final addClientViewmodel=context.watch<AddClientViewmodel>();
+    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
     return Column(
       children: [
         CustomTextFields(
           labelText: constants.firstNameLabel,
           hintText: constants.firstName,
           isMandatory: true,
-          controller: clientPageViewmodel
+          controller: addClientViewmodel
               .firstNameController,
           maxLength: 40,
           validator: (p0) => clientPageViewmodel
@@ -144,7 +136,7 @@ class _AddClientsPageState
           hintText: constants.lastName,
           isMandatory: true,
           maxLength: 40,
-          controller: clientPageViewmodel
+          controller: addClientViewmodel
               .lastNameController,
           validator: (p0) => clientPageViewmodel
               .nameValidator(p0),
@@ -158,7 +150,7 @@ class _AddClientsPageState
           hintText: constants.emailAddressHint,
           isMandatory: false,
           controller:
-              clientPageViewmodel.emailController,
+          addClientViewmodel.emailController,
           textInputType:
               TextInputType.emailAddress,
           maxLength: 70,
@@ -170,7 +162,7 @@ class _AddClientsPageState
           hintText: constants.phoneNoHint,
           isMandatory: true,
           controller:
-              clientPageViewmodel.phoneController,
+          addClientViewmodel.phoneController,
           textInputType: TextInputType.phone,
           maxLength: 11,
           validator: (p0) => clientPageViewmodel
@@ -184,7 +176,7 @@ class _AddClientsPageState
           labelText: constants.address,
           hintText: constants.addressHint,
           isMandatory: false,
-          controller: clientPageViewmodel
+          controller: addClientViewmodel
               .addressController,
           textInputType: TextInputType.text,
           maxLength: 70,
@@ -200,9 +192,9 @@ class _AddClientsPageState
     );
   }
 
-  Widget _buildAddButton(
-    ClientPageViewmodel clientPageViewmodel,
-  ) {
+  Widget _buildAddButton() {
+    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
+    final addClientViewmodel=context.watch<AddClientViewmodel>();
     return Container(
       width: context.getWidth(187),
       height: 50,
@@ -217,7 +209,13 @@ class _AddClientsPageState
         ),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
-            clientPageViewmodel.addClient();
+          clientPageViewmodel.addClient(
+              firstName: addClientViewmodel.firstNameController.text,
+              lastName: addClientViewmodel.lastNameController.text,
+              emailAddress: addClientViewmodel.emailController.text,
+              phoneNO: addClientViewmodel.phoneController.text,
+              address: addClientViewmodel.addressController.text,
+          );
             selected_page_notifier.value == 2
                 ? selected_page_notifier.value = 0
                 : Navigator.pop(context);

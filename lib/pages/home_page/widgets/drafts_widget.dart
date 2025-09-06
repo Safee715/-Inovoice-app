@@ -3,6 +3,7 @@ import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DraftsWidget extends StatefulWidget {
   const DraftsWidget({super.key,required this.constants});
@@ -17,8 +18,7 @@ class _DraftsWidgetState
 
   @override
   Widget build(BuildContext context) {
-    HomePageViewmodel homePageViewmodel=
-    HomePageViewmodel(constant: widget.constants,context: context);
+ final homePageViewmodel=  context.watch<HomePageViewmodel>();
 
     return SingleChildScrollView(
       child: Column(

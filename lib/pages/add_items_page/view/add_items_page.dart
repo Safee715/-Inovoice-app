@@ -1,10 +1,10 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/pages/add_items_page/viewmodel/add_items_viewmodel.dart';
-import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AddItemsPage extends StatefulWidget {
   const AddItemsPage({super.key});
@@ -18,22 +18,17 @@ class _AddItemsPageState
     extends State<AddItemsPage> {
   bool isToggled = false;
   final formKey = GlobalKey<FormState>();
-  ItemPageRepository itemPageRepository =
-      ItemPageRepository();
-  late ItemsPageViewmodel itemsPageViewmodel;
-  AddItemViewmodel addItemViewmodel =
-      AddItemViewmodel();
 
   @override
-  void initState() {
+  void initState()
+  {
     super.initState();
-    itemsPageViewmodel = ItemsPageViewmodel(
-      itemPageRepository,
-    );
+    final addItemsViewmodel=context.read<AddItemsViewmodel>();
+    addItemsViewmodel.resetFields();
   }
-
   @override
   Widget build(BuildContext context) {
+    final itemsPageViewmodel =context.read<ItemsPageViewmodel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -53,7 +48,7 @@ class _AddItemsPageState
         ).getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          addItemViewmodel.addItemAppBarTitle,
+          itemsPageViewmodel.addItemAppBarTitle,
           style: TextStyle(
             color: Theme.of(
               context,
@@ -94,14 +89,16 @@ class _AddItemsPageState
   }
 
   Widget _customTextFields() {
+    final itemsPageViewmodel =context.read<ItemsPageViewmodel>();//for labels and crud operations
+    final addItemsViewmodel=context.watch<AddItemsViewmodel>();//for controllers
     return Column(
       children: [
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemNameLabel,
-          hintText: addItemViewmodel.itemName,
+          itemsPageViewmodel.itemNameLabel,
+          hintText: itemsPageViewmodel.itemName,
           isMandatory: true,
-          controller: itemsPageViewmodel
+          controller: addItemsViewmodel
               .itemNameController,
           maxLength: 40,
           validator: (p0) => itemsPageViewmodel
@@ -118,14 +115,14 @@ class _AddItemsPageState
           children: [
             Expanded(
               child: CustomTextFields(
-                labelText: addItemViewmodel
+                labelText: itemsPageViewmodel
                     .itemPriceLabel,
                 hintText:
-                    addItemViewmodel.itemPrice,
+                itemsPageViewmodel.itemPrice,
                 isMandatory: true,
                 prefix: '\$',
                 maxLength: 10,
-                controller: itemsPageViewmodel
+                controller: addItemsViewmodel
                     .itemPriceController,
                 textInputType:
                     TextInputType.phone,
@@ -138,12 +135,12 @@ class _AddItemsPageState
             SizedBox(width: context.getWidth(40)),
             Expanded(
               child: CustomTextFields(
-                labelText: addItemViewmodel
+                labelText: itemsPageViewmodel
                     .itemCodeLabel,
                 hintText:
-                    addItemViewmodel.itemCode,
+                itemsPageViewmodel.itemCode,
                 isMandatory: false,
-                controller: itemsPageViewmodel
+                controller: addItemsViewmodel
                     .itemCodeController,
                 textInputType:
                     TextInputType.phone,
@@ -155,10 +152,10 @@ class _AddItemsPageState
 
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemQuantityLabel,
-          hintText: addItemViewmodel.itemQuantity,
+          itemsPageViewmodel.itemQuantityLabel,
+          hintText: itemsPageViewmodel.itemQuantity,
           isMandatory: true,
-          controller: itemsPageViewmodel
+          controller: addItemsViewmodel
               .itemQuantityController,
           textInputType: TextInputType.phone,
           maxLength: 10,
@@ -169,10 +166,10 @@ class _AddItemsPageState
         ),
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemCategoryLabel,
-          hintText: addItemViewmodel.itemCategory,
+          itemsPageViewmodel.itemCategoryLabel,
+          hintText: itemsPageViewmodel.itemCategory,
           isMandatory: false,
-          controller: itemsPageViewmodel
+          controller: addItemsViewmodel
               .itemCategoryController,
           textInputType: TextInputType.text,
           maxLength: 30,
@@ -183,10 +180,10 @@ class _AddItemsPageState
         ),
         CustomTextFields(
           labelText:
-              addItemViewmodel.itemUnitLabel,
-          hintText: addItemViewmodel.itemUnit,
+          itemsPageViewmodel.itemUnitLabel,
+          hintText: itemsPageViewmodel.itemUnit,
           isMandatory: false,
-          controller: itemsPageViewmodel
+          controller: addItemsViewmodel
               .itemUnitController,
           textInputType: TextInputType.text,
           maxLength: 20,
@@ -200,6 +197,7 @@ class _AddItemsPageState
   }
 
   Widget _buildSaveButton() {
+    final itemsPageViewmodel=context.read<ItemsPageViewmodel>();
     return Container(
       width: context.getWidth(187),
       height: 50,
@@ -221,12 +219,19 @@ class _AddItemsPageState
         ),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
-            itemsPageViewmodel.addItem();
+            final addItemViewmodel=context.read<AddItemsViewmodel>();
+            itemsPageViewmodel.addItem(
+                itemName: addItemViewmodel.itemNameController.text,
+                itemPrice: addItemViewmodel.itemPriceController.text,
+                itemCode: addItemViewmodel.itemCodeController.text,
+                itemQuantity: addItemViewmodel.itemQuantityController.text,
+                itemCategory: addItemViewmodel.itemCategoryController.text,
+                itemUnit: addItemViewmodel.itemUnitController.text);
             Navigator.pop(context);
           } else {}
         },
         child: Text(
-          addItemViewmodel.addButtonText,
+          itemsPageViewmodel.addButtonText,
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -236,4 +241,5 @@ class _AddItemsPageState
       ),
     );
   }
+
 }

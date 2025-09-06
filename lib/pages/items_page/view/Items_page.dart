@@ -2,13 +2,12 @@ import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/common_functions.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/add_items_page/view/add_items_page.dart';
-import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:DummyInvoice/widgets/custom_icon_widget.dart';
 import 'package:DummyInvoice/pages/items_page/Widgets/item_details.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ItemsPage extends StatefulWidget {
   ItemsPage({super.key, this.constants});
@@ -21,30 +20,17 @@ class ItemsPage extends StatefulWidget {
 }
 
 class _ItemsPageState extends State<ItemsPage> {
-  late ItemsPageViewmodel itemsPageViewmodel;
   CommonFunctions commonFunctions=CommonFunctions();
-  ItemPageRepository itemPageRepository =
-      ItemPageRepository();
-
-  @override
-  void initState() {
-    super.initState();
-    itemsPageViewmodel = ItemsPageViewmodel(
-      itemPageRepository,
-    );
-    itemsPageViewmodel.loadItems();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).getBackColor(),
         scrolledUnderElevation: 0,
-        backgroundColor: Color(0xFE7EBF2),
         leading: IconButton(
           onPressed: ()
           {
-
           commonFunctions.backButtonForSubNavigationPages(context);
           },
           icon: Icon(
@@ -65,7 +51,7 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
         ),
       ),
-      body: _buildBody(),
+      body: SafeArea(child: _buildBody()),
       floatingActionButton:
           _buildFloatingActionButton(),
       floatingActionButtonLocation:
@@ -73,18 +59,15 @@ class _ItemsPageState extends State<ItemsPage> {
     );
   }
 Widget _buildBody()
-{
+{    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
+final noOfItems=itemsPageViewmodel.getItemsNumber();
   return Padding(
     padding: EdgeInsets.only(
       left: context.getWidth(15),
       right: context.getWidth(15),
     ),
-    child: ValueListenableBuilder(
-      valueListenable:
-      itemsPageViewmodel.items,
-      builder: (context, items, child) {
-        if (items.isEmpty) {
-          return Center(
+    child:noOfItems==0?
+    Center(
             child: Container(
               child: Column(
                 mainAxisAlignment:
@@ -117,15 +100,13 @@ Widget _buildBody()
                 ],
               ),
             ),
-          );
-        } else {
-          print(items.length);
-          return ListView.builder(
-            itemCount: items.length,
+          ):
+         ListView.builder(
+            itemCount: noOfItems,
             itemBuilder: (context, index) {
-              final item = items[index];
+              final currentItem=itemsPageViewmodel.getItem(index);
               final bool isLast =
-                  index == items.length - 1;
+                  index == noOfItems - 1;
               print('index==$index');
               return Padding(
                 padding: EdgeInsets.only(
@@ -137,19 +118,20 @@ Widget _buildBody()
                 child: ItemDetails(
                   itemsPageViewmodel:
                   itemsPageViewmodel,
-                  name: item.itemName,
-                  price: item.itemPrice,
-                  id: item.id!,
+                  name: currentItem.itemName,
+                  price: currentItem.itemPrice,
+                  id: currentItem.id!,
                 ),
               );
             },
-          );
-        }
-      },
-    ),
+          ),
+
+
+
   );
 }
   Widget _buildFloatingActionButton() {
+    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
     return IconButton(
       onPressed: () {
         Navigator.push(

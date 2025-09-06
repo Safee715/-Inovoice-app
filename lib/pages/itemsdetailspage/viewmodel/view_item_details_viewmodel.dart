@@ -1,9 +1,8 @@
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
-class ViewItemsDetailsViewmodel {
-  ViewItemsDetailsViewmodel({required this.id});
-  final id;
+class ViewItemsDetailsViewmodel
+    extends ChangeNotifier {
   final TextEditingController itemNameController =
       TextEditingController();
   final TextEditingController
@@ -21,11 +20,9 @@ class ViewItemsDetailsViewmodel {
 
   void getControllerText(
     ItemsPageViewmodel itemsPageViewmodel,
+    int id,
   ) {
-    final item = itemsPageViewmodel.items.value
-        .firstWhere(
-          (element) => element.id == id,
-        );
+    final item = itemsPageViewmodel.getItemByDbId(id);
     itemNameController.text = item.itemName;
     itemPriceController.text = item.itemPrice
         .toString();

@@ -8,11 +8,13 @@ class ClientPageViewmodel extends ChangeNotifier {
   ClientPageViewmodel(
     this.context,
       this.clientsPageRepo,
-  );
+  ){
+    getClients();
+
+  }
   final context;
   final  ClientsPageRepo clientsPageRepo;
-  ValueNotifier<List<Client>> client =
-      ValueNotifier<List<Client>>([]);
+  List<Client> _client =   [];
   final TextEditingController
   firstNameController = TextEditingController();
   final TextEditingController lastNameController =
@@ -23,32 +25,54 @@ class ClientPageViewmodel extends ChangeNotifier {
       TextEditingController();
   final TextEditingController addressController =
       TextEditingController();
+int getClientsNumber()
+{
+  return _client.length;
+}
+Client getClient(int id)
+{
+  return _client[id];
+}
 
-  void addClient() async {
+  Client getClientByDbId(int dbId)
+  {
+    return _client.firstWhere((element) => element.id==dbId);
+  }
+
+  void addClient(
+  {
+    required String firstName,
+    required String lastName,
+    required String emailAddress,
+    required String phoneNO,
+    required String address,
+}
+
+      ) async {
     await clientsPageRepo.openDb();
     await clientsPageRepo.insertClient(
       Client(
-        firstName: firstNameController.text,
-        lastname: lastNameController.text,
-        email: emailController.text,
-        phoneNo: phoneController.text,
-        address: addressController.text,
+        firstName: firstName,
+        lastname: lastName,
+        email: emailAddress,
+        phoneNo: phoneNO,
+        address: address,
       ),
     );
-
-    notifyListeners();
+ await getClients();
   }
 
-  void getClients() async {
+  Future<void> getClients() async {
     await clientsPageRepo.openDb();
-client.value=await clientsPageRepo.getAllClients();
+_client=await clientsPageRepo.getAllClients();
+notifyListeners();
   }
 
   void delete_Client(int id) async {
     await clientsPageRepo.openDb();
     clientsPageRepo.deleteClient(id);
-    notifyListeners();
-  }
+getClients();
+}
 
   Future<void> editClient(
     int id, {
@@ -68,14 +92,7 @@ client.value=await clientsPageRepo.getAllClients();
         address: newAddress,
       ),
     );
-    client.value[id]=Client(
-      id: id,
-        firstName: newFirstName,
-        lastname: newLastName,
-        email: newEmailAddress,
-        phoneNo: newPhoneNo,
-        address: newAddress);
-    client.value=[...client.value];
+   await getClients();
     clearControllers();
     notifyListeners();
   }
@@ -86,6 +103,7 @@ client.value=await clientsPageRepo.getAllClients();
     phoneController.clear();
     emailController.clear();
     addressController.clear();
+    notifyListeners();
   }
 
 

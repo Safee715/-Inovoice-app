@@ -28,7 +28,7 @@ const Map<String,String> UrduStrings={
 'address':'پتہ' ,
 'saveClientButtonText':'کلائنٹ کی فہرستوں میں محفوظ کریں۔' ,
 'snackBarText':'براہ کرم لازمی فیلڈز پُر کریں۔' ,
-'noDataAvailableText':'کوئی ڈیٹا دستیاب نہیں ہے!' ,
+'noDataAvailableText':'کوئی ڈیٹا دستیاب نہیں!' ,
 'incomeOverviewText':'آمدنی کا جائزہ' ,
 'ThisWeek':'اس ہفتے' ,
 'LastWeek':'گزشتہ ہفتے' ,
@@ -97,4 +97,7 @@ const Map<String,String> UrduStrings={
 'OnboardingPage2Text2':'رنگ کوڈ والے ٹیگز کا استعمال کرتے ہوئے آسانی سے اپنے رسیدوں کو ٹریک کریں۔ جانیں کہ کون سے ادائیگی، واجب الادا، یا غیر ادا شدہ ہیں — اور ایک تھپتھپا کر فالو اپ کریں۔' ,
 'Next':'اگلا' ,
 'GetStarted':'شروع کریں' ,
+'ViewItemAppBarTitle':'تفصیلات دیکھیں' ,
+'EditItemAppBarTitle':'آئٹم میں ترمیم کریں۔' ,
+'SaveItemButtonText':'محفوظ کریں۔' ,
 };

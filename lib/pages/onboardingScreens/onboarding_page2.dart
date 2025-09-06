@@ -28,7 +28,9 @@ class _OnboardingPage2State
     print('safeRadius$safeRadius');
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Theme.of(context).getBackColor(),
       body: Container(
+
         padding: EdgeInsets.only(
           bottom: 20,
           top: 20,
@@ -198,12 +200,12 @@ class _OnboardingPage2State
                   child:Row(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: context.getWidth(8),
+                        radius: 8,
                         backgroundColor: Color(0xffD1D1D1),
                       ),
-                      SizedBox(width: context.getWidth(10)),
+                      SizedBox(width:10),
                       CircleAvatar(
-                        radius: context.getWidth(8),
+                        radius: 8,
                         backgroundColor: Color(0xff4082E3),
                       ),
                     ],
@@ -238,6 +240,7 @@ class _OnboardingPage2State
                       );
                     },
                     style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12),
                       overlayColor:
                           Colors.transparent,
                       shadowColor:
@@ -260,7 +263,7 @@ class _OnboardingPage2State
                         fontFamily: 'Satoshi',
                         fontSize: 22,letterSpacing: 1,
                         fontWeight:
-                            FontWeight.w900,
+                            FontWeight.bold,
                       ),
                     ),
                   ),

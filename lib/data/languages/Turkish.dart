@@ -97,4 +97,7 @@ const Map<String,String> TurkishStrings={
 'OnboardingPage2Text2':'Renk kodlu etiketler kullanarak faturalarınızı kolayca takip edin. Hangilerinin ödendiğini, hangilerinin vadesi geldiğini veya hangilerinin ödenmediğini bilin ve tek dokunuşla takip edin.' ,
 'Next':'Sonraki' ,
 'GetStarted':'Başlayın' ,
+'ViewItemAppBarTitle':'Ayrıntıları Görüntüle' ,
+'EditItemAppBarTitle':'Öğeyi Düzenle' ,
+'SaveItemButtonText':'Kaydetmek' ,
 };

@@ -1,18 +1,17 @@
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/add_items_page/viewmodel/add_items_viewmodel.dart';
-import 'package:DummyInvoice/pages/edit_items_page/viewmodel/edit_item_viewmodel.dart';
-import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/itemsdetailspage/viewmodel/view_item_details_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class ViewItemsDetails extends StatefulWidget {
   const ViewItemsDetails({
     super.key,
     required this.id,
   });
-  final id;
+  final int id;
   @override
   State<ViewItemsDetails> createState() =>
       _ViewItemsDetailsState();
@@ -21,35 +20,21 @@ class ViewItemsDetails extends StatefulWidget {
 class _ViewItemsDetailsState
     extends State<ViewItemsDetails> {
   final formKey = GlobalKey<FormState>();
-  ItemPageRepository itemPageRepository =
-      ItemPageRepository();
-  late ItemsPageViewmodel itemsPageViewmodel;
-  AddItemViewmodel addItemViewmodel =
-      AddItemViewmodel();
-  late EditItemViewmodel editItemViewmodel;
 
-  @override
-  void initState() {
-    super.initState();
-    itemsPageViewmodel = ItemsPageViewmodel(
-      itemPageRepository,
-    );
-    editItemViewmodel = EditItemViewmodel(
-      id: widget.id,
-    );
-    WidgetsBinding.instance.addPostFrameCallback((
-      _,
-    ) async {
-      await itemsPageViewmodel.loadItems();
-      editItemViewmodel.getControllerText(
-        itemsPageViewmodel,
-      );
-      setState(() {});
-    });
-  }
-
+@override
+void initState()
+{
+  super.initState();
+    final itemsPageViewmodel = context.read<
+        ItemsPageViewmodel>();
+    final viewItemsDetailsViewmodel = context
+        .read<ViewItemsDetailsViewmodel>();
+    viewItemsDetailsViewmodel.getControllerText(
+        itemsPageViewmodel, widget.id);
+}
   @override
   Widget build(BuildContext context) {
+    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +52,7 @@ class _ViewItemsDetailsState
             .getBackColor(),
         scrolledUnderElevation: 0,
         title: Text(
-          addItemViewmodel.addItemAppBarTitle,
+          itemsPageViewmodel.ViewItemAppBarTitle,
           style: TextStyle(
             color: Theme.of(context).getTextColor(),
             fontWeight: FontWeight.bold,
@@ -110,14 +95,15 @@ class _ViewItemsDetailsState
     );
   }
   Widget _buildTextFields()
-  {
-    return Column(
+  {   final itemsPageViewmodel=context.read<ItemsPageViewmodel>();
+  final viewItemsDetailsViewmodel=context.read<ViewItemsDetailsViewmodel>();
+  return Column(
        children: [
          CustomTextFields(
-           labelText: addItemViewmodel
+           labelText: itemsPageViewmodel
                .itemNameLabel,
            isMandatory: true,
-           controller: editItemViewmodel
+           controller: viewItemsDetailsViewmodel
                .itemNameController,
            maxLength: 40,
            enabled: false,
@@ -137,14 +123,14 @@ class _ViewItemsDetailsState
              Expanded(
                child: CustomTextFields(
                  labelText:
-                 addItemViewmodel
+                 itemsPageViewmodel
                      .itemPriceLabel,
                  isMandatory: true,
                  prefix: '\$',
                  maxLength: 10,
                  enabled: false,
                  controller:
-                 editItemViewmodel
+                 viewItemsDetailsViewmodel
                      .itemPriceController,
                  textInputType:
                  TextInputType.phone,
@@ -161,12 +147,12 @@ class _ViewItemsDetailsState
              Expanded(
                child: CustomTextFields(
                  labelText:
-                 addItemViewmodel
+                 itemsPageViewmodel
                      .itemCodeLabel,
                  isMandatory: false,
                  enabled: false,
                  controller:
-                 editItemViewmodel
+                 viewItemsDetailsViewmodel
                      .itemCodeController,
                  textInputType:
                  TextInputType.phone,
@@ -177,11 +163,11 @@ class _ViewItemsDetailsState
          ),
 
          CustomTextFields(
-           labelText: addItemViewmodel
+           labelText: itemsPageViewmodel
                .itemQuantityLabel,
 
            isMandatory: true,
-           controller: editItemViewmodel
+           controller: viewItemsDetailsViewmodel
                .itemQuantityController,
            textInputType:
            TextInputType.phone,
@@ -193,11 +179,11 @@ class _ViewItemsDetailsState
            ),
          ),
          CustomTextFields(
-           labelText: addItemViewmodel
+           labelText: itemsPageViewmodel
                .itemCategoryLabel,
 
            isMandatory: false,
-           controller: editItemViewmodel
+           controller: viewItemsDetailsViewmodel
                .itemCategoryController,
            textInputType:
            TextInputType.text,
@@ -211,11 +197,11 @@ class _ViewItemsDetailsState
            ),
          ),
          CustomTextFields(
-           labelText: addItemViewmodel
+           labelText: itemsPageViewmodel
                .itemUnitLabel,
            isMandatory: false,
            enabled: false,
-           controller: editItemViewmodel
+           controller: viewItemsDetailsViewmodel
                .itemUnitController,
            textInputType:
            TextInputType.text,

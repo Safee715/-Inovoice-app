@@ -74,7 +74,7 @@ const Map<String,String> FrenchStrings={
 'Clients':'Clients' ,
 'Items':'Articles' ,
 'Profile':'Profil' ,
-'noProfileAvailableText':'Aucun profil disponible !' ,
+'noProfileAvailableText':'Aucun profil disponible !' ,
 'templates':'Modèles' ,
 'Add':'Ajouter' ,
 'addItemAppBarTitle':'Ajouter un élément' ,
@@ -97,4 +97,7 @@ const Map<String,String> FrenchStrings={
 'OnboardingPage2Text2':'Suivez facilement vos factures grâce à des étiquettes couleur. Identifiez celles qui sont payées, dues ou impayées, et effectuez le suivi en un clic.' ,
 'Next':'Suivant' ,
 'GetStarted':'Commencer' ,
+'ViewItemAppBarTitle':'Voir les détails' ,
+'EditItemAppBarTitle':'Modifier l\'élément' ,
+'SaveItemButtonText':'Sauvegarder' ,
 };

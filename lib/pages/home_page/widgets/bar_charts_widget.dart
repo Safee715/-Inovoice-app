@@ -85,7 +85,7 @@ class _BarChartsWidgetState
                       Icons
                           .keyboard_arrow_down_rounded,
                       color:  Theme.of(context)
-                          .getBottomContainerColor(),
+                          .getTextFormFieldColor(),
                     ),
 
                     items: [

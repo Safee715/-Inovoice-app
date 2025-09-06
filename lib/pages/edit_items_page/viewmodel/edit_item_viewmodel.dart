@@ -1,24 +1,7 @@
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
-class EditItemViewmodel {
-  EditItemViewmodel({required this.id});
-  final id;
-
-  final appBarTitle = 'Edit Item';
-  final itemNameLabel = 'Item Name';
-  final itemPriceLabel = 'Item Price';
-  final itemQuantityLabel = 'Item Quantity';
-  final itemCodeLabel = 'Item Code';
-  final itemCategoryLabel = 'Item Category';
-  final itemUnitLabel = 'Item Unit';
-  final itemName = 'Enter Item Name';
-  final itemPrice = 'Enter Item Price';
-  final itemCode = 'Enter Item Code';
-  final itemQuantity = 'Enter Item Quantity';
-  final itemCategory = 'Enter Item Category';
-  final itemUnit = 'Enter Item Unit';
-  final addButtonText = 'Add Item';
+class EditItemViewmodel extends ChangeNotifier{
 
   final TextEditingController itemNameController =
       TextEditingController();
@@ -36,12 +19,9 @@ class EditItemViewmodel {
       TextEditingController();
 
   void getControllerText(
-    ItemsPageViewmodel itemsPageViewmodel,
+    ItemsPageViewmodel itemsPageViewmodel,int id
   ) {
-    final item = itemsPageViewmodel.items.value
-        .firstWhere(
-          (element) => element.id == id,
-        );
+    final item = itemsPageViewmodel.getItemByDbId(id);
     itemNameController.text = item.itemName;
     itemPriceController.text = item.itemPrice
         .toString();
@@ -53,5 +33,15 @@ class EditItemViewmodel {
     itemCategoryController.text =
         item.itemCategory;
     itemUnitController.text = item.itemUnit;
+  }
+  @override
+  void dispose() {
+    itemNameController.dispose();
+    itemPriceController.dispose();
+    itemCodeController.dispose();
+    itemQuantityController.dispose();
+    itemCategoryController.dispose();
+    itemUnitController.dispose();
+    super.dispose();
   }
 }

@@ -97,4 +97,7 @@ const Map<String,String> EnglishStrings={
 'OnboardingPage2Text2':'Easily track your invoices using color-coded tags. Know which ones are paid, due, or unpaid — and follow up in a tap' ,
 'Next':'Next' ,
 'GetStarted':'Get Started' ,
+'ViewItemAppBarTitle':'View Details' ,
+'EditItemAppBarTitle':'Edit Item' ,
+'SaveItemButtonText':'Save' ,
 };
