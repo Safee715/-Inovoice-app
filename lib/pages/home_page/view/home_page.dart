@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+print('safee');
     return Consumer<HomePageViewmodel>(
       builder: (ctx, viewmodel, child) {
 
@@ -53,7 +53,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+
+              });
+            },
             icon: CustomIconWidget(
               iconaddress: Assets.menuButtonAddress,
               height: 24,

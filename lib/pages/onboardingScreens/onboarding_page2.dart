@@ -1,7 +1,6 @@
 import 'package:DummyInvoice/data/helpers/assets.dart';
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,35 +17,19 @@ class _OnboardingPage2State
   @override
   Widget build(BuildContext context) {
     Constants constants = Constants();
-    final size = MediaQuery.of(context).size;
-    final circleRadius = size.width * 0.4;
-    print('circleRadius$circleRadius');
+    final circleRadius = context.getAdaptiveSizeLength(338/2);
     final safeRadius = circleRadius.clamp(
       80.0,
-      144.0,
+      147.0,
     );
     print('safeRadius$safeRadius');
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Theme.of(context).getBackColor(),
-      body: Container(
-
-        padding: EdgeInsets.only(
-          bottom: 20,
-          top: 20,
-        ),
-        decoration: BoxDecoration(
-          gradient:Theme.of(context).getOnboardingScreenBackGradient(),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
+    return  Container(
+      width: double.infinity,
+      height: double.infinity,
+        child: Column(
               mainAxisAlignment:
                   MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 70,
-                ),
                 Container(
                   padding: EdgeInsets.all(
                     context.getWidth(10),
@@ -72,7 +55,7 @@ class _OnboardingPage2State
                           ),
                         ),
                         Positioned(
-                          left: 65,
+                          left: 55,
                           bottom: 50,
                           child: Container(
                             padding:
@@ -114,38 +97,36 @@ class _OnboardingPage2State
                             child: SvgPicture.asset(
                               Assets
                                   .PaidInvoiceIcon2,
-                              width: context
-                                  .getWidth(130)
-                                  .clamp(
-                                    130,
-                                    130,
-                                  ),
+                                width: context
+                                    .getAdaptiveSizeLength(135)
+
                             ),
                           ),
                         ),
                         Positioned(
-                          right: 86,
-                          bottom: 204,
+                          right: 85,
+                          bottom: 167,
                           child: Image.asset(
                             Assets.Intersect2,
                             width: context
-                                .getWidth(32)
-                                .clamp(32, 32),
+                                .getAdaptiveSizeWidth(28)
                           ),
                         ),
                         Positioned(
-                          bottom: 83,
-                          right: 110,
+                          bottom: 76,
+                          right: 105,
                           child: SvgPicture.asset(
                             Assets.Paid,
+                            width: context.getAdaptiveSizeWidth(37),
                           ),
                         ),
                         Positioned(
-                          bottom: 230,
-                          right: 85,
+                          bottom: 185,
+                          right: 80,
                           child: SvgPicture.asset(
                             Assets
                                 .invoiceIconOfOnboardingPage,
+                            width: context.getAdaptiveSizeWidth(29),
                           ),
                         ),
                         Positioned(
@@ -153,7 +134,7 @@ class _OnboardingPage2State
                           child: SvgPicture.asset(
                             Assets
                                 .IconsOfSecondOnboardingPage,
-                            width:context.getWidth(277).clamp(270, 277) ,
+                            width:context.getAdaptiveSizeWidth(277).clamp(270, 277) ,
                           ),
                         ),
                       ],
@@ -161,8 +142,10 @@ class _OnboardingPage2State
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.only(top: 20),
                   padding: EdgeInsets.only(
-                      top: 20,left: 20,right: 20
+                    left: 20,
+                    right: 20,
                   ),
                   alignment: Alignment.center,
                   child: Text(
@@ -174,7 +157,7 @@ class _OnboardingPage2State
                       fontFamily: 'Satoshi',
                       fontWeight: FontWeight.w900,
                       color: Color(0xff4082E3),
-                      fontSize: 24,
+                      fontSize: context.getTextSize(24),
                     ),
                   ),
                 ),
@@ -191,88 +174,31 @@ class _OnboardingPage2State
                       fontFamily: 'Satoshi',
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).getOnboardingTextColor(),
-                      fontSize: 16,
+                      fontSize: context.getTextSize(18),
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
-                  child:Row(mainAxisAlignment: MainAxisAlignment.center,
+                  margin: EdgeInsets.only(
+                      top:context.getAdaptiveSizeLength(67),
+                      bottom: context.getAdaptiveSizeLength(100)),                  child:Row(mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        radius: 8,
+                        radius: context.getAdaptiveSizeWidth(6),
                         backgroundColor: Color(0xffD1D1D1),
                       ),
                       SizedBox(width:10),
                       CircleAvatar(
-                        radius: 8,
+                        radius: context.getAdaptiveSizeWidth(6),
                         backgroundColor: Color(0xff4082E3),
                       ),
                     ],
                   ) ,
                 ),
-                SizedBox(height: context.getWidth(20),),
-                Container(
-                  width: context.getWidth(360),
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(10),
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xff9CD9FF),
-                        Color(0xff4082E3),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return MainNavigationPage(
-                              constant: constants,
-                            );
-                          },
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                      overlayColor:
-                          Colors.transparent,
-                      shadowColor:
-                          Colors.transparent,
-                      backgroundColor:
-                          Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadiusGeometry.circular(
-                              context.getWidth(
-                                10,
-                              ),
-                            ),
-                      ),
-                    ),
-                    child: Text(
-                      constants.GetStarted,
-                      style: TextStyle(
-                        color: Color(0xffffffff),
-                        fontFamily: 'Satoshi',
-                        fontSize: 22,letterSpacing: 1,
-                        fontWeight:
-                            FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+      );
+
+
   }
 }

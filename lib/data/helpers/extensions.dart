@@ -5,6 +5,21 @@ extension contextExtension on BuildContext {
       Theme.of(this).brightness ==
       Brightness.dark;
 
+  double getAdaptiveSizeLength(double figmaSize) {
+    double screenHeight= MediaQuery.of(this).size.height;
+    double screenWidth= MediaQuery.of(this).size.width;
+    bool isLength=screenHeight>screenWidth?true:false;
+    double figmaLength=1046;
+    return (figmaSize/( figmaLength))*
+        (isLength?screenHeight:screenWidth);
+  } double getAdaptiveSizeWidth(double figmaSize) {
+    double screenHeight= MediaQuery.of(this).size.height;
+    double screenWidth= MediaQuery.of(this).size.width;
+    bool isWidth=screenHeight>screenWidth?true:false;
+    double figmaWidth=412;
+    return (figmaSize/( figmaWidth))*
+        (isWidth?screenWidth:screenHeight);
+  }
   double getWidth(double figmaWidth) {
     double width =
         (figmaWidth / 412) *
@@ -17,6 +32,15 @@ extension contextExtension on BuildContext {
         (figmaHeight / 1046) *
         (MediaQuery.of(this).size.height);
     return height;
+  }
+  double getTextSize(double figmaFontSize)
+  {
+    double screenHeight= MediaQuery.of(this).size.height;
+    double screenWidth= MediaQuery.of(this).size.width;
+
+    return (figmaFontSize/ 1046)*
+        (screenHeight<screenWidth?screenWidth:screenHeight);
+
   }
 }
 

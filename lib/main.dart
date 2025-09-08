@@ -13,7 +13,8 @@ import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart'
 import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/itemsdetailspage/viewmodel/view_item_details_viewmodel.dart';
-import 'package:DummyInvoice/pages/onboardingScreens/onboarding_page1.dart';
+import 'package:DummyInvoice/pages/onboardingScreens/onboarding_page.dart';
+import 'package:DummyInvoice/pages/onboardingScreens/viewmodel/onboarding_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ ItemPageRepository itemPageRepository=ItemPageRepository();
       ChangeNotifierProvider(create: (context) => EditClientViewmodel( ),),
       ChangeNotifierProvider(create: (context) => ViewDetailsViewmodel(),),
       ChangeNotifierProvider(create: (context) => AddClientViewmodel(),),
+      ChangeNotifierProvider(create: (context) => OnboardingPageViewmodel(),),
     ],
       child:  const Myapp(),
     )
@@ -116,7 +118,7 @@ class _MyappState extends State<Myapp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: OnboardingPage1(),
+      home: OnboardingPage(),
 
       themeMode: ThemeMode.system,
     );
