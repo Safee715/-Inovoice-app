@@ -209,7 +209,7 @@ class _AddClientsPageState
         ),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
-          clientPageViewmodel.addClient(
+       await   clientPageViewmodel.addClient(
               firstName: addClientViewmodel.firstNameController.text,
               lastName: addClientViewmodel.lastNameController.text,
               emailAddress: addClientViewmodel.emailController.text,

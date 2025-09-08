@@ -7,7 +7,7 @@ class ClientsPageRepo {
 
   Future<Database> openDb() async {
     var databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'Item.db');
+    String path = join(databasePath, 'app.db');
     return await openDatabase(
       path,
       version: 2,
@@ -26,7 +26,7 @@ class ClientsPageRepo {
   
       ''');
 
-          print('sql executed successfully');
+          print('sql items executed successfully');
         } catch (e) {
           return print('$e');
         }
@@ -39,7 +39,7 @@ class ClientsPageRepo {
         $columnLastName text,
         $columnEmail text,
         $columnPhone text,
-        $columnAddress text,
+        $columnAddress text
         ); 
         ''');
           print(
@@ -53,7 +53,7 @@ class ClientsPageRepo {
           (db, oldVersion, newVersion) async {
             if (oldVersion < 2) {
               await db.execute('''
-        create table Clients
+        create table if not exists Clients
         ($columnClientId integer primary key autoincrement,
         $columnFirstName text,
         $columnLastName text,

@@ -24,7 +24,11 @@ class _AddItemsPageState
   {
     super.initState();
     final addItemsViewmodel=context.read<AddItemsViewmodel>();
-    addItemsViewmodel.resetFields();
+    WidgetsBinding.instance.addPostFrameCallback((_)
+    {
+      addItemsViewmodel.resetFields();
+    }
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -130,6 +134,8 @@ class _AddItemsPageState
                     FilteringTextInputFormatter.allow(
                       RegExp(r'[0-9]'),
                     ),
+                validator: (p0) => itemsPageViewmodel
+                    .priceValidator(p0),
               ),
             ),
             SizedBox(width: context.getWidth(40)),
@@ -139,12 +145,14 @@ class _AddItemsPageState
                     .itemCodeLabel,
                 hintText:
                 itemsPageViewmodel.itemCode,
-                isMandatory: false,
+                isMandatory: true,
                 controller: addItemsViewmodel
                     .itemCodeController,
                 textInputType:
                     TextInputType.phone,
                 maxLength: 10,
+                validator: (p0) => itemsPageViewmodel
+                    .codeValidator(p0),
               ),
             ),
           ],
@@ -159,6 +167,8 @@ class _AddItemsPageState
               .itemQuantityController,
           textInputType: TextInputType.phone,
           maxLength: 10,
+          validator: (p0) => itemsPageViewmodel
+              .quantityValidator(p0),
           inputFormatter:
               FilteringTextInputFormatter.allow(
                 RegExp(r'[0-9]+'),

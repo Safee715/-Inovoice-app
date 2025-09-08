@@ -8,8 +8,19 @@ class CommonFunctions {
   Future<bool>  showSecurityPrompt(BuildContext context) async{
     return await  showDialog<bool>(context: context,
       builder: (BuildContext dialogueContext) {
-        return AlertDialog(actionsAlignment: MainAxisAlignment.spaceBetween,
-          content: Text('Are you want to exit?'),
+        return AlertDialog(
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          content: Container(
+            height: 100,
+            child: Column(spacing: 10,mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(backgroundColor: Colors.red.withValues(alpha: 0.1),radius: 35,
+                  child: Icon(Icons.exit_to_app_outlined,color: Colors.red,size: 30,),),
+                Text('Are you sure you want to exit?',style: TextStyle(fontWeight: FontWeight.bold),),
+              ],
+            ),
+          ),
           actions: [
             Container(
               child: Row(

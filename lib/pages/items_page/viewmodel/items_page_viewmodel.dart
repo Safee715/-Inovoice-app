@@ -198,5 +198,20 @@ class ItemsPageViewmodel extends ChangeNotifier {
       return 'Enter a valid Phone';
     }
     return null;
+  } String? quantityValidator(String? value) {
+    if ((value == null) || (value.isEmpty)) {
+      return 'Please Enter quantity';
+    }
+    return null;
+  } String? priceValidator(String? value) {
+    if ((value == null) || (value.isEmpty)) {
+      return 'Please Enter price';
+    }
+    return null;
+  } String? codeValidator(String? value) {
+    if ((value == null) || (value.isEmpty)) {
+      return 'Please Enter code';
+    }
+    return null;
   }
 }

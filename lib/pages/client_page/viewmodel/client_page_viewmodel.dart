@@ -39,7 +39,7 @@ Client getClient(int id)
     return _client.firstWhere((element) => element.id==dbId);
   }
 
-  void addClient(
+  Future<void> addClient(
   {
     required String firstName,
     required String lastName,
@@ -70,7 +70,7 @@ notifyListeners();
 
   void delete_Client(int id) async {
     await clientsPageRepo.openDb();
-    clientsPageRepo.deleteClient(id);
+    await clientsPageRepo.deleteClient(id);
 getClients();
 }
 

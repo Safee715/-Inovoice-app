@@ -57,7 +57,7 @@ extension colors on ThemeData {
       stops: [0.0, 0.5],
     ): LinearGradient(
       colors: [
-        Color(0xffD7E5FF),
+        Color(0xff4082E3),
         Color(0xffffffff),
       ],
       begin: Alignment.topCenter,

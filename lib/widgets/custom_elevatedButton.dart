@@ -36,7 +36,7 @@ class _CustomElevatedButtonState
       width: context.getWidth(187),
       height: 50,
       decoration: BoxDecoration(border: Border.all(color: widget.borderColor??Colors.transparent),
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(10.0),
         gradient: widget.gradient?constants.gradient
             :LinearGradient(
             colors: [

@@ -24,6 +24,7 @@ class _MainNavigationPageState
 CommonFunctions commonFunctions=CommonFunctions();
   @override
   Widget build(BuildContext context) {
+    print('MainNavigationPage');
     return PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, result) async{
