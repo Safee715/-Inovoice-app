@@ -53,7 +53,7 @@ print('safee');
           ),
           leading: IconButton(
             onPressed: () {},
-            icon: CustomIconWidget(
+            icon:  CustomIconWidget(
               iconaddress: Assets.menuButtonAddress,
               height: 24,
               weight: 24,
