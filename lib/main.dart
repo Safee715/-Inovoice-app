@@ -15,6 +15,7 @@ import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dar
 import 'package:DummyInvoice/pages/itemsdetailspage/viewmodel/view_item_details_viewmodel.dart';
 import 'package:DummyInvoice/pages/onboardingScreens/onboarding_page.dart';
 import 'package:DummyInvoice/pages/onboardingScreens/viewmodel/onboarding_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/profile_page/viewmodel/profile_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
@@ -42,6 +43,7 @@ ItemPageRepository itemPageRepository=ItemPageRepository();
       ChangeNotifierProvider(create: (context) => ViewDetailsViewmodel(),),
       ChangeNotifierProvider(create: (context) => AddClientViewmodel(),),
       ChangeNotifierProvider(create: (context) => OnboardingPageViewmodel(),),
+      ChangeNotifierProvider(create: (context) => ProfilePageViewmodel(clientsPageRepo: clientsPageRepo),),
     ],
       child:  const Myapp(),
     )

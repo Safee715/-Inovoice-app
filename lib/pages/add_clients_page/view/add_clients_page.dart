@@ -21,15 +21,18 @@ class _AddClientsPageState
     extends State<AddClientsPage> {
   final formKey = GlobalKey<FormState>();
   Constants constants = Constants(
-    addButtonText: LanguageManager.translate('Add'),
+    addButtonText: LanguageManager.translate(
+      'Add',
+    ),
   );
-@override
-  void initState()
-{
-  super.initState();
-  final addClientViewmodel=context.read<AddClientViewmodel>();
-  addClientViewmodel.clearControllers();
-}
+
+  @override
+  void initState() {
+    super.initState();
+    final addClientViewmodel = context
+        .read<AddClientViewmodel>();
+    addClientViewmodel.clearControllers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +111,15 @@ class _AddClientsPageState
             ),
           ),
         ),
-      )
+      ),
     );
   }
 
   Widget _buildCustomTextFields() {
-    final addClientViewmodel=context.watch<AddClientViewmodel>();
-    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
+    final addClientViewmodel = context
+        .watch<AddClientViewmodel>();
+    final clientPageViewmodel = context
+        .watch<ClientPageViewmodel>();
     return Column(
       children: [
         CustomTextFields(
@@ -128,7 +133,7 @@ class _AddClientsPageState
               .nameValidator(p0),
           inputFormatter:
               FilteringTextInputFormatter.allow(
-               clientPageViewmodel.getRegExp()
+                clientPageViewmodel.getRegExp(),
               ),
         ),
         CustomTextFields(
@@ -142,7 +147,7 @@ class _AddClientsPageState
               .nameValidator(p0),
           inputFormatter:
               FilteringTextInputFormatter.allow(
-                clientPageViewmodel.getRegExp()
+                clientPageViewmodel.getRegExp(),
               ),
         ),
         CustomTextFields(
@@ -150,7 +155,7 @@ class _AddClientsPageState
           hintText: constants.emailAddressHint,
           isMandatory: false,
           controller:
-          addClientViewmodel.emailController,
+              addClientViewmodel.emailController,
           textInputType:
               TextInputType.emailAddress,
           maxLength: 70,
@@ -162,7 +167,7 @@ class _AddClientsPageState
           hintText: constants.phoneNoHint,
           isMandatory: true,
           controller:
-          addClientViewmodel.phoneController,
+              addClientViewmodel.phoneController,
           textInputType: TextInputType.phone,
           maxLength: 11,
           validator: (p0) => clientPageViewmodel
@@ -180,21 +185,24 @@ class _AddClientsPageState
               .addressController,
           textInputType: TextInputType.text,
           maxLength: 70,
-          inputFormatter:
-              FilteringTextInputFormatter.allow(
-                RegExp( r'^[a-zA-Z0-9\u00C0-\u00FF\u0100-\u024F' // Latin + accents (French, Spanish, Turkish)
-                r'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF' // Arabic/Urdu
-                r'\u4E00-\u9FFF\u3400-\u4DBF' // Chinese
-                r'\s]+$'),
-              ),
+          inputFormatter: FilteringTextInputFormatter.allow(
+            RegExp(
+              r'^[a-zA-Z0-9\u00C0-\u00FF\u0100-\u024F' // Latin + accents (French, Spanish, Turkish)
+              r'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF' // Arabic/Urdu
+              r'\u4E00-\u9FFF\u3400-\u4DBF' // Chinese
+              r'\s]+$',
+            ),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildAddButton() {
-    final clientPageViewmodel = context.watch<ClientPageViewmodel>();
-    final addClientViewmodel=context.watch<AddClientViewmodel>();
+    final clientPageViewmodel = context
+        .watch<ClientPageViewmodel>();
+    final addClientViewmodel = context
+        .watch<AddClientViewmodel>();
     return Container(
       width: context.getWidth(187),
       height: 50,
@@ -209,13 +217,23 @@ class _AddClientsPageState
         ),
         onPressed: () async {
           if (formKey.currentState!.validate()) {
-       await   clientPageViewmodel.addClient(
-              firstName: addClientViewmodel.firstNameController.text,
-              lastName: addClientViewmodel.lastNameController.text,
-              emailAddress: addClientViewmodel.emailController.text,
-              phoneNO: addClientViewmodel.phoneController.text,
-              address: addClientViewmodel.addressController.text,
-          );
+            await clientPageViewmodel.addClient(
+              firstName: addClientViewmodel
+                  .firstNameController
+                  .text,
+              lastName: addClientViewmodel
+                  .lastNameController
+                  .text,
+              emailAddress: addClientViewmodel
+                  .emailController
+                  .text,
+              phoneNO: addClientViewmodel
+                  .phoneController
+                  .text,
+              address: addClientViewmodel
+                  .addressController
+                  .text,
+            );
             selected_page_notifier.value == 2
                 ? selected_page_notifier.value = 0
                 : Navigator.pop(context);

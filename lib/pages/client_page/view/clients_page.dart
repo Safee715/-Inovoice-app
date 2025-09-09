@@ -19,6 +19,7 @@ class ClientsPage extends StatefulWidget {
 
 class _ClientsPageState
     extends State<ClientsPage> {
+
   Constants constants = Constants();
   CommonFunctions commonFunctions=CommonFunctions();
 
@@ -74,77 +75,81 @@ class _ClientsPageState
   Widget _buildBody(
 
   ) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: context.getWidth(15),
-        right: context.getWidth(15),
-      ),
-      child:
-          Consumer<ClientPageViewmodel>(
-            builder: (context, clientPageViewmodel, child) {
-              final noOfClients=clientPageViewmodel.getClientsNumber();
-             if (noOfClients==0) {
-               return Center(
-                 child: Column(
-                   mainAxisAlignment:
-                   MainAxisAlignment
-                       .center,
-                   children: [
-                     CustomIconWidget(
-                       iconaddress:
-                       Assets.NoDataIcon,
-                       height: context
-                           .getWidth(65),
-                       weight: context
-                           .getWidth(114),
-                     ),
-                     Text(
-                       maxLines: 2,
-                       softWrap: true,
-                       constants
-                           .noDataAvailableText,
-                       style: TextStyle(
-                         color: Color(
-                           0xffBEC0CC,
-                         ),
-                         fontSize: 14,
+    final clientPageViewmodel=context.read<ClientPageViewmodel>();
+    return RefreshIndicator(
+      onRefresh:clientPageViewmodel.getClients,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: context.getWidth(15),
+          right: context.getWidth(15),
+        ),
+        child:
+            Consumer<ClientPageViewmodel>(
+              builder: (context, clientPageViewmodel, child) {
+                final noOfClients=clientPageViewmodel.getClientsNumber();
+               if (noOfClients==0) {
+                 return Center(
+                   child: Column(
+                     mainAxisAlignment:
+                     MainAxisAlignment
+                         .center,
+                     children: [
+                       CustomIconWidget(
+                         iconaddress:
+                         Assets.NoDataIcon,
+                         height: context
+                             .getWidth(65),
+                         weight: context
+                             .getWidth(114),
                        ),
-                     ),
-                   ],
-                 ),
-               );
-              }
-             else {
-               return
-                 ListView.builder(
-                   itemCount: noOfClients,
-                   itemBuilder: (context, index) {
-                     final bool isLast = index ==
-                         noOfClients - 1;
-                     final currentClient = clientPageViewmodel
-                         .getClient(index);
-                     return Padding(
-                       padding: EdgeInsets.only(
-                         top: context.getWidth(5),
-                         bottom: context.getWidth(
-                           isLast ? 50 : 5,
+                       Text(
+                         maxLines: 2,
+                         softWrap: true,
+                         constants
+                             .noDataAvailableText,
+                         style: TextStyle(
+                           color: Color(
+                             0xffBEC0CC,
+                           ),
+                           fontSize: 14,
                          ),
                        ),
-                       child: ClientsDetails(
-                         name:
-                         '${currentClient
-                             .firstName} ${currentClient
-                             .lastname}',
-                         email: currentClient
-                             .email,
-                         id: currentClient.id!,
-                       ),
-                     );
-                   },
+                     ],
+                   ),
                  );
-             }
-          },
-          ),
+                }
+               else {
+                 return
+                   ListView.builder(
+                     itemCount: noOfClients,
+                     itemBuilder: (context, index) {
+                       final bool isLast = index ==
+                           noOfClients - 1;
+                       final currentClient = clientPageViewmodel
+                           .getClient(index);
+                       return Padding(
+                         padding: EdgeInsets.only(
+                           top: context.getWidth(5),
+                           bottom: context.getWidth(
+                             isLast ? 50 : 5,
+                           ),
+                         ),
+                         child: ClientsDetails(
+                           name:
+                           '${currentClient
+                               .firstName} ${currentClient
+                               .lastname}',
+                           email: currentClient
+                               .email,
+                           id: currentClient.id!,
+                         ),
+                       );
+                     },
+                   );
+               }
+            },
+            ),
+      ),
     );
 
 
