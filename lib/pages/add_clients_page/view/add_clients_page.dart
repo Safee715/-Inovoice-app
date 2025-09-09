@@ -4,6 +4,7 @@ import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/data/notifiers.dart';
 import 'package:DummyInvoice/pages/add_clients_page/viewmodel/add_client_viewmodel.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
+import 'package:DummyInvoice/pages/profile_page/viewmodel/profile_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/custom_text_fields.dart';
 import 'package:flutter/services.dart';
@@ -199,6 +200,8 @@ class _AddClientsPageState
   }
 
   Widget _buildAddButton() {
+    final profilePageViewmodel=context.watch<ProfilePageViewmodel>();
+
     final clientPageViewmodel = context
         .watch<ClientPageViewmodel>();
     final addClientViewmodel = context
@@ -234,6 +237,7 @@ class _AddClientsPageState
                   .addressController
                   .text,
             );
+            await  profilePageViewmodel.loadClients();
             selected_page_notifier.value == 2
                 ? selected_page_notifier.value = 0
                 : Navigator.pop(context);
