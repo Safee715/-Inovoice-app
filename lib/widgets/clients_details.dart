@@ -1,5 +1,6 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/pages/client_page/repo/clients_page_repo.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/clients_menu_widget.dart';
@@ -10,14 +11,12 @@ class ClientsDetails extends StatefulWidget {
     required this.name,
     required this.email,
     required this.id,
-    required this.clientPageViewmodel,
 
   });
 
   final String name;
   final String email;
   final int id;
-  final ClientPageViewmodel clientPageViewmodel;
 
 
   @override
@@ -48,9 +47,9 @@ class _ClientsDetailsState
   }
 
   Constants constants = Constants();
-
   @override
   Widget build(BuildContext context) {
+
     return ListTile(
       contentPadding: EdgeInsets.symmetric(
         vertical: 10.0,
@@ -109,7 +108,6 @@ class _ClientsDetailsState
         ],
       ),
       trailing: ClientsMenuWidget(
-        clientPageViewmodel: widget.clientPageViewmodel,
         constants: constants,
         id: widget.id,
       ),

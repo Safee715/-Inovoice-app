@@ -131,8 +131,6 @@ class _ClientsPageState
                          ),
                        ),
                        child: ClientsDetails(
-                         clientPageViewmodel:
-                         clientPageViewmodel,
                          name:
                          '${currentClient
                              .firstName} ${currentClient
