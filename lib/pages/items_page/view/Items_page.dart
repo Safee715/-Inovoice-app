@@ -20,18 +20,25 @@ class ItemsPage extends StatefulWidget {
 }
 
 class _ItemsPageState extends State<ItemsPage> {
-  CommonFunctions commonFunctions=CommonFunctions();
+  CommonFunctions commonFunctions =
+      CommonFunctions();
 
   @override
   Widget build(BuildContext context) {
+    print('ItemsPage');
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).getBackColor(),
+        backgroundColor: Theme.of(
+          context,
+        ).getBackColor(),
         scrolledUnderElevation: 0,
         leading: IconButton(
-          onPressed: ()
-          {
-          commonFunctions.backButtonForSubNavigationPages(context);
+          onPressed: () {
+            commonFunctions
+                .backButtonForSubNavigationPages(
+                  context,
+                );
           },
           icon: Icon(
             Icons.arrow_back_ios_outlined,
@@ -41,7 +48,7 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
         ),
         title: Text(
-         widget.constants!.itemsAppBarTitle,
+          widget.constants!.itemsAppBarTitle,
           style: TextStyle(
             color: Theme.of(
               context,
@@ -51,87 +58,93 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
         ),
       ),
-      body: SafeArea(child: _buildBody()),
+      body: _buildBody(),
       floatingActionButton:
           _buildFloatingActionButton(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.endDocked,
     );
   }
-Widget _buildBody()
-{    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
-final noOfItems=itemsPageViewmodel.getItemsNumber();
-  return Padding(
-    padding: EdgeInsets.only(
-      left: context.getWidth(15),
-      right: context.getWidth(15),
-    ),
-    child:noOfItems==0?
-    Center(
-            child: Container(
-              child: Column(
-                mainAxisAlignment:
-                MainAxisAlignment.center,
-                children: [
-                  CustomIconWidget(
-                    iconaddress:
-                    Assets.NoDataIcon,
-                    height: context.getWidth(
-                      65,
-                    ),
-                    weight: context.getWidth(
-                      114,
-                    ),
-                  ),
-                  Text(
-                    widget
-                        .constants!
-                        .noDataAvailableText,
-                    maxLines: 2,
-                    softWrap: true,
 
-                    style: TextStyle(
-                      color: Color(
-                        0xffBEC0CC,
+  Widget _buildBody() {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: context.getWidth(15),
+        right: context.getWidth(15),
+      ),
+      child: Consumer<ItemsPageViewmodel>(
+        builder: (context, itemsPageViewmodel, child) {
+          final noOfItems = itemsPageViewmodel.getItemsNumber();
+          if (noOfItems == 0) {
+            return Center(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  children: [
+                    CustomIconWidget(
+                      iconaddress:
+                          Assets.NoDataIcon,
+                      height: context.getWidth(
+                        65,
                       ),
-                      fontSize: 14,
+                      weight: context.getWidth(
+                        114,
+                      ),
+                    ),
+                    Text(
+                      widget
+                          .constants!
+                          .noDataAvailableText,
+                      maxLines: 2,
+                      softWrap: true,
+
+                      style: TextStyle(
+                        color: Color(0xffBEC0CC),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: noOfItems,
+              itemBuilder: (context, index) {
+                final currentItem =
+                    itemsPageViewmodel.getItem(
+                      index,
+                    );
+                final bool isLast =
+                    index == noOfItems - 1;
+                print('index==$index');
+                return Padding(
+                  padding: EdgeInsets.only(
+                    top: context.getWidth(5),
+                    bottom: context.getWidth(
+                      isLast ? 50 : 5,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ):
-         ListView.builder(
-            itemCount: noOfItems,
-            itemBuilder: (context, index) {
-              final currentItem=itemsPageViewmodel.getItem(index);
-              final bool isLast =
-                  index == noOfItems - 1;
-              print('index==$index');
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: context.getWidth(5),
-                  bottom: context.getWidth(
-                    isLast ? 50 : 5,
+                  child: ItemDetails(
+                    itemsPageViewmodel:
+                        itemsPageViewmodel,
+                    name: currentItem.itemName,
+                    price: currentItem.itemPrice,
+                    id: currentItem.id!,
                   ),
-                ),
-                child: ItemDetails(
-                  itemsPageViewmodel:
-                  itemsPageViewmodel,
-                  name: currentItem.itemName,
-                  price: currentItem.itemPrice,
-                  id: currentItem.id!,
-                ),
-              );
-            },
-          ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 
-
-
-  );
-}
   Widget _buildFloatingActionButton() {
-    final itemsPageViewmodel=context.watch<ItemsPageViewmodel>();
+    final itemsPageViewmodel = context
+        .read<ItemsPageViewmodel>();
     return IconButton(
       onPressed: () {
         Navigator.push(

@@ -24,7 +24,7 @@ class _ClientsPageState
 
   @override
   Widget build(BuildContext context) {
-    final clientPageViewmodel =context.watch<ClientPageViewmodel>();
+    print('ClientsPage');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -62,10 +62,8 @@ class _ClientsPageState
             ),
           ),
         ),
-        body:  _buildBody(clientPageViewmodel),
-        floatingActionButton: _addClientButton(
-          clientPageViewmodel,
-        ),
+        body:   _buildBody(),
+        floatingActionButton: _addClientButton(),
         floatingActionButtonLocation:
             FloatingActionButtonLocation
                 .endDocked,
@@ -74,77 +72,90 @@ class _ClientsPageState
   }
 
   Widget _buildBody(
-    ClientPageViewmodel clientPageViewmodel,
+
   ) {
-    final noOfClients=clientPageViewmodel.getClientsNumber();
     return Padding(
       padding: EdgeInsets.only(
         left: context.getWidth(15),
         right: context.getWidth(15),
       ),
       child:
-      noOfClients==0 ? Center(
-              child: Column(
-                mainAxisAlignment:
-                    MainAxisAlignment
-                        .center,
-                children: [
-                  CustomIconWidget(
-                    iconaddress:
-                        Assets.NoDataIcon,
-                    height: context
-                        .getWidth(65),
-                    weight: context
-                        .getWidth(114),
-                  ),
-                  Text(
-                    maxLines: 2,
-                    softWrap: true,
-                    constants
-                        .noDataAvailableText,
-                    style: TextStyle(
-                      color: Color(
-                        0xffBEC0CC,
-                      ),
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ):
-      ListView.builder(
-              itemCount: noOfClients,
-              itemBuilder: (context, index) {
-              final bool isLast =index == noOfClients - 1;
-              final currentClient=clientPageViewmodel.getClient(index);
-                return Padding(
-                  padding: EdgeInsets.only(
-                    top: context.getWidth(5),
-                    bottom: context.getWidth(
-                      isLast ? 50 : 5,
-                    ),
-                  ),
-                  child: ClientsDetails(
-                    clientPageViewmodel:
-                        clientPageViewmodel,
-                    name:
-                        '${currentClient.firstName} ${currentClient.lastname}',
-                    email: currentClient
-                        .email,
-                    id: currentClient.id!,
-                  ),
-                );
-              },
-            ),
+          Consumer<ClientPageViewmodel>(
+            builder: (context, clientPageViewmodel, child) {
+              final noOfClients=clientPageViewmodel.getClientsNumber();
+             if (noOfClients==0) {
+               return Center(
+                 child: Column(
+                   mainAxisAlignment:
+                   MainAxisAlignment
+                       .center,
+                   children: [
+                     CustomIconWidget(
+                       iconaddress:
+                       Assets.NoDataIcon,
+                       height: context
+                           .getWidth(65),
+                       weight: context
+                           .getWidth(114),
+                     ),
+                     Text(
+                       maxLines: 2,
+                       softWrap: true,
+                       constants
+                           .noDataAvailableText,
+                       style: TextStyle(
+                         color: Color(
+                           0xffBEC0CC,
+                         ),
+                         fontSize: 14,
+                       ),
+                     ),
+                   ],
+                 ),
+               );
+              }
+             else {
+               return
+                 ListView.builder(
+                   itemCount: noOfClients,
+                   itemBuilder: (context, index) {
+                     final bool isLast = index ==
+                         noOfClients - 1;
+                     final currentClient = clientPageViewmodel
+                         .getClient(index);
+                     return Padding(
+                       padding: EdgeInsets.only(
+                         top: context.getWidth(5),
+                         bottom: context.getWidth(
+                           isLast ? 50 : 5,
+                         ),
+                       ),
+                       child: ClientsDetails(
+                         clientPageViewmodel:
+                         clientPageViewmodel,
+                         name:
+                         '${currentClient
+                             .firstName} ${currentClient
+                             .lastname}',
+                         email: currentClient
+                             .email,
+                         id: currentClient.id!,
+                       ),
+                     );
+                   },
+                 );
+             }
+          },
+          ),
     );
 
 
   }
 
   Widget _addClientButton(
-    ClientPageViewmodel clientPageViewmodel,
   ) {
-    return IconButton(
+
+  return IconButton(
       onPressed: () {
         Navigator.push(
           context,

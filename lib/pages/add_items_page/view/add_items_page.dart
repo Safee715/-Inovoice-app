@@ -33,6 +33,8 @@ class _AddItemsPageState
   @override
   Widget build(BuildContext context) {
     final itemsPageViewmodel =context.read<ItemsPageViewmodel>();
+    print('AddItemsPageBuild');
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

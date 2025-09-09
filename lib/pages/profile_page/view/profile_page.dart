@@ -36,7 +36,7 @@ class _ProfilePageState
           width: double.infinity,
           height: 500,
           padding: EdgeInsets.all(20),
-          child: Column(
+          child: Column(spacing: 20,
             mainAxisAlignment:
                 MainAxisAlignment.center,
             children: [
@@ -44,10 +44,12 @@ class _ProfilePageState
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 50,
-                  child: Icon(
-                    Icons.person_rounded,
-                    color: Colors.grey,
-                    size: 50,
+                  child: ClipOval(
+                    child: Icon(
+                      Icons.person_rounded,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
                   ),
                 ),
               ),
