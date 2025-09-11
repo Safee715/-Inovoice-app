@@ -1,39 +1,38 @@
 import 'dart:convert';
 
-final String columnUserId="userId";
 final String columnId="id";
-final String columnTitle='title';
-final String columnBody='completed';
+final String columnUserId="userId";
+final String columnName='name';
+final String columnEmail='email';
 
 class Profile {
+ final String? id;
  final int userId;
- final int id;
-  final String? title;
-  final String? body;
+  final String name;
+  final String email;
   Profile({
- required this.userId,
- required this.id,
-  this.title,
-  this.body
+   this.id,
+  required this.userId,
+  required this.name,
+  required this.email
   });
   Map<String,dynamic>toMap()
   {
      Map<String,dynamic> map=
-         {
-           columnUserId:userId,
-           columnId:id,
-           columnTitle:title,
-           columnBody:body,
+         {  columnId:id,
+           columnId:userId,
+           columnName:name,
+           columnEmail:email,
          };
      return map;
   }
 factory Profile.fromMap(Map<String,dynamic> map)
 {
   return Profile(
-    userId: map['userId'] as int,
-      id: map["id"] as int,
-      title: map["title"]?.toString(),
-      body: map["completed"] ?.toString()
+      id: map["id"] .toString(),
+      userId: map["userId"] as int,
+      name: map["name"].toString(),
+      email: map["email"].toString()
   );
 }
 String toJson()=>jsonEncode(toMap());
@@ -42,6 +41,6 @@ factory Profile.fromJson(String source)=>
 
  @override
  String toString() {
-   return 'Profile(userId: $userId, id: $id, title: $title, body: $body)';
+   return 'Profile( id: $id,userId: $userId, name: $name, email: $email)';
  }
 }

@@ -121,16 +121,6 @@ class _AddProfilePageState
       child: Column(
         children: [
           CustomTextFields(
-            labelText: constants.userIdLabel,
-            hintText: constants.userIdHint,
-            isMandatory: true,
-            controller: addProfileViewmodel
-                .userIdController,
-            maxLength: 10,
-            validator: (p0) => addProfileViewmodel.idValidator(p0),
-
-          ),
-          CustomTextFields(
             labelText: constants.idLabel,
             hintText: constants.idHint,
             isMandatory: true,
@@ -140,20 +130,20 @@ class _AddProfilePageState
               validator: (p0) => addProfileViewmodel.idValidator(p0)
           ),
           CustomTextFields(
-            labelText: constants.titleLabel,
-            hintText: constants.titleHint,
+            labelText: constants.nameLabel,
+            hintText: constants.nameHint,
             isMandatory: false,
             controller:
-            addProfileViewmodel.titleController,
+            addProfileViewmodel.nameController,
             maxLength: 70,
 
           ),
           CustomTextFields(
-            labelText: constants.bodyLabel,
-            hintText: constants.bodyHint,
+            labelText: constants.emailLabel,
+            hintText: constants.emailHint,
             isMandatory: false,
             controller:
-            addProfileViewmodel.bodyController,
+            addProfileViewmodel.emailController,
             maxLength: 100,
 
           ),
@@ -184,10 +174,9 @@ class _AddProfilePageState
           {
             await profilePageViewmodel.addProfile(
               Profile(
-                userId: int.tryParse(addProfileViewmodel.userIdController.text) ?? 0,
-                id: int.tryParse(addProfileViewmodel.idController.text) ?? 0,
-                title: addProfileViewmodel.titleController.text,
-                body: addProfileViewmodel.bodyController.text,
+                userId: int.tryParse(addProfileViewmodel.idController.text) ?? 0,
+                name: addProfileViewmodel.nameController.text,
+                email: addProfileViewmodel.emailController.text,
               ),
             );
             if(!mounted)return;

@@ -63,14 +63,12 @@ class Constants {
   LanguageManager.translate('Next');
   final String GetStarted=
   LanguageManager.translate('GetStarted');
-final String userIdLabel='User id';
 final String idLabel='Id';
-final String titleLabel='Title';
-final String bodyLabel='Body';
-final String userIdHint='Enter ser id';
+final String nameLabel='Name';
+final String emailLabel='Email';
 final String idHint='Enter id';
-final String titleHint='Enter title';
-final String bodyHint='Enter body';
+final String nameHint='Enter name';
+final String emailHint='Enter email';
 final String addProfileAppbarTitle='Add Profile';
 final String editProfileAppbarTitle='Edit Profile';
 

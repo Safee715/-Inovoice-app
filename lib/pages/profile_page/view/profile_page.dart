@@ -231,12 +231,12 @@ void initState()
                 ).getTextColor().withValues(alpha: 0.2),
               ),
             ),
-            title: Text('${currentProfile!.id}',maxLines: 1,textAlign: TextAlign.center,),
-            subtitle: Text('${currentProfile.title}',maxLines: 1,),
+            title: Text('${currentProfile!.name}',maxLines: 1,textAlign: TextAlign.center,),
+            subtitle: Text('${currentProfile.email}',maxLines: 1,),
             titleAlignment: ListTileTitleAlignment.center ,
             style: ListTileStyle.drawer,
             trailing: ProfileMenuWidget(
-              id: currentProfile.id,constants: constants,),
+              id: currentProfile.id??'',constants: constants,),
           ),
         );
       },

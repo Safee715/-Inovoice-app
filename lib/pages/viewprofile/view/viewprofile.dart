@@ -12,7 +12,7 @@ class ViewProfile extends StatefulWidget {
     required this.id,
   });
 
-  final int id;
+  final String id;
 
   @override
   State<ViewProfile> createState() =>
@@ -89,15 +89,7 @@ class _EditClient extends State<ViewProfile> {
         .watch<EditProfileViewmodel>();
     return Column(
       children: [
-        CustomTextFields(
-          labelText: constants.userIdLabel,
-          controller: editProfileViewmodel
-              .userIdController,
-          isMandatory: true,
-          maxLength: 40,
-          enabled: false,
 
-        ),
         CustomTextFields(
           labelText: constants.idLabel,
           controller:
@@ -107,18 +99,18 @@ class _EditClient extends State<ViewProfile> {
 
         ),
         CustomTextFields(
-          labelText: constants.titleLabel,
+          labelText: constants.nameLabel,
           controller: editProfileViewmodel
-              .titleController,
+              .nameController,
           isMandatory: false,
           maxLength: 70,
           enabled: false,
 
         ),
         CustomTextFields(
-          labelText: constants.bodyLabel,
+          labelText: constants.emailLabel,
           controller:
-          editProfileViewmodel.bodyController,
+          editProfileViewmodel.emailController,
           isMandatory: false,
           maxLength: 11,
           enabled: false,

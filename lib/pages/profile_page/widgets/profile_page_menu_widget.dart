@@ -15,7 +15,7 @@ class ProfileMenuWidget extends StatefulWidget {
     required this.constants,
 
   });
-  final int id;
+  final String id;
   final Constants constants;
 
   @override

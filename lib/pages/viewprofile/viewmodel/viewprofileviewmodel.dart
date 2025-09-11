@@ -3,13 +3,11 @@ import 'package:flutter/cupertino.dart';
 
 class ViewProfileViewmodel extends ChangeNotifier{
 
-  final TextEditingController
-  userIdController = TextEditingController();
   final TextEditingController idController =
   TextEditingController();
-  final TextEditingController titleController =
+  final TextEditingController nameController =
   TextEditingController();
-  final TextEditingController bodyController =
+  final TextEditingController emailController =
   TextEditingController();
 
   void getControllerText(
@@ -18,17 +16,15 @@ class ViewProfileViewmodel extends ChangeNotifier{
       ) async{
 
     final profile=await profilePageViewmodel.getProfile(id);
-    userIdController.text = profile.userId.toString();
-    idController.text = profile.id.toString();
-    titleController.text = profile.title.toString();
-    bodyController.text = profile.body.toString();
+    idController.text = profile.userId.toString();
+    nameController.text = profile.name.toString();
+    emailController.text = profile.email.toString();
   }
   @override
   void dispose() {
-    userIdController.dispose();
     idController.dispose();
-    titleController.dispose();
-    bodyController.dispose();
+    nameController.dispose();
+    emailController.dispose();
     super.dispose();
   }
 }

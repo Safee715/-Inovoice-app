@@ -13,7 +13,7 @@ class EditProfile extends StatefulWidget {
     required this.id,
   });
 
-  final int id;
+  final String id;
 
   @override
   State<EditProfile> createState() =>
@@ -115,15 +115,14 @@ class _EditClient extends State<EditProfile> {
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             profilePageViewmodel.editProfile(
-              int.tryParse(editProfileViewmodel.userIdController.text.trim())??0,
+                     widget.id,
               Profile(
-                userId:int.tryParse(editProfileViewmodel.userIdController.text.trim())??0,
-                id: int.tryParse(editProfileViewmodel.idController.text.trim())??0,
-                title: editProfileViewmodel
-                    .titleController
+                userId: int.tryParse(editProfileViewmodel.idController.text.trim())??0,
+                name: editProfileViewmodel
+                    .nameController
                     .text,
-                body: editProfileViewmodel
-                    .bodyController
+                email: editProfileViewmodel
+                    .emailController
                     .text,
               ),
             );
@@ -150,29 +149,22 @@ class _EditClient extends State<EditProfile> {
     return Column(
       children: [
         CustomTextFields(
-          labelText: constants.userIdLabel,
-          controller: editProfileViewmodel
-              .userIdController,
-          isMandatory: true,
-          maxLength: 40,
-        ),
-        CustomTextFields(
           labelText: constants.idLabel,
           controller:
               editProfileViewmodel.idController,
           isMandatory: true,
         ),
         CustomTextFields(
-          labelText: constants.titleLabel,
+          labelText: constants.nameLabel,
           controller: editProfileViewmodel
-              .titleController,
+              .nameController,
           isMandatory: false,
           maxLength: 70,
         ),
         CustomTextFields(
-          labelText: constants.bodyLabel,
+          labelText: constants.emailLabel,
           controller:
-              editProfileViewmodel.bodyController,
+              editProfileViewmodel.emailController,
           isMandatory: false,
           maxLength: 11,
         ),

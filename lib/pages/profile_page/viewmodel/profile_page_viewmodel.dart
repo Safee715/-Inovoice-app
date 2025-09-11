@@ -13,7 +13,7 @@ TextEditingController searchController=TextEditingController();
   List<Profile>get posts=>_posts;
 
   final dio=Dio(BaseOptions(
-    baseUrl:'https://jsonplaceholder.typicode.com' ,
+    baseUrl:'https://68c2b077f9928dbf33ef6266.mockapi.io/dummy' ,
     headers: {
      "Accept": "application/json",
      "User-Agent": "Dart/Flutter"
@@ -31,7 +31,7 @@ TextEditingController searchController=TextEditingController();
   {   _emit();
   }
   else{
-   final  searchResult=_posts.where((element) => element.title.toString().contains(value)).toList();
+   final  searchResult=_posts.where((element) => element.name.toString().contains(value)||element.userId.toString().contains(value)).toList();
     _controller.sink.add(searchResult);
   }
   }
@@ -39,7 +39,7 @@ TextEditingController searchController=TextEditingController();
    Future<void> getAllPosts()async
   {try
     {
-      final response = await dio.get("/todos/");
+      final response = await dio.get("/profiles/");
       List<dynamic> data =  (response.data)as List<dynamic>;
       print('type : ${data.runtimeType}');
       List<Profile> profiles=data.map((e) {
@@ -48,6 +48,7 @@ TextEditingController searchController=TextEditingController();
       },).toList();
       _posts=profiles;
         _emit();
+        print('get post called');
       print(response.statusMessage);
     }
     catch(e)
@@ -57,26 +58,25 @@ TextEditingController searchController=TextEditingController();
 }
 
 
-Future<Profile> getProfile(int id)async
+Future<Profile> getProfile(String id)async
 {
-  final response=await dio.get('/todos/$id');
+  final response=await dio.get('/profiles/$id');
   final post=response.data;
   // print(post);
   Profile profile=Profile(
-        userId: post['userId'] as int,
-      id: post['id'] as int ,
-      title: post['title']?.toString(),
-      body: post['complete']?.toString(),
+    userId: post['userId'] as int ,
+      name: post['name'].toString(),
+      email: post['email'].toString(),
   );
   return profile;
 }
 
-Future<void> deleteProfile(int id)async
+Future<void> deleteProfile(String id)async
 {
   try
   {
     final response = await dio.delete(
-        '/todos/$id');
+        '/profiles/$id');
     print(response.data);
     if(response.statusCode==200||response.statusCode==201)
       {       print(response.statusMessage);
@@ -96,7 +96,7 @@ Future<void> addProfile(Profile profile)async
 {
   try
   {
-   final response=await dio.post('/todos/',data: profile.toMap());
+   final response=await dio.post('/profiles/',data: profile.toMap());
    if(response.statusCode==200||response.statusCode==201)
      {
        print(response.statusMessage);
@@ -113,14 +113,13 @@ Future<void> addProfile(Profile profile)async
 }
 
 
-Future<void> editProfile(int id,Profile profile)async
+Future<void> editProfile(String id,Profile profile)async
 {
   try{
-    final response=await dio.put('/todos/$id',  data: {
-      columnUserId:profile.userId,
-      columnId:profile.id,
-      columnTitle:profile.title,
-      columnBody:profile.body,
+    final response=await dio.put('/profiles/$id',  data: {
+      'userId':profile.userId,
+      'name':profile.name,
+      'email':profile.email,
     });
     print(response.statusMessage);
     if(response.statusCode==200||response.statusCode==201)
@@ -131,12 +130,11 @@ Future<void> editProfile(int id,Profile profile)async
         notifyListeners();
         print('Post edited Successfully');
       }
-    notifyListeners();
 
   }
   catch(e)
   {
-    print('Profile not edited due to$e');
+    print('Profile not edited due to : $e');
   }
 
 }

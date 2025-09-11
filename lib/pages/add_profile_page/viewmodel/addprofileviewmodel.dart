@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
 
 class AddProfileViewmodel extends ChangeNotifier{
-  final TextEditingController
-  userIdController = TextEditingController();
+
   final TextEditingController idController =
   TextEditingController();
-  final TextEditingController titleController =
+  final TextEditingController nameController =
   TextEditingController();
-  final TextEditingController bodyController =
+  final TextEditingController emailController =
   TextEditingController();
 
 
   void clearControllers() {
-    userIdController.clear();
     idController.clear();
-    titleController.clear();
-    bodyController.clear();
+    nameController.clear();
+    emailController.clear();
 
   }
 
