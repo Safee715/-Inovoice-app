@@ -38,7 +38,7 @@ class _CustomElevatedButtonState
       decoration: BoxDecoration(border: Border.all(color: widget.borderColor??Colors.transparent),
         borderRadius: BorderRadius.circular(10.0),
         gradient: widget.gradient?constants.gradient
-            :LinearGradient(
+            :const LinearGradient(
             colors: [
               Colors.transparent,
               Colors.transparent]

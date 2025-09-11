@@ -51,7 +51,7 @@ class _CustomTextFieldsState
               ),
             ),
             widget.isMandatory
-                ? Text(
+                ? const Text(
                     '*',
                     style: TextStyle(
                       fontSize: 14,
@@ -60,7 +60,7 @@ class _CustomTextFieldsState
                       color: Colors.red,
                     ),
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
           ],
         ),
         TextFormField(
@@ -79,23 +79,23 @@ class _CustomTextFieldsState
           validator: (value) =>
               widget.validator?.call(value),
           enabled: widget.enabled,
-          cursorColor: Color(0xFF4082E3),
+          cursorColor: const Color(0xFF4082E3),
           decoration: InputDecoration(
             filled: true,
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color(0xFF4082E3),
                 width: 2,
               ),
             ),
             focusedErrorBorder:
-                OutlineInputBorder(
+                const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFF4082E3),
                     width: 2,
                   ),
                 ),
-            errorBorder: OutlineInputBorder(
+            errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.red,
                 width: 1,
@@ -111,7 +111,7 @@ class _CustomTextFieldsState
             ),
             hintText: widget.hintText,
             prefix: Text(widget.prefix ?? ""),
-            prefixStyle: TextStyle(
+            prefixStyle: const TextStyle(
               color: Colors.black,
             ),
             hintStyle: TextStyle(
@@ -121,7 +121,7 @@ class _CustomTextFieldsState
               color: Theme.of(context)
                   .getHintTextColor(),
             ),
-            contentPadding: EdgeInsets.only(
+            contentPadding: const EdgeInsets.only(
               left: 10,
               right: 10,
               top: 10,

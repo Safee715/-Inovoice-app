@@ -11,15 +11,15 @@ class NavigationPageViewModel {
 
   final Constants constants=Constants();
   List<Widget>get pages => [
-    HomePage(),
-    ClientsPage(),
-    AddClientsPage(),
+    const HomePage(),
+    const ClientsPage(),
+    const AddClientsPage(),
     ItemsPage(constants: constants,),
     ProfilePage(constants: constants,),
   ];
   List<Widget>get sub_Navigation_Pages => [
     TemplatePage(constants:constants ,),
-    ClientsPage(),
+    const ClientsPage(),
     ItemsPage(constants: constants,),
   ];
 }

@@ -55,11 +55,11 @@ void initState()
               decoration: InputDecoration(
                 hintText: 'Search',
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: const BorderSide(color: Colors.blue),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 border:OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue),
+                borderSide: const BorderSide(color: Colors.blue),
                 borderRadius: BorderRadius.circular(10),
                   ),
               ),
@@ -71,7 +71,7 @@ void initState()
           widget
               .constants!
               .profilePageAppBarTitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -104,18 +104,18 @@ void initState()
       ),
       body: RefreshIndicator(
         onRefresh: ()async{
-          Future.delayed(Duration(seconds: 2));
+          Future.delayed(const Duration(seconds: 2));
           profilePageViewmodel.getAllPosts();
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child:StreamBuilder(
             stream: profilePageViewmodel.postsStream,
             builder: (context, snapshot) {
               if(snapshot.connectionState==ConnectionState.waiting)
                 {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -156,7 +156,7 @@ void initState()
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AddProfilePage();
+              return const AddProfilePage();
             },
           ),
         );
@@ -175,7 +175,7 @@ void initState()
       mainAxisAlignment:
       MainAxisAlignment.center,
       children: [
-        Center(
+        const Center(
           child: CircleAvatar(backgroundColor: Colors.white,
             radius: 60,
             child: ClipOval(
@@ -213,7 +213,7 @@ void initState()
               .symmetric(
               vertical: 4.0),
           child: ListTile(
-            contentPadding: EdgeInsets.only(
+            contentPadding: const EdgeInsets.only(
                 top: 10,bottom: 10,left: 20,right: 5
             ),
             minLeadingWidth: 30,

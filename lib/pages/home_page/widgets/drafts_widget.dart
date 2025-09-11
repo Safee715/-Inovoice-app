@@ -39,23 +39,23 @@ class _DraftsWidgetState
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  side: BorderSide(
+                  side: const BorderSide(
                     width: 1,
                     color: Color(0xffC8CBD1),
                   ),
                   shadowColor: Colors.transparent,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     right: 10,
                     left: 10,
                   ),
-                  minimumSize: Size(50, 19),
-                  backgroundColor: Color(
+                  minimumSize: const Size(50, 19),
+                  backgroundColor: const Color(
                     0xffD6DAE0,
                   ),
                 ),
                 child: Text(
                   homePageViewmodel.draftStatus,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     color: Color(0xff303744),
@@ -80,14 +80,14 @@ class _DraftsWidgetState
                 children: [
                   Text(
                     LanguageManager.translate('issuedate'),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
                   ),
                   Text(
                     ': ${homePageViewmodel.draftIssueDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
@@ -97,7 +97,7 @@ class _DraftsWidgetState
               Container(
                 width: 1,
                 height: 20,
-                color: Color(
+                color: const Color(
                   0xff000000,
                 ).withValues(alpha: 0.1),
               ),
@@ -105,14 +105,14 @@ class _DraftsWidgetState
                 children: [
                   Text(
                     LanguageManager.translate('Due'),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
                   ),
                   Text(
                     '${homePageViewmodel.draftDueDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
@@ -122,7 +122,7 @@ class _DraftsWidgetState
             ],
           ),
           Divider(
-            color: Color(
+            color: const Color(
               0xff000000,
             ).withValues(alpha: 0.1),
             thickness: 1,
@@ -157,7 +157,7 @@ class _DraftsWidgetState
                     children: [
                       Text(
                         LanguageManager.translate('PKR'),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -165,7 +165,7 @@ class _DraftsWidgetState
                       ),
                       Text(
                         ' ${homePageViewmodel.draftTotalAmount}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -177,7 +177,7 @@ class _DraftsWidgetState
                     children: [
                       Text(
                         LanguageManager.translate('PKR'),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -185,7 +185,7 @@ class _DraftsWidgetState
                       ),
                       Text(
                         ' ${homePageViewmodel.draftPaidAmount}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -211,7 +211,7 @@ class _DraftsWidgetState
                       children: [
                         Text(
                           LanguageManager.translate('PKR'),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xffF26666),
                             fontWeight:
                                 FontWeight.bold,
@@ -220,7 +220,7 @@ class _DraftsWidgetState
                         ),
                         Text(
                           ' ${homePageViewmodel.draftDueAmount}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xffF26666),
                             fontWeight:
                             FontWeight.bold,

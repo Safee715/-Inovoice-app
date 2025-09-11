@@ -47,7 +47,7 @@ extension contextExtension on BuildContext {
 extension colors on ThemeData {
   Gradient getOnboardingScreenBackGradient() {
     return brightness == Brightness.dark
-        ?  LinearGradient(
+        ?  const LinearGradient(
       colors: [
         Color(0xff4082E3),
         Color(0xff171921),
@@ -55,7 +55,7 @@ extension colors on ThemeData {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       stops: [0.0, 0.5],
-    ): LinearGradient(
+    ): const LinearGradient(
       colors: [
         Color(0xff4082E3),
         Color(0xffffffff),
@@ -67,70 +67,70 @@ extension colors on ThemeData {
   }
   Color getOnboardingCircleColor() {
     return brightness == Brightness.dark
-        ? Color(0xff4082E3)
-        : Color(0xffffffff);
+        ? const Color(0xff4082E3)
+        : const Color(0xffffffff);
   }
   Color getOnboardingTextColor() {
     return brightness == Brightness.dark
-        ? Color(0xffBABBC4)
-        : Color(0xff1F2937);
+        ? const Color(0xffBABBC4)
+        : const Color(0xff1F2937);
   }
   Color getBackColor() {
     return brightness == Brightness.dark
-        ? Color(0xff090A0E)
-        : Color(0xffF0F3F7);
+        ? const Color(0xff090A0E)
+        : const Color(0xffF0F3F7);
   }
 
   Color getTextColor() {
     return brightness == Brightness.dark
-        ? Color(0xffFFFFFF)
-        : Color(0xff303744);
+        ? const Color(0xffFFFFFF)
+        : const Color(0xff303744);
   }
 
   Color getContainerColor() {
     return brightness == Brightness.dark
-        ? Color(0xff0D0F14)
-        : Color(0xffFFFFFF);
+        ? const Color(0xff0D0F14)
+        : const Color(0xffFFFFFF);
   }
 
   Color getTextFormFieldColor() {
     return brightness == Brightness.dark
-        ? Color(0xff171921)
-        : Color(0xFFD8DAE5);
+        ? const Color(0xff171921)
+        : const Color(0xFFD8DAE5);
   }
 
   Color getBottomContainerColor() {
     return brightness == Brightness.dark
-        ? Color(0xff333747)
-        : Color(0xffFFFFFF);
+        ? const Color(0xff333747)
+        : const Color(0xffFFFFFF);
   }
 
   Color getNavbarColor() {
     return brightness == Brightness.dark
-        ? Color(0xff111319)
-        : Color(0xffFFFFFF);
+        ? const Color(0xff111319)
+        : const Color(0xffFFFFFF);
   }
 
   Color getNavbarIconColor() {
     return brightness == Brightness.dark
-        ? Color(0xff353A52)
-        : Color(0xff8D8F99);
+        ? const Color(0xff353A52)
+        : const Color(0xff8D8F99);
   }
 
   Color getHomePageIconColor() {
     return brightness == Brightness.dark
-        ? Color(0xff353A52)
-        : Color(0xffD6DAE0);
+        ? const Color(0xff353A52)
+        : const Color(0xffD6DAE0);
   }
 
   Color getHintTextColor() {
     return brightness == Brightness.dark
-        ? Color(0xff353A4d)
-        : Color(0xffBEC0CC);
+        ? const Color(0xff353A4d)
+        : const Color(0xffBEC0CC);
   } Color getAppBarBottomColor() {
     return brightness == Brightness.dark
-        ? Color(0xff333747)
-        : Color(0xff000000)
+        ? const Color(0xff333747)
+        : const Color(0xff000000)
         .withValues(alpha: 0.05);
   }
 

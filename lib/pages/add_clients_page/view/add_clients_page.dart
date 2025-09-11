@@ -86,7 +86,7 @@ class _AddClientsPageState
               child: Column(
                 children: [
                   _buildCustomTextFields(),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment:
                         MainAxisAlignment
@@ -105,7 +105,7 @@ class _AddClientsPageState
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildAddButton(),
                 ],
               ),
@@ -245,7 +245,7 @@ class _AddClientsPageState
         },
         child: Text(
           constants.getElevatedButtonText(),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.bold,

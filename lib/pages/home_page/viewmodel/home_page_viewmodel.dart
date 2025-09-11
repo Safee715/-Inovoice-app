@@ -161,7 +161,7 @@ class HomePageViewmodel extends ChangeNotifier{
     double width,
   ) {
     final paint = Paint()
-      ..color = Color(0xffC7D7FE)
+      ..color = const Color(0xffC7D7FE)
       ..style = PaintingStyle.fill;
     double barWidth = getBarWidth(data, width);
     double gap = barGap();
@@ -178,8 +178,8 @@ class HomePageViewmodel extends ChangeNotifier{
       );
       final rRect = RRect.fromRectAndCorners(
         bar,
-        topLeft: Radius.circular(3),
-        topRight: Radius.circular(3),
+        topLeft: const Radius.circular(3),
+        topRight: const Radius.circular(3),
       );
       canvas.drawRRect(rRect, paint);
     }
@@ -196,7 +196,7 @@ class HomePageViewmodel extends ChangeNotifier{
 
     final paint = Paint()
       ..strokeWidth = 3
-      ..color = Color(
+      ..color = const Color(
         0xff4F60F6,
       ).withValues(alpha: 0.7)
       ..style = PaintingStyle.stroke;
@@ -233,7 +233,7 @@ class HomePageViewmodel extends ChangeNotifier{
       final textPainter = TextPainter(
         text: TextSpan(
           text: digit,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontFamily: 'Biennale',
             color: Color(0xff8D8F99),
@@ -277,7 +277,7 @@ class HomePageViewmodel extends ChangeNotifier{
       final textPainter = TextPainter(
         text: TextSpan(
           text: number,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontFamily: 'Biennale',
             color: Color(0xff8D8F99),
@@ -309,7 +309,7 @@ class HomePageViewmodel extends ChangeNotifier{
         textDirection: TextDirection.ltr,
         text: TextSpan(
           text: _months[i],
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             fontFamily: 'Biennale',
             color: Color(0xff8D8F99),
@@ -334,7 +334,7 @@ class HomePageViewmodel extends ChangeNotifier{
     double height,
   ) {
     final paint = Paint()
-      ..color = Color(0xffEBECF2)
+      ..color = const Color(0xffEBECF2)
       ..strokeWidth = 1;
     int yLines = 4;
     for (int i = 1; i <= yLines; i++) {
@@ -353,7 +353,7 @@ class HomePageViewmodel extends ChangeNotifier{
     double height,
   ) {
     final paint = Paint()
-      ..color = Color(0xffEBECF2)
+      ..color = const Color(0xffEBECF2)
       ..strokeWidth = 1;
     int xLines = 7;
     for (int i = 7; i > 1; i--) {
@@ -399,8 +399,8 @@ class HomePageViewmodel extends ChangeNotifier{
   }
 
   List<Color> colorsList = [
-    Color(0xffFFBD2E),
-    Color(0xffFE9696),
+    const Color(0xffFFBD2E),
+    const Color(0xffFE9696),
   ];
 
   double getPieChartMaxValue(

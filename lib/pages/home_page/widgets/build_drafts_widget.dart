@@ -33,7 +33,7 @@ class BuildDraftsWidget extends StatelessWidget {
               color: Theme.of(
                 context,
               ).getBottomContainerColor(),
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
             ),

@@ -87,7 +87,7 @@ final String editProfileAppbarTitle='Edit Profile';
   String getElevatedButtonText() =>
       addButtonText ?? '';
 
-  LinearGradient gradient = LinearGradient(
+  LinearGradient gradient = const LinearGradient(
     colors: [
       Color(0xFF9CD9FF),
       Color(0xFF4082E3),

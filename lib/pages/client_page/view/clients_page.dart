@@ -107,7 +107,7 @@ class _ClientsPageState
                          softWrap: true,
                          constants
                              .noDataAvailableText,
-                         style: TextStyle(
+                         style: const TextStyle(
                            color: Color(
                              0xffBEC0CC,
                            ),
@@ -164,7 +164,7 @@ class _ClientsPageState
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AddClientsPage();
+              return const AddClientsPage();
             },
           ),
         );

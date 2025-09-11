@@ -57,7 +57,7 @@ CommonFunctions commonFunctions=CommonFunctions();
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: selected_page_notifier,
         builder: (context, value, child) {
-            return Padding(
+            return const Padding(
               padding: EdgeInsets.only(
                 bottom: 30.0,
                 left: 30,

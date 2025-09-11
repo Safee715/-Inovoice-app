@@ -101,7 +101,7 @@ print('safee');
                     CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       top: 10,
                     ),
                     width: constraints.maxWidth,
@@ -110,7 +110,7 @@ print('safee');
                         context,
                       ).getContainerColor(),
                       borderRadius:
-                          BorderRadius.all(
+                          const BorderRadius.all(
                             Radius.circular(28),
                           ),
                     ),
@@ -159,9 +159,9 @@ print('safee');
                       ],
                     ),
                   ),
-                  BuildRecentInvoice(),
-                  BuildDraftsWidget(),
-                  BuildTemplatesWidgets(),
+                  const BuildRecentInvoice(),
+                  const BuildDraftsWidget(),
+                  const BuildTemplatesWidgets(),
                 ],
               ),
             ),

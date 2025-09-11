@@ -75,7 +75,7 @@ class _ItemsMenuWidgetState
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text('Edit'),
+            title: const Text('Edit'),
           ),
           value: 0,
         ),
@@ -89,7 +89,7 @@ class _ItemsMenuWidgetState
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text('View Details'),
+            title: const Text('View Details'),
           ),
           value: 1,
         ),
@@ -103,7 +103,7 @@ class _ItemsMenuWidgetState
               color: Theme.of(context)
                   .getTextColor(),
             ),
-            title: Text('Delete'),
+            title: const Text('Delete'),
           ),
           value: 2,
         ),

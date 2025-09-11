@@ -36,7 +36,7 @@ class _SubNavigationPageState
             30,
           ),
         ),
-        child: ClientPageNavBar(),
+        child: const ClientPageNavBar(),
       ),
     );
   }

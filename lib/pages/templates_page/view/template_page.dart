@@ -26,13 +26,13 @@ class _TemplatePageState
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFE7EBF2),
+        backgroundColor: const Color(0xFE7EBF2),
         leading: IconButton(
           onPressed: ()
           {
             commonFunctions.backButtonForSubNavigationPages(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_outlined,
           ),
         ),
@@ -48,7 +48,7 @@ class _TemplatePageState
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 Row(
@@ -86,7 +86,7 @@ class _TemplatePageState
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment:
                       MainAxisAlignment

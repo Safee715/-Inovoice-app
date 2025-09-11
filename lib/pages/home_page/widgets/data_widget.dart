@@ -39,10 +39,10 @@ class _DataWidgetState extends State<DataWidget> {
 
                   text: widget.constants.TotalAmountsText,
                   amount: '4,875 PKR',
-                  color1: Color(
+                  color1: const Color(
                     0xFF3AC4FF,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xFF3AC4FF),
+                  color2: const Color(0xFF3AC4FF),
                 ),
               ),
 
@@ -52,15 +52,15 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.TotalPaid,
                   text: widget.constants.TotalPaidText,
                   amount: '4,875 PKR',
-                  color1: Color(
+                  color1: const Color(
                     0xFF6690FF,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xFF668FFF),
+                  color2: const Color(0xFF668FFF),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.spaceAround,
@@ -71,10 +71,10 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.TotalDue,
                   text: widget.constants.TotalDueText,
                   amount: '4,875 PKR',
-                  color1: Color(
+                  color1: const Color(
                     0xffFF99591A,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xffFF9959),
+                  color2: const Color(0xffFF9959),
                 ),
               ),
 
@@ -84,15 +84,15 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.TotalClients,
                   text: widget.constants.TotalClientsText,
                   amount: '15',
-                  color1: Color(
+                  color1: const Color(
                     0xff7778E5,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xff7778E5),
+                  color2: const Color(0xff7778E5),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.spaceAround,
@@ -103,10 +103,10 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.TotalItems,
                   text: widget.constants.TotalItemsText,
                   amount: '10',
-                  color1: Color(
+                  color1: const Color(
                     0xff73BCE5,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xff73BCE5),
+                  color2: const Color(0xff73BCE5),
                 ),
               ),
 
@@ -116,15 +116,15 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.TotalInvoice,
                   text: widget.constants.TotalInvoiceText,
                   amount: '50',
-                  color1: Color(
+                  color1: const Color(
                     0xff3BBB2D,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xff3BBB2D),
+                  color2: const Color(0xff3BBB2D),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.spaceAround,
@@ -135,10 +135,10 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.PaidInvoice,
                   text: widget.constants.PaidInvoiceText,
                   amount: '12',
-                  color1: Color(
+                  color1: const Color(
                     0xffFFAE00,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xffFFAE00),
+                  color2: const Color(0xffFFAE00),
                 ),
               ),
 
@@ -148,15 +148,15 @@ class _DataWidgetState extends State<DataWidget> {
                   Assets.DueInvoice,
                   text: widget.constants.DueInvoiceText,
                   amount: '52',
-                  color1: Color(
+                  color1: const Color(
                     0xffF26666,
                   ).withValues(alpha: 0.1),
-                  color2: Color(0xffF26666),
+                  color2: const Color(0xffF26666),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );

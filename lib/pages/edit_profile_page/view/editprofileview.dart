@@ -76,7 +76,7 @@ class _EditClient extends State<EditProfile> {
                   _buildCustomDetailsFields(
                     constants,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSaveButton(),
                 ],
               ),
@@ -98,7 +98,7 @@ class _EditClient extends State<EditProfile> {
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Color(0xFF9CD9FF),
             Color(0xFF4082E3),
@@ -115,9 +115,16 @@ class _EditClient extends State<EditProfile> {
         onPressed: () async {
           if (formKey.currentState!.validate()) {
             profilePageViewmodel.editProfile(
-                     widget.id,
+              widget.id,
               Profile(
-                userId: int.tryParse(editProfileViewmodel.idController.text.trim())??0,
+                userId:
+                    int.tryParse(
+                      editProfileViewmodel
+                          .idController
+                          .text
+                          .trim(),
+                    ) ??
+                    0,
                 name: editProfileViewmodel
                     .nameController
                     .text,
@@ -129,7 +136,7 @@ class _EditClient extends State<EditProfile> {
             Navigator.pop(context);
           }
         },
-        child: Text(
+        child: const Text(
           'Edit',
           style: TextStyle(
             color: Colors.white,
@@ -156,15 +163,15 @@ class _EditClient extends State<EditProfile> {
         ),
         CustomTextFields(
           labelText: constants.nameLabel,
-          controller: editProfileViewmodel
-              .nameController,
+          controller:
+              editProfileViewmodel.nameController,
           isMandatory: false,
           maxLength: 70,
         ),
         CustomTextFields(
           labelText: constants.emailLabel,
-          controller:
-              editProfileViewmodel.emailController,
+          controller: editProfileViewmodel
+              .emailController,
           isMandatory: false,
           maxLength: 11,
         ),

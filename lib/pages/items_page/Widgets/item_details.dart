@@ -27,7 +27,7 @@ class _ItemDetailsState
   Widget build(BuildContext context) {
 
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(
+      contentPadding: const EdgeInsets.symmetric(
         vertical: 10.0,
         horizontal: 8.0,
       ),
@@ -50,7 +50,7 @@ class _ItemDetailsState
         mainAxisAlignment:
             MainAxisAlignment.start,
         children: [
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             widget.name,
             style: TextStyle(
@@ -60,10 +60,10 @@ class _ItemDetailsState
               fontSize: 14,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             "\$${widget.price.toString()}",
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF4082E3),
               fontSize: 12,
             ),

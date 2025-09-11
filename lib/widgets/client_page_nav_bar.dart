@@ -23,7 +23,7 @@ class ClientPageNavBar extends StatelessWidget {
                   color: Colors.black.withValues(
                     alpha: 0.1,
                   ),
-                  offset: Offset(0, 1),
+                  offset: const Offset(0, 1),
                   blurRadius: 5,
                 ),
               ],
@@ -63,7 +63,7 @@ class ClientPageNavBar extends StatelessWidget {
                       iconaddress:
                       Assets.ClientsIconSelected,                      height: 24,
                       weight: 24,
-                      color: Color(0xff6EAEF1),
+                      color: const Color(0xff6EAEF1),
                     ),
                     label: LanguageManager.translate('Clients'),
                     icon: CustomIconWidget(
@@ -76,7 +76,7 @@ class ClientPageNavBar extends StatelessWidget {
                     ),
                   ),
                   NavigationDestination(
-                    selectedIcon: Icon(
+                    selectedIcon: const Icon(
                       Icons.shopping_cart_rounded,
                       color: Color(0xff6EAEF1),
                     ),

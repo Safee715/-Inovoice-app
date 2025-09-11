@@ -54,7 +54,7 @@ void initState()
         ),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             margin: EdgeInsets.symmetric(
               horizontal: context.getWidth(20),
@@ -81,7 +81,7 @@ void initState()
             child: Column(
               children: [
                 _buildCustomTextFields(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
               ],
             ),
           ),

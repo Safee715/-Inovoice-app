@@ -1,6 +1,5 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/home_page/view/home_page.dart';
 import 'package:DummyInvoice/pages/navigation_pages/view/main_navigation_page.dart';
 import 'package:DummyInvoice/pages/onboardingScreens/viewmodel/onboarding_page_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class _NavigationButtonState extends State<NavigationButton> {
         decoration: BoxDecoration(
           borderRadius:
           BorderRadius.circular(10),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               Color(0xff9CD9FF),
               Color(0xff4082E3),
@@ -38,7 +37,7 @@ class _NavigationButtonState extends State<NavigationButton> {
             if(onboardingPageViewmodel.getCurrentPage()==0)
               {
                 onboardingPageViewmodel.pageController.nextPage(
-                    duration: Duration(
+                    duration: const Duration(
                     milliseconds: 300),
                     curve: Curves.easeInOut);
 
@@ -75,7 +74,7 @@ class _NavigationButtonState extends State<NavigationButton> {
           child: Text(
             widget.text,
             style: TextStyle(
-              color: Color(0xffffffff),
+              color: const Color(0xffffffff),
               fontFamily: 'Satoshi',
               fontSize: context.getAdaptiveSizeLength(22),
               letterSpacing: 1,

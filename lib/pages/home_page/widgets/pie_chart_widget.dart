@@ -50,7 +50,7 @@ class _PieChartWidgetState
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.transparent,
@@ -58,12 +58,12 @@ class _PieChartWidgetState
                       BorderRadius.circular(30),
 
                   border: Border.all(
-                    color: Color(0xff8D8F99),
+                    color: const Color(0xff8D8F99),
                   ),
                 ),
 
                 child: DropdownButton(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 10,
                     right: 10,
                   ),
@@ -109,7 +109,7 @@ class _PieChartWidgetState
             ],
           ),
           Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               bottom: 20,
               top: 30,
             ),
@@ -118,12 +118,12 @@ class _PieChartWidgetState
                   MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     bottom: 20,
                     top: 30,
                   ),
                   child: CustomPaint(
-                    size: Size(
+                    size: const Size(
                       double.infinity,
                       (298),
                     ),

@@ -31,7 +31,7 @@ class _OnboardingPage1State
       width: double.infinity,
       height: double.infinity,
           alignment: Alignment.center,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             bottom: 20,
             top: 20,
           ),
@@ -84,7 +84,7 @@ class _OnboardingPage1State
                           bottom: 20,
                           child: Container(
                             padding:
-                                EdgeInsets.symmetric(
+                                const EdgeInsets.symmetric(
                                   horizontal: 6,
                                   vertical: 6,
                                 ),
@@ -103,7 +103,7 @@ class _OnboardingPage1State
                                       ),
                                   spreadRadius: 2,
                                   blurRadius: 6,
-                                  offset: Offset(
+                                  offset: const Offset(
                                     5,
                                     0,
                                   ),
@@ -184,8 +184,8 @@ class _OnboardingPage1State
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.only(
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(
                     left: 20,
                     right: 20,
                   ),
@@ -198,7 +198,7 @@ class _OnboardingPage1State
                     style: TextStyle(
                       fontFamily: 'Satoshi',
                       fontWeight: FontWeight.w900,
-                      color: Color(0xff4082E3),
+                      color: const Color(0xff4082E3),
                       fontSize: context.getTextSize(24),
                     ),
                   ),
@@ -236,13 +236,13 @@ class _OnboardingPage1State
                     children: [
                       CircleAvatar(
                         radius: context.getAdaptiveSizeWidth(6),
-                        backgroundColor: Color(
+                        backgroundColor: const Color(
                           0xff4082E3,
                         ),
                       ),
                       CircleAvatar(
                         radius: context.getAdaptiveSizeWidth(6),
-                        backgroundColor: Color(
+                        backgroundColor: const Color(
                           0xffD1D1D1,
                         ),
                       ),

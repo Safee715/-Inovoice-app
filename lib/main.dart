@@ -29,6 +29,7 @@ bool isRtl()
 }
 
 void main() {
+  debugProfileBuildsEnabled=true;
 LanguageManager.init(deviceLang);
 Constants constants=Constants();
 ClientsPageRepo clientsPageRepo=ClientsPageRepo();
@@ -81,16 +82,16 @@ class _MyappState extends State<Myapp> {
                 if (states.contains(
                   WidgetState.selected,
                 )) {
-                  return Color(0xff4F94FB);
+                  return const Color(0xff4F94FB);
                 } else {
                   return Colors.grey;
                 }
               }),
-          thumbColor: WidgetStatePropertyAll(
+          thumbColor: const WidgetStatePropertyAll(
             Color(0xffffffff),
           ),
           trackOutlineColor:
-              WidgetStatePropertyAll(
+              const WidgetStatePropertyAll(
                 Colors.transparent,
               ),
         ),
@@ -109,22 +110,22 @@ class _MyappState extends State<Myapp> {
                 if (states.contains(
                   WidgetState.selected,
                 )) {
-                  return Color(0xff4F94FB);
+                  return const Color(0xff4F94FB);
                 } else {
                   return Colors.grey;
                 }
               }),
-          thumbColor: WidgetStatePropertyAll(
+          thumbColor: const WidgetStatePropertyAll(
             Color(0xffffffff),
           ),
           trackOutlineColor:
-              WidgetStatePropertyAll(
+              const WidgetStatePropertyAll(
                 Colors.transparent,
               ),
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: OnboardingPage(),
+      home: const OnboardingPage(),
 
       themeMode: ThemeMode.system,
     );

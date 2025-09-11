@@ -16,8 +16,8 @@ class CommonFunctions {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(backgroundColor: Colors.red.withValues(alpha: 0.1),radius: 35,
-                  child: Icon(Icons.exit_to_app_outlined,color: Colors.red,size: 30,),),
-                Text('Are you sure you want to exit?',style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: const Icon(Icons.exit_to_app_outlined,color: Colors.red,size: 30,),),
+                const Text('Are you sure you want to exit?',style: TextStyle(fontWeight: FontWeight.bold),),
               ],
             ),
           ),
@@ -37,13 +37,13 @@ class CommonFunctions {
                       gradient: false,
                         ),
                   ),
-                  SizedBox(width: 10,),
+                  const SizedBox(width: 10,),
                   Expanded(
                     child: CustomElevatedButton(
                       function: (){
                         Navigator.of(dialogueContext).pop(true);
                       },
-                      textColor: Color(0xffffffff),
+                      textColor: const Color(0xffffffff),
                       borderColor: Colors.transparent,
                       buttonColor: Colors.transparent,
                      text: 'Yes',

@@ -31,7 +31,7 @@ class _BarChartsWidgetState
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 20,
               top: 20,
               right: 20,
@@ -50,7 +50,7 @@ class _BarChartsWidgetState
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Colors.transparent,
@@ -58,12 +58,12 @@ class _BarChartsWidgetState
                         BorderRadius.circular(30),
 
                     border: Border.all(
-                      color: Color(0xff8D8F99),
+                      color: const Color(0xff8D8F99),
                     ),
                   ),
 
                   child: DropdownButton(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 10,
                       right: 10,
                     ),
@@ -109,7 +109,7 @@ class _BarChartsWidgetState
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
             color: Color(0xffEBECF2),
             thickness: 1,

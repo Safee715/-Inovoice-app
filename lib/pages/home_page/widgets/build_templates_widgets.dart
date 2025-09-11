@@ -18,12 +18,12 @@ class BuildTemplatesWidgets extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  SubNavigationPage(),
+                  const SubNavigationPage(),
             ),
           );
         },
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
               Row(
@@ -56,7 +56,7 @@ class BuildTemplatesWidgets extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment:
                 MainAxisAlignment.spaceAround,

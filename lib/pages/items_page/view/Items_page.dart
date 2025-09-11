@@ -99,7 +99,7 @@ class _ItemsPageState extends State<ItemsPage> {
                       maxLines: 2,
                       softWrap: true,
 
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xffBEC0CC),
                         fontSize: 14,
                       ),
@@ -151,7 +151,7 @@ class _ItemsPageState extends State<ItemsPage> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AddItemsPage();
+              return const AddItemsPage();
             },
           ),
         );

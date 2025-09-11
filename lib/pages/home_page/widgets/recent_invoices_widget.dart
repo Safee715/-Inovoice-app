@@ -44,24 +44,24 @@ class _RecentInvoicesWidgetState
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 10,
                     right: 10,
                   ),
-                  minimumSize: Size(50, 19),
+                  minimumSize: const Size(50, 19),
                   shadowColor: Colors.transparent,
-                  side: BorderSide(
+                  side: const BorderSide(
                     color: Color(0xffF26666),
                     width: 1,
                   ),
-                  backgroundColor: Color(
+                  backgroundColor: const Color(
                     0xffF26666,
                   ).withValues(alpha: 0.2),
                 ),
                 child: Text(
                   homePageViewmodel
                       .recentInvoiceStatus,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
@@ -86,14 +86,14 @@ class _RecentInvoicesWidgetState
                 children: [
                   Text(
                     LanguageManager.translate('issuedate'),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
                   ),
                   Text(
                     ': ${homePageViewmodel.recentInvoiceIssueDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
@@ -103,7 +103,7 @@ class _RecentInvoicesWidgetState
               Container(
                 width: 1,
                 height: 20,
-                color: Color(
+                color: const Color(
                   0xff000000,
                 ).withValues(alpha: 0.1),
               ),
@@ -111,14 +111,14 @@ class _RecentInvoicesWidgetState
                 children: [
                   Text(
                     LanguageManager.translate('Due'),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
                   ),
                   Text(
                    ': ${homePageViewmodel.recentInvoiceDueDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xffBEC0CC),
                     ),
@@ -128,7 +128,7 @@ class _RecentInvoicesWidgetState
             ],
           ),
           Divider(
-            color: Color(
+            color: const Color(
               0xff000000,
             ).withValues(alpha: 0.1),
             thickness: 1,
@@ -163,7 +163,7 @@ class _RecentInvoicesWidgetState
                     children: [
                       Text(
                         LanguageManager.translate('PKR'),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -171,7 +171,7 @@ class _RecentInvoicesWidgetState
                       ),
                       Text(
                        ' ${homePageViewmodel.recentInvoiceTotalAmount}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xff3AC4FF),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -183,7 +183,7 @@ class _RecentInvoicesWidgetState
                     children: [
                       Text(
                         LanguageManager.translate('PKR'),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -191,7 +191,7 @@ class _RecentInvoicesWidgetState
                       ),
                       Text(
                         ' ${homePageViewmodel.recentInvoicePaidAmount}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xffFFAE00),
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
@@ -217,7 +217,7 @@ class _RecentInvoicesWidgetState
                       children: [
                         Text(
                           LanguageManager.translate('PKR'),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xffF26666),
                             fontWeight:
                                 FontWeight.bold,
@@ -226,7 +226,7 @@ class _RecentInvoicesWidgetState
                         ),
                         Text(
                           ' ${homePageViewmodel.recentInvoiceDueAmount}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xffF26666),
                             fontWeight:
                             FontWeight.bold,

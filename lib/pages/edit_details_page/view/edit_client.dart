@@ -68,7 +68,7 @@ class _EditClient extends State<EditClient> {
             child: Column(
               children: [
                 _buildCustomDetailsFields(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _buildSaveButton(),
               ],
             ),
@@ -90,7 +90,7 @@ class _EditClient extends State<EditClient> {
         BorderRadius.circular(
           5.0,
         ),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Color(0xFF9CD9FF),
             Color(0xFF4082E3),
@@ -157,7 +157,7 @@ class _EditClient extends State<EditClient> {
         child: Text(
           editClientViewmodel
               .addButtonText,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 14,
             fontWeight:

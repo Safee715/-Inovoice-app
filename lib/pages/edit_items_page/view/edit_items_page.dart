@@ -88,7 +88,7 @@ void initState()
               child: Column(
                 children: [
                   _buildCustomTextFields(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildCustomSaveButton(),
                 ],
               ),
@@ -107,7 +107,7 @@ void initState()
       height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Color(0xFF9CD9FF),
             Color(0xFF4082E3),
@@ -149,7 +149,7 @@ void initState()
         },
         child: Text(
           itemsPageViewmodel.SaveItemButtonText,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.bold,

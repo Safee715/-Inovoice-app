@@ -63,7 +63,7 @@ class DrawPieChart extends CustomPainter {
         text: TextSpan(
           text:
               'PKR : ${dataMap.values.elementAt(i).toString()}',
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xffFFFFFF),
             backgroundColor: Colors.transparent,
             fontFamily: 'Biennale',

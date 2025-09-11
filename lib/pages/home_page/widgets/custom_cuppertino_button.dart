@@ -31,7 +31,7 @@ class _CustomCuppertinoButtonState
       onPressed: () {
         widget.onPressed();
       },
-      minimumSize: Size(20, 20),
+      minimumSize: const Size(20, 20),
       child: CustomIconWidget(
         iconaddress: widget.iconAddress,
         height: 20,

@@ -59,7 +59,7 @@ class _DataContainerWidgetState
                 weight: 24,
                 color: widget.color2,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               SizedBox(
                 child: Text(
                   widget.text,

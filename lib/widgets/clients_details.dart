@@ -1,7 +1,5 @@
 import 'package:DummyInvoice/data/helpers/constants.dart';
 import 'package:DummyInvoice/data/helpers/extensions.dart';
-import 'package:DummyInvoice/pages/client_page/repo/clients_page_repo.dart';
-import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:DummyInvoice/widgets/clients_menu_widget.dart';
 
@@ -51,7 +49,7 @@ class _ClientsDetailsState
   Widget build(BuildContext context) {
 
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(
+      contentPadding: const EdgeInsets.symmetric(
         vertical: 10.0,
         horizontal: 8.0,
       ),
@@ -72,12 +70,12 @@ class _ClientsDetailsState
       ),
       leading: CircleAvatar(
         maxRadius: 30,
-        backgroundColor: Color(
+        backgroundColor: const Color(
           0xff4F94FB,
         ).withValues(alpha: 0.2),
         child: Text(
           getInitials(widget.name),
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xff4F94FB),
             fontWeight: FontWeight.bold,
             fontSize: 12,
@@ -100,7 +98,7 @@ class _ClientsDetailsState
           ),
           Text(
             widget.email,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xffBEC0CC),
               fontSize: 12,
             ),

@@ -33,7 +33,7 @@ class BuildRecentInvoice extends StatelessWidget {
                 onPressed: () {},
                 iconAlignment: IconAlignment.end,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 10,
                     right: 0,
                   ),
@@ -43,12 +43,12 @@ class BuildRecentInvoice extends StatelessWidget {
                 ),
                 label: Text(
                   constants.viewAllLabel,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xff4F94FB),
                     fontSize: 16,
                   ),
                 ),
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: 20,
                   color: Color(0xff4F94FB),
@@ -65,7 +65,7 @@ class BuildRecentInvoice extends StatelessWidget {
               color: Theme.of(
                 context,
               ).getBottomContainerColor(),
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
             ),

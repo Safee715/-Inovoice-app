@@ -26,7 +26,7 @@ class _OnboardingPageState
       backgroundColor: Theme.of(context).getContainerColor(),
       body: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           bottom: 20,
           top: 20,
         ),

@@ -58,7 +58,7 @@ class RectangularTemplate
           Row(
             children: [
               Text(id),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               SizedBox(
                 child: Text(
                   name,
@@ -82,7 +82,7 @@ class RectangularTemplate
             alignment: Alignment.center,
             child: Text(
               amount,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Biennale',
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -132,14 +132,14 @@ class DesignedTemplate extends AbstractTemplate {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
               color: Color(0xFF3AC4FF),
             ),
             child: Row(
               children: [
                 Text(id),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 SizedBox(
                   child: Text(
                     name,
@@ -163,7 +163,7 @@ class DesignedTemplate extends AbstractTemplate {
             alignment: Alignment.center,
             child: Text(
               amount,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Biennale',
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
