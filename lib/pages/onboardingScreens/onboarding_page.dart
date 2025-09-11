@@ -25,7 +25,6 @@ class _OnboardingPageState
       extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).getContainerColor(),
       body: Container(
-
         alignment: Alignment.center,
         padding: EdgeInsets.only(
           bottom: 20,
@@ -40,7 +39,7 @@ class _OnboardingPageState
           mainAxisAlignment:
           MainAxisAlignment.center,
           children: [
-           Expanded(
+           Expanded(flex: 2,
              child: PageView.builder(
                onPageChanged: (value) => onboardingPageViewmodel.setCurrentPage(value),
                controller: onboardingPageViewmodel.pageController,

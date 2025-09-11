@@ -4,11 +4,13 @@ import 'package:DummyInvoice/data/helpers/extensions.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/add_clients_page/viewmodel/add_client_viewmodel.dart';
 import 'package:DummyInvoice/pages/add_items_page/viewmodel/add_items_viewmodel.dart';
+import 'package:DummyInvoice/pages/add_profile_page/viewmodel/addprofileviewmodel.dart';
 import 'package:DummyInvoice/pages/client_page/repo/clients_page_repo.dart';
 import 'package:DummyInvoice/pages/client_page/viewmodel/client_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/client_view_details_page/viewmodel/view_details_viewmodel.dart';
 import 'package:DummyInvoice/pages/edit_details_page/viewmodel/edit_client_viewmode.dart';
 import 'package:DummyInvoice/pages/edit_items_page/viewmodel/edit_item_viewmodel.dart';
+import 'package:DummyInvoice/pages/edit_profile_page/viewmodel/editprofileviewmodel.dart';
 import 'package:DummyInvoice/pages/home_page/viewmodel/home_page_viewmodel.dart';
 import 'package:DummyInvoice/pages/items_page/repo/item_page_repository.dart';
 import 'package:DummyInvoice/pages/items_page/viewmodel/items_page_viewmodel.dart';
@@ -43,7 +45,9 @@ ItemPageRepository itemPageRepository=ItemPageRepository();
       ChangeNotifierProvider(create: (context) => ViewDetailsViewmodel(),),
       ChangeNotifierProvider(create: (context) => AddClientViewmodel(),),
       ChangeNotifierProvider(create: (context) => OnboardingPageViewmodel(),),
-      ChangeNotifierProvider(create: (context) => ProfilePageViewmodel(clientsPageRepo: clientsPageRepo),),
+      ChangeNotifierProvider(create: (context) => ProfilePageViewmodel(),),
+      ChangeNotifierProvider(create: (context) => AddProfileViewmodel(),),
+      ChangeNotifierProvider(create: (context) => EditProfileViewmodel(),),
     ],
       child:  const Myapp(),
     )

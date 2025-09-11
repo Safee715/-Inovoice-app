@@ -237,7 +237,7 @@ class _AddClientsPageState
                   .addressController
                   .text,
             );
-            await  profilePageViewmodel.loadClients();
+            // await  profilePageViewmodel.loadClients();
             selected_page_notifier.value == 2
                 ? selected_page_notifier.value = 0
                 : Navigator.pop(context);
