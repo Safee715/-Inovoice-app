@@ -37,81 +37,88 @@ class _AddProfilePageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            selected_page_notifier.value == 2
-                ? selected_page_notifier.value = 0
-                : Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_outlined,
-            color: Theme.of(
-              context,
-            ).getTextColor(),
-          ),
+      appBar: _buildAppBar(),
+      backgroundColor: Theme.of(
+        context,
+      ).getBackColor(),
+      body: _buildBody(),
+    );
+  }
+  PreferredSizeWidget _buildAppBar()
+  { return
+    AppBar(
+      elevation: 0,
+      leading: IconButton(
+        onPressed: () {
+          selected_page_notifier.value == 2
+              ? selected_page_notifier.value = 0
+              : Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_outlined,
+          color: Theme.of(
+            context,
+          ).getTextColor(),
         ),
-        backgroundColor: Theme.of(
-          context,
-        ).getBackColor(),
-        scrolledUnderElevation: 0,
-        title: Text(
-          constants.addProfileAppbarTitle,
-          style: TextStyle(
-            color: Theme.of(
-              context,
-            ).getTextColor(),
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-        centerTitle: true,
       ),
       backgroundColor: Theme.of(
         context,
       ).getBackColor(),
-      body: SafeArea(
-        top: false,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: context.getWidth(20),
-              right: context.getWidth(20),
-              bottom: context.getWidth(20),
-            ),
-            child: Column(
-              children: [
-                _buildCustomTextFields(),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment
-                      .spaceBetween,
-                  children: [
-                    Text(
-                      constants
-                          .saveClientButtonText,
-                      style: TextStyle(
-                        fontFamily: 'Biennale',
-                        fontSize: 14,
-                        color: Theme.of(
-                          context,
-                        ).getTextColor(),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                _buildAddButton(),
-              ],
-            ),
-          ),
+      scrolledUnderElevation: 0,
+      title: Text(
+        constants.addProfileAppbarTitle,
+        style: TextStyle(
+          color: Theme.of(
+            context,
+          ).getTextColor(),
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
         ),
       ),
+      centerTitle: true,
     );
   }
-
+Widget _buildBody()
+{
+  return SafeArea(
+    top: false,
+    child: SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: context.getWidth(20),
+          right: context.getWidth(20),
+          bottom: context.getWidth(20),
+        ),
+        child: Column(
+          children: [
+            _buildCustomTextFields(),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment
+                  .spaceBetween,
+              children: [
+                Text(
+                  constants
+                      .saveClientButtonText,
+                  style: TextStyle(
+                    fontFamily: 'Biennale',
+                    fontSize: 14,
+                    color: Theme.of(
+                      context,
+                    ).getTextColor(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            _buildAddButton(),
+          ],
+        ),
+      ),
+    ),
+  );
+}
   Widget _buildCustomTextFields() {
     final addProfileViewmodel = context
         .watch<AddProfileViewmodel>();

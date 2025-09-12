@@ -17,9 +17,17 @@ class EditProfileViewmodel extends ChangeNotifier{
       ) async{
 
     final profile=await profilePageViewmodel.getProfile(id);
-    idController.text = profile.userId.toString();
-    nameController.text = profile.name.toString();
-    emailController.text = profile.email.toString();
+
+    if (profile!=null) {
+      idController.text     = profile.userId.toString();
+      nameController.text   = profile.name.toString();
+      emailController.text  = profile.email.toString();
+    }
+    else
+      {
+
+      }
+
   }
   @override
   void dispose() {

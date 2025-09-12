@@ -37,116 +37,128 @@ void initState()
   @override
   Widget build(BuildContext context) {
     print('profileBuild');
-    final profilePageViewmodel=context.watch<ProfilePageViewmodel>();
     return
     Scaffold(
-      appBar: AppBar(elevation: 0,
-        scrolledUnderElevation: 0,
-        backgroundColor: Theme.of(context).getBackColor(),
-        title: _isSearching?
-            TextField(
-              onTapOutside: (event) {
-                FocusManager.instance.primaryFocus
-                    ?.unfocus();
-
-              },
-              controller: profilePageViewmodel.searchController,
-              autofocus: true,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                border:OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue),
-                borderRadius: BorderRadius.circular(10),
-                  ),
-              ),
-              onChanged:(value) {
-                profilePageViewmodel.onSearch(value);
-              },
-            )
-            :Text(
-          widget
-              .constants!
-              .profilePageAppBarTitle,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: (){
-          if(_isSearching)
-            {
-              profilePageViewmodel.searchController.clear();
-              profilePageViewmodel.onSearch("");
-            setState(() {
-            _isSearching=false;
-            });
-            }
-
-          else{
-           setState(() {
-             _isSearching=true;
-           });
-          }
-          },
-        icon: Icon(
-            _isSearching
-                ?Icons.close
-                :Icons.search),
-
-          ),
-        ],
-      ),
-      body: RefreshIndicator(
-        onRefresh: ()async{
-          Future.delayed(const Duration(seconds: 2));
-          profilePageViewmodel.getAllPosts();
-        },
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child:StreamBuilder(
-            stream: profilePageViewmodel.postsStream,
-            builder: (context, snapshot) {
-              if(snapshot.connectionState==ConnectionState.waiting)
-                {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              else if(snapshot.hasError)
-                {
-                  return Center(
-                    child: Text('${snapshot.error}'),
-                  );
-                }
-              else if(snapshot.hasData)
-                {  final profiles= snapshot.data!;
-                if(profiles.isEmpty)
-                  {
-                    return _buildNoDataWidget();
-                  }
-                  else
-                  {
-                    return _buildListView(profiles);
-                  }
-                  }else {
-                return _buildNoDataWidget();
-              }
-            },
-          ),
-        ),
-      ),
+      appBar: _buildAppBar(),
+      body: _buildBody(),
       floatingActionButton: _addClientButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
 
     );
   }
+  PreferredSizeWidget _buildAppBar()
+  {
+    final profilePageViewmodel=context.watch<ProfilePageViewmodel>();
+  return AppBar(
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      backgroundColor: Theme.of(context).getBackColor(),
+      title: _isSearching?
+      TextField(
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus
+              ?.unfocus();
+
+        },
+        controller: profilePageViewmodel.searchController,
+        autofocus: true,
+        decoration: InputDecoration(
+          hintText: 'Search',
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blue),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          border:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blue),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        onChanged:(value) {
+          profilePageViewmodel.onSearch(value);
+        },
+      )
+          :Text(
+        widget
+            .constants!
+            .profilePageAppBarTitle,
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+      actions: [
+        IconButton(onPressed: (){
+          if(_isSearching)
+          {
+            profilePageViewmodel.searchController.clear();
+            profilePageViewmodel.onSearch("");
+            setState(() {
+              _isSearching=false;
+              profilePageViewmodel.getAllPosts();
+            });
+          }
+          else{
+            setState(() {
+              _isSearching=true;
+            });
+          }
+        },
+          icon: Icon(
+              _isSearching
+                  ?Icons.close
+                  :Icons.search),
+
+        ),
+      ],
+    );
+
+  }
+
+  Widget _buildBody()
+  {final profilePageViewmodel=context.watch<ProfilePageViewmodel>();
+    return RefreshIndicator(
+      onRefresh: ()async{
+        Future.delayed(const Duration(seconds: 2));
+        profilePageViewmodel.getAllPosts();
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child:StreamBuilder(
+          stream: profilePageViewmodel.postsStream,
+          builder: (context, snapshot) {
+            if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            else if(snapshot.hasError)
+            {
+              return Center(
+                child: Text('${snapshot.error}'),
+              );
+            }
+            else if(snapshot.hasData)
+            {  final profiles= snapshot.data!;
+            if(profiles.isEmpty)
+            {
+              return _buildNoDataWidget();
+            }
+            else
+            {
+              return _buildListView(profiles);
+            }
+            }else {
+              return _buildNoDataWidget();
+            }
+          },
+        ),
+      ),
+    );
+  }
+
   Widget _addClientButton(
       )
   {

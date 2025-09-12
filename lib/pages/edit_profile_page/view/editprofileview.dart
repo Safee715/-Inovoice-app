@@ -38,55 +38,63 @@ class _EditClient extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    Constants constants = Constants();
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(
-          context,
-        ).getBackColor(),
-        scrolledUnderElevation: 0,
-        title: Text(
-          constants.editProfileAppbarTitle,
-          style: TextStyle(
-            color: Theme.of(
-              context,
-            ).getTextColor(),
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: _buildAppBar(),
       backgroundColor: Theme.of(
         context,
       ).getBackColor(),
-      body: SafeArea(
-        top: false,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: context.getWidth(20),
-              right: context.getWidth(20),
-              bottom: context.getWidth(20),
-            ),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  _buildCustomDetailsFields(
-                    constants,
-                  ),
-                  const SizedBox(height: 20),
-                  _buildSaveButton(),
-                ],
+      body: _buildBody(),
+    );
+  }
+PreferredSizeWidget _buildAppBar()
+{
+  Constants constants = Constants();
+  return AppBar(
+    backgroundColor: Theme.of(
+      context,
+    ).getBackColor(),
+    scrolledUnderElevation: 0,
+    title: Text(
+      constants.editProfileAppbarTitle,
+      style: TextStyle(
+        color: Theme.of(
+          context,
+        ).getTextColor(),
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+      ),
+    ),
+    centerTitle: true,
+  );
+}
+  Widget _buildBody()
+{     Constants constants = Constants();
+return SafeArea(
+    top: false,
+    child: SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: context.getWidth(20),
+          right: context.getWidth(20),
+          bottom: context.getWidth(20),
+        ),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              _buildCustomDetailsFields(
+                constants,
               ),
-            ),
+              const SizedBox(height: 20),
+              _buildSaveButton(),
+            ],
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
   Widget _buildSaveButton() {
     final profilePageViewmodel = context
         .watch<ProfilePageViewmodel>();
@@ -150,7 +158,8 @@ class _EditClient extends State<EditProfile> {
 
   Widget _buildCustomDetailsFields(
     Constants constants,
-  ) {
+  )
+  {
     final editProfileViewmodel = context
         .watch<EditProfileViewmodel>();
     return Column(

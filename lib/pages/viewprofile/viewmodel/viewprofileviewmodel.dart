@@ -12,11 +12,11 @@ class ViewProfileViewmodel extends ChangeNotifier{
 
   void getControllerText(
       ProfilePageViewmodel profilePageViewmodel,
-      int id
+      String id
       ) async{
 
     final profile=await profilePageViewmodel.getProfile(id);
-    idController.text = profile.userId.toString();
+    idController.text = profile!.userId.toString();
     nameController.text = profile.name.toString();
     emailController.text = profile.email.toString();
   }

@@ -1,6 +1,6 @@
 import 'dart:ui' ;
 import 'package:DummyInvoice/data/helpers/constants.dart';
-import 'package:DummyInvoice/data/helpers/extensions.dart';
+import 'package:DummyInvoice/data/helpers/themes.dart';
 import 'package:DummyInvoice/data/languages/language_manager.dart';
 import 'package:DummyInvoice/pages/add_clients_page/viewmodel/add_client_viewmodel.dart';
 import 'package:DummyInvoice/pages/add_items_page/viewmodel/add_items_viewmodel.dart';
@@ -70,60 +70,8 @@ class _MyappState extends State<Myapp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Theme.of(context)
-            .getBackColor(),
-        useMaterial3: true,
-        switchTheme: SwitchThemeData(
-          trackColor:
-              WidgetStateColor.resolveWith((
-                states,
-              ) {
-                if (states.contains(
-                  WidgetState.selected,
-                )) {
-                  return const Color(0xff4F94FB);
-                } else {
-                  return Colors.grey;
-                }
-              }),
-          thumbColor: const WidgetStatePropertyAll(
-            Color(0xffffffff),
-          ),
-          trackOutlineColor:
-              const WidgetStatePropertyAll(
-                Colors.transparent,
-              ),
-        ),
-        brightness: Brightness.light,
-        fontFamily: 'Biennale',
-      ),
-      darkTheme: ThemeData(
-        fontFamily: 'Biennale',
-        brightness: Brightness.dark,
-        useMaterial3: true,
-        switchTheme: SwitchThemeData(
-          trackColor:
-              WidgetStateColor.resolveWith((
-                states,
-              ) {
-                if (states.contains(
-                  WidgetState.selected,
-                )) {
-                  return const Color(0xff4F94FB);
-                } else {
-                  return Colors.grey;
-                }
-              }),
-          thumbColor: const WidgetStatePropertyAll(
-            Color(0xffffffff),
-          ),
-          trackOutlineColor:
-              const WidgetStatePropertyAll(
-                Colors.transparent,
-              ),
-        ),
-      ),
+      theme: Themes.getLightTheme(context),
+      darkTheme: Themes.getDarkTheme(),
       debugShowCheckedModeBanner: false,
       home: const OnboardingPage(),
 
